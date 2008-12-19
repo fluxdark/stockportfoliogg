@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="__MSG_gadgettitle__" description="__MSG_gadgetdesc__" directory_title="__MSG_gadgettitle__" scrolling="false" singleton="false" scaling="true" height="200" thumbnail="http://cnybroe.googlepages.com/StockPortfolioThumb.png" screenshot="http://cnybroe.googlepages.com/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
+    <Require feature="setprefs"/>
+    <Require feature="minimessage"/>
+    <Require feature="analytics"/>
+    <Require feature="dynamic-height"/>
+    <Require feature="settitle"/>
+    <Locale messages="http://cnybroe.googlepages.com/ALL_ALL.xml"/>
+    <Locale lang="da" messages="http://cnybroe.googlepages.com/da_ALL.xml"/>
+    <Locale lang="de" messages="http://cnybroe.googlepages.com/de_ALL.xml"/>
+    <Locale lang="en" messages="http://cnybroe.googlepages.com/en_ALL.xml"/>
+    <Locale lang="es" messages="http://cnybroe.googlepages.com/es_ALL.xml"/>
+    <Locale lang="it" messages="http://cnybroe.googlepages.com/it_ALL.xml"/>
+    <Locale lang="nl" messages="http://cnybroe.googlepages.com/nl_ALL.xml"/>
+    <Locale lang="fr" messages="http://cnybroe.googlepages.com/fr_ALL.xml"/>
+    <Locale lang="pt-BR" messages="http://cnybroe.googlepages.com/pt_BR.xml"/>
+    <Locale lang="sv" messages="http://cnybroe.googlepages.com/sv_ALL.xml"/>
+    <Locale lang="pt-PT" messages="http://cnybroe.googlepages.com/pt_PT.xml"/>
+    <Locale lang="zh-TW" messages="http://cnybroe.googlepages.com/zh_TW.xml"/>
+  </ModulePrefs>
+  <UserPref name="GadgetVersion" datatype="hidden" default_value=""/>
+  <UserPref name="StockSymbols" datatype="hidden" default_value=""/>
+  <UserPref name="StockQtys" datatype="hidden" default_value=""/>
+  <UserPref name="StockPrices" datatype="hidden" default_value=""/>
+  <UserPref name="CustomTitle" display_name="__MSG_customtitle__"  default_value="__MSG_gadgettitle__"/>
+  <UserPref name="NameColumn" display_name="__MSG_name__ __MSG_column__" datatype="enum" default_value="2">
+    <EnumValue value="1" display_value="__MSG_symbol__"/>
+    <EnumValue value="2" display_value="__MSG_name__"/>
+  </UserPref>
+  <UserPref name="ChangeColumn" display_name="__MSG_change__ __MSG_column__" datatype="enum" default_value="3">
+    <EnumValue value="3" display_value="__MSG_changepercent__"/>
+    <EnumValue value="4" display_value="__MSG_change__"/>
+    <EnumValue value="5" display_value="__MSG_change__-__MSG_changepercent__"/>
+  </UserPref>
+  <UserPref name="Column1" display_name="__MSG_column__ 1" datatype="enum" default_value="6">
+    <EnumValue value="0" display_value="__MSG_notused__"/>
+    <EnumValue value="6" display_value="__MSG_lasttrade__"/>
+    <EnumValue value="7" display_value="__MSG_lasttradedate__"/>
+    <EnumValue value="8" display_value="__MSG_lasttradetime__"/>
+    <EnumValue value="9" display_value="__MSG_dayopen__"/>
+    <EnumValue value="10" display_value="__MSG_daylow__"/>
+    <EnumValue value="11" display_value="__MSG_dayhigh__"/>
+    <EnumValue value="12" display_value="__MSG_dayvolume__"/>
+    <EnumValue value="13" display_value="__MSG_previousclose__"/>
+    <EnumValue value="14" display_value="__MSG_52weekrange__"/>
+    <EnumValue value="15" display_value="__MSG_ask__"/>
+    <EnumValue value="16" display_value="__MSG_bid__"/>
+    <EnumValue value="17" display_value="__MSG_tickertrend__"/>
+    <EnumValue value="18" display_value="__MSG_50daymovingavg__"/>
+    <EnumValue value="19" display_value="__MSG_200daymovingavg__"/>
+    <EnumValue value="20" display_value="__MSG_dayrange__"/>
+    <EnumValue value="25" display_value="__MSG_dayearned__"/>
+    <EnumValue value="26" display_value="__MSG_earned__"/>
+  </UserPref>
+  <UserPref name="Column2" display_name="__MSG_column__ 2" datatype="enum" default_value="26">
+    <EnumValue value="0" display_value="__MSG_notused__"/>
+    <EnumValue value="6" display_value="__MSG_lasttrade__"/>
+    <EnumValue value="7" display_value="__MSG_lasttradedate__"/>
+    <EnumValue value="8" display_value="__MSG_lasttradetime__"/>
+    <EnumValue value="9" display_value="__MSG_dayopen__"/>
+    <EnumValue value="10" display_value="__MSG_daylow__"/>
+    <EnumValue value="11" display_value="__MSG_dayhigh__"/>
+    <EnumValue value="12" display_value="__MSG_dayvolume__"/>
+    <EnumValue value="13" display_value="__MSG_previousclose__"/>
+    <EnumValue value="14" display_value="__MSG_52weekrange__"/>
+    <EnumValue value="15" display_value="__MSG_ask__"/>
+    <EnumValue value="16" display_value="__MSG_bid__"/>
+    <EnumValue value="17" display_value="__MSG_tickertrend__"/>
+    <EnumValue value="18" display_value="__MSG_50daymovingavg__"/>
+    <EnumValue value="19" display_value="__MSG_200daymovingavg__"/>
+    <EnumValue value="20" display_value="__MSG_dayrange__"/>
+    <EnumValue value="25" display_value="__MSG_dayearned__"/>
+    <EnumValue value="26" display_value="__MSG_earned__"/>
+  </UserPref>
+  <UserPref name="Column3" display_name="__MSG_column__ 3" datatype="enum" default_value="17">
+    <EnumValue value="0" display_value="__MSG_notused__"/>
+    <EnumValue value="6" display_value="__MSG_lasttrade__"/>
+    <EnumValue value="7" display_value="__MSG_lasttradedate__"/>
+    <EnumValue value="8" display_value="__MSG_lasttradetime__"/>
+    <EnumValue value="9" display_value="__MSG_dayopen__"/>
+    <EnumValue value="10" display_value="__MSG_daylow__"/>
+    <EnumValue value="11" display_value="__MSG_dayhigh__"/>
+    <EnumValue value="12" display_value="__MSG_dayvolume__"/>
+    <EnumValue value="13" display_value="__MSG_previousclose__"/>
+    <EnumValue value="14" display_value="__MSG_52weekrange__"/>
+    <EnumValue value="15" display_value="__MSG_ask__"/>
+    <EnumValue value="16" display_value="__MSG_bid__"/>
+    <EnumValue value="17" display_value="__MSG_tickertrend__"/>
+    <EnumValue value="18" display_value="__MSG_50daymovingavg__"/>
+    <EnumValue value="19" display_value="__MSG_200daymovingavg__"/>
+    <EnumValue value="20" display_value="__MSG_dayrange__"/>
+    <EnumValue value="25" display_value="__MSG_dayearned__"/>
+    <EnumValue value="26" display_value="__MSG_earned__"/>
+  </UserPref>
+  <UserPref name="Column4" display_name="__MSG_column__ 4" datatype="enum" default_value="0">
+    <EnumValue value="0" display_value="__MSG_notused__"/>
+    <EnumValue value="6" display_value="__MSG_lasttrade__"/>
+    <EnumValue value="7" display_value="__MSG_lasttradedate__"/>
+    <EnumValue value="8" display_value="__MSG_lasttradetime__"/>
+    <EnumValue value="9" display_value="__MSG_dayopen__"/>
+    <EnumValue value="10" display_value="__MSG_daylow__"/>
+    <EnumValue value="11" display_value="__MSG_dayhigh__"/>
+    <EnumValue value="12" display_value="__MSG_dayvolume__"/>
+    <EnumValue value="13" display_value="__MSG_previousclose__"/>
+    <EnumValue value="14" display_value="__MSG_52weekrange__"/>
+    <EnumValue value="15" display_value="__MSG_ask__"/>
+    <EnumValue value="16" display_value="__MSG_bid__"/>
+    <EnumValue value="17" display_value="__MSG_tickertrend__"/>
+    <EnumValue value="18" display_value="__MSG_50daymovingavg__"/>
+    <EnumValue value="19" display_value="__MSG_200daymovingavg__"/>
+    <EnumValue value="20" display_value="__MSG_dayrange__"/>
+    <EnumValue value="25" display_value="__MSG_dayearned__"/>
+    <EnumValue value="26" display_value="__MSG_earned__"/>
+  </UserPref>
+  <UserPref name="Column5" display_name="__MSG_column__ 5" datatype="enum" default_value="0">
+    <EnumValue value="0" display_value="__MSG_notused__"/>
+    <EnumValue value="6" display_value="__MSG_lasttrade__"/>
+    <EnumValue value="7" display_value="__MSG_lasttradedate__"/>
+    <EnumValue value="8" display_value="__MSG_lasttradetime__"/>
+    <EnumValue value="9" display_value="__MSG_dayopen__"/>
+    <EnumValue value="10" display_value="__MSG_daylow__"/>
+    <EnumValue value="11" display_value="__MSG_dayhigh__"/>
+    <EnumValue value="12" display_value="__MSG_dayvolume__"/>
+    <EnumValue value="13" display_value="__MSG_previousclose__"/>
+    <EnumValue value="14" display_value="__MSG_52weekrange__"/>
+    <EnumValue value="15" display_value="__MSG_ask__"/>
+    <EnumValue value="16" display_value="__MSG_bid__"/>
+    <EnumValue value="17" display_value="__MSG_tickertrend__"/>
+    <EnumValue value="18" display_value="__MSG_50daymovingavg__"/>
+    <EnumValue value="19" display_value="__MSG_200daymovingavg__"/>
+    <EnumValue value="20" display_value="__MSG_dayrange__"/>
+    <EnumValue value="25" display_value="__MSG_dayearned__"/>
+    <EnumValue value="26" display_value="__MSG_earned__"/>
+  </UserPref>
+  <UserPref name="ChartType" display_name="__MSG_showsummary__" datatype="enum" default_value="ToolTip">
+    <EnumValue value="NotUsed" display_value="__MSG_notused__"/>
+    <EnumValue value="ToolTip" display_value="__MSG_charttooltip__"/>
+    <EnumValue value="Summary" display_value="__MSG_chartsummary__"/>
+  </UserPref>
+  <UserPref name="ChartScope" display_name="__MSG_chartperiod__" datatype="enum" default_value="3m">
+    <EnumValue value="1d" display_value="1 __MSG_day__"/>
+    <EnumValue value="5d" display_value="5 __MSG_days__"/>
+    <EnumValue value="1m" display_value="1 __MSG_month__"/>
+    <EnumValue value="3m" display_value="3 __MSG_months__"/>
+    <EnumValue value="1y" display_value="6 __MSG_months__"/>
+  </UserPref>
+  <UserPref name="UpdateInterval" display_name="__MSG_updateinterval__" datatype="enum" default_value="300000">
+    <EnumValue value="60000" display_value="1 __MSG_minute__"/>
+    <EnumValue value="300000" display_value="5 __MSG_minute__"/>
+    <EnumValue value="600000" display_value="10 __MSG_minute__"/>
+    <EnumValue value="3600000" display_value="60 __MSG_minute__"/>
+  </UserPref>
+  <UserPref name="Flashing" display_name="__MSG_flashing__" default_value="true" datatype="bool"/>
+<Content type="html">
+  <![CDATA[
+  <style type="text/css">
+    .def{font-size:12px; font-family:sans-serif;}
+    .InputW{width:60px;text-align:left;}
+    .InputN{width:40px;text-align:right;}
+    .Footer{font-size:9px;font-family:courier new;padding:0px;margin:0px;}
+    .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
+  </style>
+  <div id="StockData___MODULE_ID___"><table width="100%" border="0"><tr><td align="center" style="foreground:#666666;font-style:italic">__MSG_initialloading__</td></tr></table></div>
+  <div id="Footer___MODULE_ID___"><table border="0" cellspacing="0" width="100%"><tr><td colspan="3" style="height:2px"></td></tr><tr class="Footer"><td id="FooterTS___MODULE_ID___"></td><td align="right"><img width="16" height="16" style="border:none" onclick="fnToggleAddEdit__MODULE_ID___(0)" src="http://cnybroe.googlepages.com/StockAdd.gif" title="__MSG_showaddedit__" alt="__MSG_showaddedit__"></td><td style="width:20px" align="right"><img width="16" height="16" style="border:none" onclick="fnToggleSummary__MODULE_ID__()" 
+  src="http://cnybroe.googlepages.com/Summary.png" title="__MSG_showsummary__" alt="__MSG_showsummary__"></td><td style="width:20px" align="right"><img width="16" height="16" style="border:none" onclick="fnToggleProfit__MODULE_ID__()" src="http://cnybroe.googlepages.com/money.gif" title="__MSG_showprofit__" alt="__MSG_showprofit__"></td></tr></table></div>
+  <div id="StockAdd___MODULE_ID___" style="display:none;font-size:8pt;font-family:arial,sans-serif;"></div>
+  <div id="StockSummary___MODULE_ID___" style="display:none;font-size:8pt;font-family:arial,sans-serif;"></div>
+  <div id="StockProfit___MODULE_ID___" style="display:none;font-size:8pt;font-family:arial,sans-serif;"></div>
+
+<script>
+  _IG_Analytics("UA-2031644-1", "/Portfolio");
+</script>
+  <script language="javascript" type="text/javascript">
+  /* Copyright (C) 2006 Christian Nybroe
+   *
+   * All rights reserved.  Released under a Play-Fair license.
+   * No restrictions for personal use and exploration, but requires express permission from the author for use with any other website.
+   *
+   * Suggestions, patches, improvements, bug fixes, and feedback to:
+   * cnybroe.feedback+Stockgadget@gmail.com
+   * http://cnybroe.googlepages.com/
+   */
+  //declare variables
+  var pref___MODULE_ID___=new _IG_Prefs(__MODULE_ID__);
+  var cColumns___MODULE_ID___=5;
+  var iConfiguredColumns___MODULE_ID___=0;
+  var arrStocksymbols___MODULE_ID___="";
+  var arrStockQtys___MODULE_ID___="";
+  var arrStockPrices___MODULE_ID___="";
+  var arrStocks___MODULE_ID___=new Array();
+  var selectedUpdateIndex___MODULE_ID___=0;
+  _IG_RegisterOnloadHandler(fnOnInit__MODULE_ID___);
+  var msg=new _IG_MiniMessage(__MODULE_ID__);
+  var version___MODULE_ID___="1.13";
+
+  function fnOnInit__MODULE_ID___(){
+    //Insert minimessage if new version is released
+    if (pref___MODULE_ID___.getString("GadgetVersion")!=version___MODULE_ID___) {
+      msg.createDismissibleMessage('<a target="_new"href="http://cnybroe.googlepages.com/translation">Translators needed. Click here to help me translating this gadget.</a>', fnHideMess__MODULE_ID__(version___MODULE_ID___));
+      msg.createDismissibleMessage('<a target="_new"href="http://cnybroe.googlepages.com/">2007-06-30: New summary option. Can be used instead of tooltip charts.</a>', fnHideMess__MODULE_ID__(version___MODULE_ID___));
+    }
+    _IG_SetTitle(pref___MODULE_ID___.getString("CustomTitle"));
+    fnInsertSummary__MODULE_ID__();
+    fnInsertEditBox__MODULE_ID___();//Insert Configuration table
+    fntxtTips__MODULE_ID__(txt___MODULE_ID___StockSymbol,0);
+    fntxtTips__MODULE_ID__(txt___MODULE_ID___StockPrice,0);
+    fntxtTips__MODULE_ID__(txt___MODULE_ID___StockQty,0);
+    fnOnLoad__MODULE_ID___();
+  }
+
+  function fnOnLoad__MODULE_ID___(){
+    for (i=1;i<cColumns___MODULE_ID___+1;i++){
+      if (pref___MODULE_ID___.getString("Column"+i)!='0'){
+        iConfiguredColumns___MODULE_ID___++; //Count number of configured userdefined columns
+      }
+    }
+    fnReadPrefs__MODULE_ID__();
+    fnInsertStockTable__MODULE_ID___();
+    if (pref___MODULE_ID___.getString("ChartType")=="Summary" && _gel("StockSummary___MODULE_ID___").style.display == "none"){fnToggleSummary__MODULE_ID__();};
+    _IG_AdjustIFrameHeight(199);
+    fnUpdateStocks__MODULE_ID__();
+    fnInsertProfitTable__MODULE_ID__();
+  }
+
+  function fnUpdateStocks__MODULE_ID__(){
+    var sSymbols='';
+    var sTags='&f=e1snp2c1cl1d1t1oghvpwabt7m8m6m';
+    //Forming webrequest
+    if (arrStocksymbols___MODULE_ID___.length>0){ //Symbollist not empty
+      //Read configured stocks
+      for (var i=0;i<arrStocksymbols___MODULE_ID___.length;i++) {
+        if (arrStocksymbols___MODULE_ID___[i] !="" && arrStocksymbols___MODULE_ID___[i] !="undefined"){
+          sSymbols+=arrStocksymbols___MODULE_ID___[i]+'%20';
+        }
+      }
+      url='http://finance.yahoo.com/d/quotes.csv?s='+sSymbols+sTags; //+'&'+(Math.random()*10000);
+      _IG_FetchContent(url, _IG_Callback(fnParseStockData__MODULE_ID__),{ refreshInterval: (60*1) });
+    }
+    setTimeout('fnUpdateStocks__MODULE_ID__()',pref___MODULE_ID___.getInt("UpdateInterval"));
+  }
+
+  function fnParseStockData__MODULE_ID__(str){
+    var arrTable=new Array();
+    var arrLines=new Array();
+    var arrLineValues=new Array();
+    var sTemp="";
+    var sColor="";
+    var sbgColor="";
+    var iDayTotal=0;
+    var iTotal=0;
+  	//Remove comma inside quotes
+	  str=str.replace(/, /g,'. ');
+    str=str.replace(/ ,/g,' .');
+    //Remove quotes
+    arrLines=str.replace(/"/g,'').split("\n");
+    for (i=0; i<arrLines.length-1; i++){
+      arrLineValues=arrLines[i].split(",");
+      ;//Symbol not found check
+      //if (arrLineValues[0].indexOf('N/A',0)<0){}
+      if (pref___MODULE_ID___.getInt("NameColumn")==1){sTemp='Title="'+arrLineValues[2] +'" '}
+      _gel('stc'+i+'1').innerHTML='<b><a '+sTemp+' id="stcn'+i+'" class="'+arrLineValues[1]+'" onmouseover="fnShowTPChart___MODULE_ID___('+i+');fnUpdateSummary__MODULE_ID__('+i+');" onmouseout="fnHideTPChart___MODULE_ID___(this)" target="_new" href="http://finance.yahoo.com/q?s='+ arrLineValues[1]+'">'+arrLineValues[pref___MODULE_ID___.getInt("NameColumn")]+'</a></b>';
+      sTemp=arrLineValues[pref___MODULE_ID___.getString("ChangeColumn")];
+      //Flash change column
+      if (i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
+      if (pref___MODULE_ID___.getInt("Flashing")==1 && _gel('stc'+i+'2').innerHTML!=''){
+        sColor=sbgColor; //"#FFFFFF"; //White
+        if (parseFloat(arrLineValues[3])<parseFloat(_gel('stcc'+i+'2').innerHTML)){sColor="#FF6600";}//Red
+        if (parseFloat(arrLineValues[3])>parseFloat(_gel('stcc'+i+'2').innerHTML)){sColor="#00FF00";}//Green
+        _gel('stc'+i+'2').style.background=sColor;
+        setTimeout('_gel("stc'+i+'2").style.background="'+sbgColor+'"',500);
+      }
+      sColor="#000000"; //Black
+      if (arrLineValues[3].indexOf('+',0)>-1){sColor="Green";}
+      if (arrLineValues[3].indexOf('-',0)>-1){sColor="Red";}
+      _gel('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts#chart1:symbol='+arrStocksymbols___MODULE_ID___[i]+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><b><font id="stcc'+i+'2" color="'+sColor+'">'+sTemp+'</font></b></a>';
+      //Calculate earned today and round to one decimals
+      arrLineValues[25]=Math.round(arrLineValues[4]*arrStockQtys___MODULE_ID___[i]*10)/10;
+      iDayTotal+=arrLineValues[25];
+      arrLineValues[27]=arrLineValues[3]; // %
+      //Calculate earned total and round to one decimals
+      arrLineValues[26]=Math.round((arrLineValues[6]-arrStockPrices___MODULE_ID___[i])*parseInt(arrStockQtys___MODULE_ID___[i])*10)/10;
+      iTotal+=arrLineValues[26];
+      arrLineValues[28]=Math.round(((arrLineValues[6]-arrStockPrices___MODULE_ID___[i])/arrStockPrices___MODULE_ID___[i])*1000)/10; // %
+      var k=3;
+      for (j=1;j<cColumns___MODULE_ID___+1;j++){
+        if (pref___MODULE_ID___.getString("Column"+j)!='0'){
+          _gel('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrLineValues[pref___MODULE_ID___.getString("Column"+j)]+'</div>';
+          k++;
+        }
+      }
+      //Insert profit values
+      _gel("ptc0"+i).innerHTML=arrLineValues[2];
+      _gel("ptc1"+i).innerHTML=arrStockPrices___MODULE_ID___[i];
+      _gel("ptc2"+i).innerHTML=arrStockQtys___MODULE_ID___[i];
+      _gel("ptc3"+i).innerHTML=arrLineValues[25]+' ('+arrLineValues[27]+')';
+      _gel("ptc4"+i).innerHTML=arrLineValues[26]+' ('+arrLineValues[28]+'%)';
+      arrStocks___MODULE_ID___[i]=arrLineValues;
+    }
+    //Insert total profit values
+    _gel("ptc0"+i).innerHTML='<b>__MSG_total__</b>';
+    _gel("ptc3"+i).innerHTML='<b>'+Math.round(iDayTotal*100)/100+'</b>';
+    _gel("ptc4"+i).innerHTML='<b>'+Math.round(iTotal*100)/100+'</b>';
+    fnUpdateSummary__MODULE_ID__(0);
+    fnUpdateFooterTS__MODULE_ID__();
+    _IG_AdjustIFrameHeight();
+  }
+
+  function fnInsertStockTable__MODULE_ID___(){
+    var sBGColor;
+    var sTemp;
+    var sStockTable='<table border=0 cellspacing=0 width="100%" class="def">';
+    var arrHeaderNames=',,,,,,__MSG_lasttrade__,__MSG_lasttradedate__,__MSG_lasttradetime__,__MSG_dayopen__,__MSG_daylow__,__MSG_dayhigh__,__MSG_dayvolume__,__MSG_previousclose__,__MSG_52weekrange__,__MSG_ask__,__MSG_bid__,__MSG_tickertrend__,__MSG_50daymovingavg__,__MSG_200daymovingavg__,__MSG_dayrange__,,,,,__MSG_dayearned__,__MSG_earned__'.split(",");
+    //Make header
+    sStockTable+='<tr style="font-weight: bold;"><td nowrap></td><td nowrap>__MSG_name__</td><td nowrap align="right"><div class="Chart" id="StockChart___MODULE_ID___"></div>__MSG_change__</td>';
+    for (i=1;i<cColumns___MODULE_ID___+1;i++){
+      if (pref___MODULE_ID___.getString("Column"+i)!='0'){
+        sStockTable+='<td nowrap align="right">'+arrHeaderNames[pref___MODULE_ID___.getString("Column"+i)]+'</td>';
+      }
+    }
+    //Line between header and data
+    sStockTable+='</tr><tr style="height:1px;background-Color:BCBCBC"><td colspan='+iConfiguredColumns___MODULE_ID___+2+'></td></tr>';
+    //Insert rows and columns
+    for (i=0;i<arrStocksymbols___MODULE_ID___.length;i++){
+      if (i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+      sStockTable+='<tr id="str'+i+'" style="background-Color:'+sBGColor+';"><td nowrap width="1%"><img id="stcd'+i+'" width="16" height="16"  onclick="fnDeleteStock__MODULE_ID__('+i+')" src="'+_IG_GetImage('http://cnybroe.googlepages.com/Delete.gif').src+'" alt="Remove stock"><img id="stce'+i+'" width="16" height="16" onclick="fnEditStock__MODULE_ID__('+i+')" src="'+_IG_GetImage('http://cnybroe.googlepages.com/Edit.gif').src+'" alt="Edit stock"></td><td id="stc'+i+'1" nowrap></td>';
+      for (j=2; j<iConfiguredColumns___MODULE_ID___+3;j++){
+        sStockTable+='<td id="stc'+i+j+'" align="right" nowrap></td>';
+      }
+      sStockTable+='</tr>';
+    }
+    sStockTable+='</table>';
+    _gel("StockData___MODULE_ID___").innerHTML=sStockTable;
+    _gel("stc01").innerHTML="__MSG_stockloading__";
+  }
+
+  function fnInsertEditBox__MODULE_ID___(){
+    var sTemp='<hr size="2"><table border=0 id="tbl___MODULE_ID___Tickers" cellspacing=0 cellpadding=0 class="def"><tr><td width="60px"><input type="text" class="def InputW" id="txt___MODULE_ID___StockSymbol" name="txt___MODULE_ID___StockSymbol" alt="__MSG_symbol__" onfocus="fntxtTips__MODULE_ID__(this,1);" onblur="fntxtTips__MODULE_ID__(this,0);" value=""></td><td width="20px" align="left"><a target="_new" href="http://finance.yahoo.com/lookup"><img width="16" height="16" border=0 src="http://cnybroe.googlepages.com/symbollookup.gif" title="__MSG_symbollookup__"></img></a></td><td width="45px"><input type="text" class="def InputN" id="txt___MODULE_ID___StockPrice" name="txt___MODULE_ID___StockPrice" alt="__MSG_buyprice__" onfocus="fntxtTips__MODULE_ID__(this,1);" onblur="fntxtTips__MODULE_ID__(this,0);" value=""></td><td width="45px"><input type="text" class="def InputN" id="txt___MODULE_ID___StockQty" name="txt___MODULE_ID___StockQty" alt="__MSG_numberofstocks__" onfocus="fntxtTips__MODULE_ID__(this,1);" onblur="fntxtTips__MODULE_ID__(this,0);" value=""></td><td><input type=button class="def" value="__MSG_addstock__" onclick="fnbtnAddStock__MODULE_ID__()" id="btn___MODULE_ID___addStock"></td><td><input type="button" disabled class="def" value="__MSG_updatestock__" onclick="fnbtnUpdateStock__MODULE_ID__(selectedUpdateIndex___MODULE_ID___)" id="btn___MODULE_ID___UpdateStock"></td></tr></table>';
+    _gel("StockAdd___MODULE_ID___").innerHTML=sTemp;
+  }
+
+  function fnInsertSummary__MODULE_ID__(){
+    var sTemp='<hr size="2"><table width="100%" border=0 cellspacing=0 cellpadding=0><tr><td id="SummaryChartTD___MODULE_ID___" style="width:1%"></td><td><table class="def" width="100%" border=0 cellspacing=0 cellpadding=0><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_name__</b></td><td style="width:10px"></td><td id="SummaryNameTD___MODULE_ID___" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_dayrange__</b></td><td style="width:10px"></td><td id="SummaryDayRangeTD___MODULE_ID___" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_52weekrange__</b></td><td style="width:10px"></td><td id="Summary52wkRangeTD___MODULE_ID___" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_200daymovingavg__</b></td><td style="width:10px"></td><td id="Summary200AvgTD___MODULE_ID___" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_dayvolume__</b></td><td style="width:10px"></td><td id="SummaryDayVolumeTD___MODULE_ID___" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_lasttradetime__</b></td><td style="width:10px"></td><td id="SummaryLastTradeTime___MODULE_ID___" nowrap></td></tr></table></td></tr></table>';
+    _gel('StockSummary___MODULE_ID___').innerHTML =sTemp;
+  }
+
+  function fnInsertProfitTable__MODULE_ID__(){
+    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=5></td></tr>';
+    var sProfitTable='<hr size="2"><table width="100%" border=0 cellspacing=0 cellpadding=0 class="def"><tr style="font-weight: bold;"><td nowrap>__MSG_name__</td><td nowrap align="right">__MSG_buyprice__</td><td nowrap align="right">__MSG_numberofstocks__</td><td nowrap align="right">__MSG_dayearned__</td><td nowrap align="right">__MSG_earned__</td></tr>'+sLine;
+    for (i=0; i<arrStocksymbols___MODULE_ID___.length+1; i++){
+      if (i==arrStocksymbols___MODULE_ID___.length){
+        sProfitTable+=sLine;
+      }
+      sProfitTable+='<tr><td id="ptc0'+i +'" nowrap></td><td id="ptc1'+i +'" nowrap align="right"></td><td id="ptc2'+i +'" nowrap align="right"></td><td id="ptc3'+i +'" nowrap align="right"></td><td id="ptc4'+i +'" nowrap align="right"></td></tr>';
+    }
+    sProfitTable+='</table>';
+    _gel("StockProfit___MODULE_ID___").innerHTML=sProfitTable;
+  }
+
+  function fntxtTips__MODULE_ID__(sender,focus) {
+    if (focus == 1) {
+      sender.style.background='#FFFFFF';
+      if (sender.value == sender.alt) {
+        sender.value="";
+        sender.style.color="#000000";
+      }
+    }else{
+      if (sender.value == "") {
+        sender.value=sender.alt;
+        sender.style.color="#999999";
+      }
+    }
+  }
+
+  function fnValidateInput__MODULE_ID__(){
+    var bSuccess='true';
+    if (trim(_gel("txt___MODULE_ID___StockSymbol").value).length==0 || _gel("txt___MODULE_ID___StockSymbol").value =='__MSG_symbol__'){_gel("txt___MODULE_ID___StockSymbol").style.background='red';bSuccess='false';}
+    if (isNaN(_gel("txt___MODULE_ID___StockQty").value)==true || _gel("txt___MODULE_ID___StockQty").value < 0){_gel("txt___MODULE_ID___StockQty").style.background='red';bSuccess='false';}
+    if (isNaN(_gel("txt___MODULE_ID___StockPrice").value)==true || _gel("txt___MODULE_ID___StockPrice").value < 0){_gel("txt___MODULE_ID___StockPrice").style.background='red';bSuccess='false';}
+    return bSuccess;
+  }
+
+  function fnbtnAddStock__MODULE_ID__(){
+    if (fnValidateInput__MODULE_ID__()=='true'){
+      arrStocksymbols___MODULE_ID___.push(_gel("txt___MODULE_ID___StockSymbol").value);
+      arrStockQtys___MODULE_ID___.push(_gel("txt___MODULE_ID___StockQty").value);
+      arrStockPrices___MODULE_ID___.push(_gel("txt___MODULE_ID___StockPrice").value);
+      _gel("btn___MODULE_ID___UpdateStock").disabled=true;
+      fnSavePrefs__MODULE_ID__();
+      fnOnLoad__MODULE_ID___();
+    }
+  }
+
+  function fnDeleteStock__MODULE_ID__(index){
+    arrStocksymbols___MODULE_ID___.splice(index,1);
+    arrStockQtys___MODULE_ID___.splice(index,1);
+    arrStockPrices___MODULE_ID___.splice(index,1);
+    _gel("btn___MODULE_ID___UpdateStock").disabled=true;
+    fnSavePrefs__MODULE_ID__();
+    fnOnLoad__MODULE_ID___();
+  }
+
+  function fnbtnUpdateStock__MODULE_ID__(index){
+    arrStocksymbols___MODULE_ID___[index]=_gel("txt___MODULE_ID___StockSymbol").value;
+    arrStockQtys___MODULE_ID___[index]=_gel("txt___MODULE_ID___StockQty").value;
+    arrStockPrices___MODULE_ID___[index]=_gel("txt___MODULE_ID___StockPrice").value;
+    pref___MODULE_ID___.set("StockSymbols", arrStocksymbols___MODULE_ID___.join(','));
+    pref___MODULE_ID___.set("StockQtys",arrStockQtys___MODULE_ID___.join(','));
+    pref___MODULE_ID___.set("StockPrices", arrStockPrices___MODULE_ID___.join(','));
+    _gel("btn___MODULE_ID___UpdateStock").disabled=true;
+    fnOnLoad__MODULE_ID___();
+  }
+
+  function fnEditStock__MODULE_ID__(index){
+    _gel("txt___MODULE_ID___StockSymbol").value=arrStocksymbols___MODULE_ID___[index];
+    _gel("txt___MODULE_ID___StockQty").value=arrStockQtys___MODULE_ID___[index];
+    _gel("txt___MODULE_ID___StockPrice").value=arrStockPrices___MODULE_ID___[index];
+    selectedUpdateIndex___MODULE_ID___=index;
+    _gel("btn___MODULE_ID___UpdateStock").disabled=false;
+    fnToggleAddEdit__MODULE_ID___(1);
+  }
+
+  function fnSavePrefs__MODULE_ID__(){
+    pref___MODULE_ID___.set("StockSymbols", arrStocksymbols___MODULE_ID___);
+    pref___MODULE_ID___.set("StockQtys",arrStockQtys___MODULE_ID___);
+    pref___MODULE_ID___.set("StockPrices", arrStockPrices___MODULE_ID___);
+    //Set configured flag so defaults are beeing discarded in the future
+    pref___MODULE_ID___.set("CONFIGURED","CONFIGURED");
+  }
+
+  function fnReadPrefs__MODULE_ID__(){
+    arrStocksymbols___MODULE_ID___=pref___MODULE_ID___.getString("StockSymbols").split(",")
+    if (arrStocksymbols___MODULE_ID___[0] !=""){
+      arrStockQtys___MODULE_ID___=pref___MODULE_ID___.getString("StockQtys").split(",");
+      arrStockPrices___MODULE_ID___=pref___MODULE_ID___.getString("StockPrices").split(",");
+    }else{
+      arrStocksymbols___MODULE_ID___="GOOG,ABB.ST".split(",");
+      arrStockQtys___MODULE_ID___="100,3000".split(",");
+      arrStockPrices___MODULE_ID___="500,54".split(",");
+      fnToggleAddEdit__MODULE_ID___(1);
+    }
+  }
+
+  function fnUpdateFooterTS__MODULE_ID__(){
+    _gel("FooterTS___MODULE_ID___").innerHTML='__MSG_lastupdated__'+fngetDate__MODULE_ID__();
+  }
+
+  function fnUpdateSummary__MODULE_ID__(StockID){
+    _gel("StockChart___MODULE_ID___").innerHTML='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+arrStocks___MODULE_ID___[StockID][1]+'&t='+pref___MODULE_ID___.getString("ChartScope")+'&l=off&z=b">';
+    _gel("SummaryChartTD___MODULE_ID___").innerHTML = _gel("StockChart___MODULE_ID___").innerHTML;
+    _gel("SummaryNameTD___MODULE_ID___").innerHTML = arrStocks___MODULE_ID___[StockID][2];
+    _gel("SummaryDayRangeTD___MODULE_ID___").innerHTML = arrStocks___MODULE_ID___[StockID][20];
+    _gel("Summary52wkRangeTD___MODULE_ID___").innerHTML = arrStocks___MODULE_ID___[StockID][14];
+    _gel("Summary200AvgTD___MODULE_ID___").innerHTML = arrStocks___MODULE_ID___[StockID][19];
+    _gel("SummaryDayVolumeTD___MODULE_ID___").innerHTML = arrStocks___MODULE_ID___[StockID][12];
+    _gel("SummaryLastTradeTime___MODULE_ID___").innerHTML = arrStocks___MODULE_ID___[StockID][7] + ' ' + arrStocks___MODULE_ID___[StockID][8];
+  }
+
+  function fnShowTPChart___MODULE_ID___(StockID){
+    if (pref___MODULE_ID___.getString("ChartType")=='ToolTip'){
+      _gel("StockChart___MODULE_ID___").style.display="block"; //display the chart
+    }
+  }
+
+  function fnHideTPChart___MODULE_ID___(sender){
+    _gel("StockChart___MODULE_ID___").style.display="none";
+  }
+
+  function fnToggleAddEdit__MODULE_ID___(ForceVisible){
+    if (_gel("StockAdd___MODULE_ID___").style.display == "none" || ForceVisible==1){
+      _gel("StockAdd___MODULE_ID___").style.display="block";
+    }else{
+      _gel("StockAdd___MODULE_ID___").style.display="none";
+    }
+    _IG_AdjustIFrameHeight();
+  }
+
+  function fnToggleProfit__MODULE_ID__(){
+    if (_gel("StockProfit___MODULE_ID___").style.display == "block"){
+      _gel("StockProfit___MODULE_ID___").style.display="none";
+    }else{
+      _gel("StockProfit___MODULE_ID___").style.display="block";
+    }
+    _IG_AdjustIFrameHeight();
+  }
+
+  function fnToggleSummary__MODULE_ID__(){
+    if (_gel("StockSummary___MODULE_ID___").style.display == "none"){
+      _gel("StockSummary___MODULE_ID___").style.display="block";
+    }else{
+      _gel("StockSummary___MODULE_ID___").style.display="none";
+    }
+    _IG_AdjustIFrameHeight();
+  }
+
+  function fnHideMess__MODULE_ID__(GadgetVersion){
+    return function() {
+      pref___MODULE_ID___.set("GadgetVersion",GadgetVersion);
+      _IG_AdjustIFrameHeight();
+    }
+  }
+
+  function trim(s) {
+    // Trim whitespace from left and right sides of s.
+    return s.replace( /^\s*/, "" ).replace( /\s*$/, "" );
+  }
+  
+  function fngetDate__MODULE_ID__(){
+    var currentTime=new Date();
+    var month=currentTime.getMonth()+1;
+    if (month < 10){
+      month="0"+month;
+    }
+    var day=currentTime.getDate()
+    if (day  < 10){
+      day ="0"+day;
+    }
+    var year=currentTime.getFullYear();
+    var currentTime=new Date();
+    var hours=currentTime.getHours();
+    if (hours < 10){
+      hours="0"+hours;
+    }
+    var minutes=currentTime.getMinutes();
+    if (minutes < 10){
+      minutes="0"+minutes;
+    }
+    return year+'-'+month+'-'+day+' '+hours+':'+minutes;
+  }
+  </script>
+  ]]>
+  </Content>
+</Module>
