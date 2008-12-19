@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="__MSG_gadgettitle__" description="__MSG_gadgetdesc__" directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://cnybroe.googlepages.com/StockPortfolioThumb.png" screenshot="http://cnybroe.googlepages.com/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
-    <Locale messages="http://cnybroe.googlepages.com/ALL_ALL.xml"/>
-    <Locale lang="da" messages="http://cnybroe.googlepages.com/da_ALL.xml"/>
-    <Locale lang="es" messages="http://cnybroe.googlepages.com/es_ALL.xml"/>
-    <Locale lang="fr" messages="http://cnybroe.googlepages.com/fr_ALL.xml"/>
-    <Locale lang="it" messages="http://cnybroe.googlepages.com/it_ALL.xml"/>
-    <Locale lang="sv" messages="http://cnybroe.googlepages.com/sv_ALL.xml"/>
-    <Locale lang="pt-PT" messages="http://cnybroe.googlepages.com/pt_PT.xml"/>
-    <Locale lang="pt-BR" messages="http://cnybroe.googlepages.com/pt_BR.xml"/>
-    <Locale lang="de" messages="http://cnybroe.googlepages.com/de_ALL.xml"/>
-    <Locale lang="nl" messages="http://cnybroe.googlepages.com/nl_ALL.xml"/>
-    <Locale lang="zh-TW" messages="http://cnybroe.googlepages.com/zh_TW.xml"/>
+  <ModulePrefs title="__MSG_gadgettitle__" description="__MSG_gadgetdesc__" directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
+    <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
+    <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/da_ALL.xml"/>
+    <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/es_ALL.xml"/>
+    <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/fr_ALL.xml"/>
+    <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/it_ALL.xml"/>
+    <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/sv_ALL.xml"/>
+    <Locale lang="pt-PT" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_PT.xml"/>
+    <Locale lang="pt-BR" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_BR.xml"/>
+    <Locale lang="de" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/de_ALL.xml"/>
+    <Locale lang="nl" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/nl_ALL.xml"/>
+    <Locale lang="zh-TW" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/zh_TW.xml"/>
     <Require feature="setprefs"/>
     <Require feature="minimessage"/>
     <Require feature="analytics"/>
@@ -54,8 +54,8 @@
     .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
     .SearchList{display:none;position:relative;border:1px solid black;z-index:9998;background-color:white;top:-1;}
     .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
-    td.HiAlert{width:9px;background:url("http://cnybroe.googlepages.com/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
-    td.LoAlert{width:9px;background:url("http://cnybroe.googlepages.com/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
+    td.HiAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
+    td.LoAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
 	</style>
   <div id="StockData"><div class="loading">__MSG_initialloading__</div></div>
   <div id="Footer" class="Footer"></div>
@@ -64,7 +64,7 @@
   <div id="StockProfitSummary" class="def" style="display:none"></div>
   <div id="StockSummary" class="def" style="display:none;"><div class="loading">__MSG_loading__</div></div>
   <div id="StockNews" class="def" style="display:none;"></div>
-  <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0><tr><td valign="middle" class="Footer"><a href="http://cnybroe.googlepages.com/disclaimer" target="_blank">Stock data, news and historical charts provided by </td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://cnybroe.googlepages.com/Yahoo.gif"></td><td valign="middle" class="Footer"></a></td></tr></table></div>
+  <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0><tr><td valign="middle" class="Footer"><a href="http://cnybroe.googlepages.com/disclaimer" target="_blank">Stock data, news and historical charts provided by </td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://stockportfoliogg.googlecode.com/svn/released/images/Yahoo.gif"></td><td valign="middle" class="Footer"></a></td></tr></table></div>
   <div id="debug" nowrap style="display:none;font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div> 
   <script language="javascript" type="text/javascript" defer="defer">
   var pref=new _IG_Prefs(__MODULE_ID__);
@@ -86,6 +86,8 @@
   var iSDRetry=0;
   var iTmrRetry;
   var debug=0;
+
+  //fnToggleProfit DUER IKKE HELT
 
   function fnInit(){
     fnUpgrade();
@@ -128,7 +130,7 @@
       sSymb+=arrStockSymbols[i]+',';
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags;//+'&CacheWorkaround='+ Math.random()*10000;
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CacheWorkaround='+Math.random()*10000;
 		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
 	}
   function fnStockDataProxy(stockData){
@@ -141,7 +143,7 @@
 			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
-		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1';
+		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CacheWorkaround='+Math.random()*10000;
     _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData),{refreshInterval:60});
   }
   function fnPrepareStockData(currData,stockData){
@@ -339,14 +341,14 @@
       sCol='<Col width="14%"><Col width="14%"><Col width="19%"><Col width="19%"><Col width="14%"><Col width="14%">';
       sTDH='<td class="cellR">__MSG_currencyrate__</td>';
 		}
-    var sTemp='<hr class="HrDef"><table border=0 id="tblTickers" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=_gel(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+_IG_GetImage('http://cnybroe.googlepages.com/AddStock.gif').src+'"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
+    var sTemp='<hr class="HrDef"><table border=0 id="tblTickers" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=_gel(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/AddStock.gif').src+'"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
     var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan='+iCols+'></td></tr>';
     var sConfigTable='<table style="width:100%;font-size:'+fsize+'" border=0 cellspacing=0 cellpadding=0>'+sCol+'<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan='+iCols+'></td></tr>'+sLine+'<tr style="font-weight: bold;"><td class="cellL">__MSG_symbol__</td><td class="cellR" >__MSG_numberofstocks__</td><td class="cellR">__MSG_buyprice__</td>'+sTDH+'<td class="cellR">__MSG_hialert__</td><td class="cellR">__MSG_loalert__</td><td colspan=3></td></tr>'+sLine;
 	  for(i=0;i<arrStockSymbols.length;i++){
 		  if (bCurr){
         sTD='<td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockCurrRates[i]+'</td>';
       }
-      sConfigTable+='<tr><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockPrices[i]+'</td>'+sTD+'<td id="ctc4'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockHi[i]+'</td><td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc6'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+_IG_GetImage('http://cnybroe.googlepages.com/delete.gif').src+'" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/MoveUp.gif').src+'" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/MoveDown.gif').src+'" title="__MSG_movedown__"></td></tr>';
+      sConfigTable+='<tr><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockPrices[i]+'</td>'+sTD+'<td id="ctc4'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockHi[i]+'</td><td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc6'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/delete.gif').src+'" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/MoveUp.gif').src+'" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/MoveDown.gif').src+'" title="__MSG_movedown__"></td></tr>';
     }
 		if (bCurr){
       sConfigTable+='<tr>'+sLine+'<td colspan=9 title="__MSG_currencytip__">__MSG_selectedcurrency__: '+pref.getString("Currency")+'</td></tr>';
@@ -417,7 +419,7 @@
     _IG_AdjustIFrameHeight();
   }
   function fnInsertFooter(){
-    _gel("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/AddEdit.gif').src+'" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/Summary.gif').src+'" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(true)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/money.gif').src+'" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/News.gif').src+'" title="__MSG_shownews__"></td><td style="width:18px;"><a href="http://cnybroe.googlepages.com/help" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://cnybroe.googlepages.com/help.gif').src+'" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://cnybroe.googlepages.com/ggroups.gif').src+'" title="__MSG_gotoggroups__"></a></td></tr></table>';
+    _gel("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/AddEdit.gif').src+'" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/Summary.gif').src+'" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(true)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/money.gif').src+'" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/News.gif').src+'" title="__MSG_shownews__"></td><td style="width:18px;"><a href="http://cnybroe.googlepages.com/help" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/help.gif').src+'" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/ggroups.gif').src+'" title="__MSG_gotoggroups__"></a></td></tr></table>';
   }
   function fnInsertStockTable(){
     var sBGColor;
@@ -483,7 +485,7 @@
   function fnInsertNews(feed){
 		var html="";
     for(var i in feed.Entry){
-      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+_IG_GetImage('http://cnybroe.googlepages.com/Square.gif').src+'"></td><td><span><a href="'+_hesc(feed.Entry[i].Link)+'" target="_blank">';
+      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/Square.gif').src+'"></td><td><span><a href="'+_hesc(feed.Entry[i].Link)+'" target="_blank">';
       html+=_hesc(feed.Entry[i].Title)+'</a></span></td></tr>';
     }
     _gel("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
