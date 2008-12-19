@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Stock portfolio" description="Highly configurable list with unlimited number of stocks. See chart and details for each stock. Calculate total value, earning and much more." directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="200" thumbnail="http://cnybroe.googlepages.com/StockPortfolioThumb.png" screenshot="http://cnybroe.googlepages.com/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
+  <Require feature="setprefs"/><Require feature="minimessage"/><Require feature="analytics"/><Require feature="dynamic-height"/><Require feature="settitle"/></ModulePrefs>
+  <UserPref name="GadgetVersion" datatype="hidden" default_value=""/>
+  <UserPref name="StockSymbols" datatype="hidden" default_value="GOOG"/>
+  <UserPref name="StockQtys" datatype="hidden" default_value="0"/>
+  <UserPref name="StockHi" datatype="hidden" default_value="0"/>
+  <UserPref name="StockLo" datatype="hidden" default_value="0"/>
+  <UserPref name="StockPrices" datatype="hidden" default_value="0"/>
+  <UserPref name="CustomTitle" display_name="Title"  default_value="Stock portfolio"/>
+  <UserPref name="FontSize" display_name="Font size" datatype="enum" default_value="12px"><EnumValue value="9px" display_value="9px"/><EnumValue value="10px" display_value="10px"/><EnumValue value="11px" display_value="11px"/><EnumValue value="12px" display_value="12px"/><EnumValue value="14px" display_value="14px"/><EnumValue value="16px" display_value="16px"/></UserPref>
+  <UserPref name="NameColumn" display_name="Name Column" datatype="enum" default_value="2"><EnumValue value="1" display_value="Symbol"/><EnumValue value="2" display_value="Name"/></UserPref>
+  <UserPref name="ChangeColumn" display_name="Change Column" datatype="enum" default_value="3"><EnumValue value="3" display_value="Percent"/><EnumValue value="4" display_value="Change"/><EnumValue value="5" display_value="Change-Percent"/></UserPref>
+  <UserPref name="Column1" display_name="Column 1" datatype="enum" default_value="6"><EnumValue value="0" display_value="Not used"/><EnumValue value="6" display_value="Last"/><EnumValue value="7" display_value="Trade date"/><EnumValue value="8" display_value="Trade time"/><EnumValue value="9" display_value="Day open"/><EnumValue value="10" display_value="Day low"/><EnumValue value="11" display_value="Day high"/><EnumValue value="12" display_value="Volume"/><EnumValue value="13" display_value="Previous close"/><EnumValue value="14" display_value="52 week range"/><EnumValue value="15" display_value="Ask"/><EnumValue value="16" display_value="Bid"/><EnumValue value="17" display_value="Trend"/><EnumValue value="18" display_value="50 day avg."/><EnumValue value="19" display_value="200 day avg."/><EnumValue value="20" display_value="Day range"/><EnumValue value="25" display_value="Gain today"/><EnumValue value="26" display_value="Gain"/></UserPref>
+  <UserPref name="Column2" display_name="Column 2" datatype="enum" default_value="26"><EnumValue value="0" display_value="Not used"/><EnumValue value="6" display_value="Last"/><EnumValue value="7" display_value="Trade date"/><EnumValue value="8" display_value="Trade time"/><EnumValue value="9" display_value="Day open"/><EnumValue value="10" display_value="Day low"/><EnumValue value="11" display_value="Day high"/><EnumValue value="12" display_value="Volume"/><EnumValue value="13" display_value="Previous close"/><EnumValue value="14" display_value="52 week range"/><EnumValue value="15" display_value="Ask"/><EnumValue value="16" display_value="Bid"/><EnumValue value="17" display_value="Trend"/><EnumValue value="18" display_value="50 day avg."/><EnumValue value="19" display_value="200 day avg."/><EnumValue value="20" display_value="Day range"/><EnumValue value="25" display_value="Gain today"/><EnumValue value="26" display_value="Gain"/></UserPref>
+  <UserPref name="Column3" display_name="Column 3" datatype="enum" default_value="17"><EnumValue value="0" display_value="Not used"/><EnumValue value="6" display_value="Last"/><EnumValue value="7" display_value="Trade date"/><EnumValue value="8" display_value="Trade time"/><EnumValue value="9" display_value="Day open"/><EnumValue value="10" display_value="Day low"/><EnumValue value="11" display_value="Day high"/><EnumValue value="12" display_value="Volume"/><EnumValue value="13" display_value="Previous close"/><EnumValue value="14" display_value="52 week range"/><EnumValue value="15" display_value="Ask"/><EnumValue value="16" display_value="Bid"/><EnumValue value="17" display_value="Trend"/><EnumValue value="18" display_value="50 day avg."/><EnumValue value="19" display_value="200 day avg."/><EnumValue value="20" display_value="Day range"/><EnumValue value="25" display_value="Gain today"/><EnumValue value="26" display_value="Gain"/></UserPref>
+  <UserPref name="Column4" display_name="Column 4" datatype="enum" default_value="0"><EnumValue value="0" display_value="Not used"/><EnumValue value="6" display_value="Last"/><EnumValue value="7" display_value="Trade date"/><EnumValue value="8" display_value="Trade time"/><EnumValue value="9" display_value="Day open"/><EnumValue value="10" display_value="Day low"/><EnumValue value="11" display_value="Day high"/><EnumValue value="12" display_value="Volume"/><EnumValue value="13" display_value="Previous close"/><EnumValue value="14" display_value="52 week range"/><EnumValue value="15" display_value="Ask"/><EnumValue value="16" display_value="Bid"/><EnumValue value="17" display_value="Trend"/><EnumValue value="18" display_value="50 day avg."/><EnumValue value="19" display_value="200 day avg."/><EnumValue value="20" display_value="Day range"/><EnumValue value="25" display_value="Gain today"/><EnumValue value="26" display_value="Gain"/></UserPref>
+  <UserPref name="Column5" display_name="Column 5" datatype="enum" default_value="0"><EnumValue value="0" display_value="Not used"/><EnumValue value="6" display_value="Last"/><EnumValue value="7" display_value="Trade date"/><EnumValue value="8" display_value="Trade time"/><EnumValue value="9" display_value="Day open"/><EnumValue value="10" display_value="Day low"/><EnumValue value="11" display_value="Day high"/><EnumValue value="12" display_value="Volume"/><EnumValue value="13" display_value="Previous close"/><EnumValue value="14" display_value="52 week range"/><EnumValue value="15" display_value="Ask"/><EnumValue value="16" display_value="Bid"/><EnumValue value="17" display_value="Trend"/><EnumValue value="18" display_value="50 day avg."/><EnumValue value="19" display_value="200 day avg."/><EnumValue value="20" display_value="Day range"/><EnumValue value="25" display_value="Gain today"/><EnumValue value="26" display_value="Gain"/></UserPref>
+  <UserPref name="ShowProfit" display_name="Show profit" datatype="enum" default_value="NotUsed"><EnumValue value="NotUsed" display_value="Not used"/><EnumValue value="Summary" display_value="Profit summary"/><EnumValue value="Details" display_value="Profit details"/></UserPref>
+  <UserPref name="ChartType" display_name="Show summary" datatype="enum" default_value="ToolTip"><EnumValue value="NotUsed" display_value="Not used"/><EnumValue value="ToolTip" display_value="Tooltip"/><EnumValue value="Summary" display_value="Summary"/></UserPref>
+  <UserPref name="ChartScope" display_name="Chart period" datatype="enum" default_value="3m"><EnumValue value="1d" display_value="1 day"/><EnumValue value="5d" display_value="5 days"/><EnumValue value="1m" display_value="1 month"/><EnumValue value="3m" display_value="3 months"/><EnumValue value="1y" display_value="6 months"/></UserPref>
+  <UserPref name="UpdateInterval" display_name="Update" datatype="enum" default_value="300000"><EnumValue value="10000" display_value="10 sec."/><EnumValue value="60000" display_value="1 min."/><EnumValue value="300000" display_value="5 min."/><EnumValue value="600000" display_value="10 min."/><EnumValue value="3600000" display_value="60 min."/></UserPref>
+  <UserPref name="Flashing" display_name="Flashing" default_value="true" datatype="bool"/>
+<Content type="html">
+  <![CDATA[
+  <style type="text/css">
+    .def{font-family:sans-serif;}
+    .loading{font-family:sans-serif;foreground:#666666;font-style:italic;font-size:11px;}
+    .Footer{font-size:9px;font-family:courier new;padding:0px;margin:0px;}
+    .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
+    .SearchList{display:none;position:relative;border:1px solid black;z-index:9998;background-color:white;height:150;overflow:scroll;top:-1;}
+    .HrDef{height:2px;margin-top:3px;margin-bottom:3px;margin-right:0px;margin-left:0px;}
+    td.HiAlert{width:9px;background:url("http://cnybroe.googlepages.com/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
+    td.LoAlert{width:9px;background:url("http://cnybroe.googlepages.com/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
+  </style>
+  <div id="StockData"><div class="loading">Loading configured columns...</div></div>
+  <div id="Footer"></div>
+  <div id="StockAdd" style="display:none;"></div>
+  <div id="StockProfitSummary" style="display:none"></div>
+  <div id="StockProfitDetails" style="display:none;"><div class="loading">Loading ...</div></div>
+  <div id="StockSummary" style="display:none;"><div class="loading">Loading ...</div></div>
+  <div id="StockNews" style="display:none;"></div>
+  <div id="debug" nowrap style="display:none;font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div> 
+  <script>
+    _IG_Analytics("UA-2031644-1", "/Portfolio");
+  </script>
+  <script language="javascript" type="text/javascript" defer="defer">
+  var pref=new _IG_Prefs(__MODULE_ID__);
+  var fsize=pref.getString("FontSize");
+  var cColumns=5;
+  var iConfiguredColumns=0;
+  var arrStockSymbols="";
+  var arrStockQtys="";
+  var arrStockHi="";
+  var arrStockLo="";
+  var arrStockPrices="";
+  var arrStocks=new Array();
+  var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
+  var sVersion="1.170";
+  var sSymbols='';
+  var sType="A";
+  var bPageLoaded=false;
+  var debug = 0;
+  _IG_RegisterOnloadHandler(fnOnInit());
+ 
+  function fnOnInit(){
+    if(pref.getString("GadgetVersion")!=sVersion){
+	  var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/\">2008-01-16: Added High/low alerts. Improved stock search. Started writing a help page.<a>';
+	  miniMsg.createDismissibleMessage(msghtml, fnHideMess(sVersion));
+	  //miniMsg.createTimerMessage(msghtml, 7));
+    }
+    fnInsertSummary();
+    fnInsertFooter();
+    if(pref.getString("ShowProfit")=='Summary'){
+      _gel("StockProfitSummary").style.display='block';
+    }else if(pref.getString("ShowProfit")=='Details'){
+      _gel("StockProfitDetails").style.display='block';
+    }
+    for(i=1;i<cColumns+1;i++){
+      if(pref.getString("Column"+i)!='0'){
+        iConfiguredColumns++;
+      }
+     }
+    fnOnLoad();
+  }
+  function fnOnLoad(){
+    fnReadPrefs();
+    fnInsertStockTable();
+    fnInsertProfitDetailsTable();
+    fnInsertProfitSummaryTable();
+    fnUpdateStocks();
+  }
+  function fnPostLoad(){
+    if(bPageLoaded==false){
+      if(pref.getString("ChartType")=="Summary"&&_gel("StockSummary").style.display=="none"&&bPageLoaded==false){
+        fnToggleSummary();
+      }
+    if(pref.getInt("ShowProfit")==1&&_gel("StockProfitDetails").style.display=="none"&&bPageLoaded==false){
+      fnToggleProfit();
+    }
+    fnUpdateSummary(0);
+    setTimeout('_IG_SetTitle(pref.getString("CustomTitle"));_IG_AdjustIFrameHeight();',500);
+    setTimeout('_IG_AdjustIFrameHeight();',2000);
+    bPageLoaded=true;
+    }
+  }
+  function fnUpdateStocks(){
+    var sTags='&f=e1snp2c1cl1d1t1oghvpwabt7m8m6m';
+    sSymbols="";
+    if(arrStockSymbols.length>0){
+      for(var i=0;i<arrStockSymbols.length;i++){
+        sSymbols+=arrStockSymbols[i]+'+';
+      }
+      if(sSymbols.length>1){
+        url='http://finance.yahoo.com/d/quotes.csv?s='+sSymbols+sTags;_IG_FetchContent(url,fnParseStockData,{refreshInterval:(60*1)});
+      }
+    }
+    setTimeout('fnUpdateStocks()',pref.getInt("UpdateInterval"));
+  }
+  function fnParseStockData(str){
+    var arrLines=new Array();
+    var arrLineValues=new Array();
+    var sTemp="";
+    var sName="";
+    var sColor="";
+    var sbgColor="";
+    var iDayTotal=0;
+    var iEarnTot=0;
+    var iValTot=0;
+    arrLines=str.split('\n');
+    if (arrLines.length>1){
+      for(i=0;i<arrLines.length-1;i++){
+        var sClass="";
+        arrLineValues=splitLine(arrLines[i]);
+        arrLineValues[25]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*10)/10;
+        iDayTotal+=arrLineValues[25];arrLineValues[27]=(isNaN(arrLineValues[3]))?0:arrLineValues[3];
+        if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
+          arrLineValues[26]=Math.round((arrLineValues[6]-arrStockPrices[i])*parseInt(arrStockQtys[i],10)*10)/10;
+          iEarnTot+=arrLineValues[26];
+          arrLineValues[28]=Math.round(((arrLineValues[6]-arrStockPrices[i])/arrStockPrices[i])*1000)/10;
+        }else{
+          arrLineValues[26]=0;
+          arrLineValues[28]=0;
+        }
+        if(arrStockQtys[i]>0){
+          arrLineValues[29]=Math.round(arrLineValues[6]*arrStockQtys[i]);
+          iValTot+=arrLineValues[29];
+        }else{
+          arrLineValues[29]=0;
+        }
+        arrStocks[i]=arrLineValues;
+        sTemp=arrLineValues[2];
+        sName=arrLineValues[pref.getInt("NameColumn")];
+        if (pref.getInt("NameColumn")==2 && sName==''){
+          sName=arrLineValues[1];
+          sTemp=sName;
+        }
+        _gel('stc'+i+'1').innerHTML='<b><a Title="'+sTemp+'" id="stcn'+i+'" onmouseover="fnShowTPChart('+i+');fnUpdateSummary('+i+');" onmouseout="fnHideTPChart(this)" target="_new" href="http://finance.yahoo.com/q?s='+arrLineValues[1]+'">'+sName+'</a></b>';
+        sTemp=arrLineValues[pref.getString("ChangeColumn")];
+
+        if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
+        if(pref.getInt("Flashing")==1&&_gel('stc'+i+'2').innerHTML!=''){
+          sColor=sbgColor;_gel('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrLineValues[3])-parseFloat(_gel('stcc'+i+'2').innerHTML),sbgColor);
+          setTimeout('_gel("stc'+i+'2").style.background="'+sbgColor+'"',1000);
+        }
+        if (arrLineValues[6]>arrStockHi[i] && arrStockHi[i]>0){
+          sClass="HiAlert";
+        }else if(arrLineValues[6]<arrStockLo[i] && arrStockLo[i]>0){
+          sClass="LoAlert";
+        }
+        _gel('stc'+i+'0').className=sClass;
+        _gel('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts#chart1:symbol='+arrStockSymbols[i]+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><b><font id="stcc'+i+'2" color="'+fnNumToColor(arrLineValues[3],"#000000")+'">'+sTemp+'</font></b></a>';
+        var k=3;
+        for(j=1;j<cColumns+1;j++){
+          if(pref.getString("Column"+j)!='0'){
+            _gel('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrLineValues[pref.getString("Column"+j)]+'</div>';
+            k++;
+          }
+        }
+        _gel("ptc0"+i).innerHTML=arrLineValues[2];
+        _gel("ptc1"+i).innerHTML=arrLineValues[25]+' ('+arrLineValues[27]+')';
+        _gel("ptc2"+i).innerHTML=arrLineValues[26]+' ('+arrLineValues[28]+'%)';
+        _gel("ptc3"+i).innerHTML=arrLineValues[29];
+        _gel("ptc1"+i).style.color=fnNumToColor(arrLineValues[25],"#000000");
+        _gel("ptc2"+i).style.color=fnNumToColor(arrLineValues[26],"#000000");
+      }
+      iDayTotal=Math.round(iDayTotal*100)/100;
+      sColor=fnNumToColor(iDayTotal,"#000000");
+      _gel("stct1").style.color=sColor;
+      _gel("ptc1"+i).style.color=sColor;
+      _gel("stct1").innerHTML='<b>'+iDayTotal+'</b>';
+      _gel("ptc1"+i).innerHTML='<b>'+iDayTotal+'</b>';
+      iEarnTot=Math.round(iEarnTot*100)/100;
+      iValTot=Math.round(iValTot*100)/100;
+      sColor=fnNumToColor(iEarnTot,"#000000");
+      _gel("stct2").style.color=sColor;
+      _gel("ptc2"+i).style.color=sColor;
+      _gel("stct2").innerHTML='<b>'+iEarnTot+'</b>';
+      _gel("ptc2"+i).innerHTML='<b>'+iEarnTot+'</b>';
+      _gel("ptc3"+i).innerHTML='<b>'+iValTot+'</b>';
+      _gel("stct3").innerHTML='<b>'+iValTot+'</b>';
+      _gel("ptc0"+i).innerHTML='<b>Total</b>';
+      fnUpdateFooterTS();
+      fnPostLoad();
+    }
+  }
+  function fnInsertFooter(){
+    _gel("Footer").innerHTML='<table border="0" cellspacing="0" width="100%"><tr><td colspan="6" style="height:2px"></td></tr><tr class="Footer"><td id="FooterTS"></td><td align="right"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/AddEdit.gif').src+'" title="Show add/edit dialog" alt="Show add/edit dialog"></td><td style="width:20px;text-align:right"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary()" src="'+_IG_GetImage('http://cnybroe.googlepages.com/Summary.gif').src+'" title="Show summary" alt="Show summary"></td><td style="width:20px;text-align:right"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit()" src="'+_IG_GetImage('http://cnybroe.googlepages.com/money.gif').src+'" title="Show profit" alt="Show profit"></td><td style="width:20px;text-align:right"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews()" src="'+_IG_GetImage('http://cnybroe.googlepages.com/News.gif').src+'" title="Show news" alt="Show news"></td><td style="width:20px;text-align:right"><a href="http://cnybroe.googlepages.com/help" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://cnybroe.googlepages.com/help.gif').src+'" title="Get help here"></a></td></tr></table>';
+  }
+  function fnNumToColor(number,zeroColor){
+    var sColor=zeroColor;
+    if(!isNaN(parseFloat(number))){
+      if(parseFloat(number)>0){sColor="#008200";}
+      if(parseFloat(number)<0){sColor="#FF2200";}
+    }
+    return sColor;
+  }
+  function fnInsertStockTable(){
+    var sBGColor;
+    var sStockTable='<table border=0 cellspacing=0 width="100%" style="font-size:'+fsize+'" class="def">';
+    var arrHeaderNames=',,,,,,Last,Trade date,Trade time,Day open,Day low,Day high,Volume,Previous close,52 week range,Ask,Bid,Trend,50 day avg.,200 day avg.,Day range,,,,,Gain today,Gain'.split(",");
+    sStockTable+='<tr style="font-weight: bold;"><td nowrap title="Alerts"></td><td nowrap>Name</td><td nowrap align="right"><div class="Chart" id="StockChart"></div>Change</td>';
+    for(i=1;i<cColumns+1;i++){
+      if(pref.getString("Column"+i)!='0'){
+        sStockTable+='<td nowrap align="right">'+arrHeaderNames[pref.getString("Column"+i)]+'</td>';
+      }
+    }
+    sStockTable+='</tr><tr style="height:1px;background-Color:BCBCBC"><td colspan='+Number(iConfiguredColumns+3)+'></td></tr>';
+    for(i=0;i<arrStockSymbols.length;i++){
+      if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+      sStockTable+='<tr id="str'+i+'" style="background-Color:'+sBGColor+';"><td id="stc'+i+'0"></td><td id="stc'+i+'1" nowrap></td>';
+      for(j=2;j<iConfiguredColumns+3;j++){
+        sStockTable+='<td id="stc'+i+j+'" align="right" nowrap></td>';
+      }
+      sStockTable+='</tr>';
+    }
+    sStockTable+='</table>';
+    _gel("StockData").innerHTML=sStockTable;
+    _gel("stc01").innerHTML='<div class="def" style="font-size:'+fsize+'">Awaiting stock data...</div>';
+  }
+  function fnInsertAdd(){
+    var sTemp='<hr class="HrDef"><table border=0 id="tblTickers" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'" class="def"><tr><td width="62px" align="left"><input type="text" autocomplete="on" style="font-size:'+fsize+';width:60px" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="Enter symbol or company name"  onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=_gel(\'txtStockSymbol\').value;fnAddStock(Temp);" title="Add" src="'+_IG_GetImage('http://cnybroe.googlepages.com/AddStock.gif').src+'"></td><td>Search is limited to 20 hits.</td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
+    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=8></td></tr>';
+    var sConfigTable='<table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'" class="def"><tr style="height:3px"><td colspan=6></td></tr>'+sLine+'<tr style="font-weight: bold;"><td nowrap width="20%">Symbol</td><td nowrap align="right" width="17%">Price</td><td nowrap align="right" width="17%">Qty.</td><td nowrap align="right" width="17%">High</td><td nowrap align="right" width="17%">Low</td><td width="12%"colspan=3></td></tr>'+sLine;
+    for(i=0;i<arrStockSymbols.length;i++){
+      sConfigTable+='<tr><td id="ctc0'+i+'" title="Click to change this item" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" nowrap>'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="Click to change this item" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" nowrap align="right">'+arrStockPrices[i]+'</td><td id="ctc2'+i+'" title="Click to change this item" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" nowrap align="right">'+arrStockQtys[i]+'</td><td id="ctc3'+i+'" title="Click to change this item" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" nowrap align="right">'+arrStockHi[i]+'</td><td id="ctc4'+i+'" title="Click to change this item" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" nowrap align="right">'+arrStockLo[i]+'</td><td nowrap align="right" width="25px"><img id="ctc5'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+_IG_GetImage('http://cnybroe.googlepages.com/delete.gif').src+'" title="Remove"></td><td nowrap align="right" width="15px"><img id="ctc6'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/MoveUp.gif').src+'" title="Move up"></td><td nowrap align="right" width="15px"><img id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+_IG_GetImage('http://cnybroe.googlepages.com/MoveDown.gif').src+'" title="Move down"></td></tr>';
+    }
+    sConfigTable+='</table>';
+    _gel("StockAdd").innerHTML=sTemp+sConfigTable;
+  }
+  function fnSymbolSearch(symbol){
+    if(trim(symbol)!=''){
+      _gel("StockAddList").innerHTML='Loading ...';
+      _IG_FetchContent('http://finance.yahoo.com/lookup/all?m=ALL&r=3&t='+sType+'&s='+symbol,fnSymbolSearchResponse,{refreshInterval:(60*5)});
+    }else{
+      _gel("StockAddList").style.display="none";
+    }
+      _IG_AdjustIFrameHeight();
+  }
+  function fnSymbolSearchResponse(ResponseText){
+    var iStart=0;
+    var iEnd=0;
+    var i=0;
+    var sSymbol="";
+    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=4></td></tr>';
+    var sTemp='<table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'" class="def">'+sLine+'<tr style="font-weight:bold;"><td>Symbol</td><td>Name</td><td><select id="cbSearch" style="font-size:'+fsize+';width:75px;" class="def" onChange="fnCbChange(this.value)">'+fnGetOptions(sType)+'</select></td><td align="center">Exchange</td></tr>'+sLine;
+    while(ResponseText.indexOf('nce.yahoo.com/q?s=',iStart+50)>0){
+      i++;
+      //iStart=ResponseText.indexOf('<td><a href="/q?s=',iStart+50)+18;
+      iStart=ResponseText.indexOf('nce.yahoo.com/q?s=',iStart+50)+18;
+      iEnd=ResponseText.indexOf('\">',iStart);
+      sSymbol=ResponseText.substring(iStart,iEnd);
+      sTemp+='<tr style="cursor: pointer;" onmouseover=\'this.style.backgroundColor="#DCDCDC";\' onmouseout=\'this.style.backgroundColor="#FFFFFF";\' onclick=\'_gel("txtStockSymbol").value="'+sSymbol+'"\'><td nowrap>'+sSymbol+'</td>';
+      iStart=ResponseText.indexOf('<td>',iEnd)+4;
+      iEnd=ResponseText.indexOf('</td>',iStart);
+      sTemp+='<td nowrap>'+ResponseText.substring(iStart,iEnd)+'</td>';
+      iStart=ResponseText.indexOf('<td>',iEnd+6)+4;
+      iEnd=ResponseText.indexOf('</td>',iStart);
+      sTemp+='<td nowrap>'+ResponseText.substring(iStart,iEnd)+'</td>';
+      iStart=ResponseText.indexOf('<td>',iEnd)+4;
+      iStart=ResponseText.indexOf('<td>',iStart)+4;
+      iEnd=ResponseText.indexOf('</td>',iStart);
+      sTemp+='<td nowrap align="center">'+ResponseText.substring(iStart,iEnd)+'</td></tr>';
+    }
+    if(i==0){
+      sTemp+="<tr><td>Not found</td></tr>";
+    }
+    sTemp+="</table>";  
+    _gel("StockAddList").innerHTML=sTemp;      
+    _gel("StockAddList").style.display="block";
+    _IG_AdjustIFrameHeight();
+  }
+  function fnInsertSummary(){
+    var sTemp='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0><tr><td id="SummaryChartTD" style="width:1%;height:98px"></td><td><table style="font-size:'+fsize+'" class="def" width="100%" border=0 cellspacing=0 cellpadding=0><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>Name</b></td><td style="width:10px"></td><td id="SummaryNameTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>Day range</b></td><td style="width:10px"></td><td id="SummaryDayRangeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>52 week range</b></td><td style="width:10px"></td><td id="Summary52wkRangeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>200 day avg.</b></td><td style="width:10px"></td><td id="Summary200AvgTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>Volume</b></td><td style="width:10px"></td><td id="SummaryDayVolumeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>Trade time</b></td><td style="width:10px"></td><td id="SummaryLastTradeTime" nowrap></td></tr></table></td></tr></table>';
+    _gel('StockSummary').innerHTML=sTemp;
+  }
+  function fnInsertProfitDetailsTable(){
+    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=4></td></tr>';
+    var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'" class="def"><tr style="font-weight:bold;text-align:right"><td nowrap align="left">Name</td><td nowrap>Gain today</td><td nowrap>Gain</td><td nowrap >Value</td></tr>'+sLine;
+    for(i=0;i<arrStockSymbols.length+1;i++){
+      if(i==arrStockSymbols.length){
+        sProfitTable+=sLine;
+      }
+      sProfitTable+='<tr style="text-align:right"><td id="ptc0'+i+'" nowrap align="left" width="28%"></td><td id="ptc1'+i+'" nowrap width="28%"></td><td id="ptc2'+i+'" nowrap width="28%"></td><td id="ptc3'+i+'" nowrap width="16%"></td></tr>';
+    }
+    sProfitTable+='</table>';
+    _gel("StockProfitDetails").innerHTML=sProfitTable;
+  }
+  function fnEditStock(sender){
+    if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
+    var sTemp=sender.innerHTML;
+    var b=document.createElement("INPUT");
+    b.id="txtTempInput";
+    b.style.fontSize=fsize;
+    b.style.fontFamily="sans-serif";
+    b.style.textAlign=(sender.id.substr(3,1)==0)?'left':'right';
+    b.style.width=(sender.id.substr(3,1)==0)?'70px':'40px';
+    b.style.height="18px";
+    b.style.margin="0px";
+    b.onblur=function(){var index=sender.id.substr(4);var col=sender.id.substr(3,1);if((col==0&&trim(b.value)!="")||!isNaN(b.value)){if(col==0){arrStockSymbols[index]=b.value;}else if(col==1){arrStockPrices[index]=b.value;}else if(col==2){arrStockQtys[index]=b.value;}else if(col==3){arrStockHi[index]=b.value;}else if(col==4){arrStockLo[index]=b.value;}fnSavePrefs();fnUpdateStocks();}fnInsertAdd();};
+    sender.innerHTML="";
+    sender.appendChild(b);
+    b.focus();
+    b.value=sTemp;
+    b.select();
+  }
+  function fnInsertProfitSummaryTable(){
+    var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'" class="def">';
+    sProfitTable+='<tr><td width=100%><td nowrap>Total gain today: </td><td id="stct1" nowrap></td><td width="10px" nowrap></td><td nowrap>Total gain: </td><td id="stct2" nowrap></td><td width="10px" nowrap></td><td nowrap>Total value: </td><td id="stct3" nowrap></td></tr></table>';
+    _gel("StockProfitSummary").innerHTML=sProfitTable;
+  }
+  function fnAddStock(Symbol){
+    if(trim(Symbol).length>0){
+      arrStockSymbols.push(Symbol);
+      arrStockQtys.push(0);
+      arrStockHi.push(0);
+      arrStockLo.push(0);
+      arrStockPrices.push(0);
+      bPageLoaded=false;
+      fnSavePrefs();
+      _gel("StockAddList").style.display="none";
+      sType="A";
+      fnInsertAdd();
+      fnOnLoad();}
+    }
+  function fnDeleteStock(index){
+    arrStockSymbols.splice(index,1);
+    arrStockQtys.splice(index,1);
+    arrStockHi.splice(index,1);
+    arrStockLo.splice(index,1);
+    arrStockPrices.splice(index,1);
+    bPageLoaded=false;
+    fnSavePrefs();
+    fnOnLoad();
+    fnInsertAdd();
+  }
+  function fnMoveStock(index,direction){
+    if(direction==1){
+      if(index>arrStockSymbols.length-2){return;}
+        arrStockSymbols.splice(index,2,arrStockSymbols[index+1],arrStockSymbols[index]);
+        arrStockQtys.splice(index,2,arrStockQtys[index+1],arrStockQtys[index]);
+        arrStockHi.splice(index,2,arrStockHi[index+1],arrStockHi[index]);
+        arrStockLo.splice(index,2,arrStockLo[index+1],arrStockLo[index]);
+        arrStockPrices.splice(index,2,arrStockPrices[index+1],arrStockPrices[index]);
+      }else{
+        if(index==0){return;}
+    arrStockSymbols.splice(index-1,2,arrStockSymbols[index],arrStockSymbols[index-1]);
+    arrStockQtys.splice(index-1,2,arrStockQtys[index],arrStockQtys[index-1]);
+    arrStockHi.splice(index-1,2,arrStockHi[index],arrStockHi[index-1]);
+    arrStockLo.splice(index-1,2,arrStockLo[index],arrStockLo[index-1]);
+    arrStockPrices.splice(index-1,2,arrStockPrices[index],arrStockPrices[index-1]);}
+    fnSavePrefs();
+    fnInsertAdd();
+    fnOnLoad();
+  }
+  function fnSavePrefs(){
+    if(arrStockSymbols.length!=0){
+      pref.set("StockSymbols",arrStockSymbols.join(","));
+      pref.set("StockQtys",arrStockQtys.join(","));
+      pref.set("StockHi",arrStockHi.join(","));
+      pref.set("StockLo",arrStockLo.join(","));
+      pref.set("StockPrices",arrStockPrices.join(","));
+    }else{
+      pref.set("StockSymbols","GOOG");
+      pref.set("StockQtys","0");
+      pref.set("StockLo","0");
+      pref.set("StockHi","0");
+      pref.set("StockPrices","0");
+    }
+    pref.set("CONFIGURED","CONFIGURED");
+  }
+  function fnReadPrefs(){
+    arrStockSymbols=pref.getString("StockSymbols").split(",");
+    arrStockQtys=pref.getString("StockQtys").split(",");
+    arrStockHi=pref.getString("StockHi").split(",");
+    arrStockLo=pref.getString("StockLo").split(",");
+    arrStockPrices=pref.getString("StockPrices").split(",");
+    if(trim(arrStockSymbols[0])==""){fnToggleAdd(1);}
+  }
+  function fnUpdateFooterTS(){
+    _gel("FooterTS").innerHTML='Last updated:'+fngetDate(false);
+  }
+  function fnUpdateSummary(StockID){
+    _gel("StockChart").innerHTML='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+arrStocks[StockID][1]+'&amp;t='+pref.getString("ChartScope")+'&amp;l=off&amp;z=b">';
+    _gel("SummaryChartTD").innerHTML=_gel("StockChart").innerHTML;
+    _gel("SummaryNameTD").innerHTML=arrStocks[StockID][2];
+    _gel("SummaryDayRangeTD").innerHTML=arrStocks[StockID][20];
+    _gel("Summary52wkRangeTD").innerHTML=arrStocks[StockID][14];
+    _gel("Summary200AvgTD").innerHTML=arrStocks[StockID][19];
+    _gel("SummaryDayVolumeTD").innerHTML=arrStocks[StockID][12];
+    _gel("SummaryLastTradeTime").innerHTML=arrStocks[StockID][7]+' '+arrStocks[StockID][8];
+  }
+  function fnInsertNews(content){
+    var html="";
+    for(var i in content.Entry){
+      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+_IG_GetImage('http://cnybroe.googlepages.com/Square.gif').src+'"></td><td><span><a href="'+_hesc(content.Entry[i].Link)+'" target="_blank">';
+      html+=_hesc(content.Entry[i].Title)+'</a></span></td></tr>';
+    }
+    _gel("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'" class="def">'+html+'</table>';
+    _IG_AdjustIFrameHeight();
+  }
+  function fnShowTPChart(StockID){
+    if(pref.getString("ChartType")=='ToolTip'){
+    _gel("StockChart").style.display="block";
+    }
+  }
+  function fnHideTPChart(sender){
+    _gel("StockChart").style.display="none";
+  }
+  function fnToggleAdd(ForceVisible){
+    if(_gel("StockAdd").style.display=="none"||ForceVisible==1){
+      _gel("StockAdd").style.display="block";
+      fnInsertAdd();
+    }else{
+      _gel("StockAdd").style.display="none";
+    }
+    _IG_AdjustIFrameHeight();
+  }
+  function fnToggleProfit(){
+    if(_gel("StockProfitDetails").style.display=="block"){
+      _gel("StockProfitDetails").style.display="none";
+    }else{
+      _gel("StockProfitDetails").style.display="block";
+    }
+    _IG_AdjustIFrameHeight();
+  }
+  function fnToggleSummary(){
+    if(_gel("StockSummary").style.display=="none"){
+      _gel("StockSummary").style.display="block";
+    }else{
+      _gel("StockSummary").style.display="none";
+    }
+    _IG_AdjustIFrameHeight();
+  }
+  function fnToggleNews(){
+    if(_gel("StockNews").style.display=="none"){
+      _gel("StockNews").innerHTML='<hr class="HrDef"><div class="loading">Loading ...</div>';
+      _IG_FetchFeedAsJSON('http://finance.yahoo.com/rss/headline?s='+sSymbols,fnInsertNews,5,false);
+      _gel("StockNews").style.display="block";
+    }else{
+      _gel("StockNews").style.display="none";
+    }
+    _IG_AdjustIFrameHeight();
+  }
+  function fnHideMess(GadgetVersion){
+    return function(){
+      _IG_AdjustIFrameHeight();
+	  pref.set("GadgetVersion",GadgetVersion);
+    }
+  }
+  function trim(s){
+    if (s){
+      return s.replace(/^\s*/,"").replace(/\s*$/,"");
+    }else{
+      return "";
+    };
+  }
+  function fngetDate(secs){
+    var currentTime=new Date();
+    var month=currentTime.getMonth()+1;
+    if(month<10){month="0"+month;}
+    var day=currentTime.getDate();
+    if(day<10){day="0"+day;}
+    var year=currentTime.getFullYear();
+    var hours=currentTime.getHours();
+    if(hours<10){hours="0"+hours;}
+    var minutes=currentTime.getMinutes();
+    if(minutes<10){minutes="0"+minutes;}
+    if(secs){minutes+=':'+currentTime.getSeconds()};
+    return year+'-'+month+'-'+day+' '+hours+':'+minutes;
+  }
+  function splitLine(inp){
+    var out=[];
+    var i=0;
+    while(i<inp.length){
+      var j=i;
+      if(inp.charAt(i)=='"'){j=inp.indexOf('"',i+1);}
+      var k=inp.indexOf(',',j);
+      if(k<0){k=inp.length;}
+      out[out.length]=inp.substring(i,k).replace(/"/gi,'');
+      i=k+1;
+    }
+    return out;
+  }
+  function fnGetOptions(){
+    var options = new Array(new Array('A','All types'),new Array('S','Stocks'),new Array('E','ETFs'),new Array('I','Indices'),new Array('M','Mutual Funds'),new Array('F','Futures'));
+    var sTemp="";
+    for (var i=0; i<6; i++) {
+      var selected="";
+      if (sType==options[i][0]){
+        selected="selected";
+      }
+      sTemp +='<option ' + selected+' value="'+options[i][0]+'">'+options[i][1]+'</option>';
+    }
+    return sTemp;
+  }
+  function fnCbChange(type){
+    sType=type;
+    fnSymbolSearch(_gel("txtStockSymbol").value,type);
+  }
+  function print(msg){
+    if (debug){
+      var debug_html = _gel("debug").innerHTML;
+      _gel("debug").style.display='block';
+      msg=fngetDate(1)+": "+_hesc(msg)+"<br>";
+      debug_html=msg+debug_html;
+      // Write debug HTML to div
+      _gel("debug").innerHTML=debug_html;
+    }
+  }
+  </script>
+  ]]>
+  </Content>
+</Module>
+
