@@ -26,7 +26,7 @@
   <UserPref name="StockCurrRates" datatype="hidden" default_value=""/>
   <UserPref name="StockHi" datatype="hidden" default_value=""/>
   <UserPref name="StockLo" datatype="hidden" default_value=""/>
-  <UserPref name="ShowProfit" datatype="hidden" default_value="Details"/>
+  <UserPref name="ShowProfit" datatype="hidden" default_value="Summary"/>
   <UserPref name="ChartType" datatype="hidden" default_value="ToolTip"/>
   <UserPref name="ShowNews" datatype="hidden" default_value="0"/>
   <UserPref name="CustomTitle" display_name="__MSG_customtitle__"  default_value="__MSG_gadgettitle__"/>
@@ -85,7 +85,7 @@
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
-  var debug=0;
+  var debug=1;
 
   //fnToggleProfit DUER IKKE HELT
 
