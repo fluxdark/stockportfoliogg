@@ -13,7 +13,7 @@
   <msg name="show">Show</msg>
   <msg name="numberofstocks">Qty.</msg>
   <msg name="symbol">Symbol</msg>
-  <msg name="change">Change</msg>
+  <msg name="change">Change.</msg>
   <msg name="changepercent">Percent</msg>
   <msg name="lasttrade">Last</msg>
   <msg name="lasttradedate">Trade date</msg>
