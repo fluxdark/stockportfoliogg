@@ -399,7 +399,7 @@
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='block';
         pref.set("ShowProfit","Summary");    
-    }else if(_gel("StockProfitDetails").style.display=='block' && _gel("StockProfitSummary").style.display=='none'){
+    }else if(_gel("StockProfitDetails").style.display=='none' && _gel("StockProfitSummary").style.display=='block'){
         fnInsertProfitDetailsTable();
         _gel("StockProfitDetails").style.display='block';
         _gel("StockProfitSummary").style.display='none';
