@@ -394,13 +394,11 @@
     _IG_AdjustIFrameHeight();
   }
   function fnToggleProfit(bToggle){
-    alert('StockProfitDetails='+_gel("StockProfitDetails").style.display);
-    alert('StockProfitSummary='+_gel("StockProfitSummary").style.display);
     if(_gel("StockProfitDetails").style.display=='none' && _gel("StockProfitSummary").style.display=='none'){
         fnInsertProfitSummaryTable();
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='block';
-        pref.set("ShowProfit","Summary");    
+        pref.set("ShowProfit","Summary");
     }else if(_gel("StockProfitDetails").style.display=='none' && _gel("StockProfitSummary").style.display=='block'){
         fnInsertProfitDetailsTable();
         _gel("StockProfitDetails").style.display='block';
