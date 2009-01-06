@@ -377,25 +377,17 @@
     fnUpdateValues();
   }
   function fnToggleProfit(bLoad){
-//print("ShowProfit="+pref.getString("ShowProfit"));
-    var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || (!bLoad && _gel("StockProfitSummary").style.display=='block')
-    var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none')
-
-//print("StockProfitDetails="+bDet);
-//print("StockProfitSummary="+bSum);
+    var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || 
+             (!bLoad && _gel("StockProfitSummary").style.display=='block')
+    var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || 
+             (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none')
     if(bSum){
         fnInsertProfitSummaryTable();
-        //_gel("StockProfitDetails").style.display='none';
-        //_gel("StockProfitSummary").style.display='block';
         pref.set("ShowProfit","Summary");
     }else if(bDet){
         fnInsertProfitDetailsTable();
-        //_gel("StockProfitDetails").style.display='block';
-        //_gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","Details");
     }else{
-        //_gel("StockProfitDetails").style.display='none';
-        //_gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","none");
     }
     _gel("StockProfitDetails").style.display=(bDet)?'block':'none';
