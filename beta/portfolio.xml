@@ -394,17 +394,27 @@
     _IG_AdjustIFrameHeight();
   }
   function fnToggleProfit(bToggle){
-    if(_gel("StockProfitDetails").style.display=='none' && _gel("StockProfitSummary").style.display=='none'){
+    var bDetN=_gel("StockProfitDetails").style.display=='none';
+    var bSumN=_gel("StockProfitSummary").style.display=='none';
+    if(bDetN && bSumN){
+      if(!bDetN){
+        bDetN=false;
+      }
+      if(!bSumN){
+        bSumN=false;
+      }
+    }
+    if(bDetN && bSumN){
         fnInsertProfitSummaryTable();
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='block';
         pref.set("ShowProfit","Summary");
-    }else if(_gel("StockProfitDetails").style.display=='none' && _gel("StockProfitSummary").style.display=='block'){
+    }else if(bDetN && _gel("StockProfitSummary").style.display=='block'){
         fnInsertProfitDetailsTable();
         _gel("StockProfitDetails").style.display='block';
         _gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","Details");
-    }else if(_gel("StockProfitDetails").style.display=='block' && _gel("StockProfitSummary").style.display=='none'){
+    }else if(_gel("StockProfitDetails").style.display=='block' && bSumN){
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","none");
