@@ -406,7 +406,7 @@
         _gel("StockProfitDetails").style.display='block';
         _gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","Details");
-    }else if(_gel("StockProfitDetails").style.display=='none' && _gel("StockProfitSummary").style.display=='block'){
+    }else if(_gel("StockProfitDetails").style.display=='block' && _gel("StockProfitSummary").style.display=='none'){
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","none");
