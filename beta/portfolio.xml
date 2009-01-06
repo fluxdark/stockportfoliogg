@@ -394,6 +394,8 @@
     _IG_AdjustIFrameHeight();
   }
   function fnToggleProfit(bToggle){
+    alert('StockProfitDetails='+_gel("StockProfitDetails").style.display);
+    alert('StockProfitSummary='+_gel("StockProfitSummary").style.display);
     if(_gel("StockProfitDetails").style.display=='none' && _gel("StockProfitSummary").style.display=='none'){
         fnInsertProfitSummaryTable();
         _gel("StockProfitDetails").style.display='none';
