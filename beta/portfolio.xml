@@ -162,7 +162,7 @@
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){//If  exch.rate has not been set, then use current rate
 				  arrStockCurrRates[i]=arrLineValues[26];
 				}
-				arrLineValues[31]=Math.round(((arrLineValues[6]*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*10)/10;//Earned in local currency
+				arrLineValues[31]=Math.round(((arrLineValues[6]*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
         arrLineValues[33]=0;
         if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
