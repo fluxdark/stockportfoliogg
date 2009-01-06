@@ -389,7 +389,7 @@
         _gel("StockProfitDetails").style.display="block";
         _gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","Details");
-    }else
+    }
     fnUpdateProfit();
     _IG_AdjustIFrameHeight();
   }
