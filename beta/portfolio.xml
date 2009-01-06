@@ -87,8 +87,6 @@
   var iTmrRetry;
   var debug=1;
 
-  //fnToggleProfit DUER IKKE HELT
-
   function fnInit(){
     fnUpgrade();
     fnReadPrefs();
@@ -367,7 +365,7 @@
     fnInsertFooter();
     fnInsertStockTable();
     fnToggleSummary(0);
-    fnToggleProfit(0);
+    fnToggleProfit(true);
     fnToggleNews(0);
     //Show add if no stocks are configured
     if((trim(arrStockSymbols.join(","))=="GOOG,^DJI,EURUSD=X,XAU=X" && arrStockSymbols.length==4) || _gel("StockAdd").style.display=="block"){
@@ -377,48 +375,37 @@
     bTablesReady=true; //All needed tables has been made
     fnUpdateValues();
   }
-  function fnToggleProfit1(bToggle){
-    if((bToggle && _gel("StockProfitDetails").style.display=="block") ||
-       (!bToggle && pref.getString("ShowProfit")!='Details')){
-        fnInsertProfitSummaryTable();
-        _gel("StockProfitDetails").style.display="none";
-        _gel("StockProfitSummary").style.display='block';
-        pref.set("ShowProfit","Summary");    
-    }else{
-        fnInsertProfitDetailsTable();
-        _gel("StockProfitDetails").style.display="block";
-        _gel("StockProfitSummary").style.display='none';
-        pref.set("ShowProfit","Details");
-    }
-    fnUpdateProfit();
-    _IG_AdjustIFrameHeight();
-  }
-  function fnToggleProfit(bToggle){
-    var bDetN=_gel("StockProfitDetails").style.display=='none';
-    var bSumN=_gel("StockProfitSummary").style.display=='none';
-print("StockProfitDetails="+bDetN);
-print("StockProfitSummary="+bSumN);
-    if(bDetN && bSumN){
-      if(!bDetN){
-        bDetN=false;
-      }
-      if(!bSumN){
-        bSumN=false;
-      }
-    }
-print("StockProfitDetails="+bDetN);
-print("StockProfitSummary="+bSumN);
-    if(bDetN && bSumN){
+  function fnToggleProfit(bLoad){
+    //var bDetN=_gel("StockProfitDetails").style.display=='none';
+    //var bSumN=_gel("StockProfitSummary").style.display=='none';
+print("ShowProfit="+pref.getString("ShowProfit"));
+    var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || (!bLoad && _gel("StockProfitSummary").style.display=='block')
+    var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none')
+
+//    if(bLoad){
+//      if(pref.getString("ShowProfit")=='Summary'){
+//        bSumN=false;
+//        bDetN=false;
+//      }else if (pref.getString("ShowProfit")=='Details')){
+//        bSumN=false;
+//        bDetN=false;
+//      }
+//    }
+
+    
+print("StockProfitDetails="+bDet);
+print("StockProfitSummary="+bSum);
+    if(bSum){
         fnInsertProfitSummaryTable();
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='block';
         pref.set("ShowProfit","Summary");
-    }else if(bDetN && _gel("StockProfitSummary").style.display=='block'){
+    }else if(bDet){
         fnInsertProfitDetailsTable();
         _gel("StockProfitDetails").style.display='block';
         _gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","Details");
-    }else if(_gel("StockProfitDetails").style.display=='block' && bSumN){
+    }else{
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","none");
@@ -452,7 +439,7 @@ print("StockProfitSummary="+bSumN);
     _IG_AdjustIFrameHeight();
   }
   function fnInsertFooter(){
-    _gel("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/AddEdit.gif').src+'" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/Summary.gif').src+'" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(true)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/money.gif').src+'" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/News.gif').src+'" title="__MSG_shownews__"></td><td style="width:18px;"><a href="http://cnybroe.googlepages.com/help" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/help.gif').src+'" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/ggroups.gif').src+'" title="__MSG_gotoggroups__"></a></td></tr></table>';
+    _gel("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/AddEdit.gif').src+'" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/Summary.gif').src+'" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/money.gif').src+'" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1)" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/News.gif').src+'" title="__MSG_shownews__"></td><td style="width:18px;"><a href="http://cnybroe.googlepages.com/help" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/help.gif').src+'" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/ggroups.gif').src+'" title="__MSG_gotoggroups__"></a></td></tr></table>';
   }
   function fnInsertStockTable(){
     var sBGColor;
