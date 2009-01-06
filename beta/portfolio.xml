@@ -399,6 +399,11 @@
         _gel("StockProfitDetails").style.display='none';
         _gel("StockProfitSummary").style.display='block';
         pref.set("ShowProfit","Summary");    
+    }else if(_gel("StockProfitDetails").style.display='block' && _gel("StockProfitSummary").style.display=='none'){
+        fnInsertProfitDetailsTable();
+        _gel("StockProfitDetails").style.display='block';
+        _gel("StockProfitSummary").style.display='none';
+        pref.set("ShowProfit","Details");
     }
     fnUpdateProfit();
     _IG_AdjustIFrameHeight();
