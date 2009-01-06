@@ -396,6 +396,8 @@
   function fnToggleProfit(bToggle){
     var bDetN=_gel("StockProfitDetails").style.display=='none';
     var bSumN=_gel("StockProfitSummary").style.display=='none';
+print("StockProfitDetails="+bDetN);
+print("StockProfitSummary="+bSumN);
     if(bDetN && bSumN){
       if(!bDetN){
         bDetN=false;
@@ -404,6 +406,8 @@
         bSumN=false;
       }
     }
+print("StockProfitDetails="+bDetN);
+print("StockProfitSummary="+bSumN);
     if(bDetN && bSumN){
         fnInsertProfitSummaryTable();
         _gel("StockProfitDetails").style.display='none';
