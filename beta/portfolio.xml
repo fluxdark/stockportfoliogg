@@ -204,7 +204,8 @@
       var iDayTotal=0;
       var iEarnTot=0;
       var iValTot=0;
-      var bPD=(_gel("StockProfitDetails").style.display=="block");
+      var bPD=_gel("StockProfitDetails").style.display=="block";
+      var bPS=_gel("StockProfitSummary").style.display=="block";
       var sDTC;
       var sETC;
       for(i=0;i<arrStocks.length;i++){
@@ -236,7 +237,7 @@
         _gel("ptc3"+i).innerHTML='<b>'+iValTot+'</b>';
         var tmp='('+pref.getString("Currency")+')';
         _gel("ptc0"+i).innerHTML='<div title="__MSG_currencytip__"><b>__MSG_total__'+tmp+'</b></div>';
-      }else{
+      }else if (bPS){
         _gel("stct1").style.color=sDTC;
         _gel("stct1").innerHTML='<b>'+iDayTotal+'</b>';
         _gel("stct2").style.color=sETC;
