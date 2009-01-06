@@ -377,40 +377,29 @@
     fnUpdateValues();
   }
   function fnToggleProfit(bLoad){
-    //var bDetN=_gel("StockProfitDetails").style.display=='none';
-    //var bSumN=_gel("StockProfitSummary").style.display=='none';
-print("ShowProfit="+pref.getString("ShowProfit"));
+//print("ShowProfit="+pref.getString("ShowProfit"));
     var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || (!bLoad && _gel("StockProfitSummary").style.display=='block')
     var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none')
 
-//    if(bLoad){
-//      if(pref.getString("ShowProfit")=='Summary'){
-//        bSumN=false;
-//        bDetN=false;
-//      }else if (pref.getString("ShowProfit")=='Details')){
-//        bSumN=false;
-//        bDetN=false;
-//      }
-//    }
-
-    
-print("StockProfitDetails="+bDet);
-print("StockProfitSummary="+bSum);
+//print("StockProfitDetails="+bDet);
+//print("StockProfitSummary="+bSum);
     if(bSum){
         fnInsertProfitSummaryTable();
-        _gel("StockProfitDetails").style.display='none';
-        _gel("StockProfitSummary").style.display='block';
+        //_gel("StockProfitDetails").style.display='none';
+        //_gel("StockProfitSummary").style.display='block';
         pref.set("ShowProfit","Summary");
     }else if(bDet){
         fnInsertProfitDetailsTable();
-        _gel("StockProfitDetails").style.display='block';
-        _gel("StockProfitSummary").style.display='none';
+        //_gel("StockProfitDetails").style.display='block';
+        //_gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","Details");
     }else{
-        _gel("StockProfitDetails").style.display='none';
-        _gel("StockProfitSummary").style.display='none';
+        //_gel("StockProfitDetails").style.display='none';
+        //_gel("StockProfitSummary").style.display='none';
         pref.set("ShowProfit","none");
     }
+    _gel("StockProfitDetails").style.display=(bDet)?'block':'none';
+    _gel("StockProfitSummary").style.display=(bSum)?'block':'none';
     fnUpdateProfit();
     _IG_AdjustIFrameHeight();
   }
