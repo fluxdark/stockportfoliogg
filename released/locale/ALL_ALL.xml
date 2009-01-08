@@ -18,7 +18,7 @@
   <msg name="lasttrade">Last</msg>
   <msg name="lasttradedate">Trade date</msg>
   <msg name="lasttradetime">Trade time</msg>
-  <msg name="earned">Gain.</msg>
+  <msg name="earned">Gain</msg>
   <msg name="dayearned">Gain today</msg>
   <msg name="earnedtotal">Total gain</msg>
   <msg name="dayearnedtotal">Total gain today</msg>
