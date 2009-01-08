@@ -160,13 +160,13 @@
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){//If  exch.rate has not been set, then use current rate
 				  arrStockCurrRates[i]=arrLineValues[26];
 				}
-				arrLineValues[31]=Math.round(((arrLineValues[6]*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
+				arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
         arrLineValues[33]=0;
         if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
-          arrLineValues[33]=Math.round((((arrLineValues[6]*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
+          arrLineValues[33]=Math.round((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
         }
-        arrLineValues[34]=Math.round(arrLineValues[6]*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
+        arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
         arrStocks[i]=arrLineValues;
       }
       bDataReady=true; //Data has been read and calculated
@@ -282,10 +282,10 @@
         }
         var sClass="";
 				//Multiplied with 1 equals toInt
-        if ((arrStocks[i][6]*1)>(arrStockHi[i]*1) && (arrStockHi[i]*1)>0){
+        if ((arrStocks[i][6].replace("%","")*1)>(arrStockHi[i]*1) && (arrStockHi[i]*1)>0){
           sClass="HiAlert";
 					sName=arrStockHi[i];
-        }else if((arrStocks[i][6]*1)<(arrStockLo[i]*1) && (arrStockLo[i]*1)>0){
+        }else if((arrStocks[i][6].replace("%","")*1)<(arrStockLo[i]*1) && (arrStockLo[i]*1)>0){
           sClass="LoAlert";
 					sName=arrStockLo[i];
         }
