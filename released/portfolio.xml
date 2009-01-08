@@ -164,7 +164,7 @@
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
         arrLineValues[33]=0;
         if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
-          arrLineValues[33]=Math.round(((arrLineValues[6]-arrStockPrices[i])/arrStockPrices[i])*1000)/10;//Total Gain %
+          arrLineValues[33]=Math.round((((arrLineValues[6]*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
         }
         arrLineValues[34]=Math.round(arrLineValues[6]*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
         arrStocks[i]=arrLineValues;
