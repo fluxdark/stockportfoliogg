@@ -155,6 +155,7 @@
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
+        arrLineValues[6]=arrLineValues[6].replace("%","");//Last
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*10*arrLineValues[26])/10;//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){//If  exch.rate has not been set, then use current rate
