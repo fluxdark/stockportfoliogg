@@ -656,7 +656,7 @@
 		}
       var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
 			var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it usefull.<a>';
-			miniMsg1.createTimerMessage(msghtml1,10);
+			miniMsg1.createTimerMessage(msghtml1,8);
 	}
 	function fnHideMess(GadgetVersion){
     return function(){
