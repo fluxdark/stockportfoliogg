@@ -90,6 +90,7 @@
   function fnInit(){
     alert(myRound(0));
     alert(myRound("20.2%"));
+    alert(myRound("dsf"));
     alert(myRound(1.2345678));
     alert(myRound(12.345678));
     alert(myRound(123.45678));
