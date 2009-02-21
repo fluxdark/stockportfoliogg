@@ -95,6 +95,7 @@
     alert(myRound(12.34));
     alert(myRound(123.4));
     alert(myRound(1234.567));
+    alert(myRound(12345.67));
     alert(myRound(0.123456));
     fnUpgrade();
     fnReadPrefs();
@@ -730,9 +731,9 @@
     var i = sInp.indexOf(".");
 //    if (sInp.length>5 && i>-1 && i<5 && IsNumeric(inp)){
     if (sInp.length>5 && i>-1 && i<5){
-      sInp=sInp.substr(0,5);
+      inp=sInp.substr(0,5)*1;
     }
-    return sInp * 1;
+    return inp;
 	}
   function splitLine(inp){
   	var out=new Array();
