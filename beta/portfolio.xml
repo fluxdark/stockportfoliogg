@@ -729,9 +729,12 @@
 	function myRound(inp){
     var sInp = inp.toString();
     var i = sInp.indexOf(".");
-//    if (sInp.length>5 && i>-1 && i<5 && IsNumeric(inp)){
-    if (sInp.length>5 && i>-1 && i<5){
-      inp=sInp.substr(0,5)*1;
+    if (sInp.length>5 && IsNumeric(inp)){
+      if (i>-1 && i<5){
+        inp=sInp.substr(0,5)*1;
+      }else if(i>5){
+        inp=sInp.substr(0,i)*1;
+      }
     }
     return inp;
 	}
