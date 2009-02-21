@@ -88,10 +88,10 @@
   var debug=1;
 
   function fnInit(){
-    alert(myRound(123456789);
-    alert(myRound(123.45);
-    alert(myRound(123.456);
-    alert(myRound(0.123123);
+    alert(myRound(123456789));
+    alert(myRound(123.45));
+    alert(myRound(123.456));
+    alert(myRound(0.123123));
     fnUpgrade();
     fnReadPrefs();
     fnLoad();
