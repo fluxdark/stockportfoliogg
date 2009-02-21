@@ -731,7 +731,7 @@
 	function myRound(inp){
     var sInp = inp.toString();
     var i = sInp.indexOf(".");
-    if (sInp.length>5 && i>-1){
+    if (sInp.length>5 && i>-1 && !isNaN(inp)){
       if (i<5){
         i=5;
       }
