@@ -91,12 +91,13 @@
     alert(myRound(123456789));
     alert(myRound(0));
     alert(myRound("20.2%"));
-    alert(myRound(1.23));
-    alert(myRound(12.34));
-    alert(myRound(123.4));
-    alert(myRound(1234.567));
-    alert(myRound(12345.67));
-    alert(myRound(0.123456));
+    alert(myRound(1.2345678));
+    alert(myRound(12.345678));
+    alert(myRound(123.45678));
+    alert(myRound(1234.5678));
+    alert(myRound(12345.678));
+    alert(myRound(123456.78));
+    alert(myRound(0.12345678));
     fnUpgrade();
     fnReadPrefs();
     fnLoad();
@@ -733,7 +734,7 @@
     if (sInp.length>5){
       if (i>-1 && i<5){
         inp=sInp.substr(0,5)*1;
-      }else if(i>5){
+      }else if(i>=5){
         inp=sInp.substr(0,i)*1;
       }
     }
