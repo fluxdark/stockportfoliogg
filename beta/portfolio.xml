@@ -90,7 +90,7 @@
   function fnInit(){
     alert(myRound(123456789));
     alert(myRound(0));
-    alert(myRound(20.2%));
+    alert(myRound("20.2%"));
     alert(myRound(1.23));
     alert(myRound(12.34));
     alert(myRound(123.4));
@@ -729,9 +729,9 @@
     var sInp = inp.toString();
     var i = sInp.indexOf('.');
     if (sInp.length>5 && i>-1 && i<5 && IsNumeric(inp)){
-      sInp=sInp.substr(0,5);
-    }    
-    return sInp * 1;
+      sInp=sInp.substr(0,5)*1;
+    }
+    return sInp;
 	}
   function splitLine(inp){
   	var out=new Array();
