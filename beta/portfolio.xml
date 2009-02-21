@@ -88,6 +88,10 @@
   var debug=1;
 
   function fnInit(){
+    alert(myRound(123456789);
+    alert(myRound(123.45);
+    alert(myRound(123.456);
+    alert(myRound(0.123123);
     fnUpgrade();
     fnReadPrefs();
     fnLoad();
@@ -716,6 +720,14 @@
 			  sender.value=sender.title;
 			}
 		}
+	}
+	function myRound(inp){
+    var sInp = inp.tostring();
+    var i = inp.indexOf('.');
+    if (sInp.length>5 && i>-1 && i<5){
+      sInp=sInp.substr(0,5);
+    }    
+    return sInp * 1;
 	}
   function splitLine(inp){
   	var out=new Array();
