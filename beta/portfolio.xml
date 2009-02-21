@@ -89,9 +89,13 @@
 
   function fnInit(){
     alert(myRound(123456789));
-    alert(myRound(123.45));
-    alert(myRound(123.456));
-    alert(myRound(0.123123));
+    alert(myRound(0));
+    alert(myRound(20.2%));
+    alert(myRound(1.23));
+    alert(myRound(12.34));
+    alert(myRound(123.4));
+    alert(myRound(1234.567));
+    alert(myRound(0.123456));
     fnUpgrade();
     fnReadPrefs();
     fnLoad();
