@@ -88,18 +88,6 @@
   var debug=1;
 
   function fnInit(){
-    alert(myRound(0));
-    alert(myRound("20.2%"));
-    alert(myRound("dsf"));
-    alert(myRound(1.2345678));
-    alert(myRound(12.345678));
-    alert(myRound(123.45678));
-    alert(myRound(1234.5678));
-    alert(myRound(12345.678));
-    alert(myRound(123456.78));
-    alert(myRound(1234567.8));
-    alert(myRound(123456789));
-    alert(myRound(0.12345678));
     fnUpgrade();
     fnReadPrefs();
     fnLoad();
