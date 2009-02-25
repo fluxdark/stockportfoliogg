@@ -177,7 +177,7 @@
         _gel('FooterMsg').innerHTML='Gave up loading stockdata';
       }
     }else{
-      iTmrRetry=setTimeout(fnLoadData(),pref.getInt("UpdateInterval")-5000); 
+      iTmrRetry=setTimeout('fnLoadData()',pref.getInt("UpdateInterval")-5000); 
       iSDRetry=0;
     }
     print("fnRetry ended");
