@@ -699,7 +699,6 @@
     }
   }
   function fngetDate(secs){
-    print("fngetDate started");
     var currentTime=new Date();
     var month=fnZeroPad(currentTime.getMonth()+1,2);
     var day=fnZeroPad(currentTime.getDate(),2);
@@ -708,7 +707,6 @@
     var minutes=fnZeroPad(currentTime.getMinutes(),2);
     if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2)};
     return year+'-'+month+'-'+day+' '+hours+':'+minutes;
-    print("fngetDate ended");
   }
 	function fnZeroPad(num,length){
 		var snum = num + '';
