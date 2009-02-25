@@ -168,7 +168,8 @@
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
-        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){//If  exch.rate has not been set, then use current rate
+        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
+          //If  exch.rate has not been set, then use current rate
 				  arrStockCurrRates[i]=arrLineValues[26];
 				}
 				arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
@@ -181,7 +182,7 @@
         arrStocks[i]=arrLineValues;
       }
       bDataReady=true; //Data has been read and calculated
-      fnUpdateValues()
+      fnUpdateValues();
     }
     print("fnPrepareStockData ended");
   }	
@@ -324,24 +325,6 @@
     }
     print("fnUpdateStockTable ended");
   }
-  function fnUpdateSummary(StockID){
-    print("fnUpdateSummary started");
-    if (bAllReady){
-      var img='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+arrStocks[StockID][1]+'&amp;t='+pref.getString("ChartScope")+'&amp;l=off&amp;z=b">'; 
-      if(_gel("StockSummary").style.display=="block"){
-        _gel("SummaryChartTD").innerHTML=img;
-        _gel("SummaryNameTD").innerHTML=arrStocks[StockID][2];
-        _gel("SummaryDayRangeTD").innerHTML=arrStocks[StockID][20];
-        _gel("Summary52wkRangeTD").innerHTML=arrStocks[StockID][14];
-        _gel("Summary200AvgTD").innerHTML=arrStocks[StockID][19];
-        _gel("SummaryDayVolumeTD").innerHTML=arrStocks[StockID][12];
-        _gel("SummaryLastTradeTime").innerHTML=arrStocks[StockID][7]+' '+arrStocks[StockID][8];
-      }else{
-        _gel("StockChart").innerHTML=img;
-      }
-    }
-    print("fnUpdateSummary ended");
-  }
   function fnInsertSummary(){
     print("fnInsertSummary started");
     var sTemp='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0><tr><td id="SummaryChartTD" style="width:1%;height:98px"></td><td><table style="font-size:'+fsize+'" width="100%" border=0 cellspacing=0 cellpadding=0><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_name__</b></td><td style="width:10px"></td><td id="SummaryNameTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_dayrange__</b></td><td style="width:10px"></td><td id="SummaryDayRangeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_52weekrange__</b></td><td style="width:10px"></td><td id="Summary52wkRangeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_200daymovingavg__</b></td><td style="width:10px"></td><td id="Summary200AvgTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_dayvolume__</b></td><td style="width:10px"></td><td id="SummaryDayVolumeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_lasttradetime__</b></td><td style="width:10px"></td><td id="SummaryLastTradeTime" nowrap></td></tr></table></td></tr></table>';
@@ -411,9 +394,9 @@
   function fnToggleProfit(bLoad){
     print("fnToggleProfit started");
     var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || 
-             (!bLoad && _gel("StockProfitSummary").style.display=='block')
+             (!bLoad && _gel("StockProfitSummary").style.display=='block');
     var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || 
-             (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none')
+             (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none');
     if(bSum){
         fnInsertProfitSummaryTable();
         pref.set("ShowProfit","Summary");
