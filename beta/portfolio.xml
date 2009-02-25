@@ -76,7 +76,7 @@
   var arrStockPrices=new Array();
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
-  var iVersion=1.20;
+  var iVersion=1.21;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
