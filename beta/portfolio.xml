@@ -261,7 +261,9 @@
       iDayTotal=Math.round(iDayTotal*100)/100;
       iDayTotal=myRound(iDayTotal);
       iEarnTot=Math.round(iEarnTot*100)/100;
+      iEarnTot=myRound(iEarnTot);
       iValTot=Math.round(iValTot*100)/100;
+      iValTot=myRound(iValTot);
       if (bPD){
         _gel("ptc1"+i).style.color=sDTC;
         _gel("ptc1"+i).innerHTML='<b>'+iDayTotal+'</b>';
