@@ -177,7 +177,7 @@
         _gel('FooterMsg').innerHTML='Gave up loading stockdata';
       }
     }else{
-      iTmrRetry=setTimeout('fnLoadData()',pref.getInt("UpdateInterval")-5000); 
+      iTmrRetry=setTimeout(fnLoadData(),pref.getInt("UpdateInterval")-5000); 
       iSDRetry=0;
     }
     print("fnRetry ended");
@@ -205,7 +205,7 @@
         if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
         if(pref.getInt("Flashing")==1&&_gel('stc'+i+'2').innerHTML!=''){
           _gel('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrStocks[i][3])-parseFloat(_gel('stcc'+i+'2').innerHTML),sbgColor);
-          setTimeout('_gel("stc'+i+'2").style.background="'+sbgColor+'"',700);
+          setTimeout(_gel("stc'+i+'2").style.background=sbgColor,700);
         }
         var sClass="";
 				//Multiplied with 1 equals toInt
@@ -376,7 +376,7 @@
     bDataReady=false;
     bAllReady=false;
     clearTimeout(iTmrRetry);
-    iTmrRetry=setTimeout('fnRetry()',5000); 
+    iTmrRetry=setTimeout(fnRetry(),5000); 
     var sTags='e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
     var sSymb='';
     for(var i=0;i<arrStockSymbols.length;i++){
