@@ -87,18 +87,66 @@
   var iTmrRetry;
   var debug=1;
 
-  function fnInit(){
-    print("fnInit started");
-    fnUpgrade();
-    fnReadPrefs();
-    fnLoad();
-    setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
-    fnMessage();
-    print("fnInit ended");
-	}
-  
   //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
 
+	function fnZeroPad(num,length){
+		var snum = num + '';
+		while(snum.length < length) {
+		  snum = '0' + snum; 
+		}
+		return snum;
+	}
+  function fngetDate(secs){
+    var currentTime=new Date();
+    var month=fnZeroPad(currentTime.getMonth()+1,2);
+    var day=fnZeroPad(currentTime.getDate(),2);
+    var year=currentTime.getFullYear();
+    var hours=fnZeroPad(currentTime.getHours(),2);
+    var minutes=fnZeroPad(currentTime.getMinutes(),2);
+    if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2);}
+    return year+'-'+month+'-'+day+' '+hours+':'+minutes;
+  }
+  function print(msg){
+    if (debug){
+      var debug_html = _gel("debug").innerHTML;
+      if (_gel("debug").style.display=='none'){
+        _gel("debug").style.display='block';
+        _IG_AdjustIFrameHeight();   
+      }
+      msg=fngetDate(1)+"; "+_hesc(msg.toString())+"<br>";
+      debug_html=msg+debug_html;
+      _gel("debug").innerHTML=debug_html;
+    }
+	}
+  function trim(s){
+    if (s){
+      return s.replace(/^\s*/,"").replace(/\s*$/,"");
+    }else{
+      return "";
+    }
+  }
+	function myRound(inp){
+    var sInp = inp.toString();
+    var i = sInp.indexOf(".");
+    if (sInp.length>5 && i>-1 && !isNaN(inp)){
+      if (i<5){
+        i=5;
+      }
+      inp=sInp.substr(0,i)*1;
+    }
+    return inp;
+	}
+  function fnNumToColor(number,zeroColor){
+    var sColor=zeroColor;
+    if(!isNaN(parseFloat(number))){
+      if(parseFloat(number)>0){sColor="#008200";}
+      if(parseFloat(number)<0){sColor="#FF2200";}
+    }
+    return sColor;
+  }
+  function fnSavePrefs(){
+    pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockCurrRates",arrStockCurrRates.join(","));
+  }
   function fnUpgrade(){
     //Upgrade script for version 1.19 to 1.20
     //Add 5 if saved setting is >24 and <30
@@ -116,76 +164,6 @@
     }
     print("fnUpgrade ended");
 	}
-	function fnLoad(){
-    print("fnLoad started");
-    fnPrefsValidation(arrStockSymbols);
-    fnLoadData();
-    fnInsertTables();
-    print("fnLoad ended");
-  }	
-  function fnLoadData(){
-    print("fnLoadData started");
-    bDataReady=false;
-    bAllReady=false;
-    clearTimeout(iTmrRetry);
-    iTmrRetry=setTimeout('fnRetry()',5000); 
-    var sTags='e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
-    var sSymb='';
-    for(var i=0;i<arrStockSymbols.length;i++){
-      sSymb+=arrStockSymbols[i]+',';
-    }
-		sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CacheWorkaround='+Math.random()*10000;
-		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
-    print("fnLoadData ended");
-	}
-  function fnStockDataProxy(stockData){
-    print("fnStockDataProxy started");
-    var arrLines=new Array();
-    var arrLineValues=new Array();
-    var sSymb="";
-    arrLines=stockData.split('\r\n');
-    for(i=0;i<arrLines.length-1;i++){
-      arrLineValues=splitLine(arrLines[i]);
-			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
-    }
-		sSymb=sSymb.substr(0,sSymb.length-1);
-		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CacheWorkaround='+Math.random()*10000;
-    _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData),{refreshInterval:60});
-    print("fnStockDataProxy ended");
-  }
-  function fnPrepareStockData(currData,stockData){
-    print("fnPrepareStockData started");
-    var arrLinesCD=new Array();
-    var arrLinesSD=new Array();
-    var arrLineValues=new Array();
-    currData=currData.replace(/0.00/g,"1.00");
-    arrStocks=new Array();
-    arrLinesCD=currData.split('\r\n');
-    arrLinesSD=stockData.split('\r\n');
-    if (arrLinesSD.length>1){
-      for(i=0;i<arrLinesSD.length-1;i++){
-        arrLineValues=splitLine(arrLinesSD[i]);
-        arrLineValues[26]=arrLinesCD[i];//Currency rate
-        arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
-        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
-          //If  exch.rate has not been set, then use current rate
-				  arrStockCurrRates[i]=arrLineValues[26];
-				}
-				arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
-        arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
-        arrLineValues[33]=0;
-        if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
-          arrLineValues[33]=Math.round((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
-        }
-        arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
-        arrStocks[i]=arrLineValues;
-      }
-      bDataReady=true; //Data has been read and calculated
-      fnUpdateValues();
-    }
-    print("fnPrepareStockData ended");
-  }	
   function fnRetry(){
     print("fnRetry started");
     clearTimeout(iTmrRetry);
@@ -204,17 +182,53 @@
     }
     print("fnRetry ended");
   }
-  function fnUpdateValues(){
-    print("fnUpdateValues started");
-    bAllReady=(bDataReady && bTablesReady);
-    if (bAllReady){
-      fnUpdateStockTable();
-      fnUpdateProfit();
-      fnUpdateSummary(0);
-      _gel("FooterMsg").innerHTML='__MSG_lastupdated__:'+fngetDate(false);
+  function fnTPChart(show){
+    if(pref.getString("ChartType")=='ToolTip' && show==1){
+      _gel("StockChart").style.display="block";
+    }else{
+      _gel("StockChart").style.display="none";
     }
-    _IG_AdjustIFrameHeight();
-    print("fnUpdateValues started");
+  }
+  function fnUpdateStockTable(){
+    print("fnUpdateStockTable started");
+    var sName;
+    var sbgColor;
+    if (bAllReady){
+      for(var i=0;i<arrStocks.length;i++){
+				sName=arrStocks[i][2];
+        if (sName==''||pref.getInt("NameColumn")==1){
+          sName=arrStocks[i][1];
+        }else if (!isNaN(arrStocks[i][21])){//If this is an option
+          sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
+        }
+        _gel('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+arrStocks[i][1]+'">'+sName+'</a>'; 
+        if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
+        if(pref.getInt("Flashing")==1&&_gel('stc'+i+'2').innerHTML!=''){
+          _gel('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrStocks[i][3])-parseFloat(_gel('stcc'+i+'2').innerHTML),sbgColor);
+          setTimeout('_gel("stc'+i+'2").style.background="'+sbgColor+'"',700);
+        }
+        var sClass="";
+				//Multiplied with 1 equals toInt
+        if ((arrStocks[i][6].replace("%","")*1)>(arrStockHi[i]*1) && (arrStockHi[i]*1)>0){
+          sClass="HiAlert";
+					sName=arrStockHi[i];
+        }else if((arrStocks[i][6].replace("%","")*1)<(arrStockLo[i]*1) && (arrStockLo[i]*1)>0){
+          sClass="LoAlert";
+					sName=arrStockLo[i];
+        }
+        _gel('stc'+i+'0').className=sClass;
+				_gel('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
+        _gel('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+arrStocks[i][1]+'#chart1:symbol='+arrStocks[i][1]+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
+        var k=3;
+        for(var j=1;j<iConfCols+1;j++){
+          if(pref.getString("Column"+j)!='0'){
+            _gel('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
+            k++;
+          }
+        }
+      }
+    }
+    print("fnUpdateStockTable ended");
   }
   function fnUpdateProfit(){
     print("fnUpdateProfit started");
@@ -283,47 +297,167 @@
     }
     print("fnUpdateSummary ended");
   }
-  function fnUpdateStockTable(){
-    print("fnUpdateStockTable started");
-    var sName;
-		var sTip;
-    var sBGColor;
+  function fnUpdateValues(){
+    print("fnUpdateValues started");
+    bAllReady=(bDataReady && bTablesReady);
     if (bAllReady){
-      for(var i=0;i<arrStocks.length;i++){
-				sName=arrStocks[i][2];
-        if (sName==''||pref.getInt("NameColumn")==1){
-          sName=arrStocks[i][1];
-        }else if (!isNaN(arrStocks[i][21])){//If this is an option
-          sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
-        }
-        _gel('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+arrStocks[i][1]+'">'+sName+'</a>'; 
-        if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
-        if(pref.getInt("Flashing")==1&&_gel('stc'+i+'2').innerHTML!=''){
-          _gel('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrStocks[i][3])-parseFloat(_gel('stcc'+i+'2').innerHTML),sbgColor);
-          setTimeout('_gel("stc'+i+'2").style.background="'+sbgColor+'"',700);
-        }
-        var sClass="";
-				//Multiplied with 1 equals toInt
-        if ((arrStocks[i][6].replace("%","")*1)>(arrStockHi[i]*1) && (arrStockHi[i]*1)>0){
-          sClass="HiAlert";
-					sName=arrStockHi[i];
-        }else if((arrStocks[i][6].replace("%","")*1)<(arrStockLo[i]*1) && (arrStockLo[i]*1)>0){
-          sClass="LoAlert";
-					sName=arrStockLo[i];
-        }
-        _gel('stc'+i+'0').className=sClass;
-				_gel('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
-        _gel('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+arrStocks[i][1]+'#chart1:symbol='+arrStocks[i][1]+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
-        var k=3;
-        for(var j=1;j<iConfCols+1;j++){
-          if(pref.getString("Column"+j)!='0'){
-            _gel('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
-            k++;
-          }
-        }
-      }
+      fnUpdateStockTable();
+      fnUpdateProfit();
+      fnUpdateSummary(0);
+      _gel("FooterMsg").innerHTML='__MSG_lastupdated__:'+fngetDate(false);
     }
-    print("fnUpdateStockTable ended");
+    _IG_AdjustIFrameHeight();
+    print("fnUpdateValues ended");
+  }
+  function splitLine(inp){
+  	var out=new Array();
+    out=inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
+    for(var i=0;i<out.length;i++){
+      out[i]=out[i].replace(/"/g,"");
+		}
+		if(out.length!=26){
+			out='N/A,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');	
+		}
+		if(out[0]!="N/A"){
+      out[24]="???";
+      out[25]=out[0].substr(0,out[0].indexOf("<"));
+    }
+    return out;
+  }
+  function fnPrepareStockData(currData,stockData){
+    print("fnPrepareStockData started");
+    var arrLinesCD=new Array();
+    var arrLinesSD=new Array();
+    var arrLineValues=new Array();
+    currData=currData.replace(/0.00/g,"1.00");
+    arrStocks=new Array();
+    arrLinesCD=currData.split('\r\n');
+    arrLinesSD=stockData.split('\r\n');
+    if (arrLinesSD.length>1){
+      for(i=0;i<arrLinesSD.length-1;i++){
+        arrLineValues=splitLine(arrLinesSD[i]);
+        arrLineValues[26]=arrLinesCD[i];//Currency rate
+        arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
+        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
+          //If  exch.rate has not been set, then use current rate
+				  arrStockCurrRates[i]=arrLineValues[26];
+				}
+				arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
+        arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
+        arrLineValues[33]=0;
+        if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
+          arrLineValues[33]=Math.round((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
+        }
+        arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
+        arrStocks[i]=arrLineValues;
+      }
+      bDataReady=true; //Data has been read and calculated
+      fnUpdateValues();
+    }
+    print("fnPrepareStockData ended");
+  }
+  function fnStockDataProxy(stockData){
+    print("fnStockDataProxy started");
+    var arrLines=new Array();
+    var arrLineValues=new Array();
+    var sSymb="";
+    arrLines=stockData.split('\r\n');
+    for(i=0;i<arrLines.length-1;i++){
+      arrLineValues=splitLine(arrLines[i]);
+			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
+    }
+		sSymb=sSymb.substr(0,sSymb.length-1);
+		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CacheWorkaround='+Math.random()*10000;
+    _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData),{refreshInterval:60});
+    print("fnStockDataProxy ended");
+  }
+  function fnLoadData(){
+    print("fnLoadData started");
+    bDataReady=false;
+    bAllReady=false;
+    clearTimeout(iTmrRetry);
+    iTmrRetry=setTimeout('fnRetry()',5000); 
+    var sTags='e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
+    var sSymb='';
+    for(var i=0;i<arrStockSymbols.length;i++){
+      sSymb+=arrStockSymbols[i]+',';
+    }
+		sSymb=sSymb.substr(0,sSymb.length-1);
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CacheWorkaround='+Math.random()*10000;
+		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
+    print("fnLoadData ended");
+	}
+  function fnReadPrefs(){
+    arrStockSymbols=pref.getString("StockSymbols").split(",");
+    arrStockQtys=pref.getString("StockQtys").split(",");
+    arrStockPrices=pref.getString("StockPrices").split(",");
+    arrStockCurrRates=pref.getString("StockCurrRates").split(",");
+    arrStockHi=pref.getString("StockHi").split(",");
+    arrStockLo=pref.getString("StockLo").split(",");
+    iPrefVersion=pref.getString("GadgetVersion");
+  }
+  function fnPrefsValidation(inp){
+    if (trim(inp.join(","))==""){
+		  arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
+			arrStockQtys="100,0,200,300".split(",");
+			arrStockPrices="235,0,0,0".split(",");
+			arrStockCurrRates="1,1,1,1".split(",");
+			arrStockHi="500,10000,2,0.002".split(",");
+			arrStockLo="300,6000,1,0.0005".split(",");
+    }
+		for(var i=0;i<inp.length;i++){
+		  if (isNaN(arrStockQtys[i])){arrStockQtys[i]=0;}
+		  if (isNaN(arrStockPrices[i])){arrStockPrices[i]=0;}
+		  //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
+		  if (isNaN(arrStockHi[i])){arrStockHi[i]=0;}
+		  if (isNaN(arrStockLo[i])){arrStockLo[i]=0;}
+		}
+  }
+  function fnInsertProfitDetailsTable(){
+    print("fnInsertProfitDetailsTable started");
+    var sCurr='';
+		if (pref.getString("Currency")=="-"){
+      sCurr='style="visibility:hidden;"';
+		}
+		var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=6></td></tr>';
+    var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="width:100%;font-size:'+fsize+'" class="def"><col width="10%"><col width="20%"><col width="25%"><col width="15%"><col width="15%"><col width="15%"><tr style="font-weight:bold;"><td class="cellL">__MSG_name__</td><td class="cellR">__MSG_dayearned__</td><td class="cellR">__MSG_earned__</td><td class="cellR">__MSG_value__</td><td class="cellC" '+sCurr+'>__MSG_currency__</td><td class="cellL" '+sCurr+'>__MSG_currencyrate__</td></tr>'+sLine;
+    for(i=0;i<arrStockSymbols.length+1;i++){
+      if(i==arrStockSymbols.length){
+        sProfitTable+=sLine;
+      }
+      sProfitTable+='<tr><td id="ptc0'+i+'" class="cellL"></td><td id="ptc1'+i+'" class="cellR"></td><td id="ptc2'+i+'" class="cellR"></td><td id="ptc3'+i+'" class="cellR"></td><td id="ptc4'+i+'" class="cellC" '+sCurr+'></td><td id="ptc5'+i+'" class="cellR" '+sCurr+'></td></tr>';
+    }
+    sProfitTable+='</table>';
+    _gel("StockProfitDetails").innerHTML=sProfitTable;
+    print("fnInsertProfitDetailsTable ended");
+  }
+  function fnInsertProfitSummaryTable(){
+    print("fnInsertProfitSummaryTable started");
+    var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'">';
+    sProfitTable+='<tr width=100%><td nowrap>__MSG_dayearned__: </td><td id="stct1" nowrap></td><td width="10px" nowrap></td><td nowrap>__MSG_earned__: </td><td id="stct2" nowrap></td><td width="10px" nowrap></td><td nowrap>__MSG_value__: </td><td id="stct3" nowrap></td><td nowrap width="70%"></td></tr></table>';
+    _gel("StockProfitSummary").innerHTML=sProfitTable;
+    print("fnInsertProfitSummaryTable ended");
+  }
+  function fnToggleProfit(bLoad){
+    print("fnToggleProfit started");
+    var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || 
+             (!bLoad && _gel("StockProfitSummary").style.display=='block');
+    var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || 
+             (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none');
+    if(bSum){
+        fnInsertProfitSummaryTable();
+        pref.set("ShowProfit","Summary");
+    }else if(bDet){
+        fnInsertProfitDetailsTable();
+        pref.set("ShowProfit","Details");
+    }else{
+        pref.set("ShowProfit","none");
+    }
+    _gel("StockProfitDetails").style.display=(bDet)?'block':'none';
+    _gel("StockProfitSummary").style.display=(bSum)?'block':'none';
+    fnUpdateProfit();
+    _IG_AdjustIFrameHeight();
+    print("fnToggleProfit ended");
   }
   function fnInsertSummary(){
     print("fnInsertSummary started");
@@ -333,12 +467,62 @@
     fnUpdateSummary(0);
     print("fnInsertSummary ended");
   }
-  function fnInsertProfitSummaryTable(){
-    print("fnInsertProfitSummaryTable started");
-    var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'">';
-    sProfitTable+='<tr width=100%><td nowrap>__MSG_dayearned__: </td><td id="stct1" nowrap></td><td width="10px" nowrap></td><td nowrap>__MSG_earned__: </td><td id="stct2" nowrap></td><td width="10px" nowrap></td><td nowrap>__MSG_value__: </td><td id="stct3" nowrap></td><td nowrap width="70%"></td></tr></table>';
-    _gel("StockProfitSummary").innerHTML=sProfitTable;
-    print("fnInsertProfitSummaryTable ended");
+  function fnToggleSummary(bToggle){
+    print("fnToggleSummary started");
+    if(bToggle){
+      if(_gel("StockSummary").style.display=="none"){
+        pref.set("ChartType","Summary");
+        fnInsertSummary();
+      }else{
+        _gel("StockSummary").style.display="none";
+        pref.set("ChartType","ToolTip");
+      }
+    }else{
+      if(pref.getString("ChartType")=='Summary'){
+        fnInsertSummary();
+      }
+    }
+    _IG_AdjustIFrameHeight();
+    print("fnToggleSummary ended");
+  }
+	function txtFocus(sender,focus){
+    if (trim(sender.value)=="" || trim(sender.value)==sender.title){
+			if (focus==1){
+			  sender.value="";
+			  sender.style.color='#000000';
+			}else{
+			  sender.style.color='#AAAAAA';
+			  sender.value=sender.title;
+			}
+		}
+	}
+  function fnInsertNews(feed){
+		var html="";
+    for(var i in feed.Entry){
+      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/Square.gif').src+'"></td><td><span><a href="'+_hesc(feed.Entry[i].Link)+'" target="_blank">';
+      html+=_hesc(feed.Entry[i].Title)+'</a></span></td></tr>';
+    }
+    _gel("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
+    _IG_AdjustIFrameHeight();
+  }
+  function fnToggleNews(bToggle){
+    if (bToggle){
+      if(_gel("StockNews").style.display=="none"){
+        _gel("StockNews").innerHTML='<hr class="HrDef"><div class="loading">__MSG_loading__</div>';
+        var url='http://finance.yahoo.com/rss/headline?s='+arrStockSymbols.join(",");
+				_IG_FetchFeedAsJSON(url,fnInsertNews,5,false);
+        _gel("StockNews").style.display="block";
+        pref.set("ShowNews","1");
+      }else{
+        _gel("StockNews").style.display="none";
+        pref.set("ShowNews","0");
+      }
+    }else{
+      if(pref.getString("ShowNews")=='1'){
+        fnToggleNews(1);
+      }
+    }
+    _IG_AdjustIFrameHeight();
   }
   function fnInsertAdd(){
     print("fnInsertAdd started");
@@ -373,65 +557,7 @@
 		}
     print("fnInsertAdd ended");
   }
-	function fnInsertTables(){
-    print("fnInsertTables started");
-    bTablesReady=false;
-    bAllReady=false;
-    fnInsertFooter();
-    fnInsertStockTable();
-    fnToggleSummary(0);
-    fnToggleProfit(true);
-    fnToggleNews(0);
-    //Show add if no stocks are configured
-    if((trim(arrStockSymbols.join(","))=="GOOG,^DJI,EURUSD=X,XAU=X" && arrStockSymbols.length==4) || _gel("StockAdd").style.display=="block"){
-      fnToggleAdd(1);
-    }
-    _IG_SetTitle(pref.getString("CustomTitle"));
-    bTablesReady=true; //All needed tables has been made
-    fnUpdateValues();
-    print("fnInsertTables ended");
-  }
-  function fnToggleProfit(bLoad){
-    print("fnToggleProfit started");
-    var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || 
-             (!bLoad && _gel("StockProfitSummary").style.display=='block');
-    var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || 
-             (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none');
-    if(bSum){
-        fnInsertProfitSummaryTable();
-        pref.set("ShowProfit","Summary");
-    }else if(bDet){
-        fnInsertProfitDetailsTable();
-        pref.set("ShowProfit","Details");
-    }else{
-        pref.set("ShowProfit","none");
-    }
-    _gel("StockProfitDetails").style.display=(bDet)?'block':'none';
-    _gel("StockProfitSummary").style.display=(bSum)?'block':'none';
-    fnUpdateProfit();
-    _IG_AdjustIFrameHeight();
-    print("fnToggleProfit ended");
-  }
-  function fnToggleSummary(bToggle){
-    print("fnToggleSummary started");
-    if(bToggle){
-      if(_gel("StockSummary").style.display=="none"){
-        pref.set("ChartType","Summary");
-        fnInsertSummary();
-      }else{
-        _gel("StockSummary").style.display="none";
-        pref.set("ChartType","ToolTip");
-      }
-    }else{
-      if(pref.getString("ChartType")=='Summary'){
-        fnInsertSummary();
-      }
-    }
-    _IG_AdjustIFrameHeight();
-    print("fnToggleSummary ended");
-  }
   function fnToggleAdd(ForceVisible){
-    print("fnToggleAdd started");
     if((_gel("StockAdd").style.display=="none" && bTablesReady==true)||ForceVisible==1){
       _gel("StockAdd").style.display="block";
       fnInsertAdd();
@@ -439,7 +565,6 @@
       _gel("StockAdd").style.display="none";
     }
     _IG_AdjustIFrameHeight();
-    print("fnToggleAdd ended");
   }
   function fnInsertFooter(){
     print("fnInsertFooter started");
@@ -474,65 +599,43 @@
     _gel("StockData").innerHTML=sStockTable;
     print("fnInsertStockTable ended");
   }
-  function fnInsertProfitDetailsTable(){
-    print("fnInsertProfitDetailsTable started");
-    var sCurr='';
-		if (pref.getString("Currency")=="-"){
-      sCurr='style="visibility:hidden;"';
-		}
-		var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=6></td></tr>';
-    var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="width:100%;font-size:'+fsize+'" class="def"><col width="10%"><col width="20%"><col width="25%"><col width="15%"><col width="15%"><col width="15%"><tr style="font-weight:bold;"><td class="cellL">__MSG_name__</td><td class="cellR">__MSG_dayearned__</td><td class="cellR">__MSG_earned__</td><td class="cellR">__MSG_value__</td><td class="cellC" '+sCurr+'>__MSG_currency__</td><td class="cellL" '+sCurr+'>__MSG_currencyrate__</td></tr>'+sLine;
-    for(i=0;i<arrStockSymbols.length+1;i++){
-      if(i==arrStockSymbols.length){
-        sProfitTable+=sLine;
-      }
-      sProfitTable+='<tr><td id="ptc0'+i+'" class="cellL"></td><td id="ptc1'+i+'" class="cellR"></td><td id="ptc2'+i+'" class="cellR"></td><td id="ptc3'+i+'" class="cellR"></td><td id="ptc4'+i+'" class="cellC" '+sCurr+'></td><td id="ptc5'+i+'" class="cellR" '+sCurr+'></td></tr>';
+  function fnInsertTables(){
+    print("fnInsertTables started");
+    bTablesReady=false;
+    bAllReady=false;
+    fnInsertFooter();
+    fnInsertStockTable();
+    fnToggleSummary(0);
+    fnToggleProfit(true);
+    fnToggleNews(0);
+    //Show add if no stocks are configured
+    if((trim(arrStockSymbols.join(","))=="GOOG,^DJI,EURUSD=X,XAU=X" && arrStockSymbols.length==4) || _gel("StockAdd").style.display=="block"){
+      fnToggleAdd(1);
     }
-    sProfitTable+='</table>';
-    _gel("StockProfitDetails").innerHTML=sProfitTable;
-    print("fnInsertProfitDetailsTable ended");
+    _IG_SetTitle(pref.getString("CustomTitle"));
+    bTablesReady=true; //All needed tables has been made
+    fnUpdateValues();
+    print("fnInsertTables ended");
   }
-  function fnToggleNews(bToggle){
-    print("fnToggleNews started");
-    if (bToggle){
-      if(_gel("StockNews").style.display=="none"){
-        _gel("StockNews").innerHTML='<hr class="HrDef"><div class="loading">__MSG_loading__</div>';
-        var url='http://finance.yahoo.com/rss/headline?s='+arrStockSymbols.join(",");
-				_IG_FetchFeedAsJSON(url,fnInsertNews,5,false);
-        _gel("StockNews").style.display="block";
-        pref.set("ShowNews","1");
-      }else{
-        _gel("StockNews").style.display="none";
-        pref.set("ShowNews","0");
-      }
-    }else{
-      if(pref.getString("ShowNews")=='1'){
-        fnToggleNews(1);
-      }
-    }
-    _IG_AdjustIFrameHeight();
-    print("fnToggleNews ended");
+	function fnLoad(){
+    print("fnLoad started");
+    fnPrefsValidation(arrStockSymbols);
+    fnLoadData();
+    fnInsertTables();
+    print("fnLoad ended");
   }
-  function fnInsertNews(feed){
-    print("fnInsertNews started");
-		var html="";
-    for(var i in feed.Entry){
-      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/Square.gif').src+'"></td><td><span><a href="'+_hesc(feed.Entry[i].Link)+'" target="_blank">';
-      html+=_hesc(feed.Entry[i].Title)+'</a></span></td></tr>';
+  function fnAddStock(Symbol){
+    Symbol=Symbol.replace(/ /g,'');
+    if(Symbol.length>0){
+      arrStockSymbols.push(Symbol);
+      arrStockQtys.push(0);
+      arrStockPrices.push(0);
+      arrStockCurrRates.push("???");
+      arrStockHi.push(0);
+      arrStockLo.push(0);
+      fnSavePrefs();
+      fnLoad();
     }
-    _gel("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
-    _IG_AdjustIFrameHeight();
-    print("fnInsertNews ended");
-  }
-  function fnSymbolSearch(symbol){
-    if(trim(symbol)!=''){
-      _gel("StockAddList").innerHTML='__MSG_loading__';
-      symbol=symbol.replace(' ','+');
-			_IG_FetchContent('http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+symbol+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback',fnSymbolSearchResponse,{refreshInterval:3599});
-    }else{
-      _gel("StockAddList").style.display="none";
-    }
-    _IG_AdjustIFrameHeight();
   }
   function fnSymbolSearchResponse(ResponseText){
     var iStart=0;
@@ -579,15 +682,15 @@
     _gel("StockAddList").style.display="block";
     _IG_AdjustIFrameHeight();
   }
-  function fnEditStock(sender){
-    if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
-    var sTemp=sender.innerHTML;
-    var a="uha"+sender.id.replace("ctc","");
-    var b=(sender.id.substr(3,1)==0)?'64px':'49px';
-    var c=(sender.id.substr(3,1)==0)?'left':'right';
-    var d='<input type="text" id="'+a+'" onkeypress="EditOnKey(event,this);" onBlur="EditOnBlur(this);" value="'+sTemp+'" class="def" style="font-size:'+fsize+';width:'+b+';height:18px;margin:0px;text-align:'+c+';" />';
-    sender.innerHTML=d;
-    _gel(a).focus();
+  function fnSymbolSearch(symbol){
+    if(trim(symbol)!=''){
+      _gel("StockAddList").innerHTML='__MSG_loading__';
+      symbol=symbol.replace(' ','+');
+			_IG_FetchContent('http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+symbol+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback',fnSymbolSearchResponse,{refreshInterval:3599});
+    }else{
+      _gel("StockAddList").style.display="none";
+    }
+    _IG_AdjustIFrameHeight();
   }
   function EditOnBlur(s){
     var index=s.id.substr(4);
@@ -608,12 +711,15 @@
       EditOnBlur(s);
     }
   }
-  function fnTPChart(show){
-    if(pref.getString("ChartType")=='ToolTip' && show==1){
-      _gel("StockChart").style.display="block";
-    }else{
-      _gel("StockChart").style.display="none";
-    }
+  function fnEditStock(sender){
+    if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
+    var sTemp=sender.innerHTML;
+    var a="uha"+sender.id.replace("ctc","");
+    var b=(sender.id.substr(3,1)==0)?'64px':'49px';
+    var c=(sender.id.substr(3,1)==0)?'left':'right';
+    var d='<input type="text" id="'+a+'" onkeypress="EditOnKey(event,this);" onBlur="EditOnBlur(this);" value="'+sTemp+'" class="def" style="font-size:'+fsize+';width:'+b+';height:18px;margin:0px;text-align:'+c+';" />';
+    sender.innerHTML=d;
+    _gel(a).focus();
   }
   function fnDeleteStock(index){
     arrStockSymbols.splice(index,1);
@@ -646,39 +752,15 @@
     fnSavePrefs();
     fnLoad();
   }
-  function fnAddStock(Symbol){
-    Symbol=Symbol.replace(/ /g,'');
-    if(Symbol.length>0){
-      arrStockSymbols.push(Symbol);
-      arrStockQtys.push(0);
-      arrStockPrices.push(0);
-      arrStockCurrRates.push("???");
-      arrStockHi.push(0);
-      arrStockLo.push(0);
-      fnSavePrefs();
-      fnLoad();
-    }
-  }
-  function fnSavePrefs(){
-    pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockCurrRates",arrStockCurrRates.join(","));
-  }
-  function fnPrefsValidation(inp){
-    if (trim(inp.join(","))==""){
-		  arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
-			arrStockQtys="100,0,200,300".split(",");
-			arrStockPrices="235,0,0,0".split(",");
-			arrStockCurrRates="1,1,1,1".split(",");
-			arrStockHi="500,10000,2,0.002".split(",");
-			arrStockLo="300,6000,1,0.0005".split(",");
-    }
-		for(var i=0;i<inp.length;i++){
-		  if (isNaN(arrStockQtys[i])){arrStockQtys[i]=0;}
-		  if (isNaN(arrStockPrices[i])){arrStockPrices[i]=0;}
-		  //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
-		  if (isNaN(arrStockHi[i])){arrStockHi[i]=0;}
-		  if (isNaN(arrStockLo[i])){arrStockLo[i]=0;}
-		}
-  }
+
+
+	function fnHideMess(GadgetVersion){
+    return function(){
+      _IG_AdjustIFrameHeight();
+			iPrefVersion=GadgetVersion;
+      pref.set("GadgetVersion",iPrefVersion);
+    };
+  }  
   function fnMessage(){
     print("fnMessage started");
 	  //if((iPrefVersion*1)<(iVersion*1)){
@@ -691,106 +773,20 @@
 			miniMsg1.createTimerMessage(msghtml1,8);
     print("fnMessage ended");
 	}
-	function fnHideMess(GadgetVersion){
-    return function(){
-      _IG_AdjustIFrameHeight();
-			iPrefVersion=GadgetVersion;
-      pref.set("GadgetVersion",iPrefVersion);
-    }
-  }
-  function fngetDate(secs){
-    var currentTime=new Date();
-    var month=fnZeroPad(currentTime.getMonth()+1,2);
-    var day=fnZeroPad(currentTime.getDate(),2);
-    var year=currentTime.getFullYear();
-    var hours=fnZeroPad(currentTime.getHours(),2);
-    var minutes=fnZeroPad(currentTime.getMinutes(),2);
-    if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2)};
-    return year+'-'+month+'-'+day+' '+hours+':'+minutes;
-  }
-	function fnZeroPad(num,length){
-		var snum = num + '';
-		while(snum.length < length) {
-		  snum = '0' + snum; 
-		}
-		return snum;
+  function fnInit(){
+    print("fnInit started");
+    fnUpgrade();
+    fnReadPrefs();
+    fnLoad();
+    setTimeout(_IG_Analytics("UA-2031644-1", "/Portfolio"),3000);
+    fnMessage();
+    print("fnInit ended");
 	}
-  function trim(s){
-    if (s){
-      return s.replace(/^\s*/,"").replace(/\s*$/,"");
-    }else{
-      return "";
-    }
-  }
-  function fnReadPrefs(){
-    arrStockSymbols=pref.getString("StockSymbols").split(",");
-    arrStockQtys=pref.getString("StockQtys").split(",");
-    arrStockPrices=pref.getString("StockPrices").split(",");
-    arrStockCurrRates=pref.getString("StockCurrRates").split(",");
-    arrStockHi=pref.getString("StockHi").split(",");
-    arrStockLo=pref.getString("StockLo").split(",");
-    iPrefVersion=pref.getString("GadgetVersion");
-  }
-  function fnNumToColor(number,zeroColor){
-    var sColor=zeroColor;
-    if(!isNaN(parseFloat(number))){
-      if(parseFloat(number)>0){sColor="#008200";}
-      if(parseFloat(number)<0){sColor="#FF2200";}
-    }
-    return sColor;
-  }
-	function txtFocus(sender,focus){
-    if (trim(sender.value)=="" || trim(sender.value)==sender.title){
-			if (focus==1){
-			  sender.value="";
-			  sender.style.color='#000000';
-			}else{
-			  sender.style.color='#AAAAAA';
-			  sender.value=sender.title;
-			}
-		}
-	}
-	function myRound(inp){
-    var sInp = inp.toString();
-    var i = sInp.indexOf(".");
-    if (sInp.length>5 && i>-1 && !isNaN(inp)){
-      if (i<5){
-        i=5;
-      }
-      inp=sInp.substr(0,i)*1;
-    }
-    return inp;
-	}
-  function splitLine(inp){
-  	var out=new Array();
-    out=inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
-    for(var i=0;i<out.length;i++){
-      out[i]=out[i].replace(/"/g,"");
-		}
-		if(out.length!=26){
-			out='N/A,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');	
-		}
-		if(out[0]!="N/A"){
-      out[24]="???";
-      out[25]=out[0].substr(0,out[0].indexOf("<"));
-    }
-    return out;
-  }
-  function print(msg){
-    if (debug){
-      var debug_html = _gel("debug").innerHTML;
-      if (_gel("debug").style.display='none'){
-        _gel("debug").style.display='block';
-        _IG_AdjustIFrameHeight();   
-      }
-      msg=fngetDate(1)+"; "+_hesc(msg.toString())+"<br>";
-      debug_html=msg+debug_html;
-      _gel("debug").innerHTML=debug_html;
-    }
-	}
+  
  //1-2-3 start
 	fnInit();  
-   </script>
+
+  </script>
   ]]>
   </Content>
 </Module>
