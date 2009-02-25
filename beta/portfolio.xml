@@ -199,7 +199,8 @@
         if (sName==''||pref.getInt("NameColumn")==1){
           sName=arrStocks[i][1];
         }else if (!isNaN(arrStocks[i][21])){//If this is an option
-          sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
+          //sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
+          sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+myRound(arrStocks[i][21])+" "+arrStocks[i][22];
         }
         _gel('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+arrStocks[i][1]+'">'+sName+'</a>'; 
         if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
@@ -258,11 +259,11 @@
       //Totals
       sDTC=fnNumToColor(iDayTotal,"#000000");
       sETC=fnNumToColor(iEarnTot,"#000000");
-      iDayTotal=Math.round(iDayTotal*100)/100;
+      //iDayTotal=Math.round(iDayTotal*100)/100;
       iDayTotal=myRound(iDayTotal);
-      iEarnTot=Math.round(iEarnTot*100)/100;
+      //iEarnTot=Math.round(iEarnTot*100)/100;
       iEarnTot=myRound(iEarnTot);
-      iValTot=Math.round(iValTot*100)/100;
+      //iValTot=Math.round(iValTot*100)/100;
       iValTot=myRound(iValTot);
       if (bPD){
         _gel("ptc1"+i).style.color=sDTC;
@@ -340,18 +341,23 @@
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
-        arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
+        //arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
+        arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
           //If  exch.rate has not been set, then use current rate
 				  arrStockCurrRates[i]=arrLineValues[26];
 				}
-				arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
-        arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
+				//arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
+				arrLineValues[31]=myRound(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]);//Earned in local currency
+        //arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
+        arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
         arrLineValues[33]=0;
         if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
-          arrLineValues[33]=Math.round((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
+          //arrLineValues[33]=Math.round((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
+          arrLineValues[33]=myRound((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*100);//Total Gain %
         }
-        arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
+        //arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
+        arrLineValues[34]=myRound(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
         arrStocks[i]=arrLineValues;
       }
       bDataReady=true; //Data has been read and calculated
