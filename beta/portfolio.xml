@@ -205,7 +205,7 @@
         if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
         if(pref.getInt("Flashing")==1&&_gel('stc'+i+'2').innerHTML!=''){
           _gel('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrStocks[i][3])-parseFloat(_gel('stcc'+i+'2').innerHTML),sbgColor);
-          setTimeout('_gel("stc'+i+'2").style.background="'+sbgColor+'"',700);
+          setTimeout(_gel("stc'+i+'2").style.background=sbgColor,700);
         }
         var sClass="";
 				//Multiplied with 1 equals toInt
