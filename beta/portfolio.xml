@@ -69,8 +69,8 @@
   <script language="javascript" type="text/javascript" defer="defer">
   var pref=new _IG_Prefs(__MODULE_ID__);
   var fsize=pref.getString("FontSize");
-  var arrStockSymbols=new Array[];
-  var arrStockQtys=new Array[];
+  var arrStockSymbols=new Array();
+  var arrStockQtys=new Array();
   var arrStockHi=new Array();
   var arrStockLo=new Array();
   var arrStockPrices=new Array();
