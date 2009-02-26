@@ -787,7 +787,7 @@
     fnUpgrade();
     fnReadPrefs();
     fnLoad();
-    setTimeout(_IG_Analytics("UA-2031644-1", "/Portfolio"),3000);
+    setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
     fnMessage();
     print("fnInit ended");
 	}
