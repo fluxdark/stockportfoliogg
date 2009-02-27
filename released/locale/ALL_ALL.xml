@@ -8,7 +8,7 @@
   <msg name="flashing">Flashing</msg>
   <msg name="notused">Not used</msg>
   <msg name="name">Name</msg>
-  <msg name="buyprice">Price</msg>
+  <msg name="buyprice">Buy price</msg>
   <msg name="value">Value</msg>
   <msg name="show">Show</msg>
   <msg name="numberofstocks">Qty.</msg>

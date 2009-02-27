@@ -8,7 +8,7 @@
   <msg name="flashing">Blink</msg>
   <msg name="notused">Ikke brugt</msg>
   <msg name="name">Navn</msg>
-  <msg name="buyprice">Pris</msg>
+  <msg name="buyprice">Købspris</msg>
   <msg name="value">Værdi</msg>
   <msg name="show">Vis</msg>
   <msg name="numberofstocks">Antal</msg>
