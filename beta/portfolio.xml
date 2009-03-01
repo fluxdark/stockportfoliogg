@@ -596,6 +596,11 @@
     sStockTable+='<COLGROUP width="8px"><COLGROUP span="2" width="10%"><COLGROUP span="'+iConfCols+'" width="'+80/iConfCols+'%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"></td><td class="cellL">__MSG_name__</td><td class="cellR"><div class="Chart" id="StockChart"></div>__MSG_change__</td>';
     sStockTable+=sHead;
     sStockTable+='</tr><tr style="height:1px;background-Color:BCBCBC"><td colspan='+Number(iConfCols+3)+'></td></tr>';
+
+    //var str = "DeveloperSnippets was helpful to *Developers, *Designers, *Beginners, and to *Everybody";
+    //var occurences = str.match(/\*/g);
+    //document.write(occurences.length);
+
     for(i=0;i<arrStockSymbols.length;i++){
       if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
       sStockTable+='<tr id="str'+i+'" style="background-Color:'+sBGColor+';"><td class="cellL" id="stc'+i+'0"></td><td class="cellL" id="stc'+i+'1">'+arrStockSymbols[i]+'</td>';
