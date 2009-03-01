@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
   <ModulePrefs title="__MSG_gadgettitle__" description="__MSG_gadgetdesc__" directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
-    <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
-    <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/da_ALL.xml"/>
-    <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/es_ALL.xml"/>
-    <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/fr_ALL.xml"/>
-    <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/it_ALL.xml"/>
-    <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/sv_ALL.xml"/>
-    <Locale lang="pt-PT" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_PT.xml"/>
-    <Locale lang="pt-BR" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_BR.xml"/>
-    <Locale lang="de" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/de_ALL.xml"/>
-    <Locale lang="nl" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/nl_ALL.xml"/>
-    <Locale lang="zh-TW" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/zh_TW.xml"/>
+    <Locale messages="locale/ALL_ALL.xml"/>
+    <Locale lang="da" messages="locale/da_ALL.xml"/>
+    <Locale lang="es" messages="locale/es_ALL.xml"/>
+    <Locale lang="fr" messages="locale/fr_ALL.xml"/>
+    <Locale lang="it" messages="locale/it_ALL.xml"/>
+    <Locale lang="sv" messages="locale/sv_ALL.xml"/>
+    <Locale lang="pt-PT" messages="locale/pt_PT.xml"/>
+    <Locale lang="pt-BR" messages="locale/pt_BR.xml"/>
+    <Locale lang="de" messages="locale/de_ALL.xml"/>
+    <Locale lang="nl" messages="locale/nl_ALL.xml"/>
+    <Locale lang="zh-TW" messages="locale/zh_TW.xml"/>
     <Require feature="setprefs"/>
     <Require feature="minimessage"/>
     <Require feature="analytics"/>
@@ -778,7 +778,7 @@
 		//	miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
 		//}
       var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
-			var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it usefull.<a>';
+			var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it useful.<a>';
 			miniMsg1.createTimerMessage(msghtml1,8);
     print("fnMessage ended");
 	}
