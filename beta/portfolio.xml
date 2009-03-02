@@ -141,14 +141,12 @@
     print("myRound ended");
 	}
   function fnNumToColor(number,zeroColor){
-    print("fnNumToColor started");
     var sColor=zeroColor;
     if(!isNaN(parseFloat(number))){
       if(parseFloat(number)>0){sColor="#008200";}
       if(parseFloat(number)<0){sColor="#FF2200";}
     }
     return sColor;
-    print("fnNumToColor ended");
   }
   function fnSavePrefs(){
     print("fnSavePrefs started");
