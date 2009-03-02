@@ -119,13 +119,11 @@
     }
 	}
   function trim(s){
-    print("trim started");
     if (s){
       return s.replace(/^\s*/,"").replace(/\s*$/,"");
     }else{
       return "";
     }
-    print("trim ended");
   }
 	function myRound(inp){
     print("myRound started");
