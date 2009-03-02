@@ -90,13 +90,16 @@
   //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
 
 	function fnZeroPad(num,length){
+    print("fnZeroPad started");
 		var snum = num + '';
 		while(snum.length < length) {
 		  snum = '0' + snum; 
 		}
 		return snum;
+    print("fnZeroPad ended");
 	}
   function fngetDate(secs){
+    print("fngetDate started");
     var currentTime=new Date();
     var month=fnZeroPad(currentTime.getMonth()+1,2);
     var day=fnZeroPad(currentTime.getDate(),2);
@@ -105,6 +108,7 @@
     var minutes=fnZeroPad(currentTime.getMinutes(),2);
     if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2);}
     return year+'-'+month+'-'+day+' '+hours+':'+minutes;
+    print("fngetDate ended");
   }
   function print(msg){
     if (debug){
@@ -119,13 +123,16 @@
     }
 	}
   function trim(s){
+    print("trim started");
     if (s){
       return s.replace(/^\s*/,"").replace(/\s*$/,"");
     }else{
       return "";
     }
+    print("trim ended");
   }
 	function myRound(inp){
+    print("myRound started");
     var sInp = inp.toString();
     var i = sInp.indexOf(".");
     if (sInp.length>5 && i>-1 && !isNaN(inp)){
@@ -135,17 +142,22 @@
       inp=sInp.substr(0,i)*1;
     }
     return inp;
+    print("myRound ended");
 	}
   function fnNumToColor(number,zeroColor){
+    print("fnNumToColor started");
     var sColor=zeroColor;
     if(!isNaN(parseFloat(number))){
       if(parseFloat(number)>0){sColor="#008200";}
       if(parseFloat(number)<0){sColor="#FF2200";}
     }
     return sColor;
+    print("fnNumToColor ended");
   }
   function fnSavePrefs(){
+    print("fnSavePrefs started");
     pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockCurrRates",arrStockCurrRates.join(","));
+    print("fnSavePrefs ended");
   }
   function fnUpgrade(){
     //Upgrade script for version 1.19 to 1.20
@@ -183,11 +195,13 @@
     print("fnRetry ended");
   }
   function fnTPChart(show){
+    print("fnTPChart started");
     if(pref.getString("ChartType")=='ToolTip' && show==1){
       _gel("StockChart").style.display="block";
     }else{
       _gel("StockChart").style.display="none";
     }
+    print("fnTPChart ended");
   }
   function fnUpdateStockTable(){
     print("fnUpdateStockTable started");
@@ -314,6 +328,7 @@
     print("fnUpdateValues ended");
   }
   function splitLine(inp){
+    print("splitLine started");
   	var out=new Array();
     out=inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
     for(var i=0;i<out.length;i++){
@@ -327,6 +342,7 @@
       out[25]=out[0].substr(0,out[0].indexOf("<"));
     }
     return out;
+    print("splitLine ended");
   }
   function fnPrepareStockData(currData,stockData){
     print("fnPrepareStockData started");
@@ -397,6 +413,7 @@
     print("fnLoadData ended");
 	}
   function fnReadPrefs(){
+    print("fnReadPrefs started");
     arrStockSymbols=pref.getString("StockSymbols").split(",");
     arrStockQtys=pref.getString("StockQtys").split(",");
     arrStockPrices=pref.getString("StockPrices").split(",");
@@ -404,8 +421,10 @@
     arrStockHi=pref.getString("StockHi").split(",");
     arrStockLo=pref.getString("StockLo").split(",");
     iPrefVersion=pref.getString("GadgetVersion");
+    print("fnReadPrefs ended");
   }
   function fnPrefsValidation(inp){
+    print("fnPrefsValidation started");
     if (trim(inp.join(","))==""){
 		  arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
 			arrStockQtys="100,0,200,300".split(",");
@@ -421,6 +440,7 @@
 		  if (isNaN(arrStockHi[i])){arrStockHi[i]=0;}
 		  if (isNaN(arrStockLo[i])){arrStockLo[i]=0;}
 		}
+    print("fnPrefsValidation ended");
   }
   function fnInsertProfitDetailsTable(){
     print("fnInsertProfitDetailsTable started");
@@ -495,6 +515,7 @@
     print("fnToggleSummary ended");
   }
 	function txtFocus(sender,focus){
+    print("txtFocus started");
     if (trim(sender.value)=="" || trim(sender.value)==sender.title){
 			if (focus==1){
 			  sender.value="";
@@ -504,8 +525,10 @@
 			  sender.value=sender.title;
 			}
 		}
+    print("txtFocus ended");
 	}
   function fnInsertNews(feed){
+    print("fnInsertNews started");
 		var html="";
     for(var i in feed.Entry){
       html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/Square.gif').src+'"></td><td><span><a href="'+_hesc(feed.Entry[i].Link)+'" target="_blank">';
@@ -513,8 +536,10 @@
     }
     _gel("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
     _IG_AdjustIFrameHeight();
+    print("fnInsertNews ended");
   }
   function fnToggleNews(bToggle){
+    print("fnToggleNews started");
     if (bToggle){
       if(_gel("StockNews").style.display=="none"){
         _gel("StockNews").innerHTML='<hr class="HrDef"><div class="loading">__MSG_loading__</div>';
@@ -532,6 +557,7 @@
       }
     }
     _IG_AdjustIFrameHeight();
+    print("fnToggleNews ended");
   }
   function fnInsertAdd(){
     print("fnInsertAdd started");
@@ -567,6 +593,7 @@
     print("fnInsertAdd ended");
   }
   function fnToggleAdd(ForceVisible){
+    print("fnToggleAdd started");
     if((_gel("StockAdd").style.display=="none" && bTablesReady==true)||ForceVisible==1){
       _gel("StockAdd").style.display="block";
       fnInsertAdd();
@@ -574,6 +601,7 @@
       _gel("StockAdd").style.display="none";
     }
     _IG_AdjustIFrameHeight();
+    print("fnToggleAdd ended");
   }
   function fnInsertFooter(){
     print("fnInsertFooter started");
@@ -639,6 +667,7 @@
     print("fnLoad ended");
   }
   function fnAddStock(Symbol){
+    print("fnAddStock started");
     Symbol=Symbol.replace(/ /g,'');
     if(Symbol.length>0){
       arrStockSymbols.push(Symbol);
@@ -650,8 +679,10 @@
       fnSavePrefs();
       fnLoad();
     }
+    print("fnAddStock ended");
   }
   function fnSymbolSearchResponse(ResponseText){
+    print("fnSymbolSearchResponse started");
     var iStart=0;
     var iEnd=0;
     var arrSearch="";
@@ -695,8 +726,10 @@
     _gel("StockAddList").innerHTML=sTable;
     _gel("StockAddList").style.display="block";
     _IG_AdjustIFrameHeight();
+    print("fnSymbolSearchResponse ended");
   }
   function fnSymbolSearch(symbol){
+    print("fnSymbolSearch started");
     if(trim(symbol)!=''){
       _gel("StockAddList").innerHTML='__MSG_loading__';
       symbol=symbol.replace(' ','+');
@@ -705,8 +738,10 @@
       _gel("StockAddList").style.display="none";
     }
     _IG_AdjustIFrameHeight();
+    print("fnSymbolSearch ended");
   }
   function EditOnBlur(s){
+    print("EditOnBlur started");
     var index=s.id.substr(4);
     var col=s.id.substr(3,1);
     if((col==0&&trim(s.value)!="")||(col>0&&!isNaN(s.value))){
@@ -719,13 +754,17 @@
       fnSavePrefs();
     }
     fnLoad();
+    print("EditOnBlur ended");
   }
   function EditOnKey(e,s){
+    print("??? started");
     if(e.keyCode==13){
       EditOnBlur(s);
     }
+    print("??? ended");
   }
   function fnEditStock(sender){
+    print("fnEditStock started");
     if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
     var sTemp=sender.innerHTML;
     var a="uha"+sender.id.replace("ctc","");
@@ -734,8 +773,10 @@
     var d='<input type="text" id="'+a+'" onkeypress="EditOnKey(event,this);" onBlur="EditOnBlur(this);" value="'+sTemp+'" class="def" style="font-size:'+fsize+';width:'+b+';height:18px;margin:0px;text-align:'+c+';" />';
     sender.innerHTML=d;
     _gel(a).focus();
+    print("fnEditStock ended");
   }
   function fnDeleteStock(index){
+    print("fnDeleteStock started");
     arrStockSymbols.splice(index,1);
     arrStockQtys.splice(index,1);
     arrStockPrices.splice(index,1);
@@ -744,8 +785,10 @@
     arrStockLo.splice(index,1);
     fnSavePrefs();
     fnLoad();
+    print("fnDeleteStock ended");
   }
   function fnMoveStock(index,direction){
+    print("fnMoveStock started");
     if(direction==1){
       if(index>arrStockSymbols.length-2){return;}
       arrStockSymbols.splice(index,2,arrStockSymbols[index+1],arrStockSymbols[index]);
@@ -765,15 +808,18 @@
 	  }
     fnSavePrefs();
     fnLoad();
+    print("fnMoveStock ended");
   }
 
 
 	function fnHideMess(GadgetVersion){
+    print("fnHideMess started");
     return function(){
       _IG_AdjustIFrameHeight();
 			iPrefVersion=GadgetVersion;
       pref.set("GadgetVersion",iPrefVersion);
     };
+    print("fnHideMess ended");
   }  
   function fnMessage(){
     print("fnMessage started");
