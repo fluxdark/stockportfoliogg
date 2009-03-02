@@ -90,13 +90,11 @@
   //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
 
 	function fnZeroPad(num,length){
-    print("fnZeroPad started");
 		var snum = num + '';
 		while(snum.length < length) {
 		  snum = '0' + snum; 
 		}
 		return snum;
-    print("fnZeroPad ended");
 	}
   function fngetDate(secs){
     var currentTime=new Date();
