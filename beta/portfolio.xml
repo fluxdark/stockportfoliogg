@@ -126,7 +126,6 @@
     }
   }
 	function myRound(inp){
-    print("myRound started");
     var sInp = inp.toString();
     var i = sInp.indexOf(".");
     if (sInp.length>5 && i>-1 && !isNaN(inp)){
@@ -136,7 +135,6 @@
       inp=sInp.substr(0,i)*1;
     }
     return inp;
-    print("myRound ended");
 	}
   function fnNumToColor(number,zeroColor){
     var sColor=zeroColor;
