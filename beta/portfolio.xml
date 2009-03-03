@@ -144,12 +144,20 @@
     }
     return sColor;
   }
-function dhtmlLoadScript(url)
-{
-   var e = document.createElement("script");
-   e.src = url;
-   e.type="text/javascript";
-   document.getElementsByTagName("head")[0].appendChild(e); 
+function loadjscssfile(filename, filetype){
+ if (filetype=="js"){ //if filename is a external JavaScript file
+  var fileref=document.createElement('script')
+  fileref.setAttribute("type","text/javascript")
+  fileref.setAttribute("src", filename)
+ }
+ else if (filetype=="css"){ //if filename is an external CSS file
+  var fileref=document.createElement("link")
+  fileref.setAttribute("rel", "stylesheet")
+  fileref.setAttribute("type", "text/css")
+  fileref.setAttribute("href", filename)
+ }
+ if (typeof fileref!="undefined")
+  document.getElementsByTagName("head")[0].appendChild(fileref)
 }
   function fnSavePrefs(){
     print("fnSavePrefs started");
@@ -839,7 +847,7 @@ tableDnD.init(document.getElementById('AddTable'));
     fnLoad();
     setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
     fnMessage();
-    dhtmlLoadScript("tablednd.js");
+loadjscssfile("tablednd.js", "js");
 
     print("fnInit ended");
 	}
