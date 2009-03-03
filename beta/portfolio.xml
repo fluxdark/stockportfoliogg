@@ -558,7 +558,6 @@ function dhtmlLoadScript(url)
   }
   function fnInsertAdd(){
     print("fnInsertAdd started");
-dhtmlLoadScript("tablednd.js");
 var tableDnD = new TableDnD();
 tableDnD.init(document.getElementById('AddTable'));
     var sCol='<Col width="18%"><Col width="18%"><Col width="23%"><Col width="18%"><Col width="18%">';
@@ -840,6 +839,8 @@ tableDnD.init(document.getElementById('AddTable'));
     fnLoad();
     setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
     fnMessage();
+    dhtmlLoadScript("tablednd.js");
+
     print("fnInit ended");
 	}
   
