@@ -217,9 +217,8 @@ function loadjscssfile(filename, filetype){
 				sName=arrStocks[i][2];
         if (sName==''||pref.getInt("NameColumn")==1){
           sName=arrStocks[i][1];
-        }else if (pref.getInt("NameColumn")==40)){//name(symbol)
+        }else if (pref.getInt("NameColumn")==40){//name(symbol)
           sName=arrStocks[i][2]+'('+arrStocks[i][1]+')';
-        }
         }else if (!isNaN(arrStocks[i][21])){//If this is an option
           //sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
           sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+myRound(arrStocks[i][21])+" "+arrStocks[i][22];
