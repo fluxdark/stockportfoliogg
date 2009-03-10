@@ -217,6 +217,9 @@ function loadjscssfile(filename, filetype){
 				sName=arrStocks[i][2];
         if (sName==''||pref.getInt("NameColumn")==1){
           sName=arrStocks[i][1];
+        }else if (pref.getInt("NameColumn")==40){//name(symbol)
+          sName=arrStocks[i][2]+'('+arrStocks[i][1]+')';
+        }
         }else if (!isNaN(arrStocks[i][21])){//If this is an option
           //sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
           sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+myRound(arrStocks[i][21])+" "+arrStocks[i][22];
@@ -361,7 +364,6 @@ function loadjscssfile(filename, filetype){
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
-        arrLineValues[40]=arrLineValues[2]+'('+arrLineValues[1]+')';//Stockname(symbol)
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         //arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
