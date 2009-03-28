@@ -635,7 +635,7 @@
   }
   function fnAddStock(Symbol){
     Symbol=Symbol.replace(/ /g,'');
-    if(Symbol.length>0){
+    if(Symbol.length>0 && Symbol!='__MSG_symbolsearchtip__'){
       arrStockSymbols.push(Symbol);
       arrStockQtys.push(0);
       arrStockPrices.push(0);
