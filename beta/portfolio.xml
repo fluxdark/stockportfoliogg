@@ -568,8 +568,8 @@ function loadjscssfile(filename, filetype){
   }
   function fnInsertAdd(){
     print("fnInsertAdd started");
-var tableDnD = new TableDnD();
-tableDnD.init(document.getElementById('AddTable'));
+//var tableDnD = new TableDnD();
+//tableDnD.init(document.getElementById('AddTable'));
     var sCol='<Col width="18%"><Col width="18%"><Col width="23%"><Col width="18%"><Col width="18%">';
     var iCols=8;
     var sTDH='';
