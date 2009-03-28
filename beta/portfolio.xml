@@ -647,8 +647,6 @@
     }
   }
   function fnSavePrefs(){
-    var tmp=arrStockSymbols.join(",")+arrStockQtys.join(",")+arrStockHi.join(",")+arrStockLo.join(",")+arrStockPrices.join(",")+arrStockCurrRates.join(",");
-    print(tmp.length);
     pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockCurrRates",arrStockCurrRates.join(","));
   }
   function fnPrefsValidation(inp){
@@ -712,6 +710,10 @@
     }
   }
   function fnReadPrefs(){
+    var tmp=arrStockSymbols.join(",")+arrStockQtys.join(",")+arrStockHi.join(",")+arrStockLo.join(",")+arrStockPrices.join(",")+arrStockCurrRates.join(",");
+  
+    print('PrefLength:'+tmp.length);
+
     arrStockSymbols=pref.getString("StockSymbols").split(",");
     arrStockQtys=pref.getString("StockQtys").split(",");
     arrStockPrices=pref.getString("StockPrices").split(",");
