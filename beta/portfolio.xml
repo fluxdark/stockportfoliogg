@@ -766,11 +766,11 @@ function loadjscssfile(filename, filetype){
     print("EditOnBlur ended");
   }
   function EditOnKey(e,s){
-    print("??? started");
+    print("EditOnKey started");
     if(e.keyCode==13){
       EditOnBlur(s);
     }
-    print("??? ended");
+    print("EditOnKey ended");
   }
   function fnEditStock(sender){
     print("fnEditStock started");
