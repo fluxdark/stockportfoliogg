@@ -685,8 +685,8 @@
     //Check if too many stocks are configured
     if (arrStockSymbols.length>40){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-			var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than 45 stocks has been configured. Please read more here.<a>';
-			var statusMsg = miniMsg.createTimerMessage(msghtml,20);
+			var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than 40 stocks has been configured. Please read more here.<a>';
+			var statusMsg = miniMsg.createStaticMessage(msghtml);
       statusMsg.style.backgroundColor = "red";
       //fnDeleteStock(arrStockSymbols.length-1)
     }
