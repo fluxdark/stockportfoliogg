@@ -729,6 +729,7 @@
             pref.getString("Column4")+pref.getString("Column5")+
             pref.getString("ChartScope")+pref.getString("UpdateInterval")+pref.getString("Flashing");
   
+    print('Pref:'+tmp);
     print('PrefLength:'+tmp.length);
   }
 	function myRound(inp){
