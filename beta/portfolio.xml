@@ -665,6 +665,19 @@
 		  if (isNaN(arrStockHi[i])){arrStockHi[i]=0;}
 		  if (isNaN(arrStockLo[i])){arrStockLo[i]=0;}
 		}
+
+    var tmp=pref.getString("StockSymbols")+pref.getString("StockQtys")+pref.getString("StockPrices")+
+            pref.getString("StockCurrRates")+pref.getString("StockHi")+pref.getString("StockLo")+iPrefVersion+
+            pref.getString("SettingVersion")+pref.getString("ShowProfit")+pref.getString("ChartType")+
+            pref.getString("ShowNews")+pref.getString("CustomTitle")+pref.getString("FontSize")+
+            pref.getString("Currency")+pref.getString("NameColumn")+pref.getString("ChangeColumn")+
+            pref.getString("Column1")+pref.getString("Column2")+pref.getString("Column3")+
+            pref.getString("Column4")+pref.getString("Column5")+
+            pref.getString("ChartScope")+pref.getString("UpdateInterval")+pref.getString("Flashing");
+  
+    print('Pref:'+tmp);
+    print('Number of synbols:'+arrStockSymbols.length);
+    print('PrefLength:'+tmp.length);
   }
   function fnMessage(){
 	  //if((iPrefVersion*1)<(iVersion*1)){
@@ -710,7 +723,6 @@
     }
   }
   function fnReadPrefs(){
-
     arrStockSymbols=pref.getString("StockSymbols").split(",");
     arrStockQtys=pref.getString("StockQtys").split(",");
     arrStockPrices=pref.getString("StockPrices").split(",");
@@ -718,19 +730,6 @@
     arrStockHi=pref.getString("StockHi").split(",");
     arrStockLo=pref.getString("StockLo").split(",");
     iPrefVersion=pref.getString("GadgetVersion");
-
-    var tmp=pref.getString("StockSymbols")+pref.getString("StockQtys")+pref.getString("StockPrices")+
-            pref.getString("StockCurrRates")+pref.getString("StockHi")+pref.getString("StockLo")+iPrefVersion+
-            pref.getString("SettingVersion")+pref.getString("ShowProfit")+pref.getString("ChartType")+
-            pref.getString("ShowNews")+pref.getString("CustomTitle")+pref.getString("FontSize")+
-            pref.getString("Currency")+pref.getString("NameColumn")+pref.getString("ChangeColumn")+
-            pref.getString("Column1")+pref.getString("Column2")+pref.getString("Column3")+
-            pref.getString("Column4")+pref.getString("Column5")+
-            pref.getString("ChartScope")+pref.getString("UpdateInterval")+pref.getString("Flashing");
-  
-    print('Pref:'+tmp);
-    print('Number of synbols:'+arrStockSymbols.length);
-    print('PrefLength:'+tmp.length);
   }
 	function myRound(inp){
     var sInp = inp.toString();
