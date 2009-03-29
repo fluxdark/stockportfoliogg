@@ -719,7 +719,6 @@
     arrStockLo=pref.getString("StockLo").split(",");
     iPrefVersion=pref.getString("GadgetVersion");
 
-   
     var tmp=pref.getString("StockSymbols")+pref.getString("StockQtys")+pref.getString("StockPrices")+
             pref.getString("StockCurrRates")+pref.getString("StockHi")+pref.getString("StockLo")+iPrefVersion+
             pref.getString("SettingVersion")+pref.getString("ShowProfit")+pref.getString("ChartType")+
@@ -730,6 +729,7 @@
             pref.getString("ChartScope")+pref.getString("UpdateInterval")+pref.getString("Flashing");
   
     print('Pref:'+tmp);
+    print('Number of synbols:'+arrStockSymbols.length);
     print('PrefLength:'+tmp.length);
   }
 	function myRound(inp){
