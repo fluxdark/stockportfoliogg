@@ -22,6 +22,7 @@
   <UserPref name="SettingVersion" datatype="hidden" default_value="0"/>
   <UserPref name="StockSymbols" datatype="hidden" default_value=""/>
   <UserPref name="StockPrices" datatype="hidden" default_value=""/>
+  <UserPref name="StockComm" datatype="hidden" default_value=""/>
   <UserPref name="StockQtys" datatype="hidden" default_value=""/>
   <UserPref name="StockCurrRates" datatype="hidden" default_value=""/>
   <UserPref name="StockHi" datatype="hidden" default_value=""/>
@@ -74,6 +75,7 @@
   var arrStockHi=new Array();
   var arrStockLo=new Array();
   var arrStockPrices=new Array();
+  var arrStockComm=new Array();
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
   var iVersion=1.21;
@@ -606,6 +608,7 @@
     arrStockSymbols.splice(index,1);
     arrStockQtys.splice(index,1);
     arrStockPrices.splice(index,1);
+    arrStockComm.splice(index,1);
     arrStockCurrRates.splice(index,1);
     arrStockHi.splice(index,1);
     arrStockLo.splice(index,1);
@@ -618,6 +621,7 @@
       arrStockSymbols.splice(index,2,arrStockSymbols[index+1],arrStockSymbols[index]);
       arrStockQtys.splice(index,2,arrStockQtys[index+1],arrStockQtys[index]);
       arrStockPrices.splice(index,2,arrStockPrices[index+1],arrStockPrices[index]);
+      arrStockComm.splice(index,2,arrStockComm[index+1],arrStockComm[index]);
       arrStockCurrRates.splice(index,2,arrStockCurrRates[index+1],arrStockCurrRates[index]);
       arrStockHi.splice(index,2,arrStockHi[index+1],arrStockHi[index]);
       arrStockLo.splice(index,2,arrStockLo[index+1],arrStockLo[index]);
@@ -626,6 +630,7 @@
       arrStockSymbols.splice(index-1,2,arrStockSymbols[index],arrStockSymbols[index-1]);
       arrStockQtys.splice(index-1,2,arrStockQtys[index],arrStockQtys[index-1]);
       arrStockPrices.splice(index-1,2,arrStockPrices[index],arrStockPrices[index-1]);
+      arrStockComm.splice(index-1,2,arrStockComm[index],arrStockComm[index-1]);
       arrStockCurrRates.splice(index-1,2,arrStockCurrRates[index],arrStockCurrRates[index-1]);
       arrStockHi.splice(index-1,2,arrStockHi[index],arrStockHi[index-1]);
       arrStockLo.splice(index-1,2,arrStockLo[index],arrStockLo[index-1]);
@@ -639,6 +644,7 @@
       arrStockSymbols.push(tmp);
       arrStockQtys.push(0);
       arrStockPrices.push(0);
+      arrStockComm.push(0);
       arrStockCurrRates.push("???");
       arrStockHi.push(0);
       arrStockLo.push(0);
@@ -647,7 +653,7 @@
     }
   }
   function fnSavePrefs(){
-    pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockCurrRates",arrStockCurrRates.join(","));
+    pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockComm",arrStockComm.join(","),"StockCurrRates",arrStockCurrRates.join(","));
   }
   function fnPrefsValidation(inp){
     //Check if no stocks are configured
@@ -655,6 +661,7 @@
 		  arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
 			arrStockQtys="100,0,200,300".split(",");
 			arrStockPrices="235,0,0,0".split(",");
+			arrStockComm="0,0,0,0".split(",");
 			arrStockCurrRates="1,1,1,1".split(",");
 			arrStockHi="500,10000,2,0.002".split(",");
 			arrStockLo="300,6000,1,0.0005".split(",");
@@ -663,6 +670,7 @@
     for(var i=0;i<inp.length;i++){
 		  if (isNaN(arrStockQtys[i])){arrStockQtys[i]=0;}
 		  if (isNaN(arrStockPrices[i])){arrStockPrices[i]=0;}
+		  if (isNaN(arrStockComm[i])){arrStockComm[i]=0;}
 		  //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
 		  if (isNaN(arrStockHi[i])){arrStockHi[i]=0;}
 		  if (isNaN(arrStockLo[i])){arrStockLo[i]=0;}
@@ -737,6 +745,7 @@
     arrStockSymbols=pref.getString("StockSymbols").split(",");
     arrStockQtys=pref.getString("StockQtys").split(",");
     arrStockPrices=pref.getString("StockPrices").split(",");
+    arrStockComm=pref.getString("StockComm").split(",");
     arrStockCurrRates=pref.getString("StockCurrRates").split(",");
     arrStockHi=pref.getString("StockHi").split(",");
     arrStockLo=pref.getString("StockLo").split(",");
