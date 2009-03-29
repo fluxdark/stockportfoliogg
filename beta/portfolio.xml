@@ -685,11 +685,10 @@
     //Check if too many stocks are configured
     if (arrStockSymbols.length>45){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-			var msghtml='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">More than 45 stocks has been configured. Please add the gadget once more to your iGoogle page.<a>';
-			var statusMsg = miniMsg.createTimerMessage(msghtml,8);
+			var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than 45 stocks has been configured. Please read more here.<a>';
+			var statusMsg = miniMsg.createTimerMessage(msghtml,20);
       statusMsg.style.backgroundColor = "red";
-      //alert('More than 45 stocks has been configured. Please add the gadget once more to your iGoogle page');
-      fnDeleteStock(arrStockSymbols.length-1)
+      //fnDeleteStock(arrStockSymbols.length-1)
     }
   }
   function fnMessage(){
