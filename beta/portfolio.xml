@@ -683,7 +683,7 @@
 
 
     //Check if too many stocks are configured
-    while (arrStockSymbols.length>68){
+    while (arrStockSymbols.length>65){
       alert('More than 65 stocks has been configured. Please add the gadget once more to your iGoogle page');
       fnDeleteStock(arrStockSymbols.length)
     }
