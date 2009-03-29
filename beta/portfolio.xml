@@ -650,6 +650,7 @@
     pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockCurrRates",arrStockCurrRates.join(","));
   }
   function fnPrefsValidation(inp){
+    //Check if no stocks are configured
     if (trim(inp.join(","))==""){
 		  arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
 			arrStockQtys="100,0,200,300".split(",");
@@ -658,7 +659,8 @@
 			arrStockHi="500,10000,2,0.002".split(",");
 			arrStockLo="300,6000,1,0.0005".split(",");
     }
-		for(var i=0;i<inp.length;i++){
+  	//Check for empty prefs
+    for(var i=0;i<inp.length;i++){
 		  if (isNaN(arrStockQtys[i])){arrStockQtys[i]=0;}
 		  if (isNaN(arrStockPrices[i])){arrStockPrices[i]=0;}
 		  //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
@@ -678,6 +680,14 @@
     print('Pref:'+tmp);
     print('Number of synbols:'+arrStockSymbols.length);
     print('PrefLength:'+tmp.length);
+
+
+    //Check if too many stocks are configured
+    while (arrStockSymbols.length>68){
+      alert('More than 65 stocks has been configured. Please add the gadget once more to your iGoogle page');
+      fnDeleteStock(arrStockSymbols.length)
+    }
+    
   }
   function fnMessage(){
 	  //if((iPrefVersion*1)<(iVersion*1)){
