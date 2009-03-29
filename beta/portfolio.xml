@@ -676,7 +676,7 @@
 		  if (isNaN(arrStockLo[i])){arrStockLo[i]=0;}
 		}
 
-    var tmp=pref.getString("StockSymbols")+pref.getString("StockQtys")+pref.getString("StockPrices")+
+    var tmp=pref.getString("StockSymbols")+pref.getString("StockQtys")+pref.getString("StockPrices")+pref.getString("StockComm")+
             pref.getString("StockCurrRates")+pref.getString("StockHi")+pref.getString("StockLo")+iPrefVersion+
             pref.getString("SettingVersion")+pref.getString("ShowProfit")+pref.getString("ChartType")+
             pref.getString("ShowNews")+pref.getString("CustomTitle")+pref.getString("FontSize")+
