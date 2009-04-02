@@ -88,7 +88,6 @@
   var debug=1;
 
   function fnInit(){
-    fnUpgrade();
     fnReadPrefs();
     fnLoad();
     setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
@@ -97,25 +96,12 @@
   
   //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
 
-  function fnUpgrade(){
-    //Upgrade script for version 1.19 to 1.20
-    //Add 5 if saved setting is >24 and <30
-		if ((pref.getString("SettingVersion")*1)<("1.20"*1)){
-			for(i=1;i<6;i++){
-	      var iPref=(pref.getString("Column"+i)*1);
-	      //Checking setting for column"+i+"("+iPref+")");
-	      if(iPref>24 && iPref<30){
-	        //Setting for column"+i+" was upgraded");
-	        pref.set("Column"+i,iPref+5);
-	      }
-	    }
-	    pref.set("SettingVersion","1.20");
-    }
-	}
 	function fnLoad(){
+    print("fnLoad started");
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
     fnInsertTables();
+    print("fnLoad ended");
   }	
   function fnLoadData(){
     print("fnLoadData started");
@@ -201,7 +187,7 @@
       iTmrRetry=setTimeout('fnLoadData()',pref.getInt("UpdateInterval")-5000); 
       iSDRetry=0;
     }
-    print("fnRetry started");
+    print("fnRetry ended");
   }
   function fnUpdateValues(){
     print("fnUpdateValues started");
