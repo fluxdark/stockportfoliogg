@@ -86,6 +86,8 @@
   var iSDRetry=0;
   var iTmrRetry;
   var debug=1;
+  
+  //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
 
   function fnInit(){
     fnReadPrefs();
@@ -93,8 +95,6 @@
     setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
     fnMessage();
 	}
-  
-  //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
 
 	function fnLoad(){
     print("fnLoad started");
