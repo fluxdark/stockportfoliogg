@@ -115,7 +115,7 @@
       sSymb+=arrStockSymbols[i]+',';
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f='+sTags+'&CacheWorkaround='+Math.random()*1000;
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
     print("fnLoadData url:"+url);
 		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
     print("fnLoadData ended");
@@ -131,8 +131,8 @@
 			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
-		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f=l1&CacheWorkaround='+Math.random()*1000;
-    print("fnStockDataProxy url:"+url);
+		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f=l1&CW='+Math.random()*1000;
+    //print("fnStockDataProxy url:"+url);
     _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData),{refreshInterval:60});
     print("fnStockDataProxy ended");
   }
@@ -145,13 +145,13 @@
     arrStocks=new Array();
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
-    print("fnPrepareStockData Received currdata:"+currData);
-    print("fnPrepareStockData Received stockdata:"+stockData);
-    print("fnPrepareStockData Arrays read");
-    print("fnPrepareStockData currData:"+currData);
-    print("fnPrepareStockData stockData:"+stockData);
-    print("fnPrepareStockData currData length:"+arrLinesCD.length);
-    print("fnPrepareStockData stockData length:"+arrLinesSD.length);
+    //print("fnPrepareStockData Received currdata:"+currData);
+    //print("fnPrepareStockData Received stockdata:"+stockData);
+    //print("fnPrepareStockData Arrays read");
+    //print("fnPrepareStockData currData:"+currData);
+    //print("fnPrepareStockData stockData:"+stockData);
+    //print("fnPrepareStockData currData length:"+arrLinesCD.length);
+    //print("fnPrepareStockData stockData length:"+arrLinesSD.length);
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
