@@ -144,6 +144,8 @@
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
     print("fnPrepareStockData Arrays read");
+    print("fnPrepareStockData currData:"+currData);
+    print("fnPrepareStockData stockData:"+stockData);
     print("fnPrepareStockData currData length:"+arrLinesCD.length);
     print("fnPrepareStockData stockData length:"+arrLinesSD.length);
     if (arrLinesSD.length>1){
