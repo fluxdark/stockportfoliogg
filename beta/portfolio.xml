@@ -143,9 +143,15 @@
     arrStocks=new Array();
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
+    print("fnPrepareStockData Arrays read");
+    print("fnPrepareStockData currData length:"+arrLinesCD.length);
+    print("fnPrepareStockData stockData length:"+arrLinesSD.length);
     if (arrLinesSD.length>1){
+      print("fnPrepareStockData arrLinesSD.length>1");
       for(i=0;i<arrLinesSD.length-1;i++){
+        print("fnPrepareStockData Loop:"+i);
         arrLineValues=splitLine(arrLinesSD[i]);
+        print("fnPrepareStockData SplitLine done");
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         //arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
@@ -153,6 +159,7 @@
           //If  exch.rate has not been set, then use current rate
 				  arrStockCurrRates[i]=arrLineValues[26];
 				}
+        print("fnPrepareStockData Currency done");
 				//arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
 				arrLineValues[31]=myRound(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]);//Earned in local currency
         //arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
@@ -165,7 +172,9 @@
         //arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
         arrLineValues[34]=myRound(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
         arrStocks[i]=arrLineValues;
+        print("fnPrepareStockData Values done");
       }
+      print("fnPrepareStockData Loop finished");
       bDataReady=true; //Data has been read and calculated
       fnUpdateValues();
     }
