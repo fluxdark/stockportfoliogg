@@ -146,7 +146,7 @@
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
     //print("fnPrepareStockData Received currdata:"+currData);
-    //print("fnPrepareStockData Received stockdata:"+stockData);
+    print("fnPrepareStockData Received stockdata:"+stockData);
     //print("fnPrepareStockData Arrays read");
     //print("fnPrepareStockData currData:"+currData);
     //print("fnPrepareStockData stockData:"+stockData);
