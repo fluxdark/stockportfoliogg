@@ -617,23 +617,38 @@
     fnLoad();
   }
   function fnMoveStock(index,direction){
+    var iAC;
+    var iB;
     if(direction==1){
       if(index>arrStockSymbols.length-2){return;}
-      arrStockSymbols.splice(index,2,arrStockSymbols[index+1],arrStockSymbols[index]);
-      arrStockQtys.splice(index,2,arrStockQtys[index+1],arrStockQtys[index]);
-      arrStockPrices.splice(index,2,arrStockPrices[index+1],arrStockPrices[index]);
-      arrStockCurrRates.splice(index,2,arrStockCurrRates[index+1],arrStockCurrRates[index]);
-      arrStockHi.splice(index,2,arrStockHi[index+1],arrStockHi[index]);
-      arrStockLo.splice(index,2,arrStockLo[index+1],arrStockLo[index]);
+      iAC = index;
+      iB = index+1;
+      //arrStockSymbols.splice(index,2,arrStockSymbols[index+1],arrStockSymbols[index]);
+      //arrStockQtys.splice(index,2,arrStockQtys[index+1],arrStockQtys[index]);
+      //arrStockPrices.splice(index,2,arrStockPrices[index+1],arrStockPrices[index]);
+      //arrStockTC.splice(index,2,arrStockTC[index+1],arrStockTC[index]);
+      //arrStockCurrRates.splice(index,2,arrStockCurrRates[index+1],arrStockCurrRates[index]);
+      //arrStockHi.splice(index,2,arrStockHi[index+1],arrStockHi[index]);
+      //arrStockLo.splice(index,2,arrStockLo[index+1],arrStockLo[index]);
     }else{
       if(index==0){return;}
-      arrStockSymbols.splice(index-1,2,arrStockSymbols[index],arrStockSymbols[index-1]);
-      arrStockQtys.splice(index-1,2,arrStockQtys[index],arrStockQtys[index-1]);
-      arrStockPrices.splice(index-1,2,arrStockPrices[index],arrStockPrices[index-1]);
-      arrStockCurrRates.splice(index-1,2,arrStockCurrRates[index],arrStockCurrRates[index-1]);
-      arrStockHi.splice(index-1,2,arrStockHi[index],arrStockHi[index-1]);
-      arrStockLo.splice(index-1,2,arrStockLo[index],arrStockLo[index-1]);
+      iAC = index-1;
+      iB = index;
+      //arrStockSymbols.splice(index-1,2,arrStockSymbols[index],arrStockSymbols[index-1]);
+      //arrStockQtys.splice(index-1,2,arrStockQtys[index],arrStockQtys[index-1]);
+      //arrStockPrices.splice(index-1,2,arrStockPrices[index],arrStockPrices[index-1]);
+      //arrStockTC.splice(index-1,2,arrStockTC[index],arrStockTC[index-1]);
+      //arrStockCurrRates.splice(index-1,2,arrStockCurrRates[index],arrStockCurrRates[index-1]);
+      //arrStockHi.splice(index-1,2,arrStockHi[index],arrStockHi[index-1]);
+      //arrStockLo.splice(index-1,2,arrStockLo[index],arrStockLo[index-1]);
 	  }
+      arrStockSymbols.splice(iAC,2,arrStockSymbols[iB],arrStockSymbols[iAC]);
+      arrStockQtys.splice(iAC,2,arrStockQtys[iB],arrStockQtys[iAC]);
+      arrStockPrices.splice(iAC,2,arrStockPrices[iB],arrStockPrices[iAC]);
+      arrStockTC.splice(iAC,2,arrStockTC[iB],arrStockTC[iAC]);
+      arrStockCurrRates.splice(iAC,2,arrStockCurrRates[iB],arrStockCurrRates[iAC]);
+      arrStockHi.splice(iAC,2,arrStockHi[iB],arrStockHi[iAC]);
+      arrStockLo.splice(iAC,2,arrStockLo[iB],arrStockLo[iAC]);
     fnSavePrefs();
     fnLoad();
   }
