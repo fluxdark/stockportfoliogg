@@ -645,7 +645,7 @@
       arrStockSymbols.splice(iAC,2,arrStockSymbols[iB],arrStockSymbols[iAC]);
       arrStockQtys.splice(iAC,2,arrStockQtys[iB],arrStockQtys[iAC]);
       arrStockPrices.splice(iAC,2,arrStockPrices[iB],arrStockPrices[iAC]);
-      arrStockTC.splice(iAC,2,arrStockTC[iB],arrStockTC[iAC]);
+      //arrStockTC.splice(iAC,2,arrStockTC[iB],arrStockTC[iAC]);
       arrStockCurrRates.splice(iAC,2,arrStockCurrRates[iB],arrStockCurrRates[iAC]);
       arrStockHi.splice(iAC,2,arrStockHi[iB],arrStockHi[iAC]);
       arrStockLo.splice(iAC,2,arrStockLo[iB],arrStockLo[iAC]);
