@@ -149,11 +149,6 @@
     arrLinesSD=stockData.split('\r\n');
     //print("fnPrepareStockData Received currdata:"+currData);
     print("fnPrepareStockData Received stockdata:"+stockData);
-    //print("fnPrepareStockData Arrays read");
-    //print("fnPrepareStockData currData:"+currData);
-    //print("fnPrepareStockData stockData:"+stockData);
-    //print("fnPrepareStockData currData length:"+arrLinesCD.length);
-    //print("fnPrepareStockData stockData length:"+arrLinesSD.length);
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
@@ -165,7 +160,7 @@
 				  arrStockCurrRates[i]=arrLineValues[26];
 				}
 				//arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
-				arrLineValues[31]=myRound(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]);//Earned in local currency
+				arrLineValues[31]=myRound(((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-((arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+arrStockTC[i]));//Earned in local currency
         //arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
         arrLineValues[33]=0;
@@ -285,8 +280,7 @@
     print("fnUpdateStockTable started");
     var sName;
     var sbgColor;
-
-
+    
     if (bAllReady){
       for(var i=0;i<arrStocks.length;i++){
 				sName=arrStocks[i][2];
