@@ -164,7 +164,7 @@
         test = test * arrLineValues[26] * arrStockQtys[i];
         print("Total value: "+test);
         test = arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i];
-        test = test*1+arrStockTC[i];
+        test = test+parseInt(arrStockTC[i]);
         print("Total cost: "+test);
         //test = 
         //print(test);
