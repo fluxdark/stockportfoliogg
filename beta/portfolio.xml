@@ -162,10 +162,10 @@
 				//arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
         var test = arrLineValues[6].replace("%","");
         test = test * arrLineValues[26] * arrStockQtys[i];
-        print("Total value:"+test);
+        print("Total value: "+test);
         test = arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i];
-        test = test +arrStockTC[i];
-        print("Total cost"+test);
+        test = test*1+arrStockTC[i];
+        print("Total cost: "+test);
         //test = 
         //print(test);
 				arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-((arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+arrStockTC[i]));//Earned in local currency
