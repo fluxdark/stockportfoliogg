@@ -355,14 +355,14 @@
     _gel("StockProfitSummary").innerHTML=sProfitTable;
   }
   function fnInsertAdd(){
-    var sCol='<Col width="15%"><Col width="15%"><Col width="15%"><Col width="20%"><Col width="15%"><Col width="15%">';
+    var sCol='<Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%">';
     var iCols=9;
     var sTDH='';
     var sTD='';
     var bCurr=pref.getString("Currency")!="-";
 		if (bCurr){
       iCols=10;
-      sCol='<Col width="13%"><Col width="13%"><Col width="13%"><Col width="17%"><Col width="13%"><Col width="13%"><Col width="13%">';
+      sCol='<Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%">';
       sTDH='<td class="cellR">__MSG_currencyrate__</td>';
 		}
     var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=_gel(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+_IG_GetImage('http://stockportfoliogg.googlecode.com/svn/released/images/AddStock.gif').src+'"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
