@@ -87,4 +87,5 @@
   <msg name="currencytip">Du kan ændre valuta in gadget indstillinger</msg>
   <msg name="selectedcurrency">Valgt valuta</msg>
   <msg name="gotoggroups">Diskuter denne gadget med udvikleren og andre brugere</msg>
+  <msg name="tradecost">Kurtage</msg>
 </messagebundle>
