@@ -164,9 +164,8 @@
         test = test * arrLineValues[26] * arrStockQtys[i];
         print("Total value: "+test);
         test = arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i];
-        test = test//+parseInt(arrStockTC[i]);
+        test = parseInt(test)+parseInt(arrStockTC[i]);
         print("Total cost: "+test);
-        print("TradeCost: "+parseInt(arrStockTC[i]));
         //test = 
         //print(test);
 				arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-((arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+arrStockTC[i]));//Earned in local currency
