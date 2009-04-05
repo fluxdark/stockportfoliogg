@@ -87,4 +87,5 @@
   <msg name="currencytip">È possibile cambiare la valuta in impostazioni del gadget</msg>
   <msg name="selectedcurrency">Valuta selezionata</msg>
   <msg name="gotoggroups">Discuss this gadget with the developer and other users</msg>
+  <msg name="tradecost">comm.</msg>
 </messagebundle>
