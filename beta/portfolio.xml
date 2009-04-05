@@ -160,8 +160,10 @@
 				  arrStockCurrRates[i]=arrLineValues[26];
 				}
 				//arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
-        print(arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i]);
-        print(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+arrStockTC[i]);
+        var test = arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i];
+        print(test);
+        test = arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+arrStockTC[i];
+        print(test);
 				arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-((arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+arrStockTC[i]));//Earned in local currency
         //arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
