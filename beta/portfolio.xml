@@ -378,7 +378,7 @@
       sConfigTable+='<tr>'+sLine+'<td colspan=10 title="__MSG_currencytip__">__MSG_selectedcurrency__: '+pref.getString("Currency")+'</td></tr>';
     }
     sConfigTable+='</table>';
-    _gel("StkockAdd").innerHTML=sTemp+sConfigTable;
+    _gel("StockAdd").innerHTML=sTemp+sConfigTable;
 		//Hide move arrows with no function
 		if (i>0){
 			_gel("ctc80").style.display="none";
