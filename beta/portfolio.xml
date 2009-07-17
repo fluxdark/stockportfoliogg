@@ -377,7 +377,7 @@
     _gel("StockAdd").innerHTML=sTemp+sConfigTable;
     _gel("AddStockTD").innerHTML = "";
     setTimeout('_gel("AddStockTD").appendChild(_IG_GetImage("http://stockportfoliogg.googlecode.com/svn/released/images/AddStock.gif"))',5);
-    setTimeout('alert(_gel("AddStockTD").innerHTML'),6);
+    setTimeout('alert(_gel("AddStockTD").innerHTML)',6);
     //Hide move arrows with no function
 		if (i>0){
 			_gel("ctc80").style.display="none";
