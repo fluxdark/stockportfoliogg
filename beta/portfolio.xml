@@ -376,7 +376,7 @@
     sConfigTable+='</table>';
     _gel("StockAdd").innerHTML=sTemp+sConfigTable;
     _gel("AddStockTD").innerHTML = "";
-    SetTimeout(_gel("AddStockTD").appendChild(_IG_GetImage("http://stockportfoliogg.googlecode.com/svn/released/images/AddStock.gif"));,5);
+    SetTimeout(_gel("AddStockTD").appendChild(_IG_GetImage("http://stockportfoliogg.googlecode.com/svn/released/images/AddStock.gif")),5);
     
     //Hide move arrows with no function
 		if (i>0){
