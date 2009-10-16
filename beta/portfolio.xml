@@ -656,9 +656,9 @@
     }
   }
   function fnSavePrefs(){
-    if (arrStockSymbols.length<iMaxStockNo+1){
+    //if (arrStockSymbols.length<iMaxStockNo+1){
       pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockTC",arrStockTC.join(","),"StockCurrRates",arrStockCurrRates.join(","));
-    }
+    //}
   }
   function fnPrefsValidation(inp){
     //Check if no stocks are configured
