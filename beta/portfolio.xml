@@ -656,9 +656,11 @@
     }
   }
   function fnSavePrefs(){
-    //if (arrStockSymbols.length<iMaxStockNo+1){
+    print('Number of stocks:'+arrStockSymbols.length);
+    if (arrStockSymbols.length<iMaxStockNo+1){
       pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockTC",arrStockTC.join(","),"StockCurrRates",arrStockCurrRates.join(","));
-    //}
+      print('Stocks saved');
+    }
   }
   function fnPrefsValidation(inp){
     //Check if no stocks are configured
@@ -700,7 +702,7 @@
 			var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
 			var statusMsg = miniMsg.createStaticMessage(msghtml);
       statusMsg.style.backgroundColor = "red";
-      fnDeleteStock(arrStockSymbols.length-1)
+//      fnDeleteStock(arrStockSymbols.length-1)
     }
   }
   function fnMessage(){
