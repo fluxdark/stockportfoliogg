@@ -88,7 +88,7 @@
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
-  var debug=1;
+  var debug=0;
   
   //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
 
