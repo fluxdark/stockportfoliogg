@@ -587,6 +587,7 @@
     print("Edit started");
     var index=s.id.substr(4);
     var col=s.id.substr(3,1);
+    print("col="+col);
     print("s="+s.value);
     if((col==0&&trim(s.value)!="")||(col>0&&!isNaN(s.value))){
       if(col==0){arrStockSymbols[index]=s.value;}
