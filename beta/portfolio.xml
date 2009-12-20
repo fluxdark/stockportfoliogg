@@ -589,6 +589,7 @@
     var col=s.id.substr(3,1);
     print("col="+col);
     print("s="+s.value);
+    print("if="+(col>0&&!isNaN(s.value)));
     if((col==0&&trim(s.value)!="")||(col>0&&!isNaN(s.value))){
       if(col==0){arrStockSymbols[index]=s.value;}
       if(col==1){arrStockQtys[index]=s.value;}
