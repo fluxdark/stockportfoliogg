@@ -86,6 +86,6 @@
   <msg name="currency">Valuta</msg>
   <msg name="currencytip">Je kunt de valuta wijzigen in de gadget instellingen</msg>
   <msg name="selectedcurrency">Geselecteerde valuta</msg>
-  <msg name="gotoggroups">Bespreek deze gasget met de ontwikkelaar en andere gebruikers</msg>
+  <msg name="gotoggroups">Bespreek deze gadget met de ontwikkelaar en andere gebruikers</msg>
   <msg name="tradecost">comm.</msg>
 </messagebundle>
