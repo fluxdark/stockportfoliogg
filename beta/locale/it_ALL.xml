@@ -11,7 +11,7 @@
   <msg name="buyprice">Prezzo di acquisto</msg>
   <msg name="value">Valore</msg>
   <msg name="show">Mostra</msg>
-  <msg name="numberofstocks">Qta'</msg>
+  <msg name="numberofstocks">Qta\'</msg>
   <msg name="symbol">Simbolo</msg>
   <msg name="change">Variazione</msg>
   <msg name="changepercent">Variazione percentuale</msg>
@@ -62,7 +62,7 @@
   <msg name="showprofit">Mostra guadagno</msg>
   <msg name="profitsummary">Riepilogo guadagno</msg>
   <msg name="profitdetails">Dettagli guadagno</msg>
-  <msg name="showaddedit">Mostra menu' aggiungi/modifica</msg>
+  <msg name="showaddedit">Mostra menu\' aggiungi/modifica</msg>
   <msg name="chart">Grafico</msg>
   <msg name="shownews">Mostra notizie</msg>
   <msg name="showsummary">Mostra sommario</msg>
