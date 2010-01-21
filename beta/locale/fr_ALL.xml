@@ -33,11 +33,11 @@
   <msg name="dayrange">Ecart jour</msg>
   <msg name="ask">Demande</msg>
   <msg name="bid">Mise</msg>
-  <msg name="notfound">not found</msg>
-  <msg name="loading">Loading ...</msg>
-  <msg name="initialloading">Loading configured columns...</msg>
+  <msg name="notfound">Non trouvé</msg>
+  <msg name="loading">Initialisation ...</msg>
+  <msg name="initialloading">Initialisation des colonnes configurées...</msg>
   <msg name="prefsloading">Loading preferences...</msg>
-  <msg name="stockloading">En attente des données d'actions</msg>
+  <msg name="stockloading">Awaiting stock data...</msg>
   <msg name="retrystockloading">Retrying stockdata request...</msg>
   <msg name="lastupdated">Updated</msg>
   <msg name="tickertrend">Trend</msg>
