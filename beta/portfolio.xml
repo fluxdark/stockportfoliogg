@@ -187,7 +187,7 @@
       if (iSDRetry<10){
         iSDRetry++;
         var tmp='('+iSDRetry+')';
-        _gel('FooterMsg').innerHTML='__MSG_retrystockloading__'+tmp;
+        _gel('FooterMsg').innerHTML="__MSG_retrystockloading__"+tmp;
         fnLoadData(); 
       }else{
         _gel('FooterMsg').innerHTML='Gave up loading stockdata';
