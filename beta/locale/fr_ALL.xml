@@ -28,11 +28,11 @@
   <msg name="dayavgvolume">Vol. Moy.</msg>
   <msg name="dayhigh">Haut jour</msg>
   <msg name="daylow">Bas jour</msg>
-  <msg name="dayopen">Ouverture jour</msg>
-  <msg name="dayclose">Fermeture jour</msg>
-  <msg name="dayrange">Ecart jour</msg>
-  <msg name="ask">Demande</msg>
-  <msg name="bid">Mise</msg>
+  <msg name="dayopen">Day open</msg> 
+  <msg name="dayclose">Day close</msg>
+  <msg name="dayrange">Day range</msg>
+  <msg name="ask">Ask</msg>
+  <msg name="bid">Bid</msg>
   <msg name="notfound">Non trouvé</msg>
   <msg name="loading">Initialisation ...</msg>
   <msg name="initialloading">Initialisation des colonnes configurées...</msg>
