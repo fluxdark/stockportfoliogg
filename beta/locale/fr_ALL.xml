@@ -37,7 +37,7 @@
   <msg name="loading">Initialisation ...</msg>
   <msg name="initialloading">Initialisation des colonnes configurées...</msg>
   <msg name="prefsloading">Loading preferences...</msg>
-  <msg name="stockloading">En attente des données d'actions</msg>
+  <msg name="stockloading">En attente des données d\'actions</msg>
   <msg name="retrystockloading">Retrying stockdata request...</msg>
   <msg name="lastupdated">Mise à jour</msg>
   <msg name="tickertrend">Tendance</msg>
