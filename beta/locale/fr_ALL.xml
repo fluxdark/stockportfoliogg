@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <messagebundle>
-  <msg name="gadgettitle">Portfolio d\'actions</msg>
-  <msg name="gadgetdesc">Une liste très flexible avec un nombre illimité d\'actions. Vous pouvez voir des chartes et des détails pour chacune des actions. Calcule la valeure totale et les profits. Et encore beaucoup plus!</msg>
+  <msg name="gadgettitle">Portfolio d'actions</msg>
+  <msg name="gadgetdesc">Une liste très flexible avec un nombre illimité d'actions. Vous pouvez voir des chartes et des détails pour chacune des actions. Calcule la valeure totale et les profits. Et encore beaucoup plus!</msg>
   <msg name="customtitle">Modifier le Titre</msg>
   <msg name="column">Colonne</msg>
   <msg name="updateinterval">Mise à jour</msg>
