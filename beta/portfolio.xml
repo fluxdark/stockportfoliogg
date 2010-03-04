@@ -283,7 +283,7 @@
     print("fnUpdateStockTable started");
     var sName;
     var sbgColor;
-    
+
     if (bAllReady){
       for(var i=0;i<arrStocks.length;i++){
 				sName=arrStocks[i][2];
