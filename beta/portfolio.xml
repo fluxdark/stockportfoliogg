@@ -514,8 +514,10 @@
         var url='http://finance.yahoo.com/rss/headline?s='+encodeURIComponent(arrStockSymbols.join(","));
 				var params = {};
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+        params[gadgets.io.RequestParameters.NUM_ENTRIES] = 5;
         params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 600;
-		    //gadgets.io.makeRequest(url,function(){fnPrepareStockData(stockData)},params);
+		    
+        //gadgets.io.makeRequest(url,function(){fnPrepareStockData(stockData)},params);
         gadgets.io.makeRequest(url, fnInsertNews, params);
         //_IG_FetchFeedAsJSON(url,fnInsertNews,5,false);
         document.getElementById("StockNews").style.display="block";
