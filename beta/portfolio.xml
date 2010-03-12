@@ -119,11 +119,11 @@
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
-    print("fnLoadData url:"+url);
+    print("fnLoadData url1:"+url);
 
     var params = opt_params || {};
     params["CONTENT_TYPE"] = gadgets.io.ContentType.TEXT;
-    params["REFRESH_INTERVAL"] = 60;
+    //params["REFRESH_INTERVAL"] = 60;
 		gadgets.io.makeRequest(url,fnStockDataProxy,params);
 //		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
     print("fnLoadData ended");
