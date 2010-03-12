@@ -119,7 +119,7 @@
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
-    print("fnLoadData url4:"+url);
+    print("fnLoadData url:"+url);
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
@@ -141,14 +141,26 @@
 		sSymb=sSymb.substr(0,sSymb.length-1);
 		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
     //print("fnStockDataProxy url:"+url);
-    _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData.data),{refreshInterval:60});
+   
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+    params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
+		gadgets.io.makeRequest(url,function(){fnPrepareStockData(response(stockData)},params);
+
+
+   //_IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData.data),{refreshInterval:60});
+    //gadgets.io.makeRequest(url, function() {response(id)}, params);
+    
     print("fnStockDataProxy ended");
   }
-  function fnPrepareStockData(currData,stockData){
-    print("fnPrepareStockData started");
+  function fnPrepareStockData(currDataIn,stockDataIn){
+    print("fnPrepareStockData1 started");
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
+    var currData = currDataIn.data;
+    var stockData = stockDataIn.data;
+
     currData=currData.replace(/0.00/g,"1.00");
     arrStocks=new Array();
     arrLinesCD=currData.split('\r\n');
