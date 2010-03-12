@@ -708,7 +708,7 @@
     }
   }
   function fnMessage(){
-	  if((iPrefVersion*1)<(iVersion*1)){
+	  if((iPrefVersion*1)<(iVersion*2)){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
 			var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/releasenotes\">2008-12-04: Gain and loss in local currency is now possible.<br>Just choose your currency in gadget settings.<a>';
 			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
