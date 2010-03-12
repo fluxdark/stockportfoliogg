@@ -710,7 +710,7 @@
   function fnMessage(){
 	  if((iPrefVersion*1)<(iVersion*2)){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-	    var msghtml='hi there';
+	    var msghtml='hi <a href="http://www.google.dk/">there</a>';
 			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
 		}
       var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
