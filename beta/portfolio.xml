@@ -534,7 +534,7 @@
     _IG_AdjustIFrameHeight();
   }
   function fnInsertNews(feedIn){
-    print("fnInsertNews:"+feedIn.data);
+    print("fnInsertNews: Started);
     var html="";
     var feed = feedIn.data;
     for(var i in feed.Entry){
@@ -543,16 +543,25 @@
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
     _IG_AdjustIFrameHeight();
+    print("fnInsertNews: Ended);
   }
   function fnSymbolSearch(symbol){
+    print("fnSymbolSearch: Started);
     if(trim(symbol)!=''){
       document.getElementById("StockAddList").innerHTML='__MSG_loading__';
       //symbol=symbol.replace(' ','+');
-			_IG_FetchContent('http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+encodeURIComponent(symbol)+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback',fnSymbolSearchResponse,{refreshInterval:3599});
+			var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+      params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 3600;
+      var url='http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+encodeURIComponent(symbol)+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback';
+      gadgets.io.makeRequest(url, fnSymbolSearchResponse, params);
+
+      //_IG_FetchContent('http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+encodeURIComponent(symbol)+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback',fnSymbolSearchResponse,{refreshInterval:3599});
     }else{
       document.getElementById("StockAddList").style.display="none";
     }
     _IG_AdjustIFrameHeight();
+    print("fnSymbolSearch: Ended);
   }
   function fnSymbolSearchResponse(ResponseText){
     var iStart=0;
