@@ -119,7 +119,7 @@
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
-    print("fnLoadData url1:"+url);
+    print("fnLoadData url2:"+url);
 
     var params = opt_params || {};
     params["CONTENT_TYPE"] = gadgets.io.ContentType.TEXT;
@@ -133,7 +133,7 @@
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
-    arrLines=stockData.split('\r\n');
+    arrLines=stockData.data.split('\r\n');
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
 			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
@@ -141,7 +141,7 @@
 		sSymb=sSymb.substr(0,sSymb.length-1);
 		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
     //print("fnStockDataProxy url:"+url);
-    _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData),{refreshInterval:60});
+    _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData.data),{refreshInterval:60});
     print("fnStockDataProxy ended");
   }
   function fnPrepareStockData(currData,stockData){
