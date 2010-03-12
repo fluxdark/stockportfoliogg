@@ -154,7 +154,7 @@ gadgets.io.makeRequest(url, function() {fnPrepareStockData(stockData)}, params);
   }
   function fnPrepareStockData(currData,stockData){
 //  function fnPrepareStockData(currData,stockData){
-    print("fnPrepareStockData 5 started");
+    print("fnPrepareStockData 1 started");
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
