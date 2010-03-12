@@ -118,7 +118,7 @@
       sSymb+=arrStockSymbols[i]+',';
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
     print("fnLoadData url:"+url);
 		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
     print("fnLoadData ended");
@@ -134,7 +134,7 @@
 			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
 		sSymb=sSymb.substr(0,sSymb.length-1);
-		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f=l1&CW='+Math.random()*1000;
+		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
     //print("fnStockDataProxy url:"+url);
     _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData),{refreshInterval:60});
     print("fnStockDataProxy ended");
@@ -265,7 +265,7 @@
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
-      var img='<img width="192" height="96" src="http://uk.ichart.yahoo.com/z?s='+_esc(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
+      var img='<img width="192" height="96" src="http://uk.ichart.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
       if(_gel("StockSummary").style.display=="block"){
         _gel("SummaryChartTD").innerHTML=img;
         _gel("SummaryNameTD").innerHTML=arrStocks[StockID][2];
@@ -295,7 +295,7 @@
           //sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
           sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+myRound(arrStocks[i][21])+" "+arrStocks[i][22];
         }
-        _gel('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+_esc(arrStocks[i][1])+'">'+sName+'</a>'; 
+        _gel('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+encodeURIComponent(arrStocks[i][1])+'">'+sName+'</a>'; 
         if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
         if(pref.getInt("Flashing")==1&&_gel('stc'+i+'2').innerHTML!=''){
           _gel('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrStocks[i][3])-parseFloat(_gel('stcc'+i+'2').innerHTML),sbgColor);
@@ -312,7 +312,7 @@
         }
         _gel('stc'+i+'0').className=sClass;
 				_gel('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
-        _gel('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+_esc(arrStocks[i][1])+'#chart1:symbol='+_esc(arrStocks[i][1])+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
+        _gel('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+encodeURIComponent(arrStocks[i][1])+'#chart1:symbol='+encodeURIComponent(arrStocks[i][1])+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
         var k=3;
         for(var j=1;j<iConfCols+1;j++){
           if(pref.getString("Column"+j)!='0'){
@@ -326,7 +326,7 @@
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
-      var img='<img width="192" height="96" src="http://uk.ichart.yahoo.com/z?s='+_esc(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
+      var img='<img width="192" height="96" src="http://uk.ichart.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
       if(_gel("StockSummary").style.display=="block"){
         _gel("SummaryChartTD").innerHTML=img;
         _gel("SummaryNameTD").innerHTML=arrStocks[StockID][2];
@@ -494,7 +494,7 @@
     if (bToggle){
       if(_gel("StockNews").style.display=="none"){
         _gel("StockNews").innerHTML='<hr class="HrDef"><div class="loading">__MSG_loading__</div>';
-        var url='http://finance.yahoo.com/rss/headline?s='+_esc(arrStockSymbols.join(","));
+        var url='http://finance.yahoo.com/rss/headline?s='+encodeURIComponent(arrStockSymbols.join(","));
 				_IG_FetchFeedAsJSON(url,fnInsertNews,5,false);
         _gel("StockNews").style.display="block";
         pref.set("ShowNews","1");
@@ -522,7 +522,7 @@
     if(trim(symbol)!=''){
       _gel("StockAddList").innerHTML='__MSG_loading__';
       //symbol=symbol.replace(' ','+');
-			_IG_FetchContent('http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+_esc(symbol)+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback',fnSymbolSearchResponse,{refreshInterval:3599});
+			_IG_FetchContent('http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+encodeURIComponent(symbol)+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback',fnSymbolSearchResponse,{refreshInterval:3599});
     }else{
       _gel("StockAddList").style.display="none";
     }
