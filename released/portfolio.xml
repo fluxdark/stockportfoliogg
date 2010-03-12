@@ -51,7 +51,8 @@
     .def{font-family:sans-serif;}
     .loading{font-family:sans-serif;foreground:#666666;font-style:italic;font-size:11px;}
     .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
-    .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
+
+  .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
     .SearchList{display:none;position:relative;border:1px solid black;z-index:9998;background-color:white;top:-1;}
     .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
     td.HiAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
