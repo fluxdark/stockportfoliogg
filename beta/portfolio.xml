@@ -154,7 +154,7 @@
   }
   function fnPrepareStockData(currDataIn,stockDataIn){
 //  function fnPrepareStockData(currData,stockData){
-    print("fnPrepareStockData1 started");
+    print("fnPrepareStockData 2 started");
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
