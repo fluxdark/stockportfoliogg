@@ -68,7 +68,7 @@
   <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0><tr><td valign="middle" class="Footer"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer" target="_blank">Stock data, news and historical charts provided by </td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://stockportfoliogg.googlecode.com/svn/released/images/Yahoo.gif"></td><td valign="middle" class="Footer"></a></td></tr></table></div>
   <div id="debug" nowrap style="display:none;font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div> 
   <script language="javascript" type="text/javascript" defer="defer">
-  var pref=new _IG_Prefs(__MODULE_ID__);
+  var pref=new gadgets.Prefs(__MODULE_ID__);
   var fsize=pref.getString("FontSize");
   var arrStockSymbols=new Array();
   var arrStockQtys=new Array();
@@ -710,7 +710,7 @@
   function fnMessage(){
 	  if((iPrefVersion*1)<(iVersion*2)){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-	    var msghtml='hi2 <a href=\"http://www.google.dk/\">you there<\/a>';
+	    var msghtml='hi4 <a href=\"http://www.google.dk/\">you there<\/a>';
 			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
 		}
       var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
