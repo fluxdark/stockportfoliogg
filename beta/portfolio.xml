@@ -710,7 +710,7 @@
   function fnMessage(){
 	  if((iPrefVersion*1)<(iVersion*2)){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-	    var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/\">2008-08-05: Fixed yahoo full page html reference.<br>2008-08-05: Added option specific columns like strike, call/put and expire date.<a>';
+	    var msghtml='hi there';
 			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
 		}
       var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
