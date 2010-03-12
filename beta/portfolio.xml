@@ -534,7 +534,7 @@
     _IG_AdjustIFrameHeight();
   }
   function fnInsertNews(feedIn){
-    print("fnInsertNews: Started);
+    print("fnInsertNews: Started");
     var html="";
     var feed = feedIn.data;
     for(var i in feed.Entry){
@@ -543,10 +543,10 @@
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
     _IG_AdjustIFrameHeight();
-    print("fnInsertNews: Ended);
+    print("fnInsertNews: Ended");
   }
   function fnSymbolSearch(symbol){
-    print("fnSymbolSearch: Started);
+    print("fnSymbolSearch: Started");
     if(trim(symbol)!=''){
       document.getElementById("StockAddList").innerHTML='__MSG_loading__';
       //symbol=symbol.replace(' ','+');
@@ -561,7 +561,7 @@
       document.getElementById("StockAddList").style.display="none";
     }
     _IG_AdjustIFrameHeight();
-    print("fnSymbolSearch: Ended);
+    print("fnSymbolSearch: Ended");
   }
   function fnSymbolSearchResponse(ResponseText){
     var iStart=0;
