@@ -564,6 +564,7 @@
     print("fnSymbolSearch: Ended");
   }
   function fnSymbolSearchResponse(ResponseTextIn){
+    print("fnSymbolSearchResponse: Started");
     var iStart=0;
     var iEnd=0;
     var arrSearch="";
@@ -608,6 +609,7 @@
     document.getElementById("StockAddList").innerHTML=sTable;
     document.getElementById("StockAddList").style.display="block";
     _IG_AdjustIFrameHeight();
+    print("fnSymbolSearchResponse: Ended");
   }
   function fnEditStock(sender){
     if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
