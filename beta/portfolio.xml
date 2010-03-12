@@ -154,19 +154,20 @@
   }
   function fnPrepareStockData(currDataIn,stockDataIn){
 //  function fnPrepareStockData(currData,stockData){
-    print("fnPrepareStockData 2 started");
+    print("fnPrepareStockData 3 started");
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
     var currData = currDataIn.data;
     var stockData = stockDataIn.data;
 
+    print("fnPrepareStockData Received currdata:"+currData);
+    print("fnPrepareStockData Received stockdata:"+stockData);
+
     currData=currData.replace(/0.00/g,"1.00");
     arrStocks=new Array();
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
-    //print("fnPrepareStockData Received currdata:"+currData);
-    //print("fnPrepareStockData Received stockdata:"+stockData);
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
