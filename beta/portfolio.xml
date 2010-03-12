@@ -563,12 +563,13 @@
     _IG_AdjustIFrameHeight();
     print("fnSymbolSearch: Ended");
   }
-  function fnSymbolSearchResponse(ResponseText){
+  function fnSymbolSearchResponse(ResponseTextIn){
     var iStart=0;
     var iEnd=0;
     var arrSearch="";
     var i=0;
     var sTemp="";
+    var ResponseText = ResponseTextIn.data;
     var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=4></td></tr>';
     var sTable='<table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'" class="def">'+sLine+'<tr style="font-weight:bold;"><td>Symbol</td><td>Name</td><td>Type</td><td>Exchange</td></tr>'+sLine;
     if (ResponseText.indexOf('"Result":[]',1)<1){
