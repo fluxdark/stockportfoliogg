@@ -1,45 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-- <ModulePrefs height="100" author="Labpixies" author_email="info@labpixies.com" description="__MSG_desc__" title="__MSG_gTitle__" title_url="http://www.labpixies.com/" screenshot="http://www.labpixies.com/campaigns/todo/images_shared/screenshot_igoogle.jpg" thumbnail="http://www.labpixies.com/campaigns/todo/images_shared/thumbnail.jpg" render_inline="never" directory_title="">
-  <Locale messages="http://www.labpixies.com/campaigns/todo/i19_shared/all_all_igoogle.xml" /> 
-  <Locale lang="bg" messages="http://www.labpixies.com/campaigns/todo/i20/bg_all.xml" /> 
-  <Locale lang="ca" messages="http://www.labpixies.com/campaigns/todo/i20/ca_all.xml" /> 
-  <Locale lang="cs" messages="http://www.labpixies.com/campaigns/todo/i20/cs_all.xml" /> 
-  <Locale lang="da" messages="http://www.labpixies.com/campaigns/todo/i20/da_all.xml" /> 
-  <Locale lang="de" messages="http://www.labpixies.com/campaigns/todo/i20/de_all.xml" /> 
-  <Locale lang="el" messages="http://www.labpixies.com/campaigns/todo/i20/el_all.xml" /> 
-  <Locale lang="es" messages="http://www.labpixies.com/campaigns/todo/i20/es_all.xml" /> 
-  <Locale lang="fi" messages="http://www.labpixies.com/campaigns/todo/i20/fi_all.xml" /> 
-  <Locale lang="fr" messages="http://www.labpixies.com/campaigns/todo/i20/fr_all.xml" /> 
-  <Locale lang="hi" messages="http://www.labpixies.com/campaigns/todo/i20/hi_all.xml" /> 
-  <Locale lang="hr" messages="http://www.labpixies.com/campaigns/todo/i20/hr_all.xml" /> 
-  <Locale lang="hu" messages="http://www.labpixies.com/campaigns/todo/i20/hu_all.xml" /> 
-  <Locale lang="it" messages="http://www.labpixies.com/campaigns/todo/i20/it_all.xml" /> 
-  <Locale lang="iw" messages="http://www.labpixies.com/campaigns/todo/i20/iw_all.xml" language_direction="rtl" /> 
-  <Locale lang="ko" messages="http://www.labpixies.com/campaigns/todo/i20/ko_all.xml" /> 
-  <Locale lang="lt" messages="http://www.labpixies.com/campaigns/todo/i20/lt_all.xml" /> 
-  <Locale lang="lv" messages="http://www.labpixies.com/campaigns/todo/i20/lv_all.xml" /> 
-  <Locale lang="ms" messages="http://www.labpixies.com/campaigns/todo/i20/ms_all.xml" /> 
-  <Locale lang="nl" messages="http://www.labpixies.com/campaigns/todo/i20/nl_all.xml" /> 
-  <Locale lang="no" messages="http://www.labpixies.com/campaigns/todo/i20/no_all.xml" /> 
-  <Locale lang="pl" messages="http://www.labpixies.com/campaigns/todo/i20/pl_all.xml" /> 
-  <Locale lang="pt-BR" messages="http://www.labpixies.com/campaigns/todo/i20/pt_br_all.xml" /> 
-  <Locale lang="pt-PT" messages="http://www.labpixies.com/campaigns/todo/i20/pt_pt_all.xml" /> 
-  <Locale lang="ro" messages="http://www.labpixies.com/campaigns/todo/i20/ro_all.xml" /> 
-  <Locale lang="ru" messages="http://www.labpixies.com/campaigns/todo/i20/ru_all.xml" /> 
-  <Locale lang="sk" messages="http://www.labpixies.com/campaigns/todo/i20/sk_all.xml" /> 
-  <Locale lang="sl" messages="http://www.labpixies.com/campaigns/todo/i20/sl_all.xml" /> 
-  <Locale lang="sr" messages="http://www.labpixies.com/campaigns/todo/i20/sr_all.xml" /> 
-  <Locale lang="sv" messages="http://www.labpixies.com/campaigns/todo/i20/sv_all.xml" /> 
-  <Locale lang="th" messages="http://www.labpixies.com/campaigns/todo/i20/th_all.xml" /> 
-  <Locale lang="tl" messages="http://www.labpixies.com/campaigns/todo/i20/tl_all.xml" /> 
-  <Locale lang="tr" messages="http://www.labpixies.com/campaigns/todo/i20/tr_all.xml" /> 
-  <Locale lang="uk" messages="http://www.labpixies.com/campaigns/todo/i20/uk_all.xml" /> 
-  <Locale lang="vi" messages="http://www.labpixies.com/campaigns/todo/i20/vi_all.xml" /> 
-  <Locale lang="zh-CN" messages="http://www.labpixies.com/campaigns/todo/i20/zh_cn_all.xml" /> 
-  <Locale lang="zh-TW" messages="http://www.labpixies.com/campaigns/todo/i20/zh_tw_all.xml" /> 
-  <Locale lang="ja" messages="http://www.labpixies.com/campaigns/todo/i20/ja_all.xml" /> 
-  <Locale lang="en" country="US" messages="http://www.labpixies.com/campaigns/todo/i20/en_us.xml" /> 
+  <ModulePrefs title="__MSG_gadgettitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." title_url="http://sites.google.com/site/cnybroe/iGoogleStockGadget"  directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" render_inline="never" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
+    <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
+    <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/da_ALL.xml"/>
+    <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/es_ALL.xml"/>
+    <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/fr_ALL.xml"/>
+    <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/it_ALL.xml"/>
+    <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/sv_ALL.xml"/>
+    <Locale lang="pt-PT" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_PT.xml"/>
+    <Locale lang="pt-BR" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_BR.xml"/>
+    <Locale lang="de" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/de_ALL.xml"/>
+    <Locale lang="nl" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/nl_ALL.xml"/>
+    <Locale lang="zh-TW" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/zh_TW.xml"/>
     <Require feature="setprefs"/>
     <Require feature="minimessage"/>
     <Require feature="analytics"/>
