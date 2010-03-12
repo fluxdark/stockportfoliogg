@@ -120,7 +120,12 @@
 		sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
     print("fnLoadData url:"+url);
-		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
+
+    var params = opt_params || {};
+    params["CONTENT_TYPE"] = gadgets.io.ContentType.TEXT;
+    params["REFRESH_INTERVAL"] = 60;
+		gadgets.io.makeRequest(url,fnStockDataProxy,params);
+//		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
     print("fnLoadData ended");
 	}
   function fnStockDataProxy(stockData){
@@ -710,7 +715,7 @@
   function fnMessage(){
 	  if((iPrefVersion*1)<(iVersion*2)){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-	    var msghtml='hi4 <a href=\"http://www.google.dk/\">you there<\/a>';
+	    var msghtml='hi5 <a href=\"http://www.google.dk/\">you there<\/a>';
 			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
 		}
       var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
