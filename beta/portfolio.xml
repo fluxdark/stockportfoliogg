@@ -700,7 +700,7 @@
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-			var msghtml='<a target="_new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
+			var msghtml='<a target="_new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.</a>';
 			var statusMsg = miniMsg.createStaticMessage(msghtml);
       statusMsg.style.backgroundColor = "red";
 //      fnDeleteStock(arrStockSymbols.length-1)
@@ -709,7 +709,7 @@
   function fnMessage(){
 	  if((iPrefVersion*1)<(iVersion*1)){
       var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-			var msghtml='<a target=\"_new\" href=\"http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes">2009-12-xx: Commission is now included.<a>';
+			var msghtml='<a target="_new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes">2009-12-xx: Commission is now included.</a>';
 			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
 		}
       //var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
