@@ -91,7 +91,7 @@
   var iTmrRetry;
   var debug=1;
   
-  //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
+  //gadgets.window.adjustHeight is called too many times at load. Must be fixed  
 
   function fnInit(){
     fnReadPrefs();
@@ -226,7 +226,7 @@
       fnUpdateSummary(0);
       document.getElementById("FooterMsg").innerHTML='__MSG_lastupdated__:'+fngetDate(false);
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
     print("fnUpdateValues ended");
   }
   function fnUpdateProfit(){
@@ -414,7 +414,7 @@
     if((trim(arrStockSymbols.join(","))=="GOOG,^DJI,EURUSD=X,XAU=X" && arrStockSymbols.length==4) || document.getElementById("StockAdd").style.display=="block"){
       fnToggleAdd(1);
     }
-    _IG_SetTitle(pref.getString("CustomTitle"));
+    gadgets.window.setTitle(pref.getString("CustomTitle"));
     bTablesReady=true; //All needed tables has been made
     fnUpdateValues();
   }
@@ -434,7 +434,7 @@
     document.getElementById("StockProfitDetails").style.display=(bDet)?'block':'none';
     document.getElementById("StockProfitSummary").style.display=(bSum)?'block':'none';
     fnUpdateProfit();
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnToggleSummary(bToggle){
     if(bToggle){
@@ -450,7 +450,7 @@
         fnInsertSummary();
       }
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnToggleAdd(ForceVisible){
     if((document.getElementById("StockAdd").style.display=="none" && bTablesReady==true)||ForceVisible==1){
@@ -459,7 +459,7 @@
     }else{
       document.getElementById("StockAdd").style.display="none";
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnInsertFooter(){
     document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddEdit.gif') + '" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'Summary.gif') + '" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'money.gif') + '" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'News.gif')+'" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'help.gif') + '" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'ggroups.gif') + '" title="__MSG_gotoggroups__"></a></td></tr></table>';
@@ -530,7 +530,7 @@
         fnToggleNews(1);
       }
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnInsertNews(feedIn){
     print("fnInsertNews: Started");
@@ -541,7 +541,7 @@
       html+=feed.Entry[i].Title+'</a></span></td></tr>';
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
     print("fnInsertNews: Ended");
   }
   function fnSymbolSearch(symbol){
@@ -559,7 +559,7 @@
     }else{
       document.getElementById("StockAddList").style.display="none";
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
     print("fnSymbolSearch: Ended");
   }
   function fnSymbolSearchResponse(ResponseTextIn){
@@ -607,7 +607,7 @@
     }
     document.getElementById("StockAddList").innerHTML=sTable;
     document.getElementById("StockAddList").style.display="block";
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
     print("fnSymbolSearchResponse: Ended");
   }
   function fnEditStock(sender){
@@ -737,7 +737,7 @@
 
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
-      var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
+      var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
 			var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
 			var statusMsg = miniMsg.createStaticMessage(msghtml);
       statusMsg.style.backgroundColor = "red";
@@ -746,18 +746,18 @@
   }
   function fnMessage(){
 	  if((iPrefVersion*1)<(iVersion*2)){
-      var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
+      var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
 	    var msghtml='hi5 <a href=\"http://www.google.dk/\">you there<\/a>';
 			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
 		}
-      var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
+      var miniMsg1=new gadgets.MiniMessage(__MODULE_ID__);
 			var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it useful.<a>';
 			miniMsg1.createTimerMessage(msghtml1,8);
 	}
 	function fnHideMess(GadgetVersion){
     print("fnHideMess started");
     return function(){
-      _IG_AdjustIFrameHeight();
+      gadgets.window.adjustHeight();
 			iPrefVersion=GadgetVersion;
       pref.set("GadgetVersion",iPrefVersion);
     print("fnHideMess ended");
@@ -847,7 +847,7 @@
       var debug_html = document.getElementById("debug").innerHTML;
       if (document.getElementById("debug").style.display=='none'){
         document.getElementById("debug").style.display='block';
-        _IG_AdjustIFrameHeight();   
+        gadgets.window.adjustHeight();   
       }
       msg=fngetDate(1)+"; "+msg.toString()+"<br>";
       debug_html=msg+debug_html;
