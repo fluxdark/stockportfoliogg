@@ -154,12 +154,12 @@
   }
   function fnPrepareStockData(currData,stockData){
 //  function fnPrepareStockData(currData,stockData){
-    print("fnPrepareStockData 4 started");
+    print("fnPrepareStockData 5 started");
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
-    var currData = currDataIn.data;
-    var stockData = stockDataIn.data;
+    var currData = currDataIn;
+    var stockData = stockDataIn;
 
     print("fnPrepareStockData Received currdata:"+currData);
     print("fnPrepareStockData Received stockdata:"+stockData);
