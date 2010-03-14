@@ -150,7 +150,7 @@
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
     currData=currData.replace(/0.00/g,"1.00");
-    arrStocks=new Array();
+    arrStocks = new Array();
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
     if (arrLinesSD.length>1){
