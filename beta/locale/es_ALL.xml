@@ -65,7 +65,7 @@
   <msg name="showaddedit">Añadir/Editar</msg>
   <msg name="chart">Gráfico</msg>
   <msg name="shownews">Mostrar noticias</msg>
-  <msg name="showsummary">Mostrar resumen/msg> 
+  <msg name="showsummary">Mostrar resumen</msg> 
   <msg name="charttooltip">Descripción</msg>
   <msg name="chartsummary">Resumen</msg>
   <msg name="chartperiod">Período del gráfico</msg>
