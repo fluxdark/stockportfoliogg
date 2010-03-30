@@ -871,6 +871,7 @@
     }
   }
   function CreatePromos() {
+    print("Do promo");
     var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
