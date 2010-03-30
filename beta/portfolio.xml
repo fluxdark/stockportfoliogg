@@ -879,7 +879,7 @@
                      'Add a Currency gadget to iGoogle with charts and market news'];
       var getProNo = Math.floor(Math.random()*proText.length);
       var divpromo = document.createElement("divpromo");
-      divpromo.innerHTML = '<span style=font-size:11px;><a href="javascript:callCampaignLink(' + getProNo + ');" class=prostyle>"' + proText[getProNo] + '</a> &raquo;</span>';
+      divpromo.innerHTML = '<span style=font-size:11px;><a href="javascript:callCampaignLink(' + getProNo + ');" class=prostyle>' + proText[getProNo] + '</a> &raquo;</span>';
       promomsg.createDismissibleMessage(divpromo, callPromoClick);
       _IG_AdjustIFrameHeight();
     }
