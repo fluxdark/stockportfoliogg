@@ -881,7 +881,7 @@
       var proLink = 'http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=' + getProNo;
 
       var divpromo = document.createElement("divpromo");
-      divpromo.innerHTML = '<span style=font-size:11px;><a href="javascript:callCampaignLink(''' + proLink + ''');" class=prostyle>"' + proText[getProNo] + '</a> &raquo;</span>';
+      divpromo.innerHTML = '<span style=font-size:11px;><a href="javascript:callCampaignLink('' + proLink + '');" class=prostyle>"' + proText[getProNo] + '</a> &raquo;</span>';
 
       promomsg.createDismissibleMessage(divpromo, callPromoClick);
       _IG_AdjustIFrameHeight();
