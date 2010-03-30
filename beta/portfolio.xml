@@ -18,6 +18,7 @@
     <Require feature="dynamic-height"/>
     <Require feature="settitle"/>
   </ModulePrefs>
+  <UserPref name="campaign_1" datatype="hidden" default_value="0" />
   <UserPref name="GadgetVersion" datatype="hidden" default_value="0"/>
   <UserPref name="SettingVersion" datatype="hidden" default_value="0"/>
   <UserPref name="StockSymbols" datatype="hidden" default_value=""/>
@@ -57,7 +58,14 @@
     .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
     td.HiAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
     td.LoAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
-	</style>
+    /* campaign minimessage styling */
+    .mmlib_table__MODULE_ID__ {border-bottom: 1px solid #ddd;}
+    a.prostyle:link {color: #254970; font-size:11px; font-family:arial; text-decoration: none}
+    a.prostyle:active {color: #ff6909; font-size:11px; font-family:arial; text-decoration: none}
+    a.prostyle:visited {color: #254970; font-size:11px; font-family:arial; text-decoration: none}
+    a.prostyle:hover {color: #008000; font-size:11px; font-family:arial; text-decoration: underline;}
+  </style>
+
   <div id="StockData"><div class="loading">__MSG_initialloading__</div></div>
   <div id="Footer" class="Footer"></div>
   <div id="StockProfitDetails" style="display:none;width:100%;overflow:scroll;overflow-y:hidden;"></div>
@@ -97,16 +105,16 @@
     fnReadPrefs();
     fnLoad();
     setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
-    fnMessage();
-	}
+    setTimeout('fnMessage()',4000);
+  }
 
-	function fnLoad(){
+  function fnLoad(){
     print("fnLoad started");
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
     fnInsertTables();
     print("fnLoad ended");
-  }	
+  }
   function fnLoadData(){
     print("fnLoadData started");
     bDataReady=false;
@@ -118,17 +126,17 @@
     for(var i=0;i<arrStockSymbols.length;i++){
       sSymb+=arrStockSymbols[i]+',';
     }
-		sSymb=sSymb.substr(0,sSymb.length-1);
+    sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
     print("fnLoadData url:"+url);
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
-		gadgets.io.makeRequest(url,fnStockDataProxy,params);
-//		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
+    gadgets.io.makeRequest(url,fnStockDataProxy,params);
+//    _IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
     print("fnLoadData ended");
-	}
+  }
   function fnStockDataProxy(stockData){
     print("fnStockDataProxy started");
     var arrLines=new Array();
@@ -137,16 +145,16 @@
     arrLines=stockData.data.split('\r\n');
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
-			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
+      sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
-		sSymb=sSymb.substr(0,sSymb.length-1);
-		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
+    sSymb=sSymb.substr(0,sSymb.length-1);
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
     //print("fnStockDataProxy url:"+url);
    
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
-		//gadgets.io.makeRequest(url,function(){fnPrepareStockData(stockData)},params);
+    //gadgets.io.makeRequest(url,function(){fnPrepareStockData(stockData)},params);
     gadgets.io.makeRequest(url, _IG_Callback(fnPrepareStockData,stockData), params);
      //_IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData.data),{refreshInterval:60});
     
@@ -176,11 +184,11 @@
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
           //If  exch.rate has not been set, then use current rate
-				  arrStockCurrRates[i]=arrLineValues[26];
-				}
-				//arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
+          arrStockCurrRates[i]=arrLineValues[26];
+        }
+        //arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
         var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]);
-				arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
+        arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
         //arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
         //arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
@@ -304,7 +312,7 @@
     
     if (bAllReady){
       for(var i=0;i<arrStocks.length;i++){
-				sName=arrStocks[i][2];
+        sName=arrStocks[i][2];
         if (sName==''||pref.getInt("NameColumn")==1){
           sName=arrStocks[i][1];
         }else if (pref.getInt("NameColumn")==40){//name(symbol)
@@ -320,16 +328,16 @@
           setTimeout('document.getElementById("stc'+i+'2").style.background="'+sbgColor+'"',700);
         }
         var sClass="";
-				//Multiplied with 1 equals toInt
+        //Multiplied with 1 equals toInt
         if ((arrStocks[i][6].replace("%","")*1)>(arrStockHi[i]*1) && (arrStockHi[i]*1)>0){
           sClass="HiAlert";
-					sName=arrStockHi[i];
+          sName=arrStockHi[i];
         }else if((arrStocks[i][6].replace("%","")*1)<(arrStockLo[i]*1) && (arrStockLo[i]*1)>0){
           sClass="LoAlert";
-					sName=arrStockLo[i];
+          sName=arrStockLo[i];
         }
         document.getElementById('stc'+i+'0').className=sClass;
-				document.getElementById('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
+        document.getElementById('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
         document.getElementById('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+encodeURIComponent(arrStocks[i][1])+'#chart1:symbol='+encodeURIComponent(arrStocks[i][1])+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
         var k=3;
         for(var j=1;j<iConfCols+1;j++){
@@ -376,33 +384,33 @@
     var sTD='';
     var bCurr=pref.getString("Currency")!="-";
     var sBGColor;
-		if (bCurr){
+    if (bCurr){
       iCols=10;
       sCol='<Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%">';
       sTDH='<td class="cellR">__MSG_currencyrate__</td>';
-		}
+    }
     var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=document.getElementById(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddStock.gif')+'"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
     var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan='+iCols+'></td></tr>';
     var sConfigTable='<table style="width:100%;font-size:'+fsize+'" border=0 cellspacing=0 cellpadding=0>'+sCol+'<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan='+iCols+'></td></tr>'+sLine+'<tr style="font-weight: bold;"><td class="cellL">__MSG_symbol__</td><td class="cellR" >__MSG_numberofstocks__</td><td class="cellR">__MSG_buyprice__</td><td class="cellR">__MSG_tradecost__</td>'+sTDH+'<td class="cellR">__MSG_hialert__</td><td class="cellR">__MSG_loalert__</td><td colspan=3></td></tr>'+sLine;
-	  for(i=0;i<arrStockSymbols.length;i++){
+    for(i=0;i<arrStockSymbols.length;i++){
       if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
-		  if (bCurr){
+      if (bCurr){
         sTD='<td id="ctc4'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockCurrRates[i]+'</td>';
         }
       sConfigTable+='<tr style="background-Color:'+sBGColor+';"><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockPrices[i]+'</td><td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockTC[i]+'</td>'+sTD+'<td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockHi[i]+'</td><td id="ctc6'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'delete.gif')+'" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveUp.gif') + '" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc9'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveDown.gif') + '" title="__MSG_movedown__"></td></tr>';
     }
-		if (bCurr){
+    if (bCurr){
       sConfigTable+='<tr>'+sLine+'<td colspan=10 title="__MSG_currencytip__">__MSG_selectedcurrency__: '+pref.getString("Currency")+'</td></tr>';
     }
     sConfigTable+='</table>';
     document.getElementById("StockAdd").innerHTML=sTemp+sConfigTable;
-		//Hide move arrows with no function
-		if (i>0){
-			document.getElementById("ctc80").style.display="none";
-			document.getElementById("ctc9"+(i-1)).style.display="none";
-		}
+    //Hide move arrows with no function
+    if (i>0){
+      document.getElementById("ctc80").style.display="none";
+      document.getElementById("ctc9"+(i-1)).style.display="none";
+    }
   }
-	function fnInsertTables(){
+  function fnInsertTables(){
     bTablesReady=false;
     bAllReady=false;
     fnInsertFooter();
@@ -492,10 +500,10 @@
   }
   function fnInsertProfitDetailsTable(){
     var sCurr='';
-		if (pref.getString("Currency")=="-"){
+    if (pref.getString("Currency")=="-"){
       sCurr='style="visibility:hidden;"';
-		}
-		var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=6></td></tr>';
+    }
+    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=6></td></tr>';
     var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="width:100%;font-size:'+fsize+'" class="def"><col width="10%"><col width="20%"><col width="25%"><col width="15%"><col width="15%"><col width="15%"><tr style="font-weight:bold;"><td class="cellL">__MSG_name__</td><td class="cellR">__MSG_dayearned__</td><td class="cellR">__MSG_earned__</td><td class="cellR">__MSG_value__</td><td class="cellC" '+sCurr+'>__MSG_currency__</td><td class="cellL" '+sCurr+'>__MSG_currencyrate__</td></tr>'+sLine;
     for(i=0;i<arrStockSymbols.length+1;i++){
       if(i==arrStockSymbols.length){
@@ -511,11 +519,11 @@
       if(document.getElementById("StockNews").style.display=="none"){
         document.getElementById("StockNews").innerHTML='<hr class="HrDef"><div class="loading">__MSG_loading__</div>';
         var url='http://finance.yahoo.com/rss/headline?s='+encodeURIComponent(arrStockSymbols.join(","));
-				var params = {};
+        var params = {};
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
         params[gadgets.io.RequestParameters.NUM_ENTRIES] = 5;
         params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 600;
-		    
+        
         //gadgets.io.makeRequest(url,function(){fnPrepareStockData(stockData)},params);
         gadgets.io.makeRequest(url, fnInsertNews, params);
         //_IG_FetchFeedAsJSON(url,fnInsertNews,5,false);
@@ -549,7 +557,7 @@
     if(trim(symbol)!=''){
       document.getElementById("StockAddList").innerHTML='__MSG_loading__';
       //symbol=symbol.replace(' ','+');
-			var params = {};
+      var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
       params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 3600;
       var url='http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+encodeURIComponent(symbol)+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback';
@@ -669,7 +677,7 @@
       if(index==0){return;}
       iAC = index-1;
       iB = index;
-	  }
+    }
       arrStockSymbols.splice(iAC,2,arrStockSymbols[iB],arrStockSymbols[iAC]);
       arrStockQtys.splice(iAC,2,arrStockQtys[iB],arrStockQtys[iAC]);
       arrStockPrices.splice(iAC,2,arrStockPrices[iB],arrStockPrices[iAC]);
@@ -704,23 +712,23 @@
   function fnPrefsValidation(inp){
     //Check if no stocks are configured
     if (trim(inp.join(","))==""){
-		  arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
-			arrStockQtys="100,0,200,300".split(",");
-			arrStockPrices="235,0,0,0".split(",");
-			arrStockTC="5,3,4,2".split(",");
-			arrStockCurrRates="1,1,1,1".split(",");
-			arrStockHi="500,10000,2,0.002".split(",");
-			arrStockLo="300,6000,1,0.0005".split(",");
+      arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
+      arrStockQtys="100,0,200,300".split(",");
+      arrStockPrices="235,0,0,0".split(",");
+      arrStockTC="5,3,4,2".split(",");
+      arrStockCurrRates="1,1,1,1".split(",");
+      arrStockHi="500,10000,2,0.002".split(",");
+      arrStockLo="300,6000,1,0.0005".split(",");
     }
-  	//Check for empty prefs
+    //Check for empty prefs
     for(var i=0;i<inp.length;i++){
-		  if (isNaN(arrStockQtys[i])||arrStockTC[i].length==0){arrStockQtys[i]=0;}
-		  if (isNaN(arrStockPrices[i])||arrStockTC[i].length==0){arrStockPrices[i]=0;}
-		  if (isNaN(arrStockTC[i])||arrStockTC[i].length==0){arrStockTC[i]=0;}
-		  //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
-		  if (isNaN(arrStockHi[i])||arrStockTC[i].length==0){arrStockHi[i]=0;}
-		  if (isNaN(arrStockLo[i])||arrStockTC[i].length==0){arrStockLo[i]=0;}
-		}
+      if (isNaN(arrStockQtys[i])||arrStockTC[i].length==0){arrStockQtys[i]=0;}
+      if (isNaN(arrStockPrices[i])||arrStockTC[i].length==0){arrStockPrices[i]=0;}
+      if (isNaN(arrStockTC[i])||arrStockTC[i].length==0){arrStockTC[i]=0;}
+      //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
+      if (isNaN(arrStockHi[i])||arrStockTC[i].length==0){arrStockHi[i]=0;}
+      if (isNaN(arrStockLo[i])||arrStockTC[i].length==0){arrStockLo[i]=0;}
+    }
 
 //    var tmp=pref.getString("StockSymbols")+pref.getString("StockQtys")+pref.getString("StockPrices")+
 //            pref.getString("StockCurrRates")+pref.getString("StockHi")+pref.getString("StockLo")+iPrefVersion+
@@ -738,27 +746,28 @@
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-			var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
-			var statusMsg = miniMsg.createStaticMessage(msghtml);
+      var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
+      var statusMsg = miniMsg.createStaticMessage(msghtml);
       statusMsg.style.backgroundColor = "red";
 //      fnDeleteStock(arrStockSymbols.length-1)
     }
   }
   function fnMessage(){
-	  if((iPrefVersion*1)<(iVersion*2)){
-      var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-	    var msghtml='New <a href=\"http://www.google.dk/\">release coming soon<\/a>';
-			miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
-		}
+    //if((iPrefVersion*1)<(iVersion*2)){
+      //var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
+      //var msghtml='New <a href=\"http://www.google.dk/\">release coming soon<\/a>';
+      //miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
+    //}
       //var miniMsg1=new gadgets.MiniMessage(__MODULE_ID__);
-			//var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it useful.<a>';
-			//miniMsg1.createTimerMessage(msghtml1,8);
-	}
-	function fnHideMess(GadgetVersion){
+      //var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it useful.<a>';
+      //miniMsg1.createTimerMessage(msghtml1,8);
+    CreatePromos();
+  }
+  function fnHideMess(GadgetVersion){
     print("fnHideMess started");
     return function(){
       gadgets.window.adjustHeight();
-			iPrefVersion=GadgetVersion;
+      iPrefVersion=GadgetVersion;
       pref.set("GadgetVersion",iPrefVersion);
     print("fnHideMess ended");
     };
@@ -773,13 +782,13 @@
     if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2);}
     return year+'-'+month+'-'+day+' '+hours+':'+minutes;
   }
-	function fnZeroPad(num,length){
-		var snum = num + '';
-		while(snum.length < length) {
-		  snum = '0' + snum; 
-		}
-		return snum;
-	}
+  function fnZeroPad(num,length){
+    var snum = num + '';
+    while(snum.length < length) {
+      snum = '0' + snum; 
+    }
+    return snum;
+  }
   function trim(s){
     if (s){
       return s.replace(/^\s*/,"").replace(/\s*$/,"");
@@ -797,7 +806,7 @@
     arrStockLo=pref.getString("StockLo").split(",");
     iPrefVersion=pref.getString("GadgetVersion");
   }
-	function myRound(inp){
+  function myRound(inp){
     var sInp = inp.toString();
     var i = sInp.indexOf(".");
     if (sInp.length>6 && i>-1 && !isNaN(inp)){
@@ -807,7 +816,7 @@
       inp=sInp.substr(0,i)*1;
     }
     return inp;
-	}
+  }
   function fnNumToColor(number,zeroColor){
     var sColor=zeroColor;
     if(!isNaN(parseFloat(number))){
@@ -816,27 +825,27 @@
     }
     return sColor;
   }
-	function txtFocus(sender,focus){
+  function txtFocus(sender,focus){
     if (trim(sender.value)=="" || trim(sender.value)==sender.title){
-			if (focus==1){
-			  sender.value="";
-			  sender.style.color='#000000';
-			}else{
-			  sender.style.color='#AAAAAA';
-			  sender.value=sender.title;
-			}
-		}
-	}
+      if (focus==1){
+        sender.value="";
+        sender.style.color='#000000';
+      }else{
+        sender.style.color='#AAAAAA';
+        sender.value=sender.title;
+      }
+    }
+  }
   function splitLine(inp){
-  	var out=new Array();
+    var out=new Array();
     out=inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
     for(var i=0;i<out.length;i++){
       out[i]=out[i].replace(/"/g,"");
-		}
-		if(out.length!=26){
-			out='N/A,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');	
-		}
-		if(out[0]!="N/A"){
+    }
+    if(out.length!=26){
+      out='N/A,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');  
+    }
+    if(out[0]!="N/A"){
       out[24]="???";
       out[25]=out[0].substr(0,out[0].indexOf("<"));
     }
@@ -853,7 +862,7 @@
       debug_html=msg+debug_html;
       document.getElementById("debug").innerHTML=debug_html;
     }
-	}
+  }
   function _IG_Callback(callbackFunction, parameters) {
     var args = arguments;
     return function() {
@@ -861,8 +870,41 @@
       callbackFunction.apply(null,combinedArgs.concat(Array.prototype.slice.call(args,1)))
     }
   }
+  function CreatePromos() {
+    var pronce = prefs.getInt("campaign_1");
+    if (pronce != "1") {
+      var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
+
+      var pro_link0 = "http://www.example.com";
+      var pro_link1 = "http://www.example.com";
+      var pro_link2 = "http://www.example.com";
+      var pro_text0 = "Promo Text A";
+      var pro_text1 = "Promo Text B";
+      var pro_text2 = "Promo Text C";
+
+      var prolink = new Array()
+      prolink[0] = pro_link0
+      prolink[1] = pro_link1
+      prolink[2] = pro_link2
+      var getlink = prolink[Math.floor(Math.random()*prolink.length)]
+      if (getlink==pro_link0) { var gettext = pro_text0 }
+      if (getlink==pro_link1) { var gettext = pro_text1 }
+      if (getlink==pro_link2) { var gettext = pro_text2 }
+
+      var divpromo = document.createElement("divpromo");
+      divpromo.innerHTML = "<span style=font-size:11px;><a href=" + getlink + " target=_blank class=prostyle>" + gettext + "</a> &raquo;</span>";
+
+      promomsg.createDismissibleMessage(divpromo, callPromoClick);
+      _IG_AdjustIFrameHeight();
+    }
+  }
+  function callPromoClick() {
+    _IG_Analytics("UA-2031644-1", "campaign1_clicked");
+  return true;
+  
+  
  //1-2-3 start
-	fnInit();  
+  fnInit();  
    </script>
   ]]>
   </Content>
