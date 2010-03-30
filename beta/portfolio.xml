@@ -252,7 +252,7 @@
         iValTot+=arrStocks[i][34];
         if (bPD){
           document.getElementById("ptc0"+i).innerHTML=arrStocks[i][2]; //Name
-          document.getElementById("ptc1"+i).innerHTML=arrStocks[i][30]+'('+myRoundD(arrStocks[i][32],2)+'%)'; //
+          document.getElementById("ptc1"+i).innerHTML=arrStocks[i][30]+'('+arrStocks[i][32].toFixed(2)+'%)'; //
           document.getElementById("ptc2"+i).innerHTML=arrStocks[i][31]+'('+myRoundD(arrStocks[i][33],2)+'%)';
           document.getElementById("ptc3"+i).innerHTML=arrStocks[i][34];
           document.getElementById("ptc4"+i).innerHTML=arrStocks[i][24];
