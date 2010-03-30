@@ -875,7 +875,7 @@
     var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
       print('Show Promo1');
-      var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
+/*       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
 
       var pro_link0 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=0";
       var pro_link1 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=1";
@@ -893,7 +893,7 @@
       if (getlink==pro_link0) { var gettext = pro_text0;}
       if (getlink==pro_link1) { var gettext = pro_text1;}
       if (getlink==pro_link2) { var gettext = pro_text2;}
-
+ */
       var divpromo = document.createElement("divpromo");
       divpromo.innerHTML = "<span style=font-size:11px;><a href=" + getlink + " target=_blank class=prostyle>" + gettext + "</a> &raquo;</span>";
 
