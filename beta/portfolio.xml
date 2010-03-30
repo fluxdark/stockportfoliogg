@@ -851,7 +851,7 @@
     }
     return out;
   }
-  function //print(msg){
+  function print(msg){
     if (debug){
       var debug_html = document.getElementById("debug").innerHTML;
       if (document.getElementById("debug").style.display=='none'){
