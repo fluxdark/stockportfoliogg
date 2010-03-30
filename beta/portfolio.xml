@@ -870,7 +870,38 @@
       callbackFunction.apply(null,combinedArgs.concat(Array.prototype.slice.call(args,1)))
     }
   }
-  
+  function CreatePromos() {
+    var pronce = prefs.getInt("campaign_1");
+    if (pronce != "1") {
+      var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
+
+      var pro_link0 = "http://www.example.com";
+      var pro_link1 = "http://www.example.com";
+      var pro_link2 = "http://www.example.com";
+      var pro_text0 = "Promo Text A";
+      var pro_text1 = "Promo Text B";
+      var pro_text2 = "Promo Text C";
+
+      var prolink = new Array()
+      prolink[0] = pro_link0
+      prolink[1] = pro_link1
+      prolink[2] = pro_link2
+      var getlink = prolink[Math.floor(Math.random()*prolink.length)]
+      if (getlink==pro_link0) { var gettext = pro_text0 }
+      if (getlink==pro_link1) { var gettext = pro_text1 }
+      if (getlink==pro_link2) { var gettext = pro_text2 }
+
+      var divpromo = document.createElement("divpromo");
+      divpromo.innerHTML = "<span style=font-size:11px;><a href=" + getlink + " target=_blank class=prostyle>" + gettext + "</a> &raquo;</span>";
+
+      promomsg.createDismissibleMessage(divpromo, callPromoClick);
+      _IG_AdjustIFrameHeight();
+    }
+  }
+  function callPromoClick() {
+    _IG_Analytics("UA-2031644-1", "campaign1_clicked");
+    return true;
+  }  
   
  //1-2-3 start
   fnInit();  
