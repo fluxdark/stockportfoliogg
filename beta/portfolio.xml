@@ -820,10 +820,10 @@
   }
   function myRoundD(inp,digits){
     print(inp);
-    var x=Math.pow(1,digits);
-    print(x);
-    print(Math.round(inp*x)/x);
-    return Math.round(inp*x)/x;
+    //var x=Math.pow(1,digits);
+    //print(x);
+    //print(Math.round(inp*x)/x);
+    //return Math.round(inp*x)/x;
   }
   function fnNumToColor(number,zeroColor){
     var sColor=zeroColor;
