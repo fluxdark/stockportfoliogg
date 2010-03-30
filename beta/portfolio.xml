@@ -887,7 +887,7 @@
   function callCampaignLink(ProNo){
     print("callCampaignLink clicked");
     _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1_clicked");    
-    window.open('http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=' + ProNo);
+    window.open('http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml');
   }
   function callPromoClick() {
     pref.set("campaign_1", 0);
