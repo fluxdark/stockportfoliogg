@@ -821,8 +821,8 @@
     return inp;
   }
   function myRoundD(inp,digits){
-    print(inp);
-    var x=Math.pow(1,digits);
+    //print(inp);
+    //var x=Math.pow(1,digits);
     alert(x);
     //print(Math.round(inp*x)/x);
     //return Math.round(inp*x)/x;
