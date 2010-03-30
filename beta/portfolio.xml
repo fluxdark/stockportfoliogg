@@ -115,7 +115,6 @@
     fnInsertTables();
     //print("fnLoad ended");
     var x=123.123;
-    alert(x);
     myRoundD(x,2);
   }
   function fnLoadData(){
@@ -821,11 +820,11 @@
     return inp;
   }
   function myRoundD(inp,digits){
-    //print(inp);
-    //var x=Math.pow(1,digits);
+    print(inp);
+    var x=Math.pow(1,digits);
     alert(x);
-    //print(Math.round(inp*x)/x);
-    return x;//Math.round(inp*x)/x;
+    print(Math.round(inp*x)/x);
+    return Math.round(inp*x)/x;
   }
   function fnNumToColor(number,zeroColor){
     var sColor=zeroColor;
