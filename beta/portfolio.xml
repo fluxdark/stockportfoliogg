@@ -818,7 +818,7 @@
   }
   function myRoundD(inp,digits){
     var x=Math.pow(10,digits);
-    return Math.round(inp+"0000000"*x)/x;
+    return inp;//Math.round(inp+"0000000"*x)/x;
   }
   function fnNumToColor(number,zeroColor){
     var sColor=zeroColor;
