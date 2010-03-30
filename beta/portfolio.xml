@@ -116,7 +116,7 @@
     //print("fnLoad ended");
     var x=123.123;
     alert(x);
-    MyRoundD(x,2);
+    myRoundD(x,2);
   }
   function fnLoadData(){
     //print("fnLoadData started");
@@ -825,7 +825,7 @@
     //var x=Math.pow(1,digits);
     alert(x);
     //print(Math.round(inp*x)/x);
-    //return Math.round(inp*x)/x;
+    return x;//Math.round(inp*x)/x;
   }
   function fnNumToColor(number,zeroColor){
     var sColor=zeroColor;
