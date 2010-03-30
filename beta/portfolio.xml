@@ -254,7 +254,7 @@
         if (bPD){
           document.getElementById("ptc0"+i).innerHTML=arrStocks[i][2]; //Name
           document.getElementById("ptc1"+i).innerHTML=arrStocks[i][30]+'('+arrStocks[i][32]+'%)'; //
-          document.getElementById("ptc2"+i).innerHTML=arrStocks[i][31]+'('+MyRoundD(arrStocks[i][33]+'%)';
+          document.getElementById("ptc2"+i).innerHTML=arrStocks[i][31]+'('+MyRoundD(arrStocks[i][33],3))+'%)';
           document.getElementById("ptc3"+i).innerHTML=arrStocks[i][34];
           document.getElementById("ptc4"+i).innerHTML=arrStocks[i][24];
           document.getElementById("ptc5"+i).innerHTML=arrStocks[i][26];
