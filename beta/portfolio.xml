@@ -874,10 +874,21 @@
     print('Started CreatePromos');
     var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
-      print('Show Promo3');
-/*       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
+      print('Show Promos');
+      var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
+      var proText = ['Add a Currency iGoogle gadget with real-time exchange rates',
+                     'Convert among 80+ currencies on your iGoogle page. Add now!',
+                     'Add a Currency gadget to iGoogle with charts and market news'];
+      var getProNo = Math.floor(Math.random()*protext.length);
+      var proLink = 'http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=' + getProNo;
 
-      var pro_link0 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=0";
+      var divpromo = document.createElement("divpromo");
+      divpromo.innerHTML = "<span style=font-size:11px;><a href=" + proLink + " target=_blank class=prostyle>" + proText[getProNo] + "</a> &raquo;</span>";
+
+      promomsg.createDismissibleMessage(divpromo, callPromoClick);
+      _IG_AdjustIFrameHeight();
+
+/*      var pro_link0 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=0";
       var pro_link1 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=1";
       var pro_link2 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=2";
       var pro_text0 = "Add a Currency iGoogle gadget with real-time exchange rates";
