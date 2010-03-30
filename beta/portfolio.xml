@@ -113,8 +113,8 @@
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
     fnInsertTables();
-    MyRoundD(123.123,2);
     //print("fnLoad ended");
+    MyRoundD(123.123,2);
   }
   function fnLoadData(){
     //print("fnLoadData started");
