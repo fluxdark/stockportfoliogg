@@ -105,7 +105,7 @@
   function fnInit(){
     fnReadPrefs();
     fnLoad();
-    setTimeout('fnMessage()_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
+    setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
   }
 
   function fnLoad(){
