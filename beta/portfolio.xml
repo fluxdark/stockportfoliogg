@@ -66,6 +66,7 @@
     a.prostyle:hover {color: #008000; font-size:11px; font-family:arial; text-decoration: underline;}
   </style>
 
+  <div id="promo"></div>
   <div id="StockData"><div class="loading">__MSG_initialloading__</div></div>
   <div id="Footer" class="Footer"></div>
   <div id="StockProfitDetails" style="display:none;width:100%;overflow:scroll;overflow-y:hidden;"></div>
