@@ -874,7 +874,7 @@
     print('Started CreatePromos');
     var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
-      print('Show Promo');
+      print('Show Promo1');
       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
 
       var pro_link0 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=0";
@@ -884,7 +884,8 @@
       var pro_text1 = "Convert among 80+ currencies on your iGoogle page. Add now!";
       var pro_text2 = "Add a Currency gadget to iGoogle with charts and market news";
       
-      var prolink = new Array()
+      var prolink = new Array();
+      var gettext;
       prolink[0] = pro_link0;
       prolink[1] = pro_link1;
       prolink[2] = pro_link2;
