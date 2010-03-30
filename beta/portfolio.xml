@@ -114,7 +114,9 @@
     fnLoadData();
     fnInsertTables();
     //print("fnLoad ended");
-    MyRoundD(123.123,2);
+    var x=123.123;
+    alert(x);
+    MyRoundD(x,2);
   }
   function fnLoadData(){
     //print("fnLoadData started");
