@@ -60,7 +60,7 @@
     td.LoAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
     /* campaign minimessage styling */
     .mmlib_table__MODULE_ID__ {border-bottom: 1px solid #ddd;}
-    a.prostyle:link {color: #254970; font-size:10px;font-family:sans-serif; text-decoration: none}
+    a.prostyle:link {color: #0000FF; font-size:10px;font-family:sans-serif; text-decoration: underline}
     a.prostyle:active {color: #ff6909; font-size:10px;font-family:sans-serif; text-decoration: none}
     a.prostyle:visited {color: #254970; font-size:10px;font-family:sans-serif; text-decoration: none}
     a.prostyle:hover {color: #008000; font-size:10px;font-family:sans-serif; text-decoration: underline;}
