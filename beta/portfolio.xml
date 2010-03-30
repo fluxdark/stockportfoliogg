@@ -886,12 +886,12 @@
   }
   function callCampaignLink(ProNo){
     print("callCampaignLink clicked");
-    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1_clicked");    
+    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1/Clicked");    
     window.open('http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml');
   }
   function callPromoClick() {
     pref.set("campaign_1", 0);
-    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1_dismissed");
+    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1/Dismissed");
     return true;
   }
   
