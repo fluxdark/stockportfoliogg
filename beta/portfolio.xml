@@ -63,7 +63,7 @@
     a.prostyle:link {color: #0000FF; font-size:10px;font-family:sans-serif; text-decoration: underline}
     a.prostyle:active {color: #ff6909; font-size:10px;font-family:sans-serif; text-decoration: none}
     a.prostyle:visited {color: #254970; font-size:10px;font-family:sans-serif; text-decoration: none}
-    a.prostyle:hover {color: #008000; font-size:10px;font-family:sans-serif; text-decoration: underline;}
+    a.prostyle:hover {color: #000080; font-size:10px;font-family:sans-serif; text-decoration: underline;}
   </style>
 
   <div id="promo"></div>
