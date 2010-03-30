@@ -874,7 +874,7 @@
     print('Started CreatePromos');
     var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
-      print('Show Promo1');
+      print('Show Promo2');
 /*       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
 
       var pro_link0 = "http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml?prom=0";
