@@ -266,11 +266,11 @@
       sDTC=fnNumToColor(iDayTotal,"#000000");
       sETC=fnNumToColor(iEarnTot,"#000000");
       //iDayTotal=Math.round(iDayTotal*100)/100;
-      iDayTotal=myRound(iDayTotal);
+      iDayTotal=Math.round(iDayTotal);
       //iEarnTot=Math.round(iEarnTot*100)/100;
-      iEarnTot=myRound(iEarnTot);
+      iEarnTot=Math.round(iEarnTot);
       //iValTot=Math.round(iValTot*100)/100;
-      iValTot=myRound(iValTot);
+      iValTot=Math.round(iValTot);
       if (bPD){
         document.getElementById("ptc1"+i).style.color=sDTC;
         document.getElementById("ptc1"+i).innerHTML='<b>'+iDayTotal+'</b>';
@@ -885,8 +885,8 @@
     }
   }
   function callCampaignLink(ProNo){
-    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1/Clicked");    
     window.open('http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml');
+    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1/Clicked");    
   }
   function callPromoClick() {
     pref.set("campaign_1", 1);
