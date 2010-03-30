@@ -265,11 +265,11 @@
       sDTC=fnNumToColor(iDayTotal,"#000000");
       sETC=fnNumToColor(iEarnTot,"#000000");
       //iDayTotal=Math.round(iDayTotal*100)/100;
-      iDayTotal=Math.round(iDayTotal);
+      iDayTotal=myRoundD(iDayTotal,0);
       //iEarnTot=Math.round(iEarnTot*100)/100;
-      iEarnTot=Math.round(iEarnTot);
+      iEarnTot=myRoundD(iEarnTot,0);
       //iValTot=Math.round(iValTot*100)/100;
-      iValTot=Math.round(iValTot);
+      iValTot=myRoundD(iValTot,0);
       if (bPD){
         document.getElementById("ptc1"+i).style.color=sDTC;
         document.getElementById("ptc1"+i).innerHTML='<b>'+iDayTotal+'</b>';
