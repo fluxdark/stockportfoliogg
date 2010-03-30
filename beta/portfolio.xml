@@ -885,13 +885,13 @@
       var pro_text2 = "Add a Currency gadget to iGoogle with charts and market news";
       
       var prolink = new Array()
-      prolink[0] = pro_link0
-      prolink[1] = pro_link1
-      prolink[2] = pro_link2
-      var getlink = prolink[Math.floor(Math.random()*prolink.length)]
-      if (getlink==pro_link0) { var gettext = pro_text0 }
-      if (getlink==pro_link1) { var gettext = pro_text1 }
-      if (getlink==pro_link2) { var gettext = pro_text2 }
+      prolink[0] = pro_link0;
+      prolink[1] = pro_link1;
+      prolink[2] = pro_link2;
+      var getlink = prolink[Math.floor(Math.random()*prolink.length)];
+      if (getlink==pro_link0) { var gettext = pro_text0;}
+      if (getlink==pro_link1) { var gettext = pro_text1;}
+      if (getlink==pro_link2) { var gettext = pro_text2;}
 
       var divpromo = document.createElement("divpromo");
       divpromo.innerHTML = "<span style=font-size:11px;><a href=" + getlink + " target=_blank class=prostyle>" + gettext + "</a> &raquo;</span>";
