@@ -109,14 +109,14 @@
   }
 
   function fnLoad(){
-    print("fnLoad started");
+    //print("fnLoad started");
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
     fnInsertTables();
-    print("fnLoad ended");
+    //print("fnLoad ended");
   }
   function fnLoadData(){
-    print("fnLoadData started");
+    //print("fnLoadData started");
     bDataReady=false;
     bAllReady=false;
     clearTimeout(iTmrRetry);
@@ -128,17 +128,17 @@
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
-    print("fnLoadData url:"+url);
+    //print("fnLoadData url:"+url);
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
     gadgets.io.makeRequest(url,fnStockDataProxy,params);
 //    _IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
-    print("fnLoadData ended");
+    //print("fnLoadData ended");
   }
   function fnStockDataProxy(stockData){
-    print("fnStockDataProxy started");
+    //print("fnStockDataProxy started");
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
@@ -149,7 +149,7 @@
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
-    //print("fnStockDataProxy url:"+url);
+    ////print("fnStockDataProxy url:"+url);
    
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
@@ -158,19 +158,19 @@
     gadgets.io.makeRequest(url, _IG_Callback(fnPrepareStockData,stockData), params);
      //_IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData.data),{refreshInterval:60});
     
-    print("fnStockDataProxy ended");
+    //print("fnStockDataProxy ended");
   }
   function fnPrepareStockData(currDataIn,stockDataIn){
 //  function fnPrepareStockData(currData,stockData){
-    print("fnPrepareStockData 4 started");
+    //print("fnPrepareStockData 4 started");
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
     var currData = currDataIn.data;
     var stockData = stockDataIn.data;
 
-    print("fnPrepareStockData Received currdata:"+currData);
-    print("fnPrepareStockData Received stockdata:"+stockData);
+    //print("fnPrepareStockData Received currdata:"+currData);
+    //print("fnPrepareStockData Received stockdata:"+stockData);
 
     currData=currData.replace(/0.00/g,"1.00");
     arrStocks=new Array();
@@ -204,10 +204,10 @@
       bDataReady=true; //Data has been read and calculated
       fnUpdateValues();
     }
-    print("fnPrepareStockData ended");
+    //print("fnPrepareStockData ended");
   }
   function fnRetry(){
-    print("fnRetry started");
+    //print("fnRetry started");
     clearTimeout(iTmrRetry);
     if (!bDataReady){
       if (iSDRetry<10){
@@ -222,12 +222,12 @@
       iTmrRetry=setTimeout('fnLoadData()',pref.getInt("UpdateInterval")-5000); 
       iSDRetry=0;
     }
-    print("fnRetry ended");
+    //print("fnRetry ended");
   }
   function fnUpdateValues(){
-    print("fnUpdateValues started");
+    //print("fnUpdateValues started");
     bAllReady=(bDataReady && bTablesReady);
-    print("fnUpdateValues bAllReady:"+bAllReady);
+    //print("fnUpdateValues bAllReady:"+bAllReady);
     if (bAllReady){
       fnUpdateStockTable();
       fnUpdateProfit();
@@ -235,10 +235,10 @@
       document.getElementById("FooterMsg").innerHTML='__MSG_lastupdated__:'+fngetDate(false);
     }
     gadgets.window.adjustHeight();
-    print("fnUpdateValues ended");
+    //print("fnUpdateValues ended");
   }
   function fnUpdateProfit(){
-    print("fnUpdateProfit started");
+    //print("fnUpdateProfit started");
     if (bAllReady){
       var iDayTotal=0;
       var iEarnTot=0;
@@ -287,7 +287,7 @@
         document.getElementById("stct3").innerHTML='<b>'+iValTot+'</b>';
       }
     }
-    print("fnUpdateProfit ended");
+    //print("fnUpdateProfit ended");
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
@@ -306,7 +306,7 @@
     }
   }
   function fnUpdateStockTable(){
-    print("fnUpdateStockTable started");
+    //print("fnUpdateStockTable started");
     var sName;
     var sbgColor;
     
@@ -348,7 +348,7 @@
         }
       }
     }
-    print("fnUpdateStockTable ended");
+    //print("fnUpdateStockTable ended");
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
@@ -541,7 +541,7 @@
     gadgets.window.adjustHeight();
   }
   function fnInsertNews(feedIn){
-    print("fnInsertNews: Started");
+    //print("fnInsertNews: Started");
     var html="";
     var feed = feedIn.data;
     for(var i in feed.Entry){
@@ -550,10 +550,10 @@
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
     gadgets.window.adjustHeight();
-    print("fnInsertNews: Ended");
+    //print("fnInsertNews: Ended");
   }
   function fnSymbolSearch(symbol){
-    print("fnSymbolSearch: Started");
+    //print("fnSymbolSearch: Started");
     if(trim(symbol)!=''){
       document.getElementById("StockAddList").innerHTML='__MSG_loading__';
       //symbol=symbol.replace(' ','+');
@@ -568,10 +568,10 @@
       document.getElementById("StockAddList").style.display="none";
     }
     gadgets.window.adjustHeight();
-    print("fnSymbolSearch: Ended");
+    //print("fnSymbolSearch: Ended");
   }
   function fnSymbolSearchResponse(ResponseTextIn){
-    print("fnSymbolSearchResponse: Started");
+    //print("fnSymbolSearchResponse: Started");
     var iStart=0;
     var iEnd=0;
     var arrSearch="";
@@ -616,7 +616,7 @@
     document.getElementById("StockAddList").innerHTML=sTable;
     document.getElementById("StockAddList").style.display="block";
     gadgets.window.adjustHeight();
-    print("fnSymbolSearchResponse: Ended");
+    //print("fnSymbolSearchResponse: Ended");
   }
   function fnEditStock(sender){
     if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
@@ -703,10 +703,10 @@
     }
   }
   function fnSavePrefs(){
-    print('fnSavePrefs. Number of stocks:'+arrStockSymbols.length);
+    //print('fnSavePrefs. Number of stocks:'+arrStockSymbols.length);
     if (arrStockSymbols.length<iMaxStockNo+1){
       pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockTC",arrStockTC.join(","),"StockCurrRates",arrStockCurrRates.join(","));
-      print('fnSavePrefs. Stocks saved');
+      //print('fnSavePrefs. Stocks saved');
     }
   }
   function fnPrefsValidation(inp){
@@ -739,9 +739,9 @@
 //            pref.getString("Column4")+pref.getString("Column5")+
 //            pref.getString("ChartScope")+pref.getString("UpdateInterval")+pref.getString("Flashing");
   
-//    print('Pref:'+tmp);
-//    print('Number of symbols:'+arrStockSymbols.length);
-//    print('PrefLength:'+tmp.length);
+//    //print('Pref:'+tmp);
+//    //print('Number of symbols:'+arrStockSymbols.length);
+//    //print('PrefLength:'+tmp.length);
 
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
@@ -764,12 +764,12 @@
     CreatePromos();
   }
   function fnHideMess(GadgetVersion){
-    print("fnHideMess started");
+    //print("fnHideMess started");
     return function(){
       gadgets.window.adjustHeight();
       iPrefVersion=GadgetVersion;
       pref.set("GadgetVersion",iPrefVersion);
-    print("fnHideMess ended");
+    //print("fnHideMess ended");
     };
   }  
   function fngetDate(secs){
@@ -851,7 +851,7 @@
     }
     return out;
   }
-  function print(msg){
+  function //print(msg){
     if (debug){
       var debug_html = document.getElementById("debug").innerHTML;
       if (document.getElementById("debug").style.display=='none'){
@@ -872,7 +872,7 @@
   }
   function CreatePromos() {
     print('Started CreatePromos');
-    var pronce = prefs.getInt("campaign_1");
+    var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
       print('Show Promo');
       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
