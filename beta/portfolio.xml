@@ -724,16 +724,23 @@
       if (isNaN(arrStockLo[i])||arrStockTC[i].length==0){arrStockLo[i]=0;}
     }
 
-//    var tmp=pref.getString("StockSymbols")+pref.getString("StockQtys")+pref.getString("StockPrices")+
-//            pref.getString("StockCurrRates")+pref.getString("StockHi")+pref.getString("StockLo")+iPrefVersion+
-//            pref.getString("SettingVersion")+pref.getString("ShowProfit")+pref.getString("ChartType")+
-//            pref.getString("ShowNews")+pref.getString("CustomTitle")+pref.getString("FontSize")+
-//            pref.getString("Currency")+pref.getString("NameColumn")+pref.getString("ChangeColumn")+
-//            pref.getString("Column1")+pref.getString("Column2")+pref.getString("Column3")+
-//            pref.getString("Column4")+pref.getString("Column5")+
-//            pref.getString("ChartScope")+pref.getString("UpdateInterval")+pref.getString("Flashing");
-  
-//    //print('Pref:'+tmp);
+    var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
+            pref.getString("SettingVersion")+"SettingVersion"+pref.getString("StockSymbols")+"StockSymbols"+
+            pref.getString("StockQtys")+"StockQtys"+pref.getString("StockPrices")+"StockPrices"+
+            pref.getString("StockCurrRates")+"StockCurrRates"+pref.getString("StockHi")+"StockHi"+
+            pref.getString("StockLo")+"StockLo"+pref.getString("StockTC")+"StockTC"+
+            pref.getString("ShowProfit")+"ShowProfit"+pref.getString("ChartType")+"ChartType"+
+            pref.getString("ShowNews")+"ShowNews"+pref.getString("CustomTitle")+"CustomTitle"+
+            pref.getString("FontSize")+"FontSize"+pref.getString("Currency")+"Currency"+
+            pref.getString("NameColumn")+"NameColumn"+pref.getString("ChangeColumn")+"ChangeColumn"+
+            pref.getString("Column1")+"Column1"+pref.getString("Column2")+"Column2"+
+            pref.getString("Column3")+"Column3"+pref.getString("Column4")+"Column4"+
+            pref.getString("Column5")+"Column5"+pref.getString("ChartScope")+"ChartScope"+
+            pref.getString("UpdateInterval")+"UpdateInterval"+pref.getString("Flashing")+"Flashing"+
+            pref.getString("ChartScope")+"ChartScope"+pref.getString("UpdateInterval")+"UpdateInterval"+
+            pref.getString("Flashing")+"Flashing";
+            alert(tmp.length);
+
 //    //print('Number of symbols:'+arrStockSymbols.length);
 //    //print('PrefLength:'+tmp.length);
 
