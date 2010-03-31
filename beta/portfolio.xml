@@ -739,10 +739,10 @@
             pref.getString("UpdateInterval")+"UpdateInterval"+pref.getString("Flashing")+"Flashing"+
             pref.getString("ChartScope")+"ChartScope"+pref.getString("UpdateInterval")+"UpdateInterval"+
             pref.getString("Flashing")+"Flashing";
-            alert(tmp.length);
+            //alert(tmp.length);
 
 //    //print('Number of symbols:'+arrStockSymbols.length);
-//    //print('PrefLength:'+tmp.length);
+    print('PrefLength:'+tmp.length);
 
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
