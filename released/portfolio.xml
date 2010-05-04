@@ -373,7 +373,7 @@
     if((trim(arrStockSymbols.join(","))=="GOOG,^DJI,EURUSD=X,XAU=X" && arrStockSymbols.length==4) || _gel("StockAdd").style.display=="block"){
       fnToggleAdd(1);
     }
-    _IG_SetTitle(pref.getString("CustomTitle"));
+    _IG_SetTitle(pref.getString("CustomTitle")+"*");
     bTablesReady=true; //All needed tables has been made
     fnUpdateValues();
   }
