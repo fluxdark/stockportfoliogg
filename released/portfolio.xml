@@ -630,7 +630,13 @@
     }
   }
   function fnSavePrefs(){
-    pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockCurrRates",arrStockCurrRates.join(","));
+    //pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),StockCurrRates",arrStockCurrRates.join(","));
+    pref.set("StockSymbols", arrStockSymbols.join(","))
+    pref.set("StockQtys", arrStockQtys.join(","))
+    pref.set("StockHi", arrStockHi.join(","))
+    pref.set("StockLo", arrStockLo.join(","))
+    pref.set("StockPrices", arrStockPrices.join(","))
+    pref.set("StockCurrRates", arrStockCurrRates.join(","))
   }
   function fnPrefsValidation(inp){
     if (trim(inp.join(","))==""){
