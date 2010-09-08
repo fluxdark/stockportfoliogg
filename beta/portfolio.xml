@@ -129,18 +129,22 @@
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     //print("fnLoadData url:"+url);
 
-    var params = {};
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
-    params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
-    gadgets.io.makeRequest(url,fnStockDataProxy,params);
+    //var params = {};
+    //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+    //params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
+    //gadgets.io.makeRequest(url,fnStockDataProxy,params);
+    
+    _IG_FetchContent(bB,_IG_Callback(fnStockDataProxy),{refreshInterval:60});
     //print("fnLoadData ended");
   }
   function fnStockDataProxy(stockData){
-    //print("fnStockDataProxy started");
+    print("fnStockDataProxy started");
+    print(stockData);
+    
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
-
+    
     arrLines=stockData.data.split('\r\n');
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
