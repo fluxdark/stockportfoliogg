@@ -123,7 +123,7 @@
     var sTags='e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
     var sSymb='';
     for(var i=0;i<arrStockSymbols.length;i++){
-      sSymb+=_esc(arrStockSymbols[i])+',';
+      sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
@@ -147,7 +147,7 @@
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f=l1&CW='+Math.random()*1000;
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CW='+Math.random()*1000;
     ////print("fnStockDataProxy url:"+url);
    
     var params = {};
