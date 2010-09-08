@@ -126,7 +126,7 @@
       sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
     //print("fnLoadData url:"+url);
 
     var params = {};
@@ -146,7 +146,7 @@
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f=l1&CW='+Math.random()*1000;
     ////print("fnStockDataProxy url:"+url);
    
     var params = {};
