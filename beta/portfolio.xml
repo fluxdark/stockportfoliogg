@@ -140,7 +140,7 @@
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
-    var cS=new RegExp("\n");
+
     arrLines=stockData.data.split('\r\n');
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
@@ -173,17 +173,12 @@
     currData=currData.replace(/0.00/g,"1.00");
     arrStocks=new Array();
     
-    var cS=new RegExp("\r\n");
-    var quotes=new Array();
-    quotes=stockData.split("\r\n")
-    alert(quotes.length);
-
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
-    alert(arrLinesSD.length);
 
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
+print(arrLinesSD[i]);
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         //arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
