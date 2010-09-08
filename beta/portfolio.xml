@@ -139,7 +139,7 @@
   }
   function fnStockDataProxy(stockData){
     print("fnStockDataProxy started");
-    print(stockData.length);
+    print(stockData.data);
     
     var arrLines=new Array();
     var arrLineValues=new Array();
