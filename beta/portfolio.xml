@@ -166,8 +166,8 @@
     var currData = currDataIn.data;
     var stockData = stockDataIn.data;
 
-    //print("fnPrepareStockData Received currdata:"+currData);
-    //print("fnPrepareStockData Received stockdata:"+stockData);
+    print("fnPrepareStockData Received currdata:"+currData);
+    print("fnPrepareStockData Received stockdata:"+stockData);
 
     currData=currData.replace(/0.00/g,"1.00");
     arrStocks=new Array();
