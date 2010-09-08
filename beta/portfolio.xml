@@ -175,7 +175,7 @@
     
     var cS=new RegExp("\r\n");
     var quotes=new Array();
-    quotes=stockData.split(cS)
+    quotes=stockData.split("\r\n")
     alert(quotes.length);
 
     arrLinesCD=currData.split('\r\n');
