@@ -178,7 +178,7 @@
 
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
-print(arrLinesSD[i]);
+print(arrLinesSD[i+1]);
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         //arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
