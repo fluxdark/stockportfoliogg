@@ -141,7 +141,7 @@
     var arrLineValues=new Array();
     var sSymb="";
     var cS=new RegExp("\n");
-    arrLines=stockData.data.split(cS);
+    arrLines=stockData.data.split('\r\n');
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
@@ -178,8 +178,8 @@
     quotes=stockData.split(cS)
     alert(quotes.length);
 
-    arrLinesCD=currData.split(cS);
-    arrLinesSD=stockData.split(cS);
+    arrLinesCD=currData.split('\r\n');
+    arrLinesSD=stockData.split('\r\n');
     alert(arrLinesSD.length);
 
     if (arrLinesSD.length>1){
