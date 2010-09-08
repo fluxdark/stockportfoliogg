@@ -41,7 +41,7 @@
   <UserPref name="Column3" display_name="__MSG_column__ 3" datatype="enum" default_value="17"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
   <UserPref name="Column4" display_name="__MSG_column__ 4" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
   <UserPref name="Column5" display_name="__MSG_column__ 5" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
-  <UserPref name="ChartScope" display_name="__MSG_chartperiod__" datatype="enum" default_value="3m"><EnumValue value="1d" display_value="1 __MSG_day__"/><EnumValue value="5d" display_value="5 __MSG_days__"/><EnumValue value="1m" display_value="1 __MSG_month__"/><EnumValue value="3m" display_value="3 __MSG_months__"/><EnumValue value="1y" display_value="6 __MSG_months__"/></UserPref>
+  <UserPref name="ChartScope" display_name="__MSG_chartperiod__" datatype="enum" default_value="3m"><EnumValue value="1d" display_value="1 __MSG_day__"/><EnumValue value="5d" display_value="5 __MSG_days__"/><EnumValue value="1m" display_value="1 __MSG_month__"/><EnumValue value="3m" display_value="3 __MSG_months__"/><EnumValue value="6m" display_value="6 __MSG_months__"/><EnumValue value="1y" display_value="12 __MSG_months__"/><EnumValue value="2y" display_value="24 __MSG_months__"/><EnumValue value="5y" display_value="60 __MSG_months__"/></UserPref>
   <UserPref name="UpdateInterval" display_name="__MSG_updateinterval__" datatype="enum" default_value="300000"><EnumValue value="60000" display_value="1 __MSG_minute__"/><EnumValue value="300000" display_value="5 __MSG_minute__"/><EnumValue value="600000" display_value="10 __MSG_minute__"/></UserPref>
   <UserPref name="Flashing" display_name="__MSG_flashing__" default_value="true" datatype="bool"/>
 <Content type="html" view="home,canvas">
@@ -123,11 +123,11 @@
     var sTags='e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
     var sSymb='';
     for(var i=0;i<arrStockSymbols.length;i++){
-      sSymb+=arrStockSymbols[i]+',';
+      sSymb+=_esc(arrStockSymbols[i])+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
-    //print("fnLoadData url:"+url);
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f='+sTags+'&CW='+Math.random()*1000;
+    print("fnLoadData url:"+url);
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
@@ -143,10 +143,10 @@
     arrLines=stockData.data.split('\r\n');
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
-      sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
+      sSymb+=_esc(trim(arrLineValues[24])+pref.getString("Currency")+'=X+');      
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+encodeURIComponent(sSymb)+'&f=l1&CW='+Math.random()*1000;
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f=l1&CW='+Math.random()*1000;
     ////print("fnStockDataProxy url:"+url);
    
     var params = {};
@@ -288,7 +288,7 @@
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
-      var img='<img width="192" height="96" src="http://uk.ichart.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
+      var img='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
       if(document.getElementById("StockSummary").style.display=="block"){
         document.getElementById("SummaryChartTD").innerHTML=img;
         document.getElementById("SummaryNameTD").innerHTML=arrStocks[StockID][2];
@@ -349,7 +349,7 @@
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
-      var img='<img width="192" height="96" src="http://uk.ichart.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
+      var img='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
       if(document.getElementById("StockSummary").style.display=="block"){
         document.getElementById("SummaryChartTD").innerHTML=img;
         document.getElementById("SummaryNameTD").innerHTML=arrStocks[StockID][2];
