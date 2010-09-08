@@ -173,7 +173,7 @@
     currData=currData.replace(/0.00/g,"1.00");
     arrStocks=new Array();
     
-    var cS=new RegExp("\n");
+    var cS=new RegExp("\r\n");
     var quotes=new Array();
     quotes=stockData.split(cS)
     alert(quotes.length);
