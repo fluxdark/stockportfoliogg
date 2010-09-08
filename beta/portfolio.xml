@@ -177,8 +177,8 @@
     quotes=stockData.split(cS)
     alert(quotes.length);
 
-    arrLinesCD=currData.split('\r\n');
-    arrLinesSD=stockData.split('\r\n');
+    arrLinesCD=currData.split(cS);
+    arrLinesSD=stockData.split(cS);
     alert(arrLinesSD.length);
 
     if (arrLinesSD.length>1){
