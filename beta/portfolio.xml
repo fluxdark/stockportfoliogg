@@ -138,8 +138,8 @@
     //print("fnLoadData ended");
   }
   function fnStockDataProxy(stockData){
-    //print("fnStockDataProxy started");
-    print(stockData);
+    print("fnStockDataProxy started");
+    print(stockData.length);
     
     var arrLines=new Array();
     var arrLineValues=new Array();
