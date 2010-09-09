@@ -123,14 +123,7 @@
     var sTags='e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
     var sSymb='';
     for(var i=0;i<arrStockSymbols.length;i++){
-      if (arrStockSymbols[i]=='^DJI'){
-        print("DJI found");
-        var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-        var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance, please consider removing or changing this symbol";
-        miniMsg.createTimerMessage(msghtml,8);
-      }else{
-        sSymb+=arrStockSymbols[i]+',';
-      }
+      sSymb+=arrStockSymbols[i]+',';
     }
         print(sSymb);
     sSymb=sSymb.substr(0,sSymb.length-1);
@@ -733,12 +726,21 @@
     }
     //Check for empty prefs
     for(var i=0;i<inp.length;i++){
-      if (isNaN(arrStockQtys[i])||arrStockTC[i].length==0){arrStockQtys[i]=0;}
+    if (isNaN(arrStockQtys[i])||arrStockTC[i].length==0){arrStockQtys[i]=0;}
       if (isNaN(arrStockPrices[i])||arrStockTC[i].length==0){arrStockPrices[i]=0;}
       if (isNaN(arrStockTC[i])||arrStockTC[i].length==0){arrStockTC[i]=0;}
       //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
       if (isNaN(arrStockHi[i])||arrStockTC[i].length==0){arrStockHi[i]=0;}
       if (isNaN(arrStockLo[i])||arrStockTC[i].length==0){arrStockLo[i]=0;}
+      //Check for blacklisted symbols
+      if (arrStockSymbols[i]=='^DJI'){
+        print("DJI found");
+        var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
+        var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance, please consider removing or changing this symbol";
+        miniMsg.createTimerMessage(msghtml,8);
+        fnDeleteStock(i);
+        i++;
+      }
     }
 
     var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
