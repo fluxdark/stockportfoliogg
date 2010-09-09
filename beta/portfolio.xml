@@ -740,7 +740,7 @@
         miniMsg.createTimerMessage(msghtml,10);
         //miniMsg.style.backgroundColor = "red";
         fnDeleteStock(i);
-        i++;
+        i--;
       }
     }
 
