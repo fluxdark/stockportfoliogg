@@ -737,7 +737,7 @@
         print("DJI found");
         var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
         var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance. The symbol will be removed";
-        miniMsg.createDismissibleMessage(msghtml,return function(){gadgets.window.adjustHeight();};);
+        miniMsg.createDismissibleMessage(msghtml,function(){gadgets.window.adjustHeight();};);
         fnDeleteStock(i);
         i++;
       }
