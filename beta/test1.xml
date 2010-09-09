@@ -74,7 +74,7 @@
 <script language="Javascript">
 var bf="http://download.finance.yahoo.com/d?s=";
 
-var symbol="BO.CO,GOOG"
+var symbol="^DJI,^GSPC,^IXIC";
 var bB=bf+symbol+"&f=snl1c1p2";
 
 _IG_FetchContent(bB,_IG_Callback(responseText),{refreshInterval:60});
