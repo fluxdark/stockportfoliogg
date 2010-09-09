@@ -736,13 +736,13 @@
       if (arrStockSymbols[i]=='^DJI'){
         print("DJI found");
         var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-        var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance, please consider removing or changing this symbol";
-        miniMsg.createTimerMessage(msghtml,8);
+        var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance. The symbol will be removed";
+        miniMsg.createDismissibleMessage(msghtml,return function(){gadgets.window.adjustHeight();};);
         fnDeleteStock(i);
         i++;
       }
     }
-
+miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
     var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
             pref.getString("SettingVersion")+"SettingVersion"+pref.getString("StockSymbols")+"StockSymbols"+
             pref.getString("StockQtys")+"StockQtys"+pref.getString("StockPrices")+"StockPrices"+
