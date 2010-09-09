@@ -98,5 +98,7 @@ function responseText(ds){
 }
 
 
-]]></Content>
+   </script>
+  ]]>
+  </Content>
 </Module>
