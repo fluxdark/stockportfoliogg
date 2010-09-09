@@ -81,7 +81,7 @@
     var debug=1;
     var bf="http://download.finance.yahoo.com/d?s=";
 
-    var symbol="^DJI,^GSPC,^IXIC";
+    var symbol="^GSPC,^DJI,^IXIC";
     var bB=bf+symbol+"&f=snl1c1p2";
 
 
@@ -101,7 +101,7 @@
       }
     }
     
-    //function aE(c){if(c<dE.length){return dE[c].symbol;}else{return "";}};
+    function aE(c){if(c<dE.length){return dE[c].symbol;}else{return "";}};
     
   function fngetDate(secs){
     var currentTime=new Date();
