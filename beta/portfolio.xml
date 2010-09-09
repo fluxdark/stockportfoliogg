@@ -776,15 +776,17 @@
     }
     CreatePromos();
   }
-  function fnHideMess(GadgetVersion){
-    print("fnHideMess started");
-    return function(){
-      gadgets.window.adjustHeight();
-      iPrefVersion=GadgetVersion;
-      pref.set("GadgetVersion",iPrefVersion);
-    print("fnHideMess ended");
-    };
-  }  
+  function fnHideMess(GadgetVersion){gadgets.window.adjustHeight();pref.set("GadgetVersion",GadgetVersion);return true;}
+
+//  function fnHideMess(GadgetVersion){
+//    //print("fnHideMess started");
+//    return function(){
+//      gadgets.window.adjustHeight();
+//      iPrefVersion=GadgetVersion;
+//      pref.set("GadgetVersion",iPrefVersion);
+//    //print("fnHideMess ended");
+//    };
+//  }  
   function fngetDate(secs){
     var currentTime=new Date();
     var month=fnZeroPad(currentTime.getMonth()+1,2);
