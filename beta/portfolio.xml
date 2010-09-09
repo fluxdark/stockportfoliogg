@@ -123,10 +123,15 @@
     var sTags='e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
     var sSymb='';
     for(var i=0;i<arrStockSymbols.length;i++){
+      if (arrStockSymbols[i]=='^DJI'){
+        var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
+        var msghtml='^DJI: The Dow Jones index has been blocked by Yahoo Finance, please consider removing or changing this symbol';
+        miniMsg1.createTimerMessage(msghtml1,8);
+      }
       sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d?s=^DJI,^GSPC,^IXIC&f=snl1c1p2\n';
+    //var url='http://download.finance.yahoo.com/d?s=^DJI,^GSPC,^IXIC&f=snl1c1p2\n';
     //var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     //print("fnLoadData url:"+url);
