@@ -734,7 +734,7 @@
         var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
         var divMess = document.createElement("divMess");
         var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
-        divMess.innerHTML = '<span class="prostyle" style="font-size:11px;background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
+        divMess.innerHTML = '<span class="prostyle" style="font-size:'+fsize+'";background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
         miniMsg.createTimerMessage(divMess,10);
         fnDeleteStock(i);
         i--;
@@ -763,7 +763,7 @@
     if (arrStockSymbols.length>iMaxStockNo){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;background-Color:red;"><a target="new" href="javascript:window.open(\'http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit\')\" class=prostyle>More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.</a></span>';
+      divMess.innerHTML = '<span style="font-size:11px;background-Color:red;"><a target="new" href="javascript:window.open(\'http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit\')\" class=prostyle>More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.</a> &raquo;</span>';
       var statusMsg = miniMsg.createStaticMessage(divMess);
     }
   }
@@ -771,7 +771,7 @@
     if((iPrefVersion*1)<(iVersion*2)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="javascript:window.open(\'http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes\')\" class=prostyle>New features. Read more here.</a></span>';
+      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="javascript:window.open(\'http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes\')\" class=prostyle>New features. Read more here.</a> &raquo;</span>';
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
     CreatePromos();
@@ -890,7 +890,7 @@
   function CreatePromos() {
     var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
-    var promomsg = new gadgets.MiniMessage(__MODULE_ID__, document.getElementById("promo"));
+      var promomsg = new gadgets.MiniMessage(__MODULE_ID__, document.getElementById("promo"));
       var proText = ['Add a Currency iGoogle gadget with real-time exchange rates',
                      'Convert among 80+ currencies on your iGoogle page. Add now!',
                      'Add a Currency gadget to iGoogle with charts and market news'];
