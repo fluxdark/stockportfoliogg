@@ -99,7 +99,7 @@
           }
           var bJ=quotes[c];
           print(bJ);
-        }
+        }catch(e){print("N/A");}
       }
     }
 
