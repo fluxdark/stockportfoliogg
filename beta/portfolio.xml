@@ -732,9 +732,10 @@
       if (arrStockSymbols[i]=='^DJI'){
         print("DJI found");
         var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-        var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance. The symbol will be removed.";
-        miniMsg.createTimerMessage(msghtml,10);
-        //miniMsg.style.backgroundColor = "red";
+        var divMess = document.createElement("divMess");
+        var msghtml="^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.";
+        divMess.innerHTML = '<span style="font-size:11px;background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
+        miniMsg.createTimerMessage(divMess,10);
         fnDeleteStock(i);
         i--;
       }
@@ -769,16 +770,10 @@
   function fnMessage(){
     if((iPrefVersion*1)<(iVersion*2)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-      //var msghtml='New <a href=\"http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes\">New features. Read here<\/a>';
-
       var divMess = document.createElement("divMess");
       divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="javascript:window.open(\'http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes\')\" class=prostyle>New features. Read more here.</a></span>';
-
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
-      //var miniMsg1=new gadgets.MiniMessage(__MODULE_ID__);
-      //var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it useful.<a>';
-      //miniMsg1.createTimerMessage(msghtml1,8);
     CreatePromos();
   }
   function fnHideMess(GadgetVersion){
@@ -788,11 +783,6 @@
       iPrefVersion=GadgetVersion;
       pref.set("GadgetVersion",iPrefVersion);
     //print("fnHideMess ended");
-    };
-  }  
-  function fnHideBL(){
-    return function(){
-      gadgets.window.adjustHeight();
     };
   }  
   function fngetDate(secs){
