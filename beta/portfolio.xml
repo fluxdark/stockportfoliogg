@@ -768,6 +768,8 @@
     }
   }
   function fnMessage(){
+  print("iPrefVersion="+iPrefVersion*1);
+  print("iVersion="+iVersion*1);
     if((iPrefVersion*1)<(iVersion*1)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
