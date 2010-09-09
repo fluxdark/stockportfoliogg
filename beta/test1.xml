@@ -84,7 +84,6 @@
     var symbol="^DJI,^GSPC,^IXIC";
     var bB=bf+symbol+"&f=snl1c1p2";
 
-    _IG_FetchContent(bB,_IG_Callback(responseText),{refreshInterval:60});
 
 
     function responseText(ds){
@@ -117,7 +116,9 @@
     }
 	}
 
-
+    _IG_FetchContent(bB,_IG_Callback(responseText),{refreshInterval:60});
+    print("Hej");
+    
   </script>
   ]]>
   </Content>
