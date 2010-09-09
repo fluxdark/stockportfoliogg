@@ -777,12 +777,12 @@
     CreatePromos();
   }
   function fnHideMess(GadgetVersion){
-    //print("fnHideMess started");
+    print("fnHideMess started");
     return function(){
       gadgets.window.adjustHeight();
       iPrefVersion=GadgetVersion;
       pref.set("GadgetVersion",iPrefVersion);
-    //print("fnHideMess ended");
+    print("fnHideMess ended");
     };
   }  
   function fngetDate(secs){
