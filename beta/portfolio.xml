@@ -768,9 +768,18 @@
     if (arrStockSymbols.length>iMaxStockNo){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
-      var statusMsg = miniMsg.createStaticMessage(msghtml);
-      statusMsg.style.backgroundColor = "red";
-//      fnDeleteStock(arrStockSymbols.length-1)
+
+      var divpromo = document.createElement("divMess");
+      divMess.innerHTML = '<span style="font-size:11px;backgroundColor:red;"><a href="javascript:window.open("http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml");" class=prostyle>'More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.'</a> &raquo;</span>';
+
+      //var statusMsg = miniMsg.createStaticMessage(msghtml);
+      //statusMsg.style.backgroundColor = "red";
+      var statusMsg = miniMsg.createStaticMessage(divMess);
+
+
+      
+      
+      //      fnDeleteStock(arrStockSymbols.length-1)
     }
   }
   function fnMessage(){
@@ -901,7 +910,6 @@
     }
   }
   function CreatePromos() {
-    print("CreatePromos");
     var pronce = pref.getInt("campaign_1");
     if (pronce != "1") {
       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
