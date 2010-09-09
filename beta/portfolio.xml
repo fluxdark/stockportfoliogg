@@ -735,7 +735,7 @@
       //Check for blacklisted symbols
       if (arrStockSymbols[i]=='^DJI'){
         print("DJI found");
-        var miniMsg= gadgets.MiniMessage(__MODULE_ID__);
+        var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
         var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance. The symbol will be removed.";
         miniMsg.createTimerMessage(msghtml,10);
         //miniMsg.style.backgroundColor = "red";
