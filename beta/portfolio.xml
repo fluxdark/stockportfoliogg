@@ -126,10 +126,11 @@
       if (arrStockSymbols[i]=='^DJI'){
         print("DJI found");
         var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-        var msghtml='^DJI: The Dow Jones index has been blocked by Yahoo Finance, please consider removing or changing this symbol';
-        miniMsg1.createTimerMessage(msghtml1,8);
+        var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance, please consider removing or changing this symbol";
+        miniMsg.createTimerMessage(msghtml1,8);
+      }else{
+        sSymb+=arrStockSymbols[i]+',';
       }
-      sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
     //var url='http://download.finance.yahoo.com/d?s=^DJI,^GSPC,^IXIC&f=snl1c1p2\n';
