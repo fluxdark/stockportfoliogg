@@ -770,7 +770,7 @@
       //var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
 
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;background-Color:red;"><a href="" class=prostyle>More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.</a></span>';
+      divMess.innerHTML = '<span style="font-size:11px;background-Color:red;"><a href="javascript:window.open("http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml)" class=prostyle>More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.</a></span>';
 
       //'<span style="font-size:11px;background-Color:red;"><a href="" class=prostyle>'More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.'</a> &raquo;</span>';
 
