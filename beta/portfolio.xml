@@ -734,7 +734,7 @@
         var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
         var divMess = document.createElement("divMess");
         var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
-        divMess.innerHTML = '<span class="prostyle" style="font-size:'+fsize+'";background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
+        divMess.innerHTML = '<span style="font-size:'+fsize+';background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
         miniMsg.createTimerMessage(divMess,10);
         fnDeleteStock(i);
         i--;
@@ -896,7 +896,7 @@
                      'Add a Currency gadget to iGoogle with charts and market news'];
       var getProNo = Math.floor(Math.random()*proText.length);
       var divpromo = document.createElement("divpromo");
-      divpromo.innerHTML = '<span style=font-size:11px;><a href="javascript:callCampaignLink(' + getProNo + ');" class=prostyle>' + proText[getProNo] + '</a> &raquo;</span>';
+      divpromo.innerHTML = '<span><a href="javascript:callCampaignLink(' + getProNo + ');" class=prostyle>' + proText[getProNo] + '</a> &raquo;</span>';
       promomsg.createDismissibleMessage(divpromo, callPromoClick);
       gadgets.window.adjustHeight();
     }
