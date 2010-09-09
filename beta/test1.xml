@@ -135,7 +135,7 @@
 	}
 
     _IG_FetchContent(bB,_IG_Callback(responseText),{refreshInterval:60});
-    print("Hej");
+    print("Hej1");
     
   </script>
   ]]>
