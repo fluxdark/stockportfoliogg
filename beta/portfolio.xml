@@ -733,8 +733,8 @@
         print("DJI found");
         var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
         var divMess = document.createElement("divMess");
-        var msghtml="^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.";
-        divMess.innerHTML = '<span style="font-size:11px;background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
+        var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
+        divMess.innerHTML = '<span class="prostyle" style="font-size:11px;background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
         miniMsg.createTimerMessage(divMess,10);
         fnDeleteStock(i);
         i--;
