@@ -1,104 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-<ModulePrefs 
-	title="Quick Stock Watch" 
-	description="A simple Stock Quotes and Portfolio tracking module. Works for over 30 international markets - Argentina, Australia, Austria, Belgium, Brazil, Canada, China, Denmark, Egypt, France, Germany, Hong Kong, India, Israel, Italy, Japan, Jakarta, Korea, Malaysia, Mexico, Netherlands, New Zealand, Norway, Singapore, Spain, Sweden, Switzerland, Taiwan, Turkey, UK, United States and more.. You can watch the up/down ticks of your favorite stocks and monitor your portfolio at desired intervals (Data provided by Yahoo! Finance)"
-	author="Uday Kumar Pyda - Sunnyvale, CA"
-	author_email="udaysasi+feedback@gmail.com"
-	author_affiliation="UdaySasi"
-	author_link="http://www.udaysasi.com"
-	directory_title="Uday's Quick Stock Watch"
-	title_url="http://www.freewebs.com/udaysasi/quickStockWatchHelp.html"
-	scrolling="false"
-	singleton="false"
-	screenshot="http://www.freewebs.com/udaysasi/quickStockWatchScreenshot.png"
-	thumbnail="http://www.freewebs.com/udaysasi/quickStockWatchThumbnail.png"
->
-	<Require feature="analytics"/>
-	<Require feature="minimessage"/>
-	<Require feature="settitle" /> 	
-	<Require feature="setprefs" />	
-	<Require feature="dynamic-height"/>	
-</ModulePrefs>
-<UserPref name="flashing" 
-       display_name="Highlighting"
-       datatype="enum"
-       default_value="1">
-    <EnumValue value="1" display_value="On"/>
-    <EnumValue value="0" display_value="Off"/>
-</UserPref>
-<UserPref name="refreshrate" 
-       display_name="Refresh every"
-       datatype="enum"
-       default_value="300">
-    <EnumValue value="-1" display_value="No refresh"/>
-    <EnumValue value="30" display_value="30 seconds"/>
-    <EnumValue value="60" display_value="1 minute"/>
-    <EnumValue value="300" display_value="5 minutes"/>
-    <EnumValue value="900" display_value="15 minutes"/>
-</UserPref>
-<UserPref name="showchart" 
-       display_name="Show Charts"
-       datatype="enum"
-       default_value="1">
-    <EnumValue value="0" display_value="None"/>
-    <EnumValue value="1" display_value="1 day"/>
-    <EnumValue value="5" display_value="5 day"/>   
-    <EnumValue value="90" display_value="3 month"/> 
-    <EnumValue value="180" display_value="6 month"/> 
-    <EnumValue value="365" display_value="1 year"/>     
-</UserPref>
-<UserPref name="showname" 
-       display_name="Stock Name"
-       datatype="enum"
-       default_value="1">
-    <EnumValue value="1" display_value="Show"/>
-    <EnumValue value="0" display_value="Hide"/>
-</UserPref>
-<UserPref name="title" display_name="Module Title" default_value="Quick Stock Watch"/>
-<UserPref name="tickers" datatype="hidden" default_value="^DJI,^GSPC,^IXIC"/>
-<UserPref name="promo0" datatype="hidden" default_value="0" />
-<UserPref name="promo1" datatype="hidden" default_value="0" />
-<UserPref name="promo2" datatype="hidden" default_value="0" />
-<UserPref name="promo3" datatype="hidden" default_value="0" />
-<UserPref name="shownews" datatype="hidden" default_value="0" />
-<UserPref name="showstrength" datatype="hidden" default_value="0" />
-<Content type="html"><![CDATA[
+  <ModulePrefs title="__MSG_gadgettitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
+    <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
+    <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/da_ALL.xml"/>
+    <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/beta/locale/es_ALL.xml"/>
+    <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/fr_ALL.xml"/>
+    <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/it_ALL.xml"/>
+    <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/sv_ALL.xml"/>
+    <Locale lang="pt-PT" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_PT.xml"/>
+    <Locale lang="pt-BR" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_BR.xml"/>
+    <Locale lang="de" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/de_ALL.xml"/>
+    <Locale lang="nl" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/nl_ALL.xml"/>
+    <Locale lang="zh-TW" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/zh_TW.xml"/>
+    <Require feature="setprefs"/>
+    <Require feature="minimessage"/>
+    <Require feature="analytics"/>
+    <Require feature="dynamic-height"/>
+    <Require feature="settitle"/>
+  </ModulePrefs>
+  <UserPref name="campaign_1" datatype="hidden" default_value="0" />
+  <UserPref name="GadgetVersion" datatype="hidden" default_value="0"/>
+  <UserPref name="SettingVersion" datatype="hidden" default_value="0"/>
+  <UserPref name="StockSymbols" datatype="hidden" default_value=""/>
+  <UserPref name="StockQtys" datatype="hidden" default_value=""/>
+  <UserPref name="StockPrices" datatype="hidden" default_value=""/>
+  <UserPref name="StockTC" datatype="hidden" default_value=""/>
+  <UserPref name="StockCurrRates" datatype="hidden" default_value=""/>
+  <UserPref name="StockHi" datatype="hidden" default_value=""/>
+  <UserPref name="StockLo" datatype="hidden" default_value=""/>
+  <UserPref name="ShowProfit" datatype="hidden" default_value="Summary"/>
+  <UserPref name="ChartType" datatype="hidden" default_value="ToolTip"/>
+  <UserPref name="ShowNews" datatype="hidden" default_value="0"/>
+  <UserPref name="CustomTitle" datatype="string" display_name="__MSG_customtitle__"  default_value="__MSG_gadgettitle__"/>
+  <UserPref name="FontSize" display_name="__MSG_fontsize__" datatype="enum" default_value="11px"><EnumValue value="9px" display_value="9px"/><EnumValue value="10px" display_value="10px"/><EnumValue value="11px" display_value="11px"/><EnumValue value="12px" display_value="12px"/><EnumValue value="14px" display_value="14px"/></UserPref>
+  <UserPref name="Currency" display_name="__MSG_currency__" datatype="enum" default_value="-"><EnumValue value="-" display_value="No currency conversion"/><EnumValue value="ARS" display_value="Argentine Peso (ARS)"/><EnumValue value="AUD" display_value="Australian Dollar (AUD)"/><EnumValue value="BRL" display_value="Brazilian Real (BRL)"/><EnumValue value="GBP" display_value="British Pound (GBP)"/><EnumValue value="CLP" display_value="Chilean Peso (CLP)"/><EnumValue value="CNY" display_value="Chinese Yuan (CNY)"/><EnumValue value="CZK" display_value="Czech Koruna (CZK)"/><EnumValue value="CAD" display_value="Canadian Dollar (CAD)"/><EnumValue value="DKK" display_value="Danish Krone (DKK)"/><EnumValue value="EEK" display_value="Estonian Kroon (EEK)"/><EnumValue value="EUR" display_value="Euro (EUR)"/><EnumValue value="HKD" display_value="Hong Kong Dollar (HKD)"/><EnumValue value="HUF" display_value="Hungarian Forint (HUF)"/><EnumValue value="ISK" display_value="Iceland Krona (ISK)"/><EnumValue value="INR" display_value="Indian Rupee (INR)"/><EnumValue value="IDR" display_value="Indonesian Rupiah (IDR)"/><EnumValue value="ILS" display_value="Israeli Shekel (ILS)"/><EnumValue value="JPY" display_value="Japanese Yen (JPY)"/><EnumValue value="KRW" display_value="Korean Won (KRW)"/><EnumValue value="KWD" display_value="Kuwaiti Dinar (KWD)"/><EnumValue value="MOP" display_value="Macau Pataca (MOP)"/><EnumValue value="MYR" display_value="Malaysian Ringgit (MYR)"/><EnumValue value="MXN" display_value="Mexican Peso (MXN)"/><EnumValue value="TRY" display_value="New Turkish Lira (TRY)"/><EnumValue value="NZD" display_value="New Zealand Dollar (NZD)"/><EnumValue value="NOK" display_value="Norwegian Krone (NOK)"/><EnumValue value="PHP" display_value="Philippine Peso (PHP)"/><EnumValue value="PLN" display_value="Polish Zloty (PLN)"/><EnumValue value="RON" display_value="Romanian New Leu (RON)"/><EnumValue value="RUB" display_value="Russian Rouble (RUB)"/><EnumValue value="SGD" display_value="Singapore Dollar (SGD)"/><EnumValue value="SEK" display_value="Swedish Krona (SEK)"/><EnumValue value="CHF" display_value="Swiss Franc (CHF)"/><EnumValue value="THB" display_value="Thai Baht (THB)"/><EnumValue value="USD" display_value="U.S. Dollar (USD)"/><EnumValue value="AED" display_value="UAE Dirham (AED)"/><EnumValue value="VEB" display_value="Venezuelan Bolivar (VEB)"/></UserPref>
+  <UserPref name="NameColumn" display_name="__MSG_name__ __MSG_column__" datatype="enum" default_value="2"><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_name__"/><EnumValue value="40" display_value="__MSG_name__(__MSG_symbol__)"/></UserPref>
+  <UserPref name="ChangeColumn" display_name="__MSG_change__ __MSG_column__" datatype="enum" default_value="3"><EnumValue value="3" display_value="__MSG_changepercent__"/><EnumValue value="4" display_value="__MSG_change__"/><EnumValue value="5" display_value="__MSG_change__(%)"/></UserPref>
+  <UserPref name="Column1" display_name="__MSG_column__ 1" datatype="enum" default_value="6"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="3" display_value="__MSG_changepercent__"/><EnumValue value="4" display_value="__MSG_change__"/><EnumValue value="5" display_value="__MSG_change__(%)"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
+  <UserPref name="Column2" display_name="__MSG_column__ 2" datatype="enum" default_value="31"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
+  <UserPref name="Column3" display_name="__MSG_column__ 3" datatype="enum" default_value="17"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
+  <UserPref name="Column4" display_name="__MSG_column__ 4" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
+  <UserPref name="Column5" display_name="__MSG_column__ 5" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
+  <UserPref name="ChartScope" display_name="__MSG_chartperiod__" datatype="enum" default_value="3m"><EnumValue value="1d" display_value="1 __MSG_day__"/><EnumValue value="5d" display_value="5 __MSG_days__"/><EnumValue value="1m" display_value="1 __MSG_month__"/><EnumValue value="3m" display_value="3 __MSG_months__"/><EnumValue value="6m" display_value="6 __MSG_months__"/><EnumValue value="1y" display_value="12 __MSG_months__"/><EnumValue value="2y" display_value="24 __MSG_months__"/><EnumValue value="5y" display_value="60 __MSG_months__"/></UserPref>
+  <UserPref name="UpdateInterval" display_name="__MSG_updateinterval__" datatype="enum" default_value="300000"><EnumValue value="60000" display_value="1 __MSG_minute__"/><EnumValue value="300000" display_value="5 __MSG_minute__"/><EnumValue value="600000" display_value="10 __MSG_minute__"/></UserPref>
+  <UserPref name="Flashing" display_name="__MSG_flashing__" default_value="true" datatype="bool"/>
+<Content type="html" view="home,canvas">
+  <![CDATA[
+  <style type="text/css">
+    .cellL{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:left;}
+    .cellC{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:center;}
+    .cellR{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:right;}
+    .def{font-family:sans-serif;}
+    .loading{font-family:sans-serif;foreground:#666666;font-style:italic;font-size:11px;}
+    .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
+    .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
+    .SearchList{display:none;position:relative;border:1px solid black;z-index:9998;background-color:white;top:-1;}
+    .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
+    td.HiAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
+    td.LoAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
+    /* campaign minimessage styling */
+    .mmlib_table__MODULE_ID__ {border-bottom: 1px solid #ddd;}
+    a.prostyle:link {color: #0000FF; font-size:10px;font-family:sans-serif; text-decoration: underline}
+    a.prostyle:active {color: #ff6909; font-size:10px;font-family:sans-serif; text-decoration: none}
+    a.prostyle:visited {color: #254970; font-size:10px;font-family:sans-serif; text-decoration: none}
+    a.prostyle:hover {color: #000080; font-size:10px;font-family:sans-serif; text-decoration: underline;}
+  </style>
 
-<!-- ALm6fM17IX-CBzlaLdem5GsGYeAwg-W6G4OiKO5oLvMGr1qXaQYfzfZ9I8BYy2xRl2h9bQ3RjuRHaXqUnfCWFeo9-eBKOLqO0k3nbZUPrY62oNhlsn6GzgaOXJdDH6_U9AapQLUAmYsQ3n25NmPr29Lv5an4T7C_daxaxNUyfmnJTPwK_2DSvaY= -->
+  <div id="promo"></div>
+  <div id="StockData"><div class="loading">__MSG_initialloading__</div></div>
+  <div id="Footer" class="Footer"></div>
+  <div id="StockProfitDetails" style="display:none;width:100%;overflow:scroll;overflow-y:hidden;"></div>
+  <div id="StockAdd" class="def" style="display:none;"></div>
+  <div id="StockProfitSummary" class="def" style="display:none"></div>
+  <div id="StockSummary" class="def" style="display:none;"><div class="loading">__MSG_loading__</div></div>
+  <div id="StockNews" class="def" style="display:none;"></div>
+  <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0><tr><td valign="middle" class="Footer"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer" target="_blank">Stock data, news and historical charts provided by </td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://stockportfoliogg.googlecode.com/svn/released/images/Yahoo.gif"></td><td valign="middle" class="Footer"></a></td></tr></table></div>
+  <div id="debug" nowrap style="display:none;font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div> 
+  <script language="javascript" type="text/javascript" defer="defer">
 
-<style type="text/css">
-  a { color:#0000DD;}
-  a:visited { color:#0000DD;}  
-</style>
-<script language="Javascript">
-var bf="http://download.finance.yahoo.com/d?s=";
+    var debug=1;
+    var bf="http://download.finance.yahoo.com/d?s=";
 
-var symbol="^DJI,^GSPC,^IXIC";
-var bB=bf+symbol+"&f=snl1c1p2";
+    var symbol="^DJI,^GSPC,^IXIC";
+    var bB=bf+symbol+"&f=snl1c1p2";
 
-_IG_FetchContent(bB,_IG_Callback(responseText),{refreshInterval:60});
+    _IG_FetchContent(bB,_IG_Callback(responseText),{refreshInterval:60});
 
 
-function responseText(ds){
-  var result=ds;
-  try{
-    var cS=new RegExp("\n");
-    var quotes=new Array();
-    quotes=result.split(cS);
-    for(var c=0;c<quotes.length;c++){
-      var symbol=aE(c);
-      if(symbol==""){
-        continue;
+    function responseText(ds){
+      var result=ds;
+      try{
+        var cS=new RegExp("\n");
+        var quotes=new Array();
+        quotes=result.split(cS);
+        for(var c=0;c<quotes.length;c++){
+          var symbol=aE(c);
+          if(symbol==""){
+            continue;
+          }
+          var bJ=quotes[c];
+          print(bJ);
+        }
       }
-      var bJ=quotes[c];
-      alert(bJ);
     }
-  }
-}
+
+    function print(msg){
+    if (debug){
+      var debug_html = _gel("debug").innerHTML;
+      if (_gel("debug").style.display='none'){
+        _gel("debug").style.display='block';
+        _IG_AdjustIFrameHeight();   
+      }
+      msg=fngetDate(1)+"; "+_hesc(msg.toString())+"<br>";
+      debug_html=msg+debug_html;
+      _gel("debug").innerHTML=debug_html;
+    }
+	}
 
 
-   </script>
+  </script>
   ]]>
   </Content>
 </Module>
+
+
