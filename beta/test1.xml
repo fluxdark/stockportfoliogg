@@ -88,18 +88,16 @@
 
     function responseText(ds){
       var result=ds;
-      try{
-        var cS=new RegExp("\n");
-        var quotes=new Array();
-        quotes=result.split(cS);
-        for(var c=0;c<quotes.length;c++){
-          var symbol=aE(c);
-          if(symbol==""){
-            continue;
-          }
-          var bJ=quotes[c];
-          print(bJ);
-        }catch(e){print("N/A");}
+      var cS=new RegExp("\n");
+      var quotes=new Array();
+      quotes=result.split(cS);
+      for(var c=0;c<quotes.length;c++){
+        var symbol=aE(c);
+        if(symbol==""){
+          continue;
+        }
+        var bJ=quotes[c];
+        print(bJ);
       }
     }
 
