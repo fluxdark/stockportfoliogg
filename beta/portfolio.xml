@@ -778,7 +778,12 @@
     }
     CreatePromos();
   }
-  function fnHideMess(GadgetVersion){print("GadgetVersion="+GadgetVersion);gadgets.window.adjustHeight();pref.set("GadgetVersion",GadgetVersion);return true;}
+  function fnHideMess(GadgetVersion){
+    print("GadgetVersion="+GadgetVersion);
+    gadgets.window.adjustHeight();
+    pref.set("GadgetVersion",GadgetVersion);
+    return true;
+  }
 
 //  function fnHideMess(GadgetVersion){
 //    //print("fnHideMess started");
