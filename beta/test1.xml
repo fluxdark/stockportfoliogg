@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+<ModulePrefs 
+	title="Quick Stock Watch" 
+	description="A simple Stock Quotes and Portfolio tracking module. Works for over 30 international markets - Argentina, Australia, Austria, Belgium, Brazil, Canada, China, Denmark, Egypt, France, Germany, Hong Kong, India, Israel, Italy, Japan, Jakarta, Korea, Malaysia, Mexico, Netherlands, New Zealand, Norway, Singapore, Spain, Sweden, Switzerland, Taiwan, Turkey, UK, United States and more.. You can watch the up/down ticks of your favorite stocks and monitor your portfolio at desired intervals (Data provided by Yahoo! Finance)"
+	author="Uday Kumar Pyda - Sunnyvale, CA"
+	author_email="udaysasi+feedback@gmail.com"
+	author_affiliation="UdaySasi"
+	author_link="http://www.udaysasi.com"
+	directory_title="Uday's Quick Stock Watch"
+	title_url="http://www.freewebs.com/udaysasi/quickStockWatchHelp.html"
+	scrolling="false"
+	singleton="false"
+	screenshot="http://www.freewebs.com/udaysasi/quickStockWatchScreenshot.png"
+	thumbnail="http://www.freewebs.com/udaysasi/quickStockWatchThumbnail.png"
+>
+	<Require feature="analytics"/>
+	<Require feature="minimessage"/>
+	<Require feature="settitle" /> 	
+	<Require feature="setprefs" />	
+	<Require feature="dynamic-height"/>	
+</ModulePrefs>
+<UserPref name="flashing" 
+       display_name="Highlighting"
+       datatype="enum"
+       default_value="1">
+    <EnumValue value="1" display_value="On"/>
+    <EnumValue value="0" display_value="Off"/>
+</UserPref>
+<UserPref name="refreshrate" 
+       display_name="Refresh every"
+       datatype="enum"
+       default_value="300">
+    <EnumValue value="-1" display_value="No refresh"/>
+    <EnumValue value="30" display_value="30 seconds"/>
+    <EnumValue value="60" display_value="1 minute"/>
+    <EnumValue value="300" display_value="5 minutes"/>
+    <EnumValue value="900" display_value="15 minutes"/>
+</UserPref>
+<UserPref name="showchart" 
+       display_name="Show Charts"
+       datatype="enum"
+       default_value="1">
+    <EnumValue value="0" display_value="None"/>
+    <EnumValue value="1" display_value="1 day"/>
+    <EnumValue value="5" display_value="5 day"/>   
+    <EnumValue value="90" display_value="3 month"/> 
+    <EnumValue value="180" display_value="6 month"/> 
+    <EnumValue value="365" display_value="1 year"/>     
+</UserPref>
+<UserPref name="showname" 
+       display_name="Stock Name"
+       datatype="enum"
+       default_value="1">
+    <EnumValue value="1" display_value="Show"/>
+    <EnumValue value="0" display_value="Hide"/>
+</UserPref>
+<UserPref name="title" display_name="Module Title" default_value="Quick Stock Watch"/>
+<UserPref name="tickers" datatype="hidden" default_value="^DJI,^GSPC,^IXIC"/>
+<UserPref name="promo0" datatype="hidden" default_value="0" />
+<UserPref name="promo1" datatype="hidden" default_value="0" />
+<UserPref name="promo2" datatype="hidden" default_value="0" />
+<UserPref name="promo3" datatype="hidden" default_value="0" />
+<UserPref name="shownews" datatype="hidden" default_value="0" />
+<UserPref name="showstrength" datatype="hidden" default_value="0" />
+<Content type="html"><![CDATA[
+
+<!-- ALm6fM17IX-CBzlaLdem5GsGYeAwg-W6G4OiKO5oLvMGr1qXaQYfzfZ9I8BYy2xRl2h9bQ3RjuRHaXqUnfCWFeo9-eBKOLqO0k3nbZUPrY62oNhlsn6GzgaOXJdDH6_U9AapQLUAmYsQ3n25NmPr29Lv5an4T7C_daxaxNUyfmnJTPwK_2DSvaY= -->
+
+<style type="text/css">
+  a { color:#0000DD;}
+  a:visited { color:#0000DD;}  
+</style>
+<script language="Javascript">
+var bf="http://download.finance.yahoo.com/d?s=";
+
+var symbol="BO.CO,GOOG"
+var bB=bf+symbol+"&f=snl1c1p2";
+
+_IG_FetchContent(bB,_IG_Callback(responseText),{refreshInterval:60});
+
+
+function responseText(ds){
+  var result=ds;
+  try{
+    var cS=new RegExp("\n");
+    var quotes=new Array();
+    quotes=result.split(cS);
+    for(var c=0;c<quotes.length;c++){
+      var symbol=aE(c);
+      if(symbol==""){
+        continue;
+      }
+      var bJ=quotes[c];
+      alert(bJ);
+    }
+  }
+}
+
+
+]]></Content>
+</Module>
