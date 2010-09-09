@@ -94,6 +94,7 @@
   var bTablesReady;
   var bAllReady;
   var iMaxStockNo=40;
+  var sDefStocks="^GSPC,RUWUT.X,EURUSD=X,XAU=X";
   var iStockCols=5;
   var iConfCols=0;
   var iSDRetry=0;
@@ -127,7 +128,6 @@
     }
         print(sSymb);
     sSymb=sSymb.substr(0,sSymb.length-1);
-    //var url='http://download.finance.yahoo.com/d?s=^DJI,^GSPC,^IXIC&f=snl1c1p2\n';
     //var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     //print("fnLoadData url:"+url);
@@ -426,7 +426,7 @@
     fnToggleProfit(true);
     fnToggleNews(0);
     //Show add if no stocks are configured
-    if((trim(arrStockSymbols.join(","))=="GOOG,^DJI,EURUSD=X,XAU=X" && arrStockSymbols.length==4) || document.getElementById("StockAdd").style.display=="block"){
+    if((trim(arrStockSymbols.join(","))==sDefStocks && arrStockSymbols.length==4) || document.getElementById("StockAdd").style.display=="block"){
       fnToggleAdd(1);
     }
     gadgets.window.setTitle(pref.getString("CustomTitle"));
@@ -716,7 +716,7 @@
   function fnPrefsValidation(inp){
     //Check if no stocks are configured
     if (trim(inp.join(","))==""){
-      arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
+      arrStockSymbols=sDefStocks.split(",");
       arrStockQtys="100,0,200,300".split(",");
       arrStockPrices="235,0,0,0".split(",");
       arrStockTC="5,3,4,2".split(",");
@@ -759,34 +759,15 @@
             pref.getString("UpdateInterval")+"UpdateInterval"+pref.getString("Flashing")+"Flashing"+
             pref.getString("ChartScope")+"ChartScope"+pref.getString("UpdateInterval")+"UpdateInterval"+
             pref.getString("Flashing")+"Flashing";
-            //alert(tmp.length);
 
-//    //print('Number of symbols:'+arrStockSymbols.length);
     print('PrefLength:'+tmp.length);
 
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-      //var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/iGoogleLimit">More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.<a>';
-
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;background-Color:red;"><a target="new" href="javascript:window.open(\'http://cnybroe.googlepages.com/iGoogleLimit\')\" class=prostyle>More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.</a></span>';
-
-      //'<span style="font-size:11px;background-Color:red;"><a href="" class=prostyle>'More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.'</a> &raquo;</span>';
-
-              //sTable+='<tr style="cursor: pointer;" onmouseover=\'this.style.backgroundColor="#DCDCDC";\' onmouseout=\'this.style.backgroundColor="#FFFFFF";\' onclick=\'document.getElementById("txtStockSymbol").value="'+sSymbol+'"\'><td nowrap>'+sSymbol+'</td>';
-
-      
-      
-      //javascript:window.open("http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml)
-      //var statusMsg = miniMsg.createStaticMessage(msghtml);
-      //statusMsg.style.backgroundColor = "red";
+      divMess.innerHTML = '<span style="font-size:11px;background-Color:red;"><a target="new" href="javascript:window.open(\'http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit\')\" class=prostyle>More than ' + iMaxStockNo + ' stocks has been configured. Please read more here.</a></span>';
       var statusMsg = miniMsg.createStaticMessage(divMess);
-
-
-      
-      
-      //      fnDeleteStock(arrStockSymbols.length-1)
     }
   }
   function fnMessage(){
