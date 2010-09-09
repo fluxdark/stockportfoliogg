@@ -901,8 +901,9 @@
     }
   }
   function CreatePromos() {
+    print("CreatePromos");
     var pronce = pref.getInt("campaign_1");
-    if (pronce = !"1") {
+    if (pronce != "1") {
       var promomsg = new _IG_MiniMessage(__MODULE_ID__, _gel("promo"));
       var proText = ['Add a Currency iGoogle gadget with real-time exchange rates',
                      'Convert among 80+ currencies on your iGoogle page. Add now!',
