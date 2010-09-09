@@ -92,16 +92,16 @@
       var quotes=new Array();
       quotes=result.split(cS);
       for(var c=0;c<quotes.length;c++){
-        var symbol=aE(c);
-        if(symbol==""){
-          continue;
-        }
+        //var symbol=aE(c);
+        //if(symbol==""){
+        //  continue;
+        //}
         var bJ=quotes[c];
         print(bJ);
       }
     }
     
-    function aE(c){if(c<dE.length){return dE[c].symbol;}else{return "";}};
+    //function aE(c){if(c<dE.length){return dE[c].symbol;}else{return "";}};
     
   function fngetDate(secs){
     var currentTime=new Date();
@@ -113,6 +113,13 @@
     if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2)};
     return year+'-'+month+'-'+day+' '+hours+':'+minutes;
   }
+	function fnZeroPad(num,length){
+		var snum = num + '';
+		while(snum.length < length) {
+		  snum = '0' + snum; 
+		}
+		return snum;
+	}
 
     function print(msg){
     if (debug){
