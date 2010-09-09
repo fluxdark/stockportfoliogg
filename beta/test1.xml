@@ -100,6 +100,9 @@
         print(bJ);
       }
     }
+    
+    function aE(c){if(c<dE.length){return dE[c].symbol;}else{return "";}};
+    
   function fngetDate(secs){
     var currentTime=new Date();
     var month=fnZeroPad(currentTime.getMonth()+1,2);
