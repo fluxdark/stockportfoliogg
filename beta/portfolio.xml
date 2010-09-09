@@ -737,12 +737,12 @@
         print("DJI found");
         var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
         var msghtml="^DJI: The Dow Jones index has been blocked by Yahoo Finance. The symbol will be removed";
-        miniMsg.createDismissibleMessage(msghtml,function(){gadgets.window.adjustHeight();};);
+        miniMsg.createDismissibleMessage(msghtml,fnHideBL());
         fnDeleteStock(i);
         i++;
       }
     }
-miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
+
     var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
             pref.getString("SettingVersion")+"SettingVersion"+pref.getString("StockSymbols")+"StockSymbols"+
             pref.getString("StockQtys")+"StockQtys"+pref.getString("StockPrices")+"StockPrices"+
@@ -790,6 +790,11 @@ miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
       iPrefVersion=GadgetVersion;
       pref.set("GadgetVersion",iPrefVersion);
     //print("fnHideMess ended");
+    };
+  }  
+  function fnHideBL(){
+    return function(){
+      gadgets.window.adjustHeight();
     };
   }  
   function fngetDate(secs){
