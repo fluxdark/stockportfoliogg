@@ -680,7 +680,6 @@
       if (isNaN(arrStockLo[i])||arrStockTC[i].length==0){arrStockLo[i]=0;}
       //Check for blacklisted symbols
       if (arrStockSymbols[i]=='^DJI'){
-        print("DJI found");
         var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
         var divMess = document.createElement("divMess");
         var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
