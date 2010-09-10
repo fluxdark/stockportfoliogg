@@ -122,14 +122,12 @@
     for(var i=0;i<arrStockSymbols.length;i++){
       sSymb+=arrStockSymbols[i]+',';
     }
-        print(sSymb);
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
     gadgets.io.makeRequest(url,fnStockDataProxy,params);
-    //print("fnLoadData ended");
   }
   function fnStockDataProxy(stockData){
     var arrLines=new Array();
@@ -692,24 +690,6 @@
         i--;
       }
     }
-
-    var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
-            pref.getString("SettingVersion")+"SettingVersion"+pref.getString("StockSymbols")+"StockSymbols"+
-            pref.getString("StockQtys")+"StockQtys"+pref.getString("StockPrices")+"StockPrices"+
-            pref.getString("StockCurrRates")+"StockCurrRates"+pref.getString("StockHi")+"StockHi"+
-            pref.getString("StockLo")+"StockLo"+pref.getString("StockTC")+"StockTC"+
-            pref.getString("ShowProfit")+"ShowProfit"+pref.getString("ChartType")+"ChartType"+
-            pref.getString("ShowNews")+"ShowNews"+pref.getString("CustomTitle")+"CustomTitle"+
-            pref.getString("FontSize")+"FontSize"+pref.getString("Currency")+"Currency"+
-            pref.getString("NameColumn")+"NameColumn"+pref.getString("ChangeColumn")+"ChangeColumn"+
-            pref.getString("Column1")+"Column1"+pref.getString("Column2")+"Column2"+
-            pref.getString("Column3")+"Column3"+pref.getString("Column4")+"Column4"+
-            pref.getString("Column5")+"Column5"+pref.getString("ChartScope")+"ChartScope"+
-            pref.getString("UpdateInterval")+"UpdateInterval"+pref.getString("Flashing")+"Flashing"+
-            pref.getString("ChartScope")+"ChartScope"+pref.getString("UpdateInterval")+"UpdateInterval"+
-            pref.getString("Flashing")+"Flashing";
-
-    print('PrefLength:'+tmp.length);
 
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
