@@ -783,6 +783,7 @@
     print("GadgetVersion="+GadgetVersion);
     gadgets.window.adjustHeight();
     //pref.set("GadgetVersion",GadgetVersion);
+    return true;
     }
   }
 
