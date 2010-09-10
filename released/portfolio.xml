@@ -673,11 +673,11 @@
     }
     //Check for empty prefs
     for(var i=0;i<inp.length;i++){
-    if (isNaN(arrStockQtys[i])||arrStockTC[i].length==0){arrStockQtys[i]=0;}
-      if (isNaN(arrStockPrices[i])||arrStockTC[i].length==0){arrStockPrices[i]=0;}
+      if (isNaN(arrStockQtys[i])||arrStockQtys[i].length==0){arrStockQtys[i]=0;}
+      if (isNaN(arrStockPrices[i])||arrStockPrices[i].length==0){arrStockPrices[i]=0;}
       if (isNaN(arrStockTC[i])||arrStockTC[i].length==0){arrStockTC[i]=0;}
-      if (isNaN(arrStockHi[i])||arrStockTC[i].length==0){arrStockHi[i]=0;}
-      if (isNaN(arrStockLo[i])||arrStockTC[i].length==0){arrStockLo[i]=0;}
+      if (isNaN(arrStockHi[i])||arrStockHi[i].length==0){arrStockHi[i]=0;}
+      if (isNaN(arrStockLo[i])||arrStockLo[i].length==0){arrStockLo[i]=0;}
       //Check for blacklisted symbols
       if (arrStockSymbols[i]=='^DJI'){
         var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
