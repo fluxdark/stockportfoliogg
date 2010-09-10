@@ -3,7 +3,7 @@
   <ModulePrefs title="__MSG_gadgettitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://cnybroe.googlepages.com/" category="finance">
     <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
     <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/da_ALL.xml"/>
-    <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/es_ALL.xml"/>
+    <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/beta/locale/es_ALL.xml"/>
     <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/fr_ALL.xml"/>
     <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/it_ALL.xml"/>
     <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/sv_ALL.xml"/>
@@ -18,11 +18,13 @@
     <Require feature="dynamic-height"/>
     <Require feature="settitle"/>
   </ModulePrefs>
+  <UserPref name="campaign_1" datatype="hidden" default_value="0" />
   <UserPref name="GadgetVersion" datatype="hidden" default_value="0"/>
   <UserPref name="SettingVersion" datatype="hidden" default_value="0"/>
   <UserPref name="StockSymbols" datatype="hidden" default_value=""/>
-  <UserPref name="StockPrices" datatype="hidden" default_value=""/>
   <UserPref name="StockQtys" datatype="hidden" default_value=""/>
+  <UserPref name="StockPrices" datatype="hidden" default_value=""/>
+  <UserPref name="StockTC" datatype="hidden" default_value=""/>
   <UserPref name="StockCurrRates" datatype="hidden" default_value=""/>
   <UserPref name="StockHi" datatype="hidden" default_value=""/>
   <UserPref name="StockLo" datatype="hidden" default_value=""/>
@@ -30,16 +32,16 @@
   <UserPref name="ChartType" datatype="hidden" default_value="ToolTip"/>
   <UserPref name="ShowNews" datatype="hidden" default_value="0"/>
   <UserPref name="CustomTitle" datatype="string" display_name="__MSG_customtitle__"  default_value="__MSG_gadgettitle__"/>
-  <UserPref name="FontSize" datatype="enum" display_name="__MSG_fontsize__" default_value="11px"><EnumValue value="9px" display_value="9px"/><EnumValue value="10px" display_value="10px"/><EnumValue value="11px" display_value="11px"/><EnumValue value="12px" display_value="12px"/><EnumValue value="14px" display_value="14px"/></UserPref>
+  <UserPref name="FontSize" display_name="__MSG_fontsize__" datatype="enum" default_value="11px"><EnumValue value="9px" display_value="9px"/><EnumValue value="10px" display_value="10px"/><EnumValue value="11px" display_value="11px"/><EnumValue value="12px" display_value="12px"/><EnumValue value="14px" display_value="14px"/></UserPref>
   <UserPref name="Currency" display_name="__MSG_currency__" datatype="enum" default_value="-"><EnumValue value="-" display_value="No currency conversion"/><EnumValue value="ARS" display_value="Argentine Peso (ARS)"/><EnumValue value="AUD" display_value="Australian Dollar (AUD)"/><EnumValue value="BRL" display_value="Brazilian Real (BRL)"/><EnumValue value="GBP" display_value="British Pound (GBP)"/><EnumValue value="CLP" display_value="Chilean Peso (CLP)"/><EnumValue value="CNY" display_value="Chinese Yuan (CNY)"/><EnumValue value="CZK" display_value="Czech Koruna (CZK)"/><EnumValue value="CAD" display_value="Canadian Dollar (CAD)"/><EnumValue value="DKK" display_value="Danish Krone (DKK)"/><EnumValue value="EEK" display_value="Estonian Kroon (EEK)"/><EnumValue value="EUR" display_value="Euro (EUR)"/><EnumValue value="HKD" display_value="Hong Kong Dollar (HKD)"/><EnumValue value="HUF" display_value="Hungarian Forint (HUF)"/><EnumValue value="ISK" display_value="Iceland Krona (ISK)"/><EnumValue value="INR" display_value="Indian Rupee (INR)"/><EnumValue value="IDR" display_value="Indonesian Rupiah (IDR)"/><EnumValue value="ILS" display_value="Israeli Shekel (ILS)"/><EnumValue value="JPY" display_value="Japanese Yen (JPY)"/><EnumValue value="KRW" display_value="Korean Won (KRW)"/><EnumValue value="KWD" display_value="Kuwaiti Dinar (KWD)"/><EnumValue value="MOP" display_value="Macau Pataca (MOP)"/><EnumValue value="MYR" display_value="Malaysian Ringgit (MYR)"/><EnumValue value="MXN" display_value="Mexican Peso (MXN)"/><EnumValue value="TRY" display_value="New Turkish Lira (TRY)"/><EnumValue value="NZD" display_value="New Zealand Dollar (NZD)"/><EnumValue value="NOK" display_value="Norwegian Krone (NOK)"/><EnumValue value="PHP" display_value="Philippine Peso (PHP)"/><EnumValue value="PLN" display_value="Polish Zloty (PLN)"/><EnumValue value="RON" display_value="Romanian New Leu (RON)"/><EnumValue value="RUB" display_value="Russian Rouble (RUB)"/><EnumValue value="SGD" display_value="Singapore Dollar (SGD)"/><EnumValue value="SEK" display_value="Swedish Krona (SEK)"/><EnumValue value="CHF" display_value="Swiss Franc (CHF)"/><EnumValue value="THB" display_value="Thai Baht (THB)"/><EnumValue value="USD" display_value="U.S. Dollar (USD)"/><EnumValue value="AED" display_value="UAE Dirham (AED)"/><EnumValue value="VEB" display_value="Venezuelan Bolivar (VEB)"/></UserPref>
-  <UserPref name="NameColumn" display_name="__MSG_name__ __MSG_column__" datatype="enum" default_value="2"><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_name__"/></UserPref>
+  <UserPref name="NameColumn" display_name="__MSG_name__ __MSG_column__" datatype="enum" default_value="2"><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_name__"/><EnumValue value="40" display_value="__MSG_name__(__MSG_symbol__)"/></UserPref>
   <UserPref name="ChangeColumn" display_name="__MSG_change__ __MSG_column__" datatype="enum" default_value="3"><EnumValue value="3" display_value="__MSG_changepercent__"/><EnumValue value="4" display_value="__MSG_change__"/><EnumValue value="5" display_value="__MSG_change__(%)"/></UserPref>
   <UserPref name="Column1" display_name="__MSG_column__ 1" datatype="enum" default_value="6"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="3" display_value="__MSG_changepercent__"/><EnumValue value="4" display_value="__MSG_change__"/><EnumValue value="5" display_value="__MSG_change__(%)"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
   <UserPref name="Column2" display_name="__MSG_column__ 2" datatype="enum" default_value="31"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
   <UserPref name="Column3" display_name="__MSG_column__ 3" datatype="enum" default_value="17"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
   <UserPref name="Column4" display_name="__MSG_column__ 4" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="24" display_value="__MSG_currency__"/><EnumValue value="26" display_value="__MSG_currencyrate__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
   <UserPref name="Column5" display_name="__MSG_column__ 5" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_lasttradedate__"/><EnumValue value="8" display_value="__MSG_lasttradetime__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_daylow__"/><EnumValue value="11" display_value="__MSG_dayhigh__"/><EnumValue value="12" display_value="__MSG_dayvolume__"/><EnumValue value="13" display_value="__MSG_previousclose__"/><EnumValue value="14" display_value="__MSG_52weekrange__"/><EnumValue value="15" display_value="__MSG_ask__"/><EnumValue value="16" display_value="__MSG_bid__"/><EnumValue value="17" display_value="__MSG_tickertrend__"/><EnumValue value="18" display_value="__MSG_50daymovingavg__"/><EnumValue value="19" display_value="__MSG_200daymovingavg__"/><EnumValue value="20" display_value="__MSG_dayrange__"/><EnumValue value="21" display_value="__MSG_optionstrike__"/><EnumValue value="22" display_value="__MSG_optioncallput__"/><EnumValue value="23" display_value="__MSG_optionexpire__"/><EnumValue value="30" display_value="__MSG_dayearned__"/><EnumValue value="31" display_value="__MSG_earned__"/></UserPref>
-  <UserPref name="ChartScope" display_name="__MSG_chartperiod__" datatype="enum" default_value="3m"><EnumValue value="1d" display_value="1 __MSG_day__"/><EnumValue value="5d" display_value="5 __MSG_days__"/><EnumValue value="1m" display_value="1 __MSG_month__"/><EnumValue value="3m" display_value="3 __MSG_months__"/><EnumValue value="1y" display_value="6 __MSG_months__"/></UserPref>
+  <UserPref name="ChartScope" display_name="__MSG_chartperiod__" datatype="enum" default_value="3m"><EnumValue value="1d" display_value="1 __MSG_day__"/><EnumValue value="5d" display_value="5 __MSG_days__"/><EnumValue value="1m" display_value="1 __MSG_month__"/><EnumValue value="3m" display_value="3 __MSG_months__"/><EnumValue value="6m" display_value="6 __MSG_months__"/><EnumValue value="1y" display_value="12 __MSG_months__"/><EnumValue value="2y" display_value="24 __MSG_months__"/><EnumValue value="5y" display_value="60 __MSG_months__"/></UserPref>
   <UserPref name="UpdateInterval" display_name="__MSG_updateinterval__" datatype="enum" default_value="300000"><EnumValue value="60000" display_value="1 __MSG_minute__"/><EnumValue value="300000" display_value="5 __MSG_minute__"/><EnumValue value="600000" display_value="10 __MSG_minute__"/></UserPref>
   <UserPref name="Flashing" display_name="__MSG_flashing__" default_value="true" datatype="bool"/>
 <Content type="html" view="home,canvas">
@@ -51,13 +53,20 @@
     .def{font-family:sans-serif;}
     .loading{font-family:sans-serif;foreground:#666666;font-style:italic;font-size:11px;}
     .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
-
-  .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
+    .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
     .SearchList{display:none;position:relative;border:1px solid black;z-index:9998;background-color:white;top:-1;}
     .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
     td.HiAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
     td.LoAlert{width:9px;background:url("http://stockportfoliogg.googlecode.com/svn/released/images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
-	</style>
+    /* campaign minimessage styling */
+    .mmlib_table__MODULE_ID__ {border-bottom: 1px solid #ddd;}
+    a.prostyle:link {color: #0000FF; font-size:10px;font-family:sans-serif; text-decoration: underline}
+    a.prostyle:active {color: #ff6909; font-size:10px;font-family:sans-serif; text-decoration: none}
+    a.prostyle:visited {color: #254970; font-size:10px;font-family:sans-serif; text-decoration: none}
+    a.prostyle:hover {color: #000080; font-size:10px;font-family:sans-serif; text-decoration: underline;}
+  </style>
+
+  <div id="promo"></div>
   <div id="StockData"><div class="loading">__MSG_initialloading__</div></div>
   <div id="Footer" class="Footer"></div>
   <div id="StockProfitDetails" style="display:none;width:100%;overflow:scroll;overflow-y:hidden;"></div>
@@ -65,59 +74,44 @@
   <div id="StockProfitSummary" class="def" style="display:none"></div>
   <div id="StockSummary" class="def" style="display:none;"><div class="loading">__MSG_loading__</div></div>
   <div id="StockNews" class="def" style="display:none;"></div>
-  <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0><tr><td valign="middle" class="Footer"><a href="http://cnybroe.googlepages.com/disclaimer" target="_blank">Stock data, news and historical charts provided by </td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://stockportfoliogg.googlecode.com/svn/released/images/Yahoo.gif"></td><td valign="middle" class="Footer"></a></td></tr></table></div>
+  <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0><tr><td valign="middle" class="Footer"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer" target="_blank">Stock data, news and historical charts provided by </td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://stockportfoliogg.googlecode.com/svn/released/images/Yahoo.gif"></td><td valign="middle" class="Footer"></a></td></tr></table></div>
   <div id="debug" nowrap style="display:none;font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div> 
   <script language="javascript" type="text/javascript" defer="defer">
-  var pref=new _IG_Prefs(__MODULE_ID__);
+  var pref=new gadgets.Prefs(__MODULE_ID__);
   var fsize=pref.getString("FontSize");
   var arrStockSymbols=new Array();
   var arrStockQtys=new Array();
+  var arrStockPrices=new Array();
+  var arrStockTC=new Array();
   var arrStockHi=new Array();
   var arrStockLo=new Array();
-  var arrStockPrices=new Array();
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
-  var iVersion=1.20;
+  var IMAGES_BASE = "http://stockportfoliogg.googlecode.com/svn/released/images/";
+  var iVersion=1.21;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
   var bAllReady;
+  var iMaxStockNo=45;
+  var sDefStocks="^GSPC,RUWUT.X,EURUSD=X,XAU=X";
   var iStockCols=5;
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
   var debug=1;
-
+ 
   function fnInit(){
-    fnUpgrade();
     fnReadPrefs();
     fnLoad();
-    setTimeout('_IG_Analytics("UA-2031644-1", "/Portfolio")',3000);
-    fnMessage();
-	}
-  
-  //_IG_AdjustIFrameHeight is called too many times at load. Must be fixed  
+    setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
+  }
 
-  function fnUpgrade(){
-    //Upgrade script for version 1.19 to 1.20
-    //Add 5 if saved setting is >24 and <30
-		if ((pref.getString("SettingVersion")*1)<("1.20"*1)){
-			for(i=1;i<6;i++){
-	      var iPref=(pref.getString("Column"+i)*1);
-	      //Checking setting for column"+i+"("+iPref+")");
-	      if(iPref>24 && iPref<30){
-	        //Setting for column"+i+" was upgraded");
-	        pref.set("Column"+i,iPref+5);
-	      }
-	    }
-	    pref.set("SettingVersion","1.20");
-    }
-	}
-	function fnLoad(){
+  function fnLoad(){
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
     fnInsertTables();
-  }	
+  }
   function fnLoadData(){
     bDataReady=false;
     bAllReady=false;
@@ -128,62 +122,76 @@
     for(var i=0;i<arrStockSymbols.length;i++){
       sSymb+=arrStockSymbols[i]+',';
     }
-		sSymb=sSymb.substr(0,sSymb.length-1);
-    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f='+sTags+'&CacheWorkaround='+Math.random()*10000;
-		_IG_FetchContent(url,fnStockDataProxy,{refreshInterval:60});
-	}
+    sSymb=sSymb.substr(0,sSymb.length-1);
+    var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+    params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
+    gadgets.io.makeRequest(url,fnStockDataProxy,params);
+  }
   function fnStockDataProxy(stockData){
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
-    arrLines=stockData.split('\r\n');
+    arrLines=stockData.data.split('\r\n');
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
-			sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
+      sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
-		sSymb=sSymb.substr(0,sSymb.length-1);
-		var url='http://download.finance.yahoo.com/d/quotes.csv?s='+_esc(sSymb)+'&f=l1&CacheWorkaround='+Math.random()*10000;
-    _IG_FetchContent(url,_IG_Callback(fnPrepareStockData, stockData),{refreshInterval:60});
+    sSymb=sSymb.substr(0,sSymb.length-1);
+    var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CW='+Math.random()*1000;
+
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+    params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
+    gadgets.io.makeRequest(url, _IG_MyCallback(fnPrepareStockData,stockData), params);
   }
-  function fnPrepareStockData(currData,stockData){
+  function fnPrepareStockData(currDataIn,stockDataIn){
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
+    var currData = currDataIn.data;
+    var stockData = stockDataIn.data;
+
     currData=currData.replace(/0.00/g,"1.00");
-    arrStocks = new Array();
+    arrStocks=new Array();
+    
     arrLinesCD=currData.split('\r\n');
     arrLinesSD=stockData.split('\r\n');
+
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
-        arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
-        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){//If  exch.rate has not been set, then use current rate
-				  arrStockCurrRates[i]=arrLineValues[26];
-				}
-				arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
-        arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
+        arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
+        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
+          //If  exch.rate has not been set, then use current rate
+          arrStockCurrRates[i]=arrLineValues[26];
+        }
+        var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]);
+        arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
+        arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
+        arrLineValues[34]=myRound(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Stock Value in local currency
         arrLineValues[33]=0;
         if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
-          arrLineValues[33]=Math.round((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
+          arrLineValues[33]=myRound(((arrLineValues[34] / TC)-1)*100);//Total Gain %
         }
-        arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
         arrStocks[i]=arrLineValues;
       }
       bDataReady=true; //Data has been read and calculated
-      fnUpdateValues()
+      fnUpdateValues();
     }
-  }	
+  }
   function fnRetry(){
     clearTimeout(iTmrRetry);
     if (!bDataReady){
       if (iSDRetry<10){
         iSDRetry++;
         var tmp='('+iSDRetry+')';
-        _gel('FooterMsg').innerHTML='__MSG_retrystockloading__'+tmp;
+        document.getElementById('FooterMsg').innerHTML='__MSG_retrystockloading__'+tmp;
         fnLoadData(); 
       }else{
-        _gel('FooterMsg').innerHTML='Gave up loading stockdata';
+        document.getElementById('FooterMsg').innerHTML='Gave up loading stockdata';
       }
     }else{
       iTmrRetry=setTimeout('fnLoadData()',pref.getInt("UpdateInterval")-5000); 
@@ -196,17 +204,17 @@
       fnUpdateStockTable();
       fnUpdateProfit();
       fnUpdateSummary(0);
-      _gel("FooterMsg").innerHTML='__MSG_lastupdated__:'+fngetDate(false);
+      document.getElementById("FooterMsg").innerHTML='__MSG_lastupdated__:'+fngetDate(false);
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnUpdateProfit(){
     if (bAllReady){
       var iDayTotal=0;
       var iEarnTot=0;
       var iValTot=0;
-      var bPD=_gel("StockProfitDetails").style.display=="block";
-      var bPS=_gel("StockProfitSummary").style.display=="block";
+      var bPD=document.getElementById("StockProfitDetails").style.display=="block";
+      var bPS=document.getElementById("StockProfitSummary").style.display=="block";
       var sDTC;
       var sETC;
       for(i=0;i<arrStocks.length;i++){
@@ -214,89 +222,91 @@
         iEarnTot+=arrStocks[i][31];
         iValTot+=arrStocks[i][34];
         if (bPD){
-          _gel("ptc0"+i).innerHTML=arrStocks[i][2];
-          _gel("ptc1"+i).innerHTML=arrStocks[i][30]+' ('+arrStocks[i][32]+'%)';
-          _gel("ptc2"+i).innerHTML=arrStocks[i][31]+' ('+arrStocks[i][33]+'%)';
-          _gel("ptc3"+i).innerHTML=arrStocks[i][34];
-          _gel("ptc4"+i).innerHTML=arrStocks[i][24];
-          _gel("ptc5"+i).innerHTML=arrStocks[i][26];
-          _gel("ptc1"+i).style.color=fnNumToColor(arrStocks[i][32],"#000000");
-          _gel("ptc2"+i).style.color=fnNumToColor(arrStocks[i][31],"#000000");
+          document.getElementById("ptc0"+i).innerHTML=arrStocks[i][2]; //Name
+          document.getElementById("ptc1"+i).innerHTML=arrStocks[i][30]+'('+myRoundD(arrStocks[i][32],0)+'%)'; //
+          document.getElementById("ptc2"+i).innerHTML=arrStocks[i][31]+'('+myRoundD(arrStocks[i][33],0)+'%)';
+          document.getElementById("ptc3"+i).innerHTML=arrStocks[i][34];
+          document.getElementById("ptc4"+i).innerHTML=arrStocks[i][24];
+          document.getElementById("ptc5"+i).innerHTML=arrStocks[i][26];
+          document.getElementById("ptc1"+i).style.color=fnNumToColor(arrStocks[i][32],"#000000");
+          document.getElementById("ptc2"+i).style.color=fnNumToColor(arrStocks[i][31],"#000000");
         }
       }
       //Totals
       sDTC=fnNumToColor(iDayTotal,"#000000");
       sETC=fnNumToColor(iEarnTot,"#000000");
-      iDayTotal=Math.round(iDayTotal*100)/100;
-      iEarnTot=Math.round(iEarnTot*100)/100;
-      iValTot=Math.round(iValTot*100)/100;
+      iDayTotal=myRoundD(iDayTotal,0);
+      iEarnTot=myRoundD(iEarnTot,0);
+      iValTot=myRoundD(iValTot,0);
       if (bPD){
-        _gel("ptc1"+i).style.color=sDTC;
-        _gel("ptc1"+i).innerHTML='<b>'+iDayTotal+'</b>';
-        _gel("ptc2"+i).style.color=sETC;
-        _gel("ptc2"+i).innerHTML='<b>'+iEarnTot+'</b>';
-        _gel("ptc3"+i).innerHTML='<b>'+iValTot+'</b>';
+        document.getElementById("ptc1"+i).style.color=sDTC;
+        document.getElementById("ptc1"+i).innerHTML='<b>'+iDayTotal+'</b>';
+        document.getElementById("ptc2"+i).style.color=sETC;
+        document.getElementById("ptc2"+i).innerHTML='<b>'+iEarnTot+'</b>';
+        document.getElementById("ptc3"+i).innerHTML='<b>'+iValTot+'</b>';
         var tmp='('+pref.getString("Currency")+')';
-        _gel("ptc0"+i).innerHTML='<div title="__MSG_currencytip__"><b>__MSG_total__'+tmp+'</b></div>';
+        document.getElementById("ptc0"+i).innerHTML='<div title="__MSG_currencytip__"><b>__MSG_total__'+tmp+'</b></div>';
       }else if (bPS){
-        _gel("stct1").style.color=sDTC;
-        _gel("stct1").innerHTML='<b>'+iDayTotal+'</b>';
-        _gel("stct2").style.color=sETC;
-        _gel("stct2").innerHTML='<b>'+iEarnTot+'</b>';
-        _gel("stct3").innerHTML='<b>'+iValTot+'</b>';
+        document.getElementById("stct1").style.color=sDTC;
+        document.getElementById("stct1").innerHTML='<b>'+iDayTotal+'</b>';
+        document.getElementById("stct2").style.color=sETC;
+        document.getElementById("stct2").innerHTML='<b>'+iEarnTot+'</b>';
+        document.getElementById("stct3").innerHTML='<b>'+iValTot+'</b>';
       }
     }
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
-      var img='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+arrStocks[StockID][1]+'&amp;t='+pref.getString("ChartScope")+'&amp;l=off&amp;z=b">'; 
-      if(_gel("StockSummary").style.display=="block"){
-        _gel("SummaryChartTD").innerHTML=img;
-        _gel("SummaryNameTD").innerHTML=arrStocks[StockID][2];
-        _gel("SummaryDayRangeTD").innerHTML=arrStocks[StockID][20];
-        _gel("Summary52wkRangeTD").innerHTML=arrStocks[StockID][14];
-        _gel("Summary200AvgTD").innerHTML=arrStocks[StockID][19];
-        _gel("SummaryDayVolumeTD").innerHTML=arrStocks[StockID][12];
-        _gel("SummaryLastTradeTime").innerHTML=arrStocks[StockID][7]+' '+arrStocks[StockID][8];
+      var img='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
+      if(document.getElementById("StockSummary").style.display=="block"){
+        document.getElementById("SummaryChartTD").innerHTML=img;
+        document.getElementById("SummaryNameTD").innerHTML=arrStocks[StockID][2];
+        document.getElementById("SummaryDayRangeTD").innerHTML=arrStocks[StockID][20];
+        document.getElementById("Summary52wkRangeTD").innerHTML=arrStocks[StockID][14];
+        document.getElementById("Summary200AvgTD").innerHTML=arrStocks[StockID][19];
+        document.getElementById("SummaryDayVolumeTD").innerHTML=arrStocks[StockID][12];
+        document.getElementById("SummaryLastTradeTime").innerHTML=arrStocks[StockID][7]+' '+arrStocks[StockID][8];
       }else{
-        _gel("StockChart").innerHTML=img;
+        document.getElementById("StockChart").innerHTML=img;
       }
     }
   }
   function fnUpdateStockTable(){
     var sName;
-		var sTip;
-    var sBGColor;
+    var sbgColor;
+    
     if (bAllReady){
       for(var i=0;i<arrStocks.length;i++){
-				sName=arrStocks[i][2];
+        sName=arrStocks[i][2];
         if (sName==''||pref.getInt("NameColumn")==1){
           sName=arrStocks[i][1];
+        }else if (pref.getInt("NameColumn")==40){//name(symbol)
+          sName=arrStocks[i][2]+' ('+arrStocks[i][1]+')';
         }else if (!isNaN(arrStocks[i][21])){//If this is an option
-          sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
+          sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+myRound(arrStocks[i][21])+" "+arrStocks[i][22];
         }
-        _gel('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+arrStocks[i][1]+'">'+sName+'</a>'; 
+        document.getElementById('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+encodeURIComponent(arrStocks[i][1])+'">'+sName+'</a>'; 
         if(i%2==0){sbgColor='#FFFFFF';}else{sbgColor='#EFEFEF';}
-        if(pref.getInt("Flashing")==1&&_gel('stc'+i+'2').innerHTML!=''){
-          _gel('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrStocks[i][3])-parseFloat(_gel('stcc'+i+'2').innerHTML),sbgColor);
-          setTimeout('_gel("stc'+i+'2").style.background="'+sbgColor+'"',700);
+        if(pref.getInt("Flashing")==1&&document.getElementById('stc'+i+'2').innerHTML!=''){
+          document.getElementById('stc'+i+'2').style.background=fnNumToColor(parseFloat(arrStocks[i][3])-parseFloat(document.getElementById('stcc'+i+'2').innerHTML),sbgColor);
+          setTimeout('document.getElementById("stc'+i+'2").style.background="'+sbgColor+'"',700);
         }
         var sClass="";
-				//Multiplied with 1 equals toInt
+        //Multiplied with 1 equals toInt
         if ((arrStocks[i][6].replace("%","")*1)>(arrStockHi[i]*1) && (arrStockHi[i]*1)>0){
           sClass="HiAlert";
-					sName=arrStockHi[i];
+          sName=arrStockHi[i];
         }else if((arrStocks[i][6].replace("%","")*1)<(arrStockLo[i]*1) && (arrStockLo[i]*1)>0){
           sClass="LoAlert";
-					sName=arrStockLo[i];
+          sName=arrStockLo[i];
         }
-        _gel('stc'+i+'0').className=sClass;
-				_gel('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
-        _gel('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+arrStocks[i][1]+'#chart1:symbol='+arrStocks[i][1]+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
+        document.getElementById('stc'+i+'0').className=sClass;
+        document.getElementById('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
+        document.getElementById('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+encodeURIComponent(arrStocks[i][1])+'#chart1:symbol='+encodeURIComponent(arrStocks[i][1])+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
         var k=3;
         for(var j=1;j<iConfCols+1;j++){
           if(pref.getString("Column"+j)!='0'){
-            _gel('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
+            document.getElementById('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
             k++;
           }
         }
@@ -305,63 +315,65 @@
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
-      var img='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+arrStocks[StockID][1]+'&amp;t='+pref.getString("ChartScope")+'&amp;l=off&amp;z=b">'; 
-      if(_gel("StockSummary").style.display=="block"){
-        _gel("SummaryChartTD").innerHTML=img;
-        _gel("SummaryNameTD").innerHTML=arrStocks[StockID][2];
-        _gel("SummaryDayRangeTD").innerHTML=arrStocks[StockID][20];
-        _gel("Summary52wkRangeTD").innerHTML=arrStocks[StockID][14];
-        _gel("Summary200AvgTD").innerHTML=arrStocks[StockID][19];
-        _gel("SummaryDayVolumeTD").innerHTML=arrStocks[StockID][12];
-        _gel("SummaryLastTradeTime").innerHTML=arrStocks[StockID][7]+' '+arrStocks[StockID][8];
+      var img='<img width="192" height="96" src="http://ichart.finance.yahoo.com/z?s='+encodeURIComponent(arrStocks[StockID][1])+'&amp;t='+pref.getString("ChartScope")+'&amp;l=on&amp;z=b">'; 
+      if(document.getElementById("StockSummary").style.display=="block"){
+        document.getElementById("SummaryChartTD").innerHTML=img;
+        document.getElementById("SummaryNameTD").innerHTML=arrStocks[StockID][2];
+        document.getElementById("SummaryDayRangeTD").innerHTML=arrStocks[StockID][20];
+        document.getElementById("Summary52wkRangeTD").innerHTML=arrStocks[StockID][14];
+        document.getElementById("Summary200AvgTD").innerHTML=arrStocks[StockID][19];
+        document.getElementById("SummaryDayVolumeTD").innerHTML=arrStocks[StockID][12];
+        document.getElementById("SummaryLastTradeTime").innerHTML=arrStocks[StockID][7]+' '+arrStocks[StockID][8];
       }else{
-        _gel("StockChart").innerHTML=img;
+        document.getElementById("StockChart").innerHTML=img;
       }
     }
   }
   function fnInsertSummary(){
     var sTemp='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0><tr><td id="SummaryChartTD" style="width:1%;height:98px"></td><td><table style="font-size:'+fsize+'" width="100%" border=0 cellspacing=0 cellpadding=0><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_name__</b></td><td style="width:10px"></td><td id="SummaryNameTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_dayrange__</b></td><td style="width:10px"></td><td id="SummaryDayRangeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_52weekrange__</b></td><td style="width:10px"></td><td id="Summary52wkRangeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_200daymovingavg__</b></td><td style="width:10px"></td><td id="Summary200AvgTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_dayvolume__</b></td><td style="width:10px"></td><td id="SummaryDayVolumeTD" nowrap></td></tr><tr><td style="width:5px"></td><td nowrap style="width:1%"><b>__MSG_lasttradetime__</b></td><td style="width:10px"></td><td id="SummaryLastTradeTime" nowrap></td></tr></table></td></tr></table>';
-    _gel('StockSummary').innerHTML=sTemp;
-    _gel("StockSummary").style.display='block';
+    document.getElementById('StockSummary').innerHTML=sTemp;
+    document.getElementById("StockSummary").style.display='block';
     fnUpdateSummary(0);
   }
   function fnInsertProfitSummaryTable(){
     var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'">';
     sProfitTable+='<tr width=100%><td nowrap>__MSG_dayearned__: </td><td id="stct1" nowrap></td><td width="10px" nowrap></td><td nowrap>__MSG_earned__: </td><td id="stct2" nowrap></td><td width="10px" nowrap></td><td nowrap>__MSG_value__: </td><td id="stct3" nowrap></td><td nowrap width="70%"></td></tr></table>';
-    _gel("StockProfitSummary").innerHTML=sProfitTable;
+    document.getElementById("StockProfitSummary").innerHTML=sProfitTable;
   }
   function fnInsertAdd(){
-    var sCol='<Col width="18%"><Col width="18%"><Col width="23%"><Col width="18%"><Col width="18%">';
-    var iCols=8;
+    var sCol='<Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%">';
+    var iCols=9;
     var sTDH='';
     var sTD='';
     var bCurr=pref.getString("Currency")!="-";
-		if (bCurr){
-      iCols=9;
-      sCol='<Col width="14%"><Col width="14%"><Col width="19%"><Col width="19%"><Col width="14%"><Col width="14%">';
+    var sBGColor;
+    if (bCurr){
+      iCols=10;
+      sCol='<Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%">';
       sTDH='<td class="cellR">__MSG_currencyrate__</td>';
-		}
-    var sTemp='<hr class="HrDef"><table border=0 id="tblTickers" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=_gel(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="http://stockportfoliogg.googlecode.com/svn/released/images/AddStock.gif"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
-    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan='+iCols+'></td></tr>';
-    var sConfigTable='<table style="width:100%;font-size:'+fsize+'" border=0 cellspacing=0 cellpadding=0>'+sCol+'<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan='+iCols+'></td></tr>'+sLine+'<tr style="font-weight: bold;"><td class="cellL">__MSG_symbol__</td><td class="cellR" >__MSG_numberofstocks__</td><td class="cellR">__MSG_buyprice__</td>'+sTDH+'<td class="cellR">__MSG_hialert__</td><td class="cellR">__MSG_loalert__</td><td colspan=3></td></tr>'+sLine;
-	  for(i=0;i<arrStockSymbols.length;i++){
-		  if (bCurr){
-        sTD='<td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockCurrRates[i]+'</td>';
-      }
-      sConfigTable+='<tr><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockPrices[i]+'</td>'+sTD+'<td id="ctc4'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockHi[i]+'</td><td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="#FFFFFF" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc6'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="http://stockportfoliogg.googlecode.com/svn/released/images/delete.gif" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="http://stockportfoliogg.googlecode.com/svn/released/images/MoveUp.gif" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="http://stockportfoliogg.googlecode.com/svn/released/images/MoveDown.gif" title="__MSG_movedown__"></td></tr>';
     }
-		if (bCurr){
-      sConfigTable+='<tr>'+sLine+'<td colspan=9 title="__MSG_currencytip__">__MSG_selectedcurrency__: '+pref.getString("Currency")+'</td></tr>';
+    var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=document.getElementById(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddStock.gif')+'"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
+    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan='+iCols+'></td></tr>';
+    var sConfigTable='<table style="width:100%;font-size:'+fsize+'" border=0 cellspacing=0 cellpadding=0>'+sCol+'<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan='+iCols+'></td></tr>'+sLine+'<tr style="font-weight: bold;"><td class="cellL">__MSG_symbol__</td><td class="cellR" >__MSG_numberofstocks__</td><td class="cellR">__MSG_buyprice__</td><td class="cellR">__MSG_tradecost__</td>'+sTDH+'<td class="cellR">__MSG_hialert__</td><td class="cellR">__MSG_loalert__</td><td colspan=3></td></tr>'+sLine;
+    for(i=0;i<arrStockSymbols.length;i++){
+      if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+      if (bCurr){
+        sTD='<td id="ctc4'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockCurrRates[i]+'</td>';
+        }
+      sConfigTable+='<tr style="background-Color:'+sBGColor+';"><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockPrices[i]+'</td><td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockTC[i]+'</td>'+sTD+'<td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockHi[i]+'</td><td id="ctc6'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'delete.gif')+'" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveUp.gif') + '" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc9'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveDown.gif') + '" title="__MSG_movedown__"></td></tr>';
+    }
+    if (bCurr){
+      sConfigTable+='<tr>'+sLine+'<td colspan=10 title="__MSG_currencytip__">__MSG_selectedcurrency__: '+pref.getString("Currency")+'</td></tr>';
     }
     sConfigTable+='</table>';
-    _gel("StockAdd").innerHTML=sTemp+sConfigTable;
-		//Hide move arrows with no function
-		if (i>0){
-			_gel("ctc70").style.display="none";
-			_gel("ctc8"+(i-1)).style.display="none";
-		}
+    document.getElementById("StockAdd").innerHTML=sTemp+sConfigTable;
+    //Hide move arrows with no function
+    if (i>0){
+      document.getElementById("ctc80").style.display="none";
+      document.getElementById("ctc9"+(i-1)).style.display="none";
+    }
   }
-	function fnInsertTables(){
+  function fnInsertTables(){
     bTablesReady=false;
     bAllReady=false;
     fnInsertFooter();
@@ -370,18 +382,17 @@
     fnToggleProfit(true);
     fnToggleNews(0);
     //Show add if no stocks are configured
-    if((trim(arrStockSymbols.join(","))=="GOOG,^DJI,EURUSD=X,XAU=X" && arrStockSymbols.length==4) || _gel("StockAdd").style.display=="block"){
+    if((trim(arrStockSymbols.join(","))==sDefStocks && arrStockSymbols.length==4) || document.getElementById("StockAdd").style.display=="block"){
       fnToggleAdd(1);
     }
-    _IG_SetTitle(pref.getString("CustomTitle"));
+    gadgets.window.setTitle(pref.getString("CustomTitle"));
     bTablesReady=true; //All needed tables has been made
     fnUpdateValues();
   }
   function fnToggleProfit(bLoad){
-    var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || 
-             (!bLoad && _gel("StockProfitSummary").style.display=='block')
-    var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || 
-             (!bLoad && _gel("StockProfitSummary").style.display=='none' && _gel("StockProfitDetails").style.display=='none')
+    var bDet=(bLoad && pref.getString("ShowProfit")=='Details') || (!bLoad && document.getElementById("StockProfitSummary").style.display=='block');
+    var bSum=(bLoad && pref.getString("ShowProfit")=='Summary') || (!bLoad && document.getElementById("StockProfitSummary").style.display=='none' && 
+             document.getElementById("StockProfitDetails").style.display=='none');
     if(bSum){
         fnInsertProfitSummaryTable();
         pref.set("ShowProfit","Summary");
@@ -391,18 +402,18 @@
     }else{
         pref.set("ShowProfit","none");
     }
-    _gel("StockProfitDetails").style.display=(bDet)?'block':'none';
-    _gel("StockProfitSummary").style.display=(bSum)?'block':'none';
+    document.getElementById("StockProfitDetails").style.display=(bDet)?'block':'none';
+    document.getElementById("StockProfitSummary").style.display=(bSum)?'block':'none';
     fnUpdateProfit();
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnToggleSummary(bToggle){
     if(bToggle){
-      if(_gel("StockSummary").style.display=="none"){
+      if(document.getElementById("StockSummary").style.display=="none"){
         pref.set("ChartType","Summary");
         fnInsertSummary();
       }else{
-        _gel("StockSummary").style.display="none";
+        document.getElementById("StockSummary").style.display="none";
         pref.set("ChartType","ToolTip");
       }
     }else{
@@ -410,19 +421,19 @@
         fnInsertSummary();
       }
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnToggleAdd(ForceVisible){
-    if((_gel("StockAdd").style.display=="none" && bTablesReady==true)||ForceVisible==1){
-      _gel("StockAdd").style.display="block";
+    if((document.getElementById("StockAdd").style.display=="none" && bTablesReady==true)||ForceVisible==1){
+      document.getElementById("StockAdd").style.display="block";
       fnInsertAdd();
     }else{
-      _gel("StockAdd").style.display="none";
+      document.getElementById("StockAdd").style.display="none";
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
   function fnInsertFooter(){
-    _gel("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="http://stockportfoliogg.googlecode.com/svn/released/images/AddEdit.gif" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="http://stockportfoliogg.googlecode.com/svn/released/images/Summary.gif" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="http://stockportfoliogg.googlecode.com/svn/released/images/money.gif" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1)" src="http://stockportfoliogg.googlecode.com/svn/released/images/News.gif" title="__MSG_shownews__"></td><td style="width:18px;"><a href="http://cnybroe.googlepages.com/help" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="http://stockportfoliogg.googlecode.com/svn/released/images/help.gif" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="http://stockportfoliogg.googlecode.com/svn/released/images/ggroups.gif" title="__MSG_gotoggroups__"></a></td></tr></table>';
+    document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddEdit.gif') + '" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'Summary.gif') + '" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'money.gif') + '" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'News.gif')+'" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'help.gif') + '" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'ggroups.gif') + '" title="__MSG_gotoggroups__"></a></td></tr></table>';
   }
   function fnInsertStockTable(){
     var sBGColor;
@@ -448,14 +459,14 @@
       sStockTable+='</tr>';
     }
     sStockTable+='</table>';
-    _gel("StockData").innerHTML=sStockTable;
+    document.getElementById("StockData").innerHTML=sStockTable;
   }
   function fnInsertProfitDetailsTable(){
     var sCurr='';
-		if (pref.getString("Currency")=="-"){
+    if (pref.getString("Currency")=="-"){
       sCurr='style="visibility:hidden;"';
-		}
-		var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=6></td></tr>';
+    }
+    var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=6></td></tr>';
     var sProfitTable='<hr class="HrDef"><table width="100%" border=0 cellspacing=0 cellpadding=0 style="width:100%;font-size:'+fsize+'" class="def"><col width="10%"><col width="20%"><col width="25%"><col width="15%"><col width="15%"><col width="15%"><tr style="font-weight:bold;"><td class="cellL">__MSG_name__</td><td class="cellR">__MSG_dayearned__</td><td class="cellR">__MSG_earned__</td><td class="cellR">__MSG_value__</td><td class="cellC" '+sCurr+'>__MSG_currency__</td><td class="cellL" '+sCurr+'>__MSG_currencyrate__</td></tr>'+sLine;
     for(i=0;i<arrStockSymbols.length+1;i++){
       if(i==arrStockSymbols.length){
@@ -464,18 +475,23 @@
       sProfitTable+='<tr><td id="ptc0'+i+'" class="cellL"></td><td id="ptc1'+i+'" class="cellR"></td><td id="ptc2'+i+'" class="cellR"></td><td id="ptc3'+i+'" class="cellR"></td><td id="ptc4'+i+'" class="cellC" '+sCurr+'></td><td id="ptc5'+i+'" class="cellR" '+sCurr+'></td></tr>';
     }
     sProfitTable+='</table>';
-    _gel("StockProfitDetails").innerHTML=sProfitTable;
+    document.getElementById("StockProfitDetails").innerHTML=sProfitTable;
   }
   function fnToggleNews(bToggle){
     if (bToggle){
-      if(_gel("StockNews").style.display=="none"){
-        _gel("StockNews").innerHTML='<hr class="HrDef"><div class="loading">__MSG_loading__</div>';
-        var url='http://finance.yahoo.com/rss/headline?s='+arrStockSymbols.join(",");
-				_IG_FetchFeedAsJSON(url,fnInsertNews,5,false);
-        _gel("StockNews").style.display="block";
+      if(document.getElementById("StockNews").style.display=="none"){
+        document.getElementById("StockNews").innerHTML='<hr class="HrDef"><div class="loading">__MSG_loading__</div>';
+        var url='http://finance.yahoo.com/rss/headline?s='+encodeURIComponent(arrStockSymbols.join(","));
+        var params = {};
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+        params[gadgets.io.RequestParameters.NUM_ENTRIES] = 5;
+        params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 600;
+        
+        gadgets.io.makeRequest(url, fnInsertNews, params);
+        document.getElementById("StockNews").style.display="block";
         pref.set("ShowNews","1");
       }else{
-        _gel("StockNews").style.display="none";
+        document.getElementById("StockNews").style.display="none";
         pref.set("ShowNews","0");
       }
     }else{
@@ -483,33 +499,39 @@
         fnToggleNews(1);
       }
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
-  function fnInsertNews(feed){
-		var html="";
+  function fnInsertNews(feedIn){
+    var html="";
+    var feed = feedIn.data;
     for(var i in feed.Entry){
-      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="http://stockportfoliogg.googlecode.com/svn/released/images/Square.gif"></td><td><span><a href="'+_hesc(feed.Entry[i].Link)+'" target="_blank">';
-      html+=_hesc(feed.Entry[i].Title)+'</a></span></td></tr>';
+      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'Square.gif')+'"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
+      html+=feed.Entry[i].Title+'</a></span></td></tr>';
     }
-    _gel("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
-    _IG_AdjustIFrameHeight();
+    document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
+    gadgets.window.adjustHeight();
   }
   function fnSymbolSearch(symbol){
     if(trim(symbol)!=''){
-      _gel("StockAddList").innerHTML='__MSG_loading__';
-      symbol=symbol.replace(' ','+');
-			_IG_FetchContent('http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+symbol+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback',fnSymbolSearchResponse,{refreshInterval:3599});
+      document.getElementById("StockAddList").innerHTML='__MSG_loading__';
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+      params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 3600;
+      var url='http://d.yimg.com/autoc.finance.yahoo.com/autoc?query='+encodeURIComponent(symbol)+'&callback=YAHOO.Finance.SymbolSuggest.ssCallback';
+      gadgets.io.makeRequest(url, fnSymbolSearchResponse, params);
+
     }else{
-      _gel("StockAddList").style.display="none";
+      document.getElementById("StockAddList").style.display="none";
     }
-    _IG_AdjustIFrameHeight();
+    gadgets.window.adjustHeight();
   }
-  function fnSymbolSearchResponse(ResponseText){
+  function fnSymbolSearchResponse(ResponseTextIn){
     var iStart=0;
     var iEnd=0;
     var arrSearch="";
     var i=0;
     var sTemp="";
+    var ResponseText = ResponseTextIn.data;
     var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=4></td></tr>';
     var sTable='<table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:'+fsize+'" class="def">'+sLine+'<tr style="font-weight:bold;"><td>Symbol</td><td>Name</td><td>Type</td><td>Exchange</td></tr>'+sLine;
     if (ResponseText.indexOf('"Result":[]',1)<1){
@@ -520,7 +542,7 @@
         iStart=arrSearch[i].indexOf('"symbol":"',0)+10;
         iEnd=arrSearch[i].indexOf('","',iStart);
         sSymbol=arrSearch[i].substring(iStart,iEnd);
-        sTable+='<tr style="cursor: pointer;" onmouseover=\'this.style.backgroundColor="#DCDCDC";\' onmouseout=\'this.style.backgroundColor="#FFFFFF";\' onclick=\'_gel("txtStockSymbol").value="'+sSymbol+'"\'><td nowrap>'+sSymbol+'</td>';
+        sTable+='<tr style="cursor: pointer;" onmouseover=\'this.style.backgroundColor="#DCDCDC";\' onmouseout=\'this.style.backgroundColor="#FFFFFF";\' onclick=\'document.getElementById("txtStockSymbol").value="'+sSymbol+'"\'><td nowrap>'+sSymbol+'</td>';
         iStart=arrSearch[i].indexOf('"name": "',1)+9;
         iEnd=arrSearch[i].indexOf('","',iStart);
         sTable+='<td nowrap>'+arrSearch[i].substring(iStart,iEnd)+'</td>';
@@ -545,9 +567,9 @@
     }else{
       sTable+='<tr><td colspan=4>__MSG_notfound__</td></tr></table>';
     }
-    _gel("StockAddList").innerHTML=sTable;
-    _gel("StockAddList").style.display="block";
-    _IG_AdjustIFrameHeight();
+    document.getElementById("StockAddList").innerHTML=sTable;
+    document.getElementById("StockAddList").style.display="block";
+    gadgets.window.adjustHeight();
   }
   function fnEditStock(sender){
     if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
@@ -557,7 +579,7 @@
     var c=(sender.id.substr(3,1)==0)?'left':'right';
     var d='<input type="text" id="'+a+'" onkeypress="EditOnKey(event,this);" onBlur="EditOnBlur(this);" value="'+sTemp+'" class="def" style="font-size:'+fsize+';width:'+b+';height:18px;margin:0px;text-align:'+c+';" />';
     sender.innerHTML=d;
-    _gel(a).focus();
+    document.getElementById(a).focus();
   }
   function EditOnBlur(s){
     var index=s.id.substr(4);
@@ -566,9 +588,10 @@
       if(col==0){arrStockSymbols[index]=s.value;}
       if(col==1){arrStockQtys[index]=s.value;}
       if(col==2){arrStockPrices[index]=s.value;}
-      if(col==3){arrStockCurrRates[index]=s.value;}
-      if(col==4){arrStockHi[index]=s.value;}
-      if(col==5){arrStockLo[index]=s.value;}
+      if(col==3){arrStockTC[index]=s.value;}
+      if(col==4){arrStockCurrRates[index]=s.value;}
+      if(col==5){arrStockHi[index]=s.value;}
+      if(col==6){arrStockLo[index]=s.value;}
       fnSavePrefs();
     }
     fnLoad();
@@ -580,15 +603,16 @@
   }
   function fnTPChart(show){
     if(pref.getString("ChartType")=='ToolTip' && show==1){
-      _gel("StockChart").style.display="block";
+      document.getElementById("StockChart").style.display="block";
     }else{
-      _gel("StockChart").style.display="none";
+      document.getElementById("StockChart").style.display="none";
     }
   }
   function fnDeleteStock(index){
     arrStockSymbols.splice(index,1);
     arrStockQtys.splice(index,1);
     arrStockPrices.splice(index,1);
+    arrStockTC.splice(index,1);
     arrStockCurrRates.splice(index,1);
     arrStockHi.splice(index,1);
     arrStockLo.splice(index,1);
@@ -596,32 +620,34 @@
     fnLoad();
   }
   function fnMoveStock(index,direction){
+    var iAC;
+    var iB;
     if(direction==1){
       if(index>arrStockSymbols.length-2){return;}
-      arrStockSymbols.splice(index,2,arrStockSymbols[index+1],arrStockSymbols[index]);
-      arrStockQtys.splice(index,2,arrStockQtys[index+1],arrStockQtys[index]);
-      arrStockPrices.splice(index,2,arrStockPrices[index+1],arrStockPrices[index]);
-      arrStockCurrRates.splice(index,2,arrStockCurrRates[index+1],arrStockCurrRates[index]);
-      arrStockHi.splice(index,2,arrStockHi[index+1],arrStockHi[index]);
-      arrStockLo.splice(index,2,arrStockLo[index+1],arrStockLo[index]);
+      iAC = index;
+      iB = index+1;
     }else{
       if(index==0){return;}
-      arrStockSymbols.splice(index-1,2,arrStockSymbols[index],arrStockSymbols[index-1]);
-      arrStockQtys.splice(index-1,2,arrStockQtys[index],arrStockQtys[index-1]);
-      arrStockPrices.splice(index-1,2,arrStockPrices[index],arrStockPrices[index-1]);
-      arrStockCurrRates.splice(index-1,2,arrStockCurrRates[index],arrStockCurrRates[index-1]);
-      arrStockHi.splice(index-1,2,arrStockHi[index],arrStockHi[index-1]);
-      arrStockLo.splice(index-1,2,arrStockLo[index],arrStockLo[index-1]);
-	  }
+      iAC = index-1;
+      iB = index;
+    }
+      arrStockSymbols.splice(iAC,2,arrStockSymbols[iB],arrStockSymbols[iAC]);
+      arrStockQtys.splice(iAC,2,arrStockQtys[iB],arrStockQtys[iAC]);
+      arrStockPrices.splice(iAC,2,arrStockPrices[iB],arrStockPrices[iAC]);
+      arrStockTC.splice(iAC,2,arrStockTC[iB],arrStockTC[iAC]);
+      arrStockCurrRates.splice(iAC,2,arrStockCurrRates[iB],arrStockCurrRates[iAC]);
+      arrStockHi.splice(iAC,2,arrStockHi[iB],arrStockHi[iAC]);
+      arrStockLo.splice(iAC,2,arrStockLo[iB],arrStockLo[iAC]);
     fnSavePrefs();
     fnLoad();
   }
   function fnAddStock(Symbol){
-    Symbol=Symbol.replace(/ /g,'');
-    if(Symbol.length>0){
-      arrStockSymbols.push(Symbol);
+    var tmp=Symbol.replace(/ /g,'');
+    if(tmp.length>0 && Symbol!='__MSG_symbolsearchtip__'){
+      arrStockSymbols.push(tmp);
       arrStockQtys.push(0);
       arrStockPrices.push(0);
+      arrStockTC.push(0);
       arrStockCurrRates.push("???");
       arrStockHi.push(0);
       arrStockLo.push(0);
@@ -630,46 +656,62 @@
     }
   }
   function fnSavePrefs(){
-    //pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),StockCurrRates",arrStockCurrRates.join(","));
-    pref.set("StockSymbols", arrStockSymbols.join(","))
-    pref.set("StockQtys", arrStockQtys.join(","))
-    pref.set("StockHi", arrStockHi.join(","))
-    pref.set("StockLo", arrStockLo.join(","))
-    pref.set("StockPrices", arrStockPrices.join(","))
-    pref.set("StockCurrRates", arrStockCurrRates.join(","))
+    if (arrStockSymbols.length<iMaxStockNo+1){
+      pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockTC",arrStockTC.join(","),"StockCurrRates",arrStockCurrRates.join(","));
+    }
   }
   function fnPrefsValidation(inp){
+    //Check if no stocks are configured
     if (trim(inp.join(","))==""){
-		  arrStockSymbols="^GSPC,RUWUT.X,EURUSD=X,XAU=X".split(",");
-			arrStockQtys="100,0,200,300".split(",");
-			arrStockPrices="235,0,0,0".split(",");
-			arrStockCurrRates="1,1,1,1".split(",");
-			arrStockHi="500,10000,2,0.002".split(",");
-			arrStockLo="300,6000,1,0.0005".split(",");
+      arrStockSymbols=sDefStocks.split(",");
+      arrStockQtys="100,0,200,300".split(",");
+      arrStockPrices="235,0,0,0".split(",");
+      arrStockTC="5,3,4,2".split(",");
+      arrStockCurrRates="1,1,1,1".split(",");
+      arrStockHi="500,10000,2,0.002".split(",");
+      arrStockLo="300,6000,1,0.0005".split(",");
     }
-		for(var i=0;i<inp.length;i++){
-		  if (isNaN(arrStockQtys[i])){arrStockQtys[i]=0;}
-		  if (isNaN(arrStockPrices[i])){arrStockPrices[i]=0;}
-		  //if (isNaN(arrStockCurrRates[i])){arrStockCurrRates[i]=1;}
-		  if (isNaN(arrStockHi[i])){arrStockHi[i]=0;}
-		  if (isNaN(arrStockLo[i])){arrStockLo[i]=0;}
-		}
+    //Check for empty prefs
+    for(var i=0;i<inp.length;i++){
+    if (isNaN(arrStockQtys[i])||arrStockTC[i].length==0){arrStockQtys[i]=0;}
+      if (isNaN(arrStockPrices[i])||arrStockTC[i].length==0){arrStockPrices[i]=0;}
+      if (isNaN(arrStockTC[i])||arrStockTC[i].length==0){arrStockTC[i]=0;}
+      if (isNaN(arrStockHi[i])||arrStockTC[i].length==0){arrStockHi[i]=0;}
+      if (isNaN(arrStockLo[i])||arrStockTC[i].length==0){arrStockLo[i]=0;}
+      //Check for blacklisted symbols
+      if (arrStockSymbols[i]=='^DJI'){
+        var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
+        var divMess = document.createElement("divMess");
+        var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
+        divMess.innerHTML = '<span style="background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
+        miniMsg.createTimerMessage(divMess,10);
+        fnDeleteStock(i);
+        i--;
+      }
+    }
+
+    //Check if too many stocks are configured
+    if (arrStockSymbols.length>iMaxStockNo){
+      var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
+      var divMess = document.createElement("divMess");
+      divMess.innerHTML = '<span style="background-Color:red;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit">More than '+iMaxStockNo+' stocks has been configured. Please read more here.</a> &raquo;</span>';
+      var statusMsg = miniMsg.createStaticMessage(divMess);
+    }
   }
   function fnMessage(){
-	  //if((iPrefVersion*1)<(iVersion*1)){
-    //  var miniMsg=new _IG_MiniMessage(__MODULE_ID__);
-		//	var msghtml='<a target=\"_new\" href=\"http://cnybroe.googlepages.com/releasenotes\">2008-12-04: Gain and loss in local currency is now possible.<br>Just choose your currency in gadget settings.<a>';
-		//	miniMsg.createDismissibleMessage(msghtml, fnHideMess(iVersion));
-		//}
-      var miniMsg1=new _IG_MiniMessage(__MODULE_ID__);
-			var msghtml1='<a target=\"_new\" href=\"http://www.google.dk/ig/directory?url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml">Please write a comment and rate the gadget if you find it useful.<a>';
-			miniMsg1.createTimerMessage(msghtml1,8);
-	}
-	function fnHideMess(GadgetVersion){
-    return function(){
-      _IG_AdjustIFrameHeight();
-			iPrefVersion=GadgetVersion;
-      pref.set("GadgetVersion",iPrefVersion);
+    if((iPrefVersion*1)<(iVersion*1)){
+      var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
+      var divMess = document.createElement("divMess");
+      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">New features. Read more here.</a> &raquo;</span>';
+      miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
+    }
+    CreatePromos();
+  }
+  function fnHideMess(GadgetVersion){
+    return function() {
+    gadgets.window.adjustHeight();
+    pref.set("GadgetVersion",GadgetVersion);
+    return true;
     }
   }
   function fngetDate(secs){
@@ -679,16 +721,16 @@
     var year=currentTime.getFullYear();
     var hours=fnZeroPad(currentTime.getHours(),2);
     var minutes=fnZeroPad(currentTime.getMinutes(),2);
-    if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2)};
+    if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2);}
     return year+'-'+month+'-'+day+' '+hours+':'+minutes;
   }
-	function fnZeroPad(num,length){
-		var snum = num + '';
-		while(snum.length < length) {
-		  snum = '0' + snum; 
-		}
-		return snum;
-	}
+  function fnZeroPad(num,length){
+    var snum = num + '';
+    while(snum.length < length) {
+      snum = '0' + snum; 
+    }
+    return snum;
+  }
   function trim(s){
     if (s){
       return s.replace(/^\s*/,"").replace(/\s*$/,"");
@@ -700,10 +742,26 @@
     arrStockSymbols=pref.getString("StockSymbols").split(",");
     arrStockQtys=pref.getString("StockQtys").split(",");
     arrStockPrices=pref.getString("StockPrices").split(",");
+    arrStockTC=pref.getString("StockTC").split(",");
     arrStockCurrRates=pref.getString("StockCurrRates").split(",");
     arrStockHi=pref.getString("StockHi").split(",");
     arrStockLo=pref.getString("StockLo").split(",");
     iPrefVersion=pref.getString("GadgetVersion");
+  }
+  function myRound(inp){
+    var sInp = inp.toString();
+    var i = sInp.indexOf(".");
+    if (sInp.length>6 && i>-1 && !isNaN(inp)){
+      if (i<6){
+        i=6;
+      }
+      inp=sInp.substr(0,i)*1;
+    }
+    return inp;
+  }
+  function myRoundD(inp,digits){
+    var x=Math.pow(10,digits);
+    return Math.round(inp*x)/x;
   }
   function fnNumToColor(number,zeroColor){
     var sColor=zeroColor;
@@ -713,27 +771,27 @@
     }
     return sColor;
   }
-	function txtFocus(sender,focus){
+  function txtFocus(sender,focus){
     if (trim(sender.value)=="" || trim(sender.value)==sender.title){
-			if (focus==1){
-			  sender.value="";
-			  sender.style.color='#000000';
-			}else{
-			  sender.style.color='#AAAAAA';
-			  sender.value=sender.title;
-			}
-		}
-	}
+      if (focus==1){
+        sender.value="";
+        sender.style.color='#000000';
+      }else{
+        sender.style.color='#AAAAAA';
+        sender.value=sender.title;
+      }
+    }
+  }
   function splitLine(inp){
-  	var out=new Array();
+    var out=new Array();
     out=inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
     for(var i=0;i<out.length;i++){
       out[i]=out[i].replace(/"/g,"");
-		}
-		if(out.length!=26){
-			out='N/A,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');	
-		}
-		if(out[0]!="N/A"){
+    }
+    if(out.length!=26){
+      out='N/A,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');  
+    }
+    if(out[0]!="N/A"){
       out[24]="???";
       out[25]=out[0].substr(0,out[0].indexOf("<"));
     }
@@ -741,18 +799,50 @@
   }
   function print(msg){
     if (debug){
-      var debug_html = _gel("debug").innerHTML;
-      if (_gel("debug").style.display='none'){
-        _gel("debug").style.display='block';
-        _IG_AdjustIFrameHeight();   
+      var debug_html = document.getElementById("debug").innerHTML;
+      if (document.getElementById("debug").style.display=='none'){
+        document.getElementById("debug").style.display='block';
+        gadgets.window.adjustHeight();   
       }
-      msg=fngetDate(1)+"; "+_hesc(msg.toString())+"<br>";
+      msg=fngetDate(1)+"; "+msg.toString()+"<br>";
       debug_html=msg+debug_html;
-      _gel("debug").innerHTML=debug_html;
+      document.getElementById("debug").innerHTML=debug_html;
     }
-	}
+  }
+  function _IG_MyCallback(callbackFunction, parameters) {
+    var args = arguments;
+    return function() {
+      var combinedArgs = Array.prototype.slice.call(arguments);
+      callbackFunction.apply(null,combinedArgs.concat(Array.prototype.slice.call(args,1)))
+    }
+  }
+  function CreatePromos() {
+    var pronce = pref.getInt("campaign_1");
+    if (pronce != "1") {
+      var promomsg = new gadgets.MiniMessage(__MODULE_ID__, document.getElementById("promo"));
+      var proText = ['Add a Currency iGoogle gadget with real-time exchange rates',
+                     'Convert among 80+ currencies on your iGoogle page. Add now!',
+                     'Add a Currency gadget to iGoogle with charts and market news'];
+      var getProNo = Math.floor(Math.random()*proText.length);
+      var divpromo = document.createElement("divpromo");
+      divpromo.innerHTML = '<span><a href="javascript:callCampaignLink(' + getProNo + ');" class=prostyle>' + proText[getProNo] + '</a> &raquo;</span>';
+      promomsg.createDismissibleMessage(divpromo, callPromoClick);
+      gadgets.window.adjustHeight();
+    }
+  }
+  function callCampaignLink(ProNo){
+    window.open('http://fusion.google.com/add?source=atgs&moduleurl=http%3A//www.turkishmedia.com/gadget/doviz.xml');
+    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1/Clicked");    
+  }
+  function callPromoClick() {
+    pref.set("campaign_1", 1);
+    _IG_Analytics("UA-2031644-1", "/Portfolio/campaign1/Dismissed");
+    gadgets.window.adjustHeight();
+  return true;
+  }
+  
  //1-2-3 start
-	fnInit();  
+  fnInit();  
    </script>
   ]]>
   </Content>
