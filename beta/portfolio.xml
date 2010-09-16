@@ -110,13 +110,11 @@
   }
 
   function fnLoad(){
-    //print("fnLoad started");
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
     fnInsertTables();
   }
   function fnLoadData(){
-    //print("fnLoadData started");
     bDataReady=false;
     bAllReady=false;
     clearTimeout(iTmrRetry);
@@ -126,21 +124,14 @@
     for(var i=0;i<arrStockSymbols.length;i++){
       sSymb+=arrStockSymbols[i]+',';
     }
-        print(sSymb);
     sSymb=sSymb.substr(0,sSymb.length-1);
-    //var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
-    //print("fnLoadData url:"+url);
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
     gadgets.io.makeRequest(url,fnStockDataProxy,params);
-    //print("fnLoadData ended");
   }
   function fnStockDataProxy(stockData){
-    //print("fnStockDataProxy started");
-    //print(stockData.data);
-    
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
@@ -153,26 +144,19 @@
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CW='+Math.random()*1000;
-    ////print("fnStockDataProxy url:"+url);
    
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
-    //gadgets.io.makeRequest(url,function(){fnPrepareStockData(stockData)},params);
     gadgets.io.makeRequest(url, _IG_MyCallback(fnPrepareStockData,stockData), params);
-    
-    //print("fnStockDataProxy ended");
   }
   function fnPrepareStockData(currDataIn,stockDataIn){
-    //print("fnPrepareStockData 4 started");
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
     var arrLineValues=new Array();
     var currData = currDataIn.data;
     var stockData = stockDataIn.data;
 
-    //print("fnPrepareStockData Received currdata:"+currData);
-    //print("fnPrepareStockData Received stockdata:"+stockData);
     currData=currData.replace(/0.00/g,"1.00");
     arrStocks=new Array();
     
@@ -183,23 +167,16 @@
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
-        //arrLineValues[30]=(isNaN(arrLineValues[4]))?0:Math.round(arrLineValues[4]*arrStockQtys[i]*100*arrLineValues[26])/100;//Earned today in local currency
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
-          //If  exch.rate has not been set, then use current rate
           arrStockCurrRates[i]=arrLineValues[26];
         }
-        //arrLineValues[31]=Math.round(((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))*arrStockQtys[i]*100)/100;//Earned in local currency
         var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]);
         arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
-        //arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:Math.round(arrLineValues[3].replace(/\%/g,"")*10)/10;
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
-        //arrLineValues[34]=Math.round(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Value in local currency
         arrLineValues[34]=myRound(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Stock Value in local currency
         arrLineValues[33]=0;
         if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
-          //arrLineValues[33]=Math.round((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*1000)/10;//Total Gain %
-          //arrLineValues[33]=myRound((((arrLineValues[6].replace("%","")*arrLineValues[26])-(arrStockPrices[i]*arrStockCurrRates[i]))/(arrStockPrices[i]*arrStockCurrRates[i]))*100);//Total Gain %
           arrLineValues[33]=myRound(((arrLineValues[34] / TC)-1)*100);//Total Gain %
         }
         arrStocks[i]=arrLineValues;
@@ -207,10 +184,8 @@
       bDataReady=true; //Data has been read and calculated
       fnUpdateValues();
     }
-    //print("fnPrepareStockData ended");
   }
   function fnRetry(){
-    //print("fnRetry started");
     clearTimeout(iTmrRetry);
     if (!bDataReady){
       if (iSDRetry<10){
@@ -225,12 +200,9 @@
       iTmrRetry=setTimeout('fnLoadData()',pref.getInt("UpdateInterval")-5000); 
       iSDRetry=0;
     }
-    //print("fnRetry ended");
   }
   function fnUpdateValues(){
-    //print("fnUpdateValues started");
     bAllReady=(bDataReady && bTablesReady);
-    //print("fnUpdateValues bAllReady:"+bAllReady);
     if (bAllReady){
       fnUpdateStockTable();
       fnUpdateProfit();
@@ -238,10 +210,8 @@
       document.getElementById("FooterMsg").innerHTML='__MSG_lastupdated__:'+fngetDate(false);
     }
     gadgets.window.adjustHeight();
-    //print("fnUpdateValues ended");
   }
   function fnUpdateProfit(){
-    //print("fnUpdateProfit started");
     if (bAllReady){
       var iDayTotal=0;
       var iEarnTot=0;
@@ -268,11 +238,8 @@
       //Totals
       sDTC=fnNumToColor(iDayTotal,"#000000");
       sETC=fnNumToColor(iEarnTot,"#000000");
-      //iDayTotal=Math.round(iDayTotal*100)/100;
       iDayTotal=myRoundD(iDayTotal,0);
-      //iEarnTot=Math.round(iEarnTot*100)/100;
       iEarnTot=myRoundD(iEarnTot,0);
-      //iValTot=Math.round(iValTot*100)/100;
       iValTot=myRoundD(iValTot,0);
       if (bPD){
         document.getElementById("ptc1"+i).style.color=sDTC;
@@ -290,7 +257,6 @@
         document.getElementById("stct3").innerHTML='<b>'+iValTot+'</b>';
       }
     }
-    //print("fnUpdateProfit ended");
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
@@ -309,7 +275,6 @@
     }
   }
   function fnUpdateStockTable(){
-    //print("fnUpdateStockTable started");
     var sName;
     var sbgColor;
     
@@ -321,7 +286,6 @@
         }else if (pref.getInt("NameColumn")==40){//name(symbol)
           sName=arrStocks[i][2]+' ('+arrStocks[i][1]+')';
         }else if (!isNaN(arrStocks[i][21])){//If this is an option
-          //sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+Math.round(arrStocks[i][21])+" "+arrStocks[i][22];
           sName=sName.substr(0,sName.indexOf(" "))+" "+arrStocks[i][23].slice(4)+" "+myRound(arrStocks[i][21])+" "+arrStocks[i][22];
         }
         document.getElementById('stc'+i+'1').innerHTML='<a Title="'+trim(arrStocks[i][25])+'" id="stcn'+i+'" onmouseover="fnTPChart(1);fnUpdateSummary('+i+');" onmouseout="fnTPChart(0)" target="_new" href="http://finance.yahoo.com/q?s='+encodeURIComponent(arrStocks[i][1])+'">'+sName+'</a>'; 
@@ -351,7 +315,6 @@
         }
       }
     }
-    //print("fnUpdateStockTable ended");
   }
   function fnUpdateSummary(StockID){
     if (bAllReady){
@@ -392,7 +355,7 @@
       sCol='<Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%">';
       sTDH='<td class="cellR">__MSG_currencyrate__</td>';
     }
-    var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=document.getElementById(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddStock.gif')+'"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
+    var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=document.getElementById(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+IMAGES_BASE+'AddStock.gif"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
     var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan='+iCols+'></td></tr>';
     var sConfigTable='<table style="width:100%;font-size:'+fsize+'" border=0 cellspacing=0 cellpadding=0>'+sCol+'<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan='+iCols+'></td></tr>'+sLine+'<tr style="font-weight: bold;"><td class="cellL">__MSG_symbol__</td><td class="cellR" >__MSG_numberofstocks__</td><td class="cellR">__MSG_buyprice__</td><td class="cellR">__MSG_tradecost__</td>'+sTDH+'<td class="cellR">__MSG_hialert__</td><td class="cellR">__MSG_loalert__</td><td colspan=3></td></tr>'+sLine;
     for(i=0;i<arrStockSymbols.length;i++){
@@ -400,7 +363,7 @@
       if (bCurr){
         sTD='<td id="ctc4'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockCurrRates[i]+'</td>';
         }
-      sConfigTable+='<tr style="background-Color:'+sBGColor+';"><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockPrices[i]+'</td><td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockTC[i]+'</td>'+sTD+'<td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockHi[i]+'</td><td id="ctc6'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'delete.gif')+'" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveUp.gif') + '" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc9'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveDown.gif') + '" title="__MSG_movedown__"></td></tr>';
+      sConfigTable+='<tr style="background-Color:'+sBGColor+';"><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockPrices[i]+'</td><td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockTC[i]+'</td>'+sTD+'<td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockHi[i]+'</td><td id="ctc6'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+IMAGES_BASE+'delete.gif" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+IMAGES_BASE+'MoveUp.gif" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc9'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+IMAGES_BASE+'MoveDown.gif" title="__MSG_movedown__"></td></tr>';
     }
     if (bCurr){
       sConfigTable+='<tr>'+sLine+'<td colspan=10 title="__MSG_currencytip__">__MSG_selectedcurrency__: '+pref.getString("Currency")+'</td></tr>';
@@ -473,7 +436,7 @@
     gadgets.window.adjustHeight();
   }
   function fnInsertFooter(){
-    document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddEdit.gif') + '" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'Summary.gif') + '" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'money.gif') + '" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'News.gif')+'" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'help.gif') + '" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'ggroups.gif') + '" title="__MSG_gotoggroups__"></a></td></tr></table>';
+    document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+IMAGES_BASE+'AddEdit.gif" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+IMAGES_BASE+'Summary.gif" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+IMAGES_BASE+'money.gif" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+IMAGES_BASE+'News.gif" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'help.gif" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'ggroups.gif" title="__MSG_gotoggroups__"></a></td></tr></table>';
   }
   function fnInsertStockTable(){
     var sBGColor;
@@ -542,22 +505,18 @@
     gadgets.window.adjustHeight();
   }
   function fnInsertNews(feedIn){
-    //print("fnInsertNews: Started");
     var html="";
     var feed = feedIn.data;
     for(var i in feed.Entry){
-      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'Square.gif')+'"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
+      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+IMAGES_BASE+'Square.gif"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
       html+=feed.Entry[i].Title+'</a></span></td></tr>';
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
     gadgets.window.adjustHeight();
-    //print("fnInsertNews: Ended");
   }
   function fnSymbolSearch(symbol){
-    //print("fnSymbolSearch: Started");
     if(trim(symbol)!=''){
       document.getElementById("StockAddList").innerHTML='__MSG_loading__';
-      //symbol=symbol.replace(' ','+');
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
       params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 3600;
@@ -568,10 +527,8 @@
       document.getElementById("StockAddList").style.display="none";
     }
     gadgets.window.adjustHeight();
-    //print("fnSymbolSearch: Ended");
   }
   function fnSymbolSearchResponse(ResponseTextIn){
-    //print("fnSymbolSearchResponse: Started");
     var iStart=0;
     var iEnd=0;
     var arrSearch="";
@@ -616,7 +573,6 @@
     document.getElementById("StockAddList").innerHTML=sTable;
     document.getElementById("StockAddList").style.display="block";
     gadgets.window.adjustHeight();
-    //print("fnSymbolSearchResponse: Ended");
   }
   function fnEditStock(sender){
     if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
@@ -703,10 +659,8 @@
     }
   }
   function fnSavePrefs(){
-    //print('fnSavePrefs. Number of stocks:'+arrStockSymbols.length);
     if (arrStockSymbols.length<iMaxStockNo+1){
       pref.set("StockSymbols",arrStockSymbols.join(","),"StockQtys",arrStockQtys.join(","),"StockHi",arrStockHi.join(","),"StockLo",arrStockLo.join(","),"StockPrices",arrStockPrices.join(","),"StockTC",arrStockTC.join(","),"StockCurrRates",arrStockCurrRates.join(","));
-      //print('fnSavePrefs. Stocks saved');
     }
   }
   function fnPrefsValidation(inp){
@@ -729,7 +683,6 @@
       if (isNaN(arrStockLo[i])||arrStockLo[i].length==0){arrStockLo[i]=0;}
       //Check for blacklisted symbols
       if (arrStockSymbols[i]=='^DJI'){
-        print("DJI found");
         var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
         var divMess = document.createElement("divMess");
         var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
@@ -756,7 +709,7 @@
             pref.getString("ChartScope")+"ChartScope"+pref.getString("UpdateInterval")+"UpdateInterval"+
             pref.getString("Flashing")+"Flashing";
 
-    print('PrefLength:'+tmp.length);
+    //print('PrefLength:'+tmp.length);
 
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
@@ -767,8 +720,6 @@
     }
   }
   function fnMessage(){
-  print("iPrefVersion="+iPrefVersion*1);
-  print("iVersion="+iVersion*1);
     if((iPrefVersion*1)<(iVersion*1)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
@@ -779,28 +730,11 @@
   }
   function fnHideMess(GadgetVersion){
     return function() {
-    print("GadgetVersion="+GadgetVersion);
     gadgets.window.adjustHeight();
     pref.set("GadgetVersion",GadgetVersion);
     return true;
     }
   }
-
-//    print("GadgetVersion="+GadgetVersion);
-//    gadgets.window.adjustHeight();
-//    pref.set("GadgetVersion",GadgetVersion);
-//    return true;
-//  }
-
-//  function fnHideMess(GadgetVersion){
-//    //print("fnHideMess started");
-//    return function(){
-//      gadgets.window.adjustHeight();
-//      iPrefVersion=GadgetVersion;
-//      pref.set("GadgetVersion",iPrefVersion);
-//    //print("fnHideMess ended");
-//    };
-//  }  
   function fngetDate(secs){
     var currentTime=new Date();
     var month=fnZeroPad(currentTime.getMonth()+1,2);
