@@ -93,14 +93,16 @@
   var bDataReady;
   var bTablesReady;
   var bAllReady;
-  var iMaxStockNo=45;
+  var iMaxStockNo=40;
   var sDefStocks="^GSPC,RUWUT.X,EURUSD=X,XAU=X";
   var iStockCols=5;
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
   var debug=0;
- 
+  
+  //gadgets.window.adjustHeight is called too many times at load. Must be fixed  
+
   function fnInit(){
     fnReadPrefs();
     fnLoad();
@@ -133,14 +135,16 @@
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
+    
     arrLines=stockData.data.split('\r\n');
+    
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CW='+Math.random()*1000;
-
+   
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
@@ -165,7 +169,6 @@
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
-          //If  exch.rate has not been set, then use current rate
           arrStockCurrRates[i]=arrLineValues[26];
         }
         var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]);
@@ -352,7 +355,7 @@
       sCol='<Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%"><Col width="14%">';
       sTDH='<td class="cellR">__MSG_currencyrate__</td>';
     }
-    var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=document.getElementById(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddStock.gif')+'"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
+    var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:'+fsize+'"><tr><td width="62px" align="left"><input type="text" style="font-size:'+fsize+';width:180px;color:#AAAAAA;" bclass="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="__MSG_symbolsearchtip__" value="__MSG_symbolsearchtip__" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=fnSymbolSearch(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=document.getElementById(\'txtStockSymbol\').value;fnAddStock(Temp);" title="__MSG_addstock__" src="'+IMAGES_BASE+'AddStock.gif"></td></tr></table><div id="StockAddList" style="font-size:'+fsize+'" class="SearchList"></div>';
     var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan='+iCols+'></td></tr>';
     var sConfigTable='<table style="width:100%;font-size:'+fsize+'" border=0 cellspacing=0 cellpadding=0>'+sCol+'<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan='+iCols+'></td></tr>'+sLine+'<tr style="font-weight: bold;"><td class="cellL">__MSG_symbol__</td><td class="cellR" >__MSG_numberofstocks__</td><td class="cellR">__MSG_buyprice__</td><td class="cellR">__MSG_tradecost__</td>'+sTDH+'<td class="cellR">__MSG_hialert__</td><td class="cellR">__MSG_loalert__</td><td colspan=3></td></tr>'+sLine;
     for(i=0;i<arrStockSymbols.length;i++){
@@ -360,7 +363,7 @@
       if (bCurr){
         sTD='<td id="ctc4'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockCurrRates[i]+'</td>';
         }
-      sConfigTable+='<tr style="background-Color:'+sBGColor+';"><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockPrices[i]+'</td><td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockTC[i]+'</td>'+sTD+'<td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockHi[i]+'</td><td id="ctc6'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'delete.gif')+'" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveUp.gif') + '" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc9'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'MoveDown.gif') + '" title="__MSG_movedown__"></td></tr>';
+      sConfigTable+='<tr style="background-Color:'+sBGColor+';"><td id="ctc0'+i+'" class="cellL" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'">'+arrStockSymbols[i]+'</td><td id="ctc1'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockQtys[i]+'</td><td id="ctc2'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockPrices[i]+'</td><td id="ctc3'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockTC[i]+'</td>'+sTD+'<td id="ctc5'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockHi[i]+'</td><td id="ctc6'+i+'" title="__MSG_edittooltip__" onclick="fnEditStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'+sBGColor+'" class="cellR">'+arrStockLo[i]+'</td><td class="cellR" width="25px"><img class="cellR" id="ctc7'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnDeleteStock('+i+')" src="'+IMAGES_BASE+'delete.gif" title="__MSG_deletestock__"></td><td class="cellR" width="15px"><img id="ctc8'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',0)" src="'+IMAGES_BASE+'MoveUp.gif" title="__MSG_moveup__"></td><td class="cellR" width="15px"><img id="ctc9'+i+'" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="fnMoveStock('+i+',1)" src="'+IMAGES_BASE+'MoveDown.gif" title="__MSG_movedown__"></td></tr>';
     }
     if (bCurr){
       sConfigTable+='<tr>'+sLine+'<td colspan=10 title="__MSG_currencytip__">__MSG_selectedcurrency__: '+pref.getString("Currency")+'</td></tr>';
@@ -433,7 +436,7 @@
     gadgets.window.adjustHeight();
   }
   function fnInsertFooter(){
-    document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'AddEdit.gif') + '" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'Summary.gif') + '" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'money.gif') + '" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'News.gif')+'" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'help.gif') + '" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'ggroups.gif') + '" title="__MSG_gotoggroups__"></a></td></tr></table>';
+    document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+IMAGES_BASE+'AddEdit.gif" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+IMAGES_BASE+'Summary.gif" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+IMAGES_BASE+'money.gif" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+IMAGES_BASE+'News.gif" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'help.gif" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'ggroups.gif" title="__MSG_gotoggroups__"></a></td></tr></table>';
   }
   function fnInsertStockTable(){
     var sBGColor;
@@ -505,7 +508,7 @@
     var html="";
     var feed = feedIn.data;
     for(var i in feed.Entry){
-      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+gadgets.io.getProxyUrl(IMAGES_BASE+'Square.gif')+'"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
+      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+IMAGES_BASE+'Square.gif"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
       html+=feed.Entry[i].Title+'</a></span></td></tr>';
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
@@ -689,6 +692,24 @@
         i--;
       }
     }
+
+    var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
+            pref.getString("SettingVersion")+"SettingVersion"+pref.getString("StockSymbols")+"StockSymbols"+
+            pref.getString("StockQtys")+"StockQtys"+pref.getString("StockPrices")+"StockPrices"+
+            pref.getString("StockCurrRates")+"StockCurrRates"+pref.getString("StockHi")+"StockHi"+
+            pref.getString("StockLo")+"StockLo"+pref.getString("StockTC")+"StockTC"+
+            pref.getString("ShowProfit")+"ShowProfit"+pref.getString("ChartType")+"ChartType"+
+            pref.getString("ShowNews")+"ShowNews"+pref.getString("CustomTitle")+"CustomTitle"+
+            pref.getString("FontSize")+"FontSize"+pref.getString("Currency")+"Currency"+
+            pref.getString("NameColumn")+"NameColumn"+pref.getString("ChangeColumn")+"ChangeColumn"+
+            pref.getString("Column1")+"Column1"+pref.getString("Column2")+"Column2"+
+            pref.getString("Column3")+"Column3"+pref.getString("Column4")+"Column4"+
+            pref.getString("Column5")+"Column5"+pref.getString("ChartScope")+"ChartScope"+
+            pref.getString("UpdateInterval")+"UpdateInterval"+pref.getString("Flashing")+"Flashing"+
+            pref.getString("ChartScope")+"ChartScope"+pref.getString("UpdateInterval")+"UpdateInterval"+
+            pref.getString("Flashing")+"Flashing";
+
+    //print('PrefLength:'+tmp.length);
 
     //Check if too many stocks are configured
     if (arrStockSymbols.length>iMaxStockNo){
