@@ -174,9 +174,11 @@ print("Currency rate:" + arrLineValues[26]);
         }
         var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]);
         arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
+print("CurRate:" + arrStockCurrRates[i]);
 print("Change:" + arrLineValues[6].replace("%",""));
 print("Qty:" + arrStockQtys[i]);
-print("TC:" + TC);
+print("TC:" + arrStockTC[i]);
+print("Calc TC:" + TC);
 print("Earned:" + arrLineValues[31]);
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
         arrLineValues[34]=myRound(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Stock Value in local currency
