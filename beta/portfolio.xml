@@ -169,17 +169,17 @@
         arrLineValues[26]=arrLinesCD[i];//Currency rate
 print("Currency rate:" + arrLineValues[26]);
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
-print("Earned total:" + arrLineValues[30]);
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
           arrStockCurrRates[i]=arrLineValues[26];
         }
         var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]);
         arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
+print("Change:" + arrLineValues[6].replace("%",""));
+print("Qty:" + arrStockQtys[i]);
+print("TC:" + TC);
 print("Earned:" + arrLineValues[31]);
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
-print("??:" + arrLineValues[32]);
         arrLineValues[34]=myRound(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Stock Value in local currency
-print("Stock value:" + arrLineValues[34]);
         arrLineValues[33]=0;
         if(arrStockQtys[i]>0&&arrStockPrices[i]>0){
           arrLineValues[33]=myRound(((arrLineValues[34] / TC)-1)*100);//Total Gain %
