@@ -99,7 +99,7 @@
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
-  var debug=0;
+  var debug=1;
   
   //gadgets.window.adjustHeight is called too many times at load. Must be fixed  
 
@@ -167,6 +167,7 @@
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
+        print("Currency rate:" + arrLineValues[26]);
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
           arrStockCurrRates[i]=arrLineValues[26];
