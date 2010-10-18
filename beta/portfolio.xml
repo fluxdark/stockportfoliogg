@@ -167,17 +167,17 @@
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
-print("Currency rate:" + arrLineValues[26]);
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
-        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""){
+        if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""||pref.getString("Currency")=="-"){
           arrStockCurrRates[i]=arrLineValues[26];
         }
-        var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]);
+        var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]); //Total costs in local currency
         arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
-print("CurRate:" + arrStockCurrRates[i]);
+print("BuyCurRate:" + arrStockCurrRates[i]);
+print("CurrentCurRate:" + arrLineValues[26]);
 print("Change:" + arrLineValues[6].replace("%",""));
 print("Qty:" + arrStockQtys[i]);
-print("TC:" + arrStockTC[i]);
+print("TC:" + parseInt(arrStockTC[i]));
 print("Calc TC:" + TC);
 print("Earned:" + arrLineValues[31]);
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
