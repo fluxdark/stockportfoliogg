@@ -167,6 +167,10 @@
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
         arrLineValues[26]=arrLinesCD[i];//Currency rate
+        print(arrLineValues[4]);
+        print(arrStockQtys[i]);
+        print(arrLineValues[26]);
+
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""||pref.getString("Currency")=="-"){
           arrStockCurrRates[i]=arrLineValues[26];
