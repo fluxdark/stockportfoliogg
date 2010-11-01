@@ -88,7 +88,7 @@
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
   var IMAGES_BASE = "http://stockportfoliogg.googlecode.com/svn/released/images/";
-  var iVersion=1.22;
+  var iVersion=1.23;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
@@ -171,7 +171,7 @@
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""||pref.getString("Currency")=="-"){
           arrStockCurrRates[i]=arrLineValues[26];
         }
-        var TC = parseInt(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseInt(arrStockTC[i]); //Total costs in local currency
+        var TC = parseFloat(arrStockPrices[i]*arrStockCurrRates[i]*arrStockQtys[i])+parseFloat(arrStockTC[i]); //Total costs in local currency
         arrLineValues[31]=myRound((arrLineValues[6].replace("%","")*arrLineValues[26]*arrStockQtys[i])-TC);//Earned in local currency
         arrLineValues[32]=(isNaN(arrLineValues[3].replace(/\%/g,"").replace(/\+/g,"").replace(/\-/g,"")))?0:myRound(arrLineValues[3].replace(/\%/g,""));
         arrLineValues[34]=myRound(arrLineValues[6].replace("%","")*arrStockQtys[i]*arrLineValues[26]); //Stock Value in local currency
