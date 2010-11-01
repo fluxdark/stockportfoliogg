@@ -88,7 +88,7 @@
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
   var IMAGES_BASE = "http://stockportfoliogg.googlecode.com/svn/released/images/";
-  var iVersion=1.21;
+  var iVersion=1.22;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
