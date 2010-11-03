@@ -126,13 +126,13 @@
 		//nameSpan.innerHTML = "Dow Jones Industrial";
 		//var pos = getPosition("^DJI");
 		//setName(pos, "Dow Jones Industrial");
-		var curQuotePrice = data[google.finance.LAST];
-		try {			
+		//var curQuotePrice = data[google.finance.LAST];
+		//try {			
 			//curQuotePrice = parseFloat(curQuotePrice.replace(",", ""));
-		}
-		catch (e) {
-			curQuotePrice = "N/A";
-		}
+		//}
+		//catch (e) {
+		//	curQuotePrice = "N/A";
+		//}
 		alert(curQuotePrice);
 	});
 }
