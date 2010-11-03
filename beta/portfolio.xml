@@ -121,11 +121,9 @@
 		print("Google finance quote not succesfull");
 		return;
 	}
-	quote.getQuotes([".DJI"]);
 var quote = new google.finance.Quote();
-  quote.getQuotes(["GOOG","INTC"]);
+  quote.getQuotes([".DJI"]);
   quote.addListener(function(data) {
-  
     print("Last: " + data[google.finance.LAST]);
     print("Symbol: " + data[google.finance.SYMBOL]);
     print("Change: " + data[google.finance.CHANGE]);
