@@ -118,11 +118,11 @@
 	try {
 	 	quote = new google.finance.Quote();
 	} catch(e) {
-		var pos = "Dow(Not supported)");
+		alert("Dow(Not supported)");
 		return;
-	}		
-	quote.getQuotes([".DJI"]);	
-	quote.addListener(function(data) {	
+	}
+	quote.getQuotes([".DJI"]);
+	//quote.addListener(function(data) {	
 		//nameSpan.innerHTML = "Dow Jones Industrial";
 		//var pos = getPosition("^DJI");
 		//setName(pos, "Dow Jones Industrial");
@@ -134,7 +134,7 @@
 		//	curQuotePrice = "N/A";
 		//}
 		alert(curQuotePrice);
-	});
+	//});
 }
   
   
