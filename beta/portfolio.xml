@@ -118,24 +118,38 @@
 	try {
 	 	quote = new google.finance.Quote();
 	} catch(e) {
-		alert("Dow(Not supported)");
+		alert("Google finance quote not succesfull");
 		return;
 	}
 	quote.getQuotes([".DJI"]);
-	quote.addListener(function(data) {	
-		//nameSpan.innerHTML = "Dow Jones Industrial";
-		//var pos = getPosition("^DJI");
-		//setName(pos, "Dow Jones Industrial");
-		var curQuotePrice = data[google.finance.LAST];
-		//try {			
-			//curQuotePrice = parseFloat(curQuotePrice.replace(",", ""));
-		//}
-		//catch (e) {
-		//	curQuotePrice = "N/A";
-		//}
-		alert(curQuotePrice);
-	});
-}
+var quote = new google.finance.Quote();
+  quote.getQuotes(["GOOG","INTC"]);
+  quote.addListener(function(data) {
+    var msg = "Last: " + data[google.finance.LAST] + "\n";
+    msg=msg+"Symbol: " + data[google.finance.SYMBOL+"\n";
+    msg=msg+"Change: " + data[google.finance.CHANGE+"\n";
+    msg=msg+"Change Pct: " + data[google.finance.CHANGE_PCT+"\n";
+    msg=msg+"Open: " + data[google.finance.OPEN+"\n";
+    msg=msg+"High: " + data[google.finance.HIGH+"\n";
+    msg=msg+"Low: " + data[google.finance.LOW+"\n";
+    msg=msg+"Exchange: " + data[google.finance.EXCHANGE+"\n";
+    msg=msg+"Time: " + data[google.finance.LAST_TRADE_TIME+"\n";
+
+    msg=msg+"VOLUME: " + data[google.finance.VOLUME+"\n";
+    msg=msg+"TICKER: " + data[google.finance.TICKER
+    msg=msg+"LAST_TRADE_TIME: " + data[google.finance.LAST_TRADE_TIME+"\n";
+    msg=msg+"LAST_TRADE_DATE: " + data[google.finance.LAST_TRADE_DATE+"\n";
+
+    msg=msg+"LAST_TRADE_DATETIME: " + data[google.finance.LAST_TRADE_DATETIME+"\n";
+    msg=msg+"EXT_LAST: " + data[google.finance.EXT_LAST+"\n";
+    msg=msg+"EXT_VOLUME: " + data[google.finance.EXT_VOLUME+"\n";
+    msg=msg+"EXT_CHANGE: " + data[google.finance.EXT_CHANGE+"\n";
+
+    msg=msg+"EXT_CHANGE_PCT: " + data[google.finance.EXT_CHANGE_PCT+"\n";
+    msg=msg+"EXT_LAST_TRADE_TIME: " + data[google.finance.EXT_LAST_TRADE_TIME+"\n";
+    alert(msg);
+    });
+  }
   
   
   function fnLoad(){
