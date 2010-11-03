@@ -122,11 +122,11 @@
 		return;
 	}
 	quote.getQuotes([".DJI"]);
-	//quote.addListener(function(data) {	
+	quote.addListener(function(data) {	
 		//nameSpan.innerHTML = "Dow Jones Industrial";
 		//var pos = getPosition("^DJI");
 		//setName(pos, "Dow Jones Industrial");
-		//var curQuotePrice = data[google.finance.LAST];
+		var curQuotePrice = data[google.finance.LAST];
 		//try {			
 			//curQuotePrice = parseFloat(curQuotePrice.replace(",", ""));
 		//}
@@ -134,7 +134,7 @@
 		//	curQuotePrice = "N/A";
 		//}
 		alert(curQuotePrice);
-	//});
+	});
 }
   
   
