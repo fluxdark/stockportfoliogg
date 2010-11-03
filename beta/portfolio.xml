@@ -124,28 +124,28 @@
 var quote = new google.finance.Quote();
   quote.getQuotes([".DJI"]);
   quote.addListener(function(data) {
-    print("Last: " + data[google.finance.LAST]);
-    print("Symbol: " + data[google.finance.SYMBOL]);
-    print("Change: " + data[google.finance.CHANGE]);
-    print("Change Pct: " + data[google.finance.CHANGE_PCT]);
-    print("Open: " + data[google.finance.OPEN]);
-    print("High: " + data[google.finance.HIGH]);
-    print("Low: " + data[google.finance.LOW]);
-    print("Exchange: " + data[google.finance.EXCHANGE]);
-    print("Time: " + data[google.finance.LAST_TRADE_TIME]);
+    //print("Last: " + data[google.finance.LAST]);
+    //print("Symbol: " + data[google.finance.SYMBOL]);
+    //print("Change: " + data[google.finance.CHANGE]);
+    //print("Change Pct: " + data[google.finance.CHANGE_PCT]);
+    //print("Open: " + data[google.finance.OPEN]);
+    //print("High: " + data[google.finance.HIGH]);
+    //print("Low: " + data[google.finance.LOW]);
+    //print("Exchange: " + data[google.finance.EXCHANGE]);
+    //print("Time: " + data[google.finance.LAST_TRADE_TIME]);
 
-    print("VOLUME: " + data[google.finance.VOLUME]);
-    print("TICKER: " + data[google.finance.TICKER
-    print("LAST_TRADE_TIME: " + data[google.finance.LAST_TRADE_TIME]);
-    print("LAST_TRADE_DATE: " + data[google.finance.LAST_TRADE_DATE]);
+    //print("VOLUME: " + data[google.finance.VOLUME]);
+    //print("TICKER: " + data[google.finance.TICKER
+    //print("LAST_TRADE_TIME: " + data[google.finance.LAST_TRADE_TIME]);
+    //print("LAST_TRADE_DATE: " + data[google.finance.LAST_TRADE_DATE]);
 
-    print("LAST_TRADE_DATETIME: " + data[google.finance.LAST_TRADE_DATETIME]);
-    print("EXT_LAST: " + data[google.finance.EXT_LAST]);
-    print("EXT_VOLUME: " + data[google.finance.EXT_VOLUME]);
-    print("EXT_CHANGE: " + data[google.finance.EXT_CHANGE]);
+    //print("LAST_TRADE_DATETIME: " + data[google.finance.LAST_TRADE_DATETIME]);
+    //print("EXT_LAST: " + data[google.finance.EXT_LAST]);
+    //print("EXT_VOLUME: " + data[google.finance.EXT_VOLUME]);
+    //print("EXT_CHANGE: " + data[google.finance.EXT_CHANGE]);
 
-    print("EXT_CHANGE_PCT: " + data[google.finance.EXT_CHANGE_PCT]);
-    print("EXT_LAST_TRADE_TIME: " + data[google.finance.EXT_LAST_TRADE_TIME]);
+    //print("EXT_CHANGE_PCT: " + data[google.finance.EXT_CHANGE_PCT]);
+    //print("EXT_LAST_TRADE_TIME: " + data[google.finance.EXT_LAST_TRADE_TIME]);
     });
   }
   
