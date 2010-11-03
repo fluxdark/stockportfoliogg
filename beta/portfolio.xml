@@ -118,36 +118,36 @@
 	try {
 	 	quote = new google.finance.Quote();
 	} catch(e) {
-		alert("Google finance quote not succesfull");
+		print("Google finance quote not succesfull");
 		return;
 	}
 	quote.getQuotes([".DJI"]);
 var quote = new google.finance.Quote();
   quote.getQuotes(["GOOG","INTC"]);
   quote.addListener(function(data) {
-    var msg = "Last: " + data[google.finance.LAST] + "\n";
-    msg=msg+"Symbol: " + data[google.finance.SYMBOL+"\n";
-    msg=msg+"Change: " + data[google.finance.CHANGE+"\n";
-    msg=msg+"Change Pct: " + data[google.finance.CHANGE_PCT+"\n";
-    msg=msg+"Open: " + data[google.finance.OPEN+"\n";
-    msg=msg+"High: " + data[google.finance.HIGH+"\n";
-    msg=msg+"Low: " + data[google.finance.LOW+"\n";
-    msg=msg+"Exchange: " + data[google.finance.EXCHANGE+"\n";
-    msg=msg+"Time: " + data[google.finance.LAST_TRADE_TIME+"\n";
+  
+    print("Last: " + data[google.finance.LAST]);
+    print("Symbol: " + data[google.finance.SYMBOL]);
+    print("Change: " + data[google.finance.CHANGE]);
+    print("Change Pct: " + data[google.finance.CHANGE_PCT]);
+    print("Open: " + data[google.finance.OPEN]);
+    print("High: " + data[google.finance.HIGH]);
+    print("Low: " + data[google.finance.LOW]);
+    print("Exchange: " + data[google.finance.EXCHANGE]);
+    print("Time: " + data[google.finance.LAST_TRADE_TIME]);
 
-    msg=msg+"VOLUME: " + data[google.finance.VOLUME+"\n";
-    msg=msg+"TICKER: " + data[google.finance.TICKER
-    msg=msg+"LAST_TRADE_TIME: " + data[google.finance.LAST_TRADE_TIME+"\n";
-    msg=msg+"LAST_TRADE_DATE: " + data[google.finance.LAST_TRADE_DATE+"\n";
+    print("VOLUME: " + data[google.finance.VOLUME]);
+    print("TICKER: " + data[google.finance.TICKER
+    print("LAST_TRADE_TIME: " + data[google.finance.LAST_TRADE_TIME]);
+    print("LAST_TRADE_DATE: " + data[google.finance.LAST_TRADE_DATE]);
 
-    msg=msg+"LAST_TRADE_DATETIME: " + data[google.finance.LAST_TRADE_DATETIME+"\n";
-    msg=msg+"EXT_LAST: " + data[google.finance.EXT_LAST+"\n";
-    msg=msg+"EXT_VOLUME: " + data[google.finance.EXT_VOLUME+"\n";
-    msg=msg+"EXT_CHANGE: " + data[google.finance.EXT_CHANGE+"\n";
+    print("LAST_TRADE_DATETIME: " + data[google.finance.LAST_TRADE_DATETIME]);
+    print("EXT_LAST: " + data[google.finance.EXT_LAST]);
+    print("EXT_VOLUME: " + data[google.finance.EXT_VOLUME]);
+    print("EXT_CHANGE: " + data[google.finance.EXT_CHANGE]);
 
-    msg=msg+"EXT_CHANGE_PCT: " + data[google.finance.EXT_CHANGE_PCT+"\n";
-    msg=msg+"EXT_LAST_TRADE_TIME: " + data[google.finance.EXT_LAST_TRADE_TIME+"\n";
-    alert(msg);
+    print("EXT_CHANGE_PCT: " + data[google.finance.EXT_CHANGE_PCT]);
+    print("EXT_LAST_TRADE_TIME: " + data[google.finance.EXT_LAST_TRADE_TIME]);
     });
   }
   
