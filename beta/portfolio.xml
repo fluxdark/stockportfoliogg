@@ -17,6 +17,7 @@
     <Require feature="analytics"/>
     <Require feature="dynamic-height"/>
     <Require feature="settitle"/>
+    <Require feature="finance" /> 
   </ModulePrefs>
   <UserPref name="campaign_1" datatype="hidden" default_value="0" />
   <UserPref name="GadgetVersion" datatype="hidden" default_value="0"/>
@@ -107,8 +108,36 @@
     fnReadPrefs();
     fnLoad();
     setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
+    getDowData();
   }
-
+ 
+  
+  
+  function getDowData() {
+	var quote = '';
+	try {
+	 	quote = new google.finance.Quote();
+	} catch(e) {
+		var pos = "Dow(Not supported)");
+		return;
+	}		
+	quote.getQuotes([".DJI"]);	
+	quote.addListener(function(data) {	
+		//nameSpan.innerHTML = "Dow Jones Industrial";
+		//var pos = getPosition("^DJI");
+		//setName(pos, "Dow Jones Industrial");
+		var curQuotePrice = data[google.finance.LAST];
+		try {			
+			//curQuotePrice = parseFloat(curQuotePrice.replace(",", ""));
+		}
+		catch (e) {
+			curQuotePrice = "N/A";
+		}
+		alert(curQuotePrice);
+	});
+}
+  
+  
   function fnLoad(){
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
@@ -863,7 +892,7 @@
   }
   
  //1-2-3 start
-  fnInit();  
+  fnInit();   
    </script>
   ]]>
   </Content>
