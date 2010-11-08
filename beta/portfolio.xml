@@ -168,7 +168,7 @@
       if(arrStockSymbols[i]=="^DJI"){
         getDowData();
       }
-      print("SymbolBack:"+stockData.data[i][2]);
+      print("SymbolBack:"+stockData.data.split('\r\n')[i][2]);
     }
 
     arrLines=stockData.data.split('\r\n');    
