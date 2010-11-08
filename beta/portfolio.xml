@@ -120,8 +120,8 @@
       return;
     }
     var quote = new google.finance.Quote();
-    quote.getQuotes([".DJI"]);
-    quote.addListener(function(data){
+      quote.getQuotes([".DJI"]);
+      quote.addListener(function(data){
       print("Last: " + data[google.finance.LAST]);
       print("Symbol: " + data[google.finance.SYMBOL]);
       print("Change: " + data[google.finance.CHANGE]);
@@ -133,6 +133,12 @@
       print("Volume: " + data[google.finance.VOLUME]);
     });
   }
+  
+    function getDowDomData(){
+      quote.enableDomUpdates( { '.DJI' : '_IG_SYM1'} );
+      quote.getQuotes([".DJI"]);
+      print("Last: " + "<span id=_IG_SYM1_l>Loading...</span>");
+    }
   
   function fnLoad(){
     fnPrefsValidation(arrStockSymbols);
@@ -168,10 +174,11 @@
       //arrLineValues=splitLine(arrLines[i]);
       print("Symbol:"+arrStockSymbols[i]);
       if(arrStockSymbols[i]=="^DJI"){
-        getDowData();
+        getDowDomData();
+        //getDowData();
       }
-      arrLineValues=splitLine(arrLines[i]);
-      print("SymbolBack:"+arrLineValues[2]);
+      //arrLineValues=splitLine(arrLines[i]);
+      //print("SymbolBack:"+arrLineValues[1]);
     }
 
     for(i=0;i<arrLines.length-1;i++){
