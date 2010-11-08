@@ -137,6 +137,7 @@
   
   function getDowDomData(){
     print("getDowDomData called");
+    var quote = new google.finance.Quote();
     //print("Last: " + "<span id=_IG_SYM1_l>Loading...</span>");
     quote.enableDomUpdates({'.DJI' : '_IG_SYM1'});
     
