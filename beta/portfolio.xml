@@ -179,7 +179,7 @@
       //arrLineValues=splitLine(arrLines[i]);
       print("Symbol:"+arrStockSymbols[i]);
       if(arrStockSymbols[i]=="^DJI"){
-        //getDowDomData();
+        getDowDomData();
         //getDowData();
       }
       //arrLineValues=splitLine(arrLines[i]);
