@@ -181,6 +181,7 @@ var quote = new google.finance.Quote();
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
+      print("Symbol:"+splitLine(arrLines[i]););
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CW='+Math.random()*1000;
