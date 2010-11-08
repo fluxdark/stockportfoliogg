@@ -175,16 +175,16 @@
     arrLines=stockData.data.split('\r\n');    
     
     //^Replace ^DJI with Google finance data
-    for(i=0;i<arrStockSymbols.length;i++){
-      //arrLineValues=splitLine(arrLines[i]);
-      print("Symbol:"+arrStockSymbols[i]);
-      if(arrStockSymbols[i]=="^DJI"){
-        getDowDomData();
-        //getDowData();
-      }
-      //arrLineValues=splitLine(arrLines[i]);
-      //print("SymbolBack:"+arrLineValues[1]);
-    }
+    //for(i=0;i<arrStockSymbols.length;i++){
+    //  //arrLineValues=splitLine(arrLines[i]);
+    //  print("Symbol:"+arrStockSymbols[i]);
+    //  if(arrStockSymbols[i]==".DJI"){
+    //    getDowDomData();
+    //    //getDowData();
+    //  }
+    //  arrLineValues=splitLine(arrLines[i]);
+    //  //print("SymbolBack:"+arrLineValues[1]);
+    //}
 
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
@@ -696,6 +696,9 @@
   function fnAddStock(Symbol){
     var tmp=Symbol.replace(/ /g,'');
     if(tmp.length>0 && Symbol!='__MSG_symbolsearchtip__'){
+      if (tmp=='^DJI'){
+        tmp='.DJI';
+      }
       arrStockSymbols.push(tmp);
       arrStockQtys.push(0);
       arrStockPrices.push(0);
