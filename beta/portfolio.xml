@@ -136,11 +136,11 @@
   
   function getDowDomData(){
     print("getDowDomData called");
+    print("Last: " + "<span id=_IG_SYM1_l>Loading...</span>");
     quote.enableDomUpdates({'.DJI' : '_IG_SYM1'});
     print("enableDomUpdates called");
     quote.getQuotes([".DJI"]);
     print("getQuotes called");
-    print("Last: " + "<span id=_IG_SYM1_l>Loading...</span>");
   }
   
   function fnLoad(){
