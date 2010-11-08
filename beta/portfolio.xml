@@ -176,6 +176,7 @@
     
     //^Replace ^DJI with Google finance data
     for(i=0;i<arrStockSymbols.length;i++){
+      arrLineValues=splitLine(arrLines[i]);
       if(arrLineValues[1]!=arrStockSymbols[i]){
         print(arrLineValues[1]+"!=:"+arrStockSymbols[i]);
       } 
