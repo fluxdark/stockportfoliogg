@@ -177,7 +177,7 @@ var quote = new google.finance.Quote();
     var sSymb="";
     
     //^Replace ^DJI with Google finance data
-    for(i=0;i<arrStockSymbols.length-1;i++){
+    for(i=0;i<arrStockSymbols.length;i++){
       print("Symbol:"+arrStockSymbols[i]);
     }
     
@@ -185,7 +185,7 @@ var quote = new google.finance.Quote();
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
-      print("Symbol:"+arrLineValues[2]);
+      print("SymbolBack:"+arrLineValues[2]);
     }
 
     sSymb=sSymb.substr(0,sSymb.length-1);
