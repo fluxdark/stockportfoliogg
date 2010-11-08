@@ -110,7 +110,7 @@
     setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
   }
 
-  function getDowData(arrLine){
+  function getDowData(){
     var quote = '';
     try{
       quote = new google.finance.Quote();
@@ -130,7 +130,7 @@
       print("High: " + data[google.finance.HIGH]);
       print("Low: " + data[google.finance.LOW]);
       print("Exchange: " + data[google.finance.EXCHANGE]);
-      print("VOLUME: " + data[google.finance.VOLUME]);
+      print("Volume: " + data[google.finance.VOLUME]);
     });
   }
   
