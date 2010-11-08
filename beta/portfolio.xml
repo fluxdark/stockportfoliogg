@@ -76,7 +76,6 @@
   <div id="StockSummary" class="def" style="display:none;"><div class="loading">__MSG_loading__</div></div>
   <div id="StockNews" class="def" style="display:none;"></div>
   <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0><tr><td valign="middle" class="Footer"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer" target="_blank">Stock data, news and historical charts provided by </td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://stockportfoliogg.googlecode.com/svn/released/images/Yahoo.gif"></td><td valign="middle" class="Footer"></a></td></tr></table></div>
-  <div id="test123" nowrap><span id=_IG_SYM1_l>Loading...</span></div> 
   <div id="debug" nowrap style="display:none;font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div> 
   <script language="javascript" type="text/javascript" defer="defer">
   var pref=new gadgets.Prefs(__MODULE_ID__);
@@ -138,7 +137,7 @@
   function getDowDomData(){
     print("getDowDomData called");
     var quote = new google.finance.Quote();
-    //print("Last: " + "<span id=_IG_SYM1_l>Loading...</span>");
+    print("Last: " + "<span id=_IG_SYM1_l>Loading...</span>");
     quote.enableDomUpdates({'.DJI' : '_IG_SYM1'});
     
     print("enableDomUpdates called");
