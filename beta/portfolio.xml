@@ -188,6 +188,9 @@
 
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
+      if(arrLineValues[1]=='.DJI'){
+        getDowData();
+      }
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
 
