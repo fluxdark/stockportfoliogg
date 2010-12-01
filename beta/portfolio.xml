@@ -180,7 +180,7 @@
       arrLineValues=splitLine(arrLines[ixHit]);
       arrLineValues[1]='^DJT';
       arrLineValues[2]='Dow Jones Industri';
-      arrLineValues[3]=data[google.finance.CHANGE_PCT]+'%';
+      arrLineValues[3]=data[google.finance.CHANGE_PCT];
       arrLineValues[4]=data[google.finance.CHANGE].replace(',','');
       arrLineValues[6]=data[google.finance.LAST].replace(',','');
       arrLineValues[10]=data[google.finance.LOW].replace(',','');
