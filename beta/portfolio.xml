@@ -194,9 +194,12 @@
 
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
+        print(arrLineValues.join(','));
       if(arrLineValues[1]=='DJI=GDJI'){
         print("Hit at index " + i);
         print(arrLineValues.join(','));
+        arrLineValues[1]='Dow Jones Industri';
+        arrLineValues[1]='Dow Jones Industri';
       //  getDowData();
       }
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
