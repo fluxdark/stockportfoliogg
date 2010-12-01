@@ -183,9 +183,9 @@
       arrLineValues[3]=data[google.finance.CHANGE_PCT];
       arrLineValues[4]=data[google.finance.CHANGE].replace(',','');
       arrLineValues[6]=data[google.finance.LAST].replace(',','');
-      arrLineValues[10]=data[google.finance.LOW].replace(',','');
-      arrLineValues[11]=data[google.finance.HIGH].replace(',','');
-      arrLineValues[12]=data[google.finance.VOLUME].replace(',','');
+      //arrLineValues[10]=data[google.finance.LOW].replace(',','');
+      //arrLineValues[11]=data[google.finance.HIGH].replace(',','');
+      //arrLineValues[12]=data[google.finance.VOLUME].replace(',','');
       arrLines[ixHit]=arrLineValues.join(',');
       stockData.data=arrLines.join('\r\n');
       fnStockDataProxy(stockData);
