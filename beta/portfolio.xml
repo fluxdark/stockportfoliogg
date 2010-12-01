@@ -210,8 +210,9 @@
         //print(arrLineValues.join(','));
         arrLineValues[1]='^DJT';
         arrLineValues[2]='Dow Jones Industri';
-        arrLineValues[3]='<span id=_IG_SYM1_c></span>';
-        arrLineValues[4]='<span id=_IG_SYM1_l></span>';
+        arrLineValues[3]='<span id=_IG_SYM1_cp></span>';
+        arrLineValues[4]='<span id=_IG_SYM1_c></span>';
+        arrLineValues[6]='<span id=_IG_SYM1_l></span>';
         getDowDomData();
       }
 
