@@ -161,7 +161,7 @@
       sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    sSymb=sSymb.replace('^DJI','#DJI');
+    sSymb=sSymb.replace('^DJI','@DJI');
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
