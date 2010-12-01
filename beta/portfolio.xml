@@ -196,7 +196,7 @@
       arrLineValues[2]='Dow Jones Industri';
       arrLineValues[3]=data[google.finance.CHANGE_PCT];
       arrLineValues[4]=data[google.finance.CHANGE];
-      arrLineValues[6]=data[google.finance.LAST];
+      arrLineValues[6]=data[google.finance.LAST].replace(',','');
       arrLines[ixHit]=arrLineValues.join(',');
       stockData.data=arrLines.join('\r\n');
 
