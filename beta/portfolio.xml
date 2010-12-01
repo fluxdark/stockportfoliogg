@@ -178,8 +178,8 @@
       arrLineValues=splitLine(arrLines[i]);
         print(arrLineValues.join(','));
       if(arrLineValues[1]=='DJI=GDJI'){
-        print("Hit at index " + i);g
-        print(arrLineValues.join(','));
+        //print("Hit at index " + i);g
+        //print(arrLineValues.join(','));
         arrLineValues[1]='^DJT';
         arrLineValues[2]='Dow Jones Industri';
         arrLineValues[3]='<span id=_IG_SYM1_l></span>';
