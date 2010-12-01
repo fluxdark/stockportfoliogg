@@ -236,19 +236,18 @@
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
 
-
 //      print(arrLineValues.join(','));
-      if(arrLineValues[1]=='DJI=GDJI'){
-        print("Hit at index " + i);
+      //if(arrLineValues[1]=='DJI=GDJI'){
+      //  print("Hit at index " + i);
         //print(arrLineValues.join(','));
-        arrLineValues[1]='^DJT';
-        arrLineValues[2]='Dow Jones Industri';
-        arrLineValues[3]='<span id=_IG_SYM1_cp></span>';
-        arrLineValues[4]='<span id=_IG_SYM1_c></span>';
-        arrLineValues[6]='<span id=_IG_SYM1_l></span>';
-        getDowData();
-        getDowDomData();
-      }
+      //  arrLineValues[1]='^DJT';
+      //  arrLineValues[2]='Dow Jones Industri';
+      //  arrLineValues[3]='<span id=_IG_SYM1_cp></span>';
+      //  arrLineValues[4]='<span id=_IG_SYM1_c></span>';
+      //  arrLineValues[6]='<span id=_IG_SYM1_l></span>';
+      //  getDowData();
+      //  getDowDomData();
+      //}
 
         arrLineValues[26]=arrLinesCD[i];//Currency rate
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
