@@ -178,7 +178,7 @@
       quote.addListener(function(data){
       arrLines=stockData.data.split('\r\n');
       arrLineValues=splitLine(arrLines[ixHit]);
-      arrLineValues[1]='^DJI';
+      arrLineValues[1]='^DJT';
       arrLineValues[2]='Dow Jones Industri';
       arrLineValues[3]=data[google.finance.CHANGE_PCT]+'%';
       arrLineValues[4]=data[google.finance.CHANGE].replace(',','');
