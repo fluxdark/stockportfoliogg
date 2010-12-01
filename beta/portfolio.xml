@@ -110,32 +110,6 @@
     setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
   }
 
-  function getDowData(){
-    print("getDowData Started");
-    var quote = '';
-    try{
-      quote = new google.finance.Quote();
-    } 
-    catch(e){
-      print("Google finance quote not succesfull");
-      return;
-    }
-    var quote = new google.finance.Quote();
-      quote.getQuotes([".DJI"]);
-      quote.addListener(function(data){
-      print("Last: " + data[google.finance.LAST]);
-      print("Symbol: " + data[google.finance.SYMBOL]);
-      print("Change: " + data[google.finance.CHANGE]);
-      print("Change Pct: " + data[google.finance.CHANGE_PCT]);
-      print("Open: " + data[google.finance.OPEN]);
-      print("High: " + data[google.finance.HIGH]);
-      print("Low: " + data[google.finance.LOW]);
-      print("Exchange: " + data[google.finance.EXCHANGE]);
-      print("Volume: " + data[google.finance.VOLUME]);
-    print("getDowData Data received");
-    });
-    print("getDowData Ended");
-  }
   
   function getDowDomData(){
     print("getDowDomData called");
@@ -169,8 +143,63 @@
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
-    gadgets.io.makeRequest(url,fnStockDataProxy,params);
+    //gadgets.io.makeRequest(url,fnStockDataProxy,params);
+    gadgets.io.makeRequest(url,fnGetDJI,params);
   }
+  function fnGetDJI(stockData){
+    var bHit;
+    arrLines=stockData.data.split('\r\n');    
+    
+    for(i=0;i<arrLines.length-1;i++){
+      arrLineValues=splitLine(arrLines[i]);
+      if(arrLineValues[1]=='DJI=GDJI'){
+        print(arrLines[i]);
+        bHit=true;
+        //print(arrLineValues.join(','));
+        //arrLineValues[1]='^DJT';
+        //arrLineValues[2]='Dow Jones Industri';
+        //arrLineValues[3]='<span id=_IG_SYM1_cp></span>';
+        //arrLineValues[4]='<span id=_IG_SYM1_c></span>';
+        //arrLineValues[6]='<span id=_IG_SYM1_l></span>';
+        //getDowData();
+        //getDowDomData();
+      }
+    }    
+    if (bHit==true){
+      getDowData(stockData);
+    }else{
+      fnStockDataProxy(stockData);
+    }
+  }
+
+  function getDowData(stockData){
+    print("getDowData Started");
+    var quote = '';
+    try{
+      quote = new google.finance.Quote();
+    } 
+    catch(e){
+      print("Google finance quote not succesfull");
+      return;
+    }
+    var quote = new google.finance.Quote();
+      quote.getQuotes([".DJI"]);
+      quote.addListener(function(data){
+      print("Last: " + data[google.finance.LAST]);
+      print("Symbol: " + data[google.finance.SYMBOL]);
+      print("Change: " + data[google.finance.CHANGE]);
+      print("Change Pct: " + data[google.finance.CHANGE_PCT]);
+      print("Open: " + data[google.finance.OPEN]);
+      print("High: " + data[google.finance.HIGH]);
+      print("Low: " + data[google.finance.LOW]);
+      print("Exchange: " + data[google.finance.EXCHANGE]);
+      print("Volume: " + data[google.finance.VOLUME]);
+      print("getDowData Data received");
+      fnStockDataProxy(stockData);
+    });
+    print("getDowData Ended");
+  }
+
   function fnStockDataProxy(stockData){
     var arrLines=new Array();
     var arrLineValues=new Array();
@@ -189,6 +218,7 @@
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
     gadgets.io.makeRequest(url, _IG_MyCallback(fnPrepareStockData,stockData), params);
   }
+
   function fnPrepareStockData(currDataIn,stockDataIn){
     var arrLinesCD=new Array();
     var arrLinesSD=new Array();
