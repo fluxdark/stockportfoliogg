@@ -172,39 +172,22 @@
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
-
     arrLines=stockData.data.split('\r\n');    
     
-    //^Replace ^DJI with Google finance data
-    //for(i=0;i<arrStockSymbols.length;i++){
-      //arrLineValues=splitLine(arrLines[i]);
-      //if(arrLineValues[1]!=arrStockSymbols[i]){
-      //  print(arrLineValues[1]+"!=:"+arrStockSymbols[i]);
-      //} 
-      
-    //  //arrLineValues=splitLine(arrLines[i]);
-      //print("Symbol:"+arrStockSymbols[i]);
-    //  if(arrStockSymbols[i]==".DJI"){
-    //    getDowDomData();
-    //    //getDowData();
-    //  }
-    //  arrLineValues=splitLine(arrLines[i]);
-    //  //print("SymbolBack:"+arrLineValues[1]);
-    //}
-
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
         print(arrLineValues.join(','));
       if(arrLineValues[1]=='DJI=GDJI'){
-        print("Hit at index " + i);
+        print("Hit at index " + i);g
         print(arrLineValues.join(','));
-        arrLineValues[1]='Dow Jones Industri';
-        arrLineValues[1]='Dow Jones Industri';
-      //  getDowData();
+        arrLineValues[1]='^DJT';
+        arrLineValues[2]='Dow Jones Industri';
+        arrLineValues[3]='<span id=_IG_SYM1_l></span>';
+        arrLineValues[4]='<span id=_IG_SYM1_c></span>';
+        getDowDomData();
       }
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
-
     sSymb=sSymb.substr(0,sSymb.length-1);
     var url='http://download.finance.yahoo.com/d/quotes.csv?s='+sSymb+'&f=l1&CW='+Math.random()*1000;
    
