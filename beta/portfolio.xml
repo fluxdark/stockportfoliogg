@@ -147,14 +147,19 @@
     gadgets.io.makeRequest(url,fnGetDJI,params);
   }
   function fnGetDJI(stockData){
-    var bHit;
+    var ixHit=-1;
     arrLines=stockData.data.split('\r\n');    
     
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
       if(arrLineValues[1]=='DJI=GDJI'){
-        print(arrLines[i]);
-        bHit=true;
+        //arrLineValues[1]='^DJT';
+        //arrLineValues[2]='Dow Jones Industri';
+        //arrLineValues[3]='<span id=_IG_SYM1_cp></span>';
+        //arrLineValues[4]='<span id=_IG_SYM1_c></span>';
+        //arrLineValues[6]='<span id=_IG_SYM1_l></span>';
+        
+        ixHit=i;
         //print(arrLineValues.join(','));
         //arrLineValues[1]='^DJT';
         //arrLineValues[2]='Dow Jones Industri';
@@ -165,14 +170,14 @@
         //getDowDomData();
       }
     }    
-    if (bHit==true){
-      getDowData(stockData);
+    if (ixHit>-1){
+      getDowData(stockData,ixHit);
     }else{
       fnStockDataProxy(stockData);
     }
   }
 
-  function getDowData(stockData){
+  function getDowData(stockData,ixHit){
     print("getDowData Started");
     var quote = '';
     try{
@@ -185,16 +190,27 @@
     var quote = new google.finance.Quote();
       quote.getQuotes([".DJI"]);
       quote.addListener(function(data){
-      print("Last: " + data[google.finance.LAST]);
-      print("Symbol: " + data[google.finance.SYMBOL]);
-      print("Change: " + data[google.finance.CHANGE]);
-      print("Change Pct: " + data[google.finance.CHANGE_PCT]);
-      print("Open: " + data[google.finance.OPEN]);
-      print("High: " + data[google.finance.HIGH]);
-      print("Low: " + data[google.finance.LOW]);
-      print("Exchange: " + data[google.finance.EXCHANGE]);
-      print("Volume: " + data[google.finance.VOLUME]);
-      print("getDowData Data received");
+      arrLines=stockData.data.split('\r\n');
+      arrLineValues=splitLine(arrLines[ixHit]);
+      arrLineValues[1]='^DJT';
+      arrLineValues[2]='Dow Jones Industri';
+      arrLineValues[3]=data[google.finance.CHANGE_PCT];
+      arrLineValues[4]=data[google.finance.CHANGE];
+      arrLineValues[6]=data[google.finance.LAST];
+      arrLines[ixHit]=arrLineValues.join(',');
+      stockData.data=arrLines.join('\r\n');
+
+
+      //print("Last: " + data[google.finance.LAST]);
+      //print("Symbol: " + data[google.finance.SYMBOL]);
+      //print("Change: " + data[google.finance.CHANGE]);
+      //print("Change Pct: " + data[google.finance.CHANGE_PCT]);
+      //print("Open: " + data[google.finance.OPEN]);
+      //print("High: " + data[google.finance.HIGH]);
+      //print("Low: " + data[google.finance.LOW]);
+      //print("Exchange: " + data[google.finance.EXCHANGE]);
+      //print("Volume: " + data[google.finance.VOLUME]);
+      //print("getDowData Data received");
       fnStockDataProxy(stockData);
     });
     print("getDowData Ended");
