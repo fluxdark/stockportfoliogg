@@ -196,6 +196,7 @@
       arrLineValues=splitLine(arrLines[i]);
       if(arrLineValues[1]=='DJI=GDJI'){
         print("Hit at index " + i);
+        print(arrLineValues.join(','));
       //  getDowData();
       }
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
