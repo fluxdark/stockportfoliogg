@@ -160,7 +160,7 @@
     for(var i=0;i<arrStockSymbols.length;i++){
       sSymb+=arrStockSymbols[i]+',';
     }
-    sSymb=sSymb.substr(0,sSymb.length-1);
+    sSymb=sSymb.substr(0,sSymb.length-1).replace('^DJI','#DJI');
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
@@ -175,21 +175,21 @@
     arrLines=stockData.data.split('\r\n');    
     
     //^Replace ^DJI with Google finance data
-    for(i=0;i<arrStockSymbols.length;i++){
-      arrLineValues=splitLine(arrLines[i]);
+    //for(i=0;i<arrStockSymbols.length;i++){
+      //arrLineValues=splitLine(arrLines[i]);
       //if(arrLineValues[1]!=arrStockSymbols[i]){
       //  print(arrLineValues[1]+"!=:"+arrStockSymbols[i]);
       //} 
       
     //  //arrLineValues=splitLine(arrLines[i]);
-      print("Symbol:"+arrStockSymbols[i]);
+      //print("Symbol:"+arrStockSymbols[i]);
     //  if(arrStockSymbols[i]==".DJI"){
     //    getDowDomData();
     //    //getDowData();
     //  }
     //  arrLineValues=splitLine(arrLines[i]);
     //  //print("SymbolBack:"+arrLineValues[1]);
-    }
+    //}
 
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
