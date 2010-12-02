@@ -110,18 +110,6 @@
     setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
   function fnLoad(){
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
@@ -147,53 +135,6 @@
     gadgets.io.makeRequest(url,fnStockDataProxy,params);
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function fnStockDataProxy(stockData){
     var arrLines=new Array();
     var arrLineValues=new Array();
@@ -749,19 +690,16 @@
       if (isNaN(arrStockHi[i])||arrStockHi[i].length==0){arrStockHi[i]=0;}
       if (isNaN(arrStockLo[i])||arrStockLo[i].length==0){arrStockLo[i]=0;}
       //Check for blacklisted symbols
-      if (arrStockSymbols[i]=='^DJI'){
-        var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-        var divMess = document.createElement("divMess");
-        var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
-        divMess.innerHTML = '<span style="background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
-        miniMsg.createTimerMessage(divMess,10);
-        fnDeleteStock(i);
-        i--;
-      }
-
-
+      //if (arrStockSymbols[i]=='^DJI'){
+      //  var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
+      //  var divMess = document.createElement("divMess");
+      //  var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
+      //  divMess.innerHTML = '<span style="background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
+      //  miniMsg.createTimerMessage(divMess,10);
+      //  fnDeleteStock(i);
+      //  i--;
+      //}
     }
-
     var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
             pref.getString("SettingVersion")+"SettingVersion"+pref.getString("StockSymbols")+"StockSymbols"+
             pref.getString("StockQtys")+"StockQtys"+pref.getString("StockPrices")+"StockPrices"+
