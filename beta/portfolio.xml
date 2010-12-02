@@ -17,7 +17,7 @@
     <Require feature="analytics"/>
     <Require feature="dynamic-height"/>
     <Require feature="settitle"/>
-    <Require feature="finance" /> 
+
   </ModulePrefs>
   <UserPref name="campaign_1" datatype="hidden" default_value="0" />
   <UserPref name="GadgetVersion" datatype="hidden" default_value="0"/>
@@ -89,7 +89,7 @@
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
   var IMAGES_BASE = "http://stockportfoliogg.googlecode.com/svn/released/images/";
-  var iVersion=1.24;
+  var iVersion=1.23;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
@@ -100,7 +100,7 @@
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
-  var debug=1;
+  var debug=0;
   
   //gadgets.window.adjustHeight is called too many times at load. Must be fixed  
 
@@ -110,18 +110,18 @@
     setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
   }
 
-  
-  function getDowDomData(){
-    print("getDowDomData called");
-    var quote = new google.finance.Quote();
-    print("Last: " + "<span id=_IG_SYM1_l>Loading...</span>");
-    quote.enableDomUpdates({'.DJI' : '_IG_SYM1'});
-    
-    print("enableDomUpdates called");
-    quote.getQuotes([".DJI"]);
-    print("getQuotes called");
-  }
-  
+
+
+
+
+
+
+
+
+
+
+
+
   function fnLoad(){
     fnPrefsValidation(arrStockSymbols);
     fnLoadData();
@@ -138,66 +138,68 @@
       sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    sSymb=sSymb.replace('^DJI','DJI=GDJI');
+    sSymb=sSymb.replace('^DJI','INDU');
+
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
     params[gadgets.io.RequestParameters.REFRESH_INTERVAL] = 60;
-    //gadgets.io.makeRequest(url,fnStockDataProxy,params);
-    gadgets.io.makeRequest(url,fnGetDJI,params);
-  }
-  function fnGetDJI(stockData){
-    var ixHit=-1;
-    arrLines=stockData.data.split('\r\n');    
-    
-    for(i=0;i<arrLines.length-1;i++){
-      arrLineValues=splitLine(arrLines[i]);
-      if(arrLineValues[1]=='DJI=GDJI'){
-        ixHit=i;
-      }
-    }    
-    if (ixHit>-1){
-      getDowData(stockData,ixHit);
-    }else{
-      fnStockDataProxy(stockData);
-    }
+    gadgets.io.makeRequest(url,fnStockDataProxy,params);
+
   }
 
-  function getDowData(stockData,ixHit){
-    print("getDowData Started");
-    var quote = '';
-    try{
-      quote = new google.finance.Quote();
-    } 
-    catch(e){
-      print("Google finance quote not succesfull");
-      return;
-    }
-    var quote = new google.finance.Quote();
-      quote.getQuotes([".DJI"]);
-      quote.addListener(function(data){
-      arrLines=stockData.data.split('\r\n');
-      arrLineValues=splitLine(arrLines[ixHit]);
-      arrLineValues[1]='^DJT';
-      arrLineValues[2]='Dow Jones Industri';
-      arrLineValues[3]=data[google.finance.CHANGE_PCT];
-      arrLineValues[4]=data[google.finance.CHANGE].replace(',','');
-      arrLineValues[6]=data[google.finance.LAST].replace(',','');
-      //arrLineValues[10]=data[google.finance.LOW].replace(',','');
-      //arrLineValues[11]=data[google.finance.HIGH].replace(',','');
-      //arrLineValues[12]=data[google.finance.VOLUME].replace(',','');
-      arrLines[ixHit]=arrLineValues.join(',');
-      stockData.data=arrLines.join('\r\n');
-      fnStockDataProxy(stockData);
-    });
-    print("getDowData Ended");
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   function fnStockDataProxy(stockData){
     var arrLines=new Array();
     var arrLineValues=new Array();
     var sSymb="";
-    arrLines=stockData.data.split('\r\n');    
+    
+    arrLines=stockData.data.split('\r\n');
     
     for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
@@ -709,9 +711,9 @@
   function fnAddStock(Symbol){
     var tmp=Symbol.replace(/ /g,'');
     if(tmp.length>0 && Symbol!='__MSG_symbolsearchtip__'){
-      //if (tmp=='^DJI'){
-      //  tmp='.DJI';
-      //}
+
+
+
       arrStockSymbols.push(tmp);
       arrStockQtys.push(0);
       arrStockPrices.push(0);
@@ -747,15 +749,17 @@
       if (isNaN(arrStockHi[i])||arrStockHi[i].length==0){arrStockHi[i]=0;}
       if (isNaN(arrStockLo[i])||arrStockLo[i].length==0){arrStockLo[i]=0;}
       //Check for blacklisted symbols
-//      if (arrStockSymbols[i]=='^DJI'){
-//        var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-//        var divMess = document.createElement("divMess");
-//        var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
-//        divMess.innerHTML = '<span style="background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
-//        miniMsg.createTimerMessage(divMess,10);
-//        fnDeleteStock(i);
-//        i--;
-//      }
+      if (arrStockSymbols[i]=='^DJI'){
+        var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
+        var divMess = document.createElement("divMess");
+        var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
+        divMess.innerHTML = '<span style="background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
+        miniMsg.createTimerMessage(divMess,10);
+        fnDeleteStock(i);
+        i--;
+      }
+
+
     }
 
     var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
@@ -928,7 +932,7 @@
   }
   
  //1-2-3 start
-  fnInit();   
+  fnInit();  
    </script>
   ]]>
   </Content>
