@@ -322,7 +322,7 @@
               k++;
             }
           }
-        }
+        }else{document.getElementById('stc'+i+'0').innerHTML='';document.getElementById('stc'+i+'1').innerHTML='';}
       }
     }
   }
