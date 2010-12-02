@@ -313,7 +313,6 @@
         document.getElementById('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
         document.getElementById('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+encodeURIComponent(arrStocks[i][1])+'#chart1:symbol='+encodeURIComponent(arrStocks[i][1])+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
         if(arrStocks[i][1]!="-"){
-          //document.getElementById('str'+i).innerHTML="";
           var k=3;
           for(var j=1;j<iConfCols+1;j++){
             if(pref.getString("Column"+j)!='0'){
