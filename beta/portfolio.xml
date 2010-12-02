@@ -89,13 +89,13 @@
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
   var IMAGES_BASE = "http://stockportfoliogg.googlecode.com/svn/released/images/";
-  var iVersion=1.23;
+  var iVersion=1.24;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
   var bAllReady;
   var iMaxStockNo=40;
-  var sDefStocks="^GSPC,RUWUT.X,EURUSD=X,XAU=X";
+  var sDefStocks="^GSPC,GOOG,EURUSD=X,XAU=X";
   var iStockCols=5;
   var iConfCols=0;
   var iSDRetry=0;
@@ -652,9 +652,6 @@
   function fnAddStock(Symbol){
     var tmp=Symbol.replace(/ /g,'');
     if(tmp.length>0 && Symbol!='__MSG_symbolsearchtip__'){
-
-
-
       arrStockSymbols.push(tmp);
       arrStockQtys.push(0);
       arrStockPrices.push(0);
@@ -689,16 +686,6 @@
       if (isNaN(arrStockTC[i])||arrStockTC[i].length==0){arrStockTC[i]=0;}
       if (isNaN(arrStockHi[i])||arrStockHi[i].length==0){arrStockHi[i]=0;}
       if (isNaN(arrStockLo[i])||arrStockLo[i].length==0){arrStockLo[i]=0;}
-      //Check for blacklisted symbols
-      //if (arrStockSymbols[i]=='^DJI'){
-      //  var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-      //  var divMess = document.createElement("divMess");
-      //  var msghtml="^DJI: The Dow Jones Industrial average index is no longer supported by Yahoo Finance. The symbol will be removed.";
-      //  divMess.innerHTML = '<span style="background-Color:red;">^DJI: The Dow Jones Industrial index is no longer supported by Yahoo Finance. The symbol will be removed.</span>';
-      //  miniMsg.createTimerMessage(divMess,10);
-      //  fnDeleteStock(i);
-      //  i--;
-      //}
     }
     var tmp=pref.getString("campaign_1")+"campaign_1"+pref.getString("GadgetVersion")+"GadgetVersion"+
             pref.getString("SettingVersion")+"SettingVersion"+pref.getString("StockSymbols")+"StockSymbols"+
@@ -730,7 +717,7 @@
     if((iPrefVersion*1)<(iVersion*1)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">New features. Read more here.</a> &raquo;</span>';
+      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Dow Jones index is working again. Read more here.</a> &raquo;</span>';
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
     CreatePromos();
