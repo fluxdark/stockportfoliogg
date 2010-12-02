@@ -100,7 +100,7 @@
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
-  var debug=0;
+  var debug=1;
   
   //gadgets.window.adjustHeight is called too many times at load. Must be fixed  
 
