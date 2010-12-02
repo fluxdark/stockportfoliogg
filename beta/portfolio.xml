@@ -312,17 +312,15 @@
         document.getElementById('stc'+i+'0').className=sClass;
         document.getElementById('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
         document.getElementById('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+encodeURIComponent(arrStocks[i][1])+'#chart1:symbol='+encodeURIComponent(arrStocks[i][1])+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
-        var k=3;
-        for(var j=1;j<iConfCols+1;j++){
-            print(arrStocks[i][0]);
-            print(arrStocks[i][1]);
-            print(arrStocks[i][2]);
-          if(arrStocks[i][1]=="-"){
-            print("-");
-          }
-          if(pref.getString("Column"+j)!='0'){
-            document.getElementById('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
-            k++;
+        if(arrStocks[i][1]!="-"){
+          print("-");
+          //document.getElementById('str'+i).innerHTML="";
+          var k=3;
+          for(var j=1;j<iConfCols+1;j++){
+            if(pref.getString("Column"+j)!='0'){
+              document.getElementById('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
+              k++;
+            }
           }
         }
       }
