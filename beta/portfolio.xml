@@ -315,6 +315,9 @@
         var k=3;
         for(var j=1;j<iConfCols+1;j++){
           if(pref.getString("Column"+j)!='0'){
+            if(arrStocks[i][1]=="-"){
+              print("-");
+            }
             document.getElementById('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
             k++;
           }
