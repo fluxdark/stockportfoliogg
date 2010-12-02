@@ -324,7 +324,7 @@
         }else{
           document.getElementById('str'+i).style.background='#BCBCBC';
           document.getElementById('stc'+i+'1').innerHTML='';
-          document.getElementById('stc'+i+'1').style.height='5px';
+          document.getElementById('stc'+i+'1').height='5px';
           document.getElementById('stc'+i+'2').innerHTML='';
         }
       }
