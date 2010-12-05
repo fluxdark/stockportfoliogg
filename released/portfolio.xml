@@ -89,7 +89,7 @@
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
   var IMAGES_BASE = "http://stockportfoliogg.googlecode.com/svn/released/images/";
-  var iVersion=1.24;
+  var iVersion=1.25;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
@@ -312,12 +312,19 @@
         document.getElementById('stc'+i+'0').className=sClass;
         document.getElementById('stc'+i+'0').title="Hi="+arrStockHi[i]+"\nLo="+arrStockLo[i];
         document.getElementById('stc'+i+'2').innerHTML='<a target="_new" href='+'http://finance.yahoo.com/charts?s='+encodeURIComponent(arrStocks[i][1])+'#chart1:symbol='+encodeURIComponent(arrStocks[i][1])+';range=3m;indicator=volume;charttype=line;crosshair=on;logscale=on;source=><font id="stcc'+i+'2" color="'+fnNumToColor(arrStocks[i][3],"#000000")+'">'+arrStocks[i][pref.getString("ChangeColumn")]+'</font></a>';
-        var k=3;
-        for(var j=1;j<iConfCols+1;j++){
-          if(pref.getString("Column"+j)!='0'){
-            document.getElementById('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
-            k++;
+        if(arrStocks[i][1]!="-"){
+          var k=3;
+          for(var j=1;j<iConfCols+1;j++){
+            if(pref.getString("Column"+j)!='0'){
+              document.getElementById('stc'+i+k).innerHTML='<div id="stcc'+i+k+'">'+arrStocks[i][pref.getString("Column"+j)]+'</div>';
+              k++;
+            }
           }
+        }else{
+          document.getElementById('str'+i).style.background='#BCBCBC';
+          document.getElementById('stc'+i+'1').innerHTML='';
+          document.getElementById('stc'+i+'1').height='2px';
+          document.getElementById('stc'+i+'2').innerHTML='';
         }
       }
     }
@@ -442,7 +449,7 @@
     gadgets.window.adjustHeight();
   }
   function fnInsertFooter(){
-    document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+IMAGES_BASE+'AddEdit.gif" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+IMAGES_BASE+'Summary.gif" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+IMAGES_BASE+'money.gif" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+IMAGES_BASE+'News.gif" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'help.gif" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://groups.google.com/group/stock-portfolio" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'ggroups.gif" title="__MSG_gotoggroups__"></a></td></tr></table>';
+    document.getElementById("Footer").innerHTML='<table border="0" cellspacing="0" celpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>__MSG_stockloading__</td><td width="18px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleAdd(0)" src="'+IMAGES_BASE+'AddEdit.gif" title="__MSG_showaddedit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer" onclick="fnToggleSummary(1)" src="'+IMAGES_BASE+'Summary.gif" title="__MSG_showsummary__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleProfit(false)" src="'+IMAGES_BASE+'money.gif" title="__MSG_showprofit__"></td><td style="width:18px;"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" onclick="fnToggleNews(1);" src="'+IMAGES_BASE+'News.gif" title="__MSG_shownews__"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'help.gif" title="__MSG_help__"></a></td><td style="width:18px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:hand;cursor:pointer;" src="'+IMAGES_BASE+'ggroups.gif" title="__MSG_gotoggroups__"></a></td></tr></table>';
   }
   function fnInsertStockTable(){
     var sBGColor;
@@ -718,7 +725,7 @@
     if((iPrefVersion*1)<(iVersion*1)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Dow Jones index is working again. Read more here.</a> &raquo;</span>';
+      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">New forum and features. Read more here.</a> &raquo;</span>';
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
     CreatePromos();
