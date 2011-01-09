@@ -95,7 +95,7 @@
   var bTablesReady;
   var bAllReady;
   var iMaxStockNo=40;
-  var sDefStocks="^GSPC,GOOG,EURUSD=X,XAU=X";
+  var sDefStocks="^GSPC,GOOG,-,EURUSD=X,XAU=X";
   var iStockCols=5;
   var iConfCols=0;
   var iSDRetry=0;
@@ -398,7 +398,7 @@
     fnToggleProfit(true);
     fnToggleNews(0);
     //Show add if no stocks are configured
-    if((trim(arrStockSymbols.join(","))==sDefStocks && arrStockSymbols.length==4) || document.getElementById("StockAdd").style.display=="block"){
+    if((trim(arrStockSymbols.join(","))==sDefStocks && arrStockSymbols.length==5) || document.getElementById("StockAdd").style.display=="block"){
       fnToggleAdd(1);
     }
     gadgets.window.setTitle(pref.getString("CustomTitle"));
@@ -680,12 +680,12 @@
     //Check if no stocks are configured
     if (trim(inp.join(","))==""){
       arrStockSymbols=sDefStocks.split(",");
-      arrStockQtys="100,0,200,300".split(",");
-      arrStockPrices="235,0,0,0".split(",");
-      arrStockTC="5,3,4,2".split(",");
+      arrStockQtys="100,0,0,200,300".split(",");
+      arrStockPrices="235,0,0,0,0".split(",");
+      arrStockTC="5,3,0,4,2".split(",");
       arrStockCurrRates="1,1,1,1".split(",");
-      arrStockHi="500,10000,2,0.002".split(",");
-      arrStockLo="300,6000,1,0.0005".split(",");
+      arrStockHi="500,10000,0,2,0.002".split(",");
+      arrStockLo="300,6000,0,1,0.0005".split(",");
     }
     //Check for empty prefs
     for(var i=0;i<inp.length;i++){
