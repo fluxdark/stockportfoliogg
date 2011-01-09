@@ -95,7 +95,7 @@
   var bTablesReady;
   var bAllReady;
   var iMaxStockNo=40;
-  var sDefStocks="^GSPC,GOOG,EURUSD=X,XAU=X";
+  var sDefStocks="^GSPC,GOOG,-,EURUSD=X,XAU=X";
   var iStockCols=5;
   var iConfCols=0;
   var iSDRetry=0;
