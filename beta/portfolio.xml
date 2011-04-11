@@ -45,7 +45,7 @@
   <UserPref name="ChartScope" display_name="__MSG_chartperiod__" datatype="enum" default_value="3m"><EnumValue value="1d" display_value="1 __MSG_day__"/><EnumValue value="5d" display_value="5 __MSG_days__"/><EnumValue value="1m" display_value="1 __MSG_month__"/><EnumValue value="3m" display_value="3 __MSG_months__"/><EnumValue value="6m" display_value="6 __MSG_months__"/><EnumValue value="1y" display_value="12 __MSG_months__"/><EnumValue value="2y" display_value="24 __MSG_months__"/><EnumValue value="5y" display_value="60 __MSG_months__"/></UserPref>
   <UserPref name="UpdateInterval" display_name="__MSG_updateinterval__" datatype="enum" default_value="300000"><EnumValue value="60000" display_value="1 __MSG_minute__"/><EnumValue value="300000" display_value="5 __MSG_minute__"/><EnumValue value="600000" display_value="10 __MSG_minute__"/></UserPref>
   <UserPref name="Flashing" display_name="__MSG_flashing__" default_value="true" datatype="bool"/>
-<Content type="html" view="home,canvas">
+<Content type="html" view="home,canvas,preview">
   <![CDATA[
   <style type="text/css">
     .cellL{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:left;}
