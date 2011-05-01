@@ -726,8 +726,8 @@
     if((iPrefVersion*1)<(iVersion*1)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">No news. Read more here.</a> &raquo;</span>';
-      //miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
+      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Added buy price as column choice. Read more here.</a> &raquo;</span>';
+      miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
     gadgets.window.adjustHeight();
   }
