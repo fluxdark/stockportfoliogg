@@ -522,7 +522,8 @@
     var html="";
     var feed = feedIn.data;
     for(var i in feed.Entry){
-      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+IMAGES_BASE+'Square.gif"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
+      alert(feed.Entry[i].Date);
+	  html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+IMAGES_BASE+'Square.gif"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
       html+=feed.Entry[i].Title+'</a></span></td></tr>';
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
