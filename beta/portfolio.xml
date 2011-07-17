@@ -101,6 +101,9 @@
   var iSDRetry=0;
   var iTmrRetry;
   var debug=0;
+  //Increase columnsNo from 5 to 6
+  
+  
   
   //gadgets.window.adjustHeight is called too many times at load. Must be fixed  
 
