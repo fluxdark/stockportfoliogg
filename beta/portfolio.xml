@@ -144,6 +144,9 @@
     var arrLineValues=new Array();
     var sSymb="";
     
+	print(stockData);
+	print(stockData.data);
+
     arrLines=stockData.data.split('\r\n');
     
 	if (arrLines[6])
