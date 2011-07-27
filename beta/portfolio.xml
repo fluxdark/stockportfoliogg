@@ -733,7 +733,7 @@
     if (arrStockSymbols.length>iMaxStockNo){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="background-Color:red;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit">More than '+iMaxStockNo+' stocks has been configured. Please read more here.</a> &raquo;</span>';
+      divMess.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit">More than '+iMaxStockNo+' stocks has been configured. Please read more here.</a> &raquo;</span>';
       var statusMsg = miniMsg.createStaticMessage(divMess);
     }
   }
@@ -747,8 +747,8 @@
 	if (debug){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">"You are using the Beta version with debug enabled, please use the releaed version instead.</a> &raquo;</span>';
-      miniMsg.createTimerMessage(divMess, 5);	
+      divMess.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">You are using the Beta version with debug enabled, please use the releaed version instead.</a> &raquo;</span>';
+      miniMsg.createTimerMessage(divMess, 15);	
 	}
 	
     gadgets.window.adjustHeight();
