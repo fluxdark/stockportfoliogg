@@ -416,6 +416,7 @@
 	if(debug){
 	    gadgets.window.setTitle(pref.getString("CustomTitle")+" - BETA");
 	}
+	
     bTablesReady=true; //All needed tables has been made
     fnUpdateValues();
   }
@@ -745,9 +746,9 @@
     }
 	if (debug){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-      var divMess = document.createElement("divMess");
+      divMess = document.createElement("divMess");
       divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">"You are using the Beta version with debug enabled, please use the releaed version instead.</a> &raquo;</span>';
-      miniMsg.createTimerMessage(, 5);	
+      miniMsg.createTimerMessage(divMess, 5);	
 	}
 	
     gadgets.window.adjustHeight();
