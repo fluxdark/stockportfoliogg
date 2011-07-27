@@ -413,6 +413,9 @@
       fnToggleAdd(1);
     }
     gadgets.window.setTitle(pref.getString("CustomTitle"));
+	if(debug){
+	    gadgets.window.setTitle(pref.getString("CustomTitle")+" - BETA");
+	}
     bTablesReady=true; //All needed tables has been made
     fnUpdateValues();
   }
@@ -740,6 +743,13 @@
       divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Added buy price as column choice. Read more here.</a> &raquo;</span>';
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
+	if (debug){
+      var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
+      var divMess = document.createElement("divMess");
+      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">"You are using the Beta version with debug enabled, please use the releaed version instead.</a> &raquo;</span>';
+      miniMsg.createTimerMessage(, 5);	
+	}
+	
     gadgets.window.adjustHeight();
   }
   function fnHideMess(GadgetVersion){
