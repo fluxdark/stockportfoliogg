@@ -10,12 +10,13 @@
 //search: http://www.google.com/finance/match?matchtype=matchall&q=maersk
 //News: http://www.google.com/finance/company_news?q=NASDAQ:GOOG&output=rss
 //http://www.google.com/finance/match?matchtype=matchall&q=abb
-
+alert("1");
 	var quote = new google.finance.Quote();
       quote.getQuotes(["GOOG","INTC"]);
       quote.addListener(function(data) {
 //alert(google.finance.LAST);
 //alert(google.finance.SYMBOL);
+alert("2");
 alert("Last: " + data[google.finance.LAST]);
 		
 		
