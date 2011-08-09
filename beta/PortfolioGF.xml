@@ -7,21 +7,20 @@
     <![CDATA[
    
     <script type="text/javascript">
-
-    
-    
-    //search: http://www.google.com/finance/match?matchtype=matchall&q=maersk
+//search: http://www.google.com/finance/match?matchtype=matchall&q=maersk
 //News: http://www.google.com/finance/company_news?q=NASDAQ:GOOG&output=rss
 //http://www.google.com/finance/match?matchtype=matchall&q=abb
-alert('1');
 
 	var quote = new google.finance.Quote();
       quote.getQuotes(["GOOG","INTC"]);
       quote.addListener(function(data) {
 //alert(google.finance.LAST);
-//alert(google.finance.SYMBOL);
-        //alert("Symbol: " + data[google.finance.SYMBOL] + ", Last: " + data[google.finance.LAST]);
-        alert("Change: " + data[google.finance.CHANGE]);
+alert(google.finance.SYMBOL);
+alert("Last: " + data[google.finance.LAST]);
+		
+		
+        //alert("Symbol: " + data[google.finance.SYMBOL]);
+        //alert("Change: " + data[google.finance.CHANGE]);
         //alert("Change Pct: " + data[google.finance.CHANGE_PCT]);
         //alert("Open: " + data[google.finance.OPEN]);
         //alert("High: " + data[google.finance.HIGH]);
