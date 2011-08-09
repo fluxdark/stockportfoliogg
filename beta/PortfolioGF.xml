@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <Module>
+    
+<Module>
   <ModulePrefs title="hellofinance">
     <Require feature="finance"/>
   </ModulePrefs>
   <Content type="html">
   <![CDATA[
-   
-  <script type="text/javascript">
 
+Hello world!
+Here is your portfolio:<br/>
+  GOOG: <span id=_IG_SYM1_l></span> (<span id=_IG_SYM1_c></span>)<br/>
+  AAPL: <span id=_IG_SYM2_l></span> (<span id=_IG_SYM2_c></span>)<br/>
+  INTC: <span id=_IG_SYM3_l></span> (<span id=_IG_SYM3_c></span>)<br/>
+
+  
+<script>
   var quote = new google.finance.Quote();
-  quote.getQuotes(["GOOG","INTC"]);
-  quote.addListener(function(data) {
-    alert("Last: " + data[google.finance.LAST]);
-    alert("Symbol: " + data[google.finance.SYMBOL]);
-    alert("Change: " + data[google.finance.CHANGE]);
-    alert("Change Pct: " + data[google.finance.CHANGE_PCT]);
-    alert("Open: " + data[google.finance.OPEN]);
-    alert("High: " + data[google.finance.HIGH]);
-    alert("Low: " + data[google.finance.LOW]);
-    alert("Exchange: " + data[google.finance.EXCHANGE]);
-    alert("Time: " + data[google.finance.LAST_TRADE_TIME]);
-    });
-    
-    </script>
+  quote.enableDomUpdates( { 'GOOG' : '_IG_SYM1', 'AAPL' : '_IG_SYM2', 
+    'INTC' : '_IG_SYM3' } );
+
+  quote.getQuotes(["GOOG", "AAPL", "INTC"]);
+</script>
   ]]>
+
   </Content>
-  </Module>
+</Module>
