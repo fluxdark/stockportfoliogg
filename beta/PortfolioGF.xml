@@ -15,7 +15,7 @@
       quote.getQuotes(["GOOG","INTC"]);
       quote.addListener(function(data) {
 //alert(google.finance.LAST);
-alert(google.finance.SYMBOL);
+//alert(google.finance.SYMBOL);
 alert("Last: " + data[google.finance.LAST]);
 		
 		
