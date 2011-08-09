@@ -10,11 +10,6 @@
 
     
     
-    
-    
-    
-    
-    
     //search: http://www.google.com/finance/match?matchtype=matchall&q=maersk
 //News: http://www.google.com/finance/company_news?q=NASDAQ:GOOG&output=rss
 //http://www.google.com/finance/match?matchtype=matchall&q=abb
@@ -24,8 +19,8 @@
       quote.addListener(function(data) {
 //alert(google.finance.LAST);
 //alert(google.finance.SYMBOL);
-        alert("Symbol: " + data[google.finance.SYMBOL] + ", Last: " + data[google.finance.LAST]);
-        //alert("Change: " + data[google.finance.CHANGE]);
+        //alert("Symbol: " + data[google.finance.SYMBOL] + ", Last: " + data[google.finance.LAST]);
+        alert("Change: " + data[google.finance.CHANGE]);
         //alert("Change Pct: " + data[google.finance.CHANGE_PCT]);
         //alert("Open: " + data[google.finance.OPEN]);
         //alert("High: " + data[google.finance.HIGH]);
