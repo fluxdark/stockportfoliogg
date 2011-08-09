@@ -14,13 +14,14 @@ Here is your portfolio:<br/>
   INTC: <span id=_IG_SYM3_l></span> (<span id=_IG_SYM3_c></span>)<br/>
 
   
-<script>
+<script type="text/javascript">
   var quote = new google.finance.Quote();
-  quote.enableDomUpdates( { 'GOOG' : '_IG_SYM1', 'AAPL' : '_IG_SYM2', 
-    'INTC' : '_IG_SYM3' } );
+  quote.enableDomUpdates( { 'GOOG' : '_IG_SYM1', 'AAPL' : '_IG_SYM2', 'INTC' : '_IG_SYM3' } );
 
   quote.getQuotes(["GOOG", "AAPL", "INTC"]);
 </script>
+
+
   ]]>
 
   </Content>
