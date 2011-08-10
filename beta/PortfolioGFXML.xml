@@ -46,7 +46,7 @@
         // obj.data contains a Document DOM element corresponding to the
         // page that was requested
         var domdata = obj.data;
-alert(domdata.getElementsByTagName("finance"));
+//alert(domdata.getElementsByTagName("finance"));
 alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"));
         // Display menu title. Use getElementsByTagName() to retrieve the <menu> element.
         // Since there is only one menu element in the file,
