@@ -66,12 +66,13 @@ alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"))
         html += title + "</div><br>"; 
         // Get a list of the <food> element nodes in the file
         var itemList = domdata.getElementsByTagName("finance");
- 
+        alert("itemList Length:" + itemList.length);
+
         // Loop through all <food> nodes
         for (var i = 0; i < itemList.length ; i++) { 
         // For each <food> node, get child nodes.
         var nodeList = itemList.item(i).childNodes;
-        alert("Length:" + nodeList.length);
+        alert("childNodes Length:" + nodeList.length);
 
         // Loop through child nodes. Extract data from the text nodes that are
         // the children of the associated name, price, and calories element nodes.
