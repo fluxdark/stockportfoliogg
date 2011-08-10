@@ -82,7 +82,7 @@ alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"))
           alert("Name:" + node.nodeName);
           if (node.nodeName == "company") 
           {
-            var price = node.item(0).getAttribute("data");
+            var price = node.getAttribute("data");
             alert("Company1:" + price);
           }
           // If the user chose to display descriptions and
