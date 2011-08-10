@@ -79,11 +79,11 @@ alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"))
         // the children of the associated name, price, and calories element nodes.
         for (var j = 0; j < nodeList.length ; j++) {
           var node = nodeList.item(j);
-          alert("Name:" + node.nodeName);
+          //alert("Name:" + node.nodeName);
           if (node.nodeName == "company") 
           {
             var price = node.getAttribute("data");
-            alert("Company1:" + price);
+            alert("Company:" + price);
           }
           // If the user chose to display descriptions and
           // the child node is "#cdata-section", grab the 
