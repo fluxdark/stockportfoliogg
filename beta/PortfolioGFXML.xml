@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
   <Module>
-  <ModulePrefs title="Fetch XML" scrolling="true"/>
+  <ModulePrefs title="Fetch XML1" scrolling="true"/>
   <UserPref 
     name="mycalories" 
     display_name="Calorie limit" 
@@ -47,7 +47,7 @@
         // page that was requested
         var domdata = obj.data;
 alert(domdata.getElementsByTagName("finance"));
-alert(domdata.getElementsByTagName("finance").item(0).getAttribute("mobile_zipped"););
+alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"));
         // Display menu title. Use getElementsByTagName() to retrieve the <menu> element.
         // Since there is only one menu element in the file,
         // you can get to it by accessing the item at index "0". 
