@@ -73,7 +73,7 @@ alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"))
         for (var i = 0; i < itemList.length ; i++) { 
         // For each <food> node, get child nodes.
         var nodeList = itemList.item(i).childNodes;
-        alert("childNodes Length:" + nodeList.length);
+        //alert("childNodes Length:" + nodeList.length);
 
         // Loop through child nodes. Extract data from the text nodes that are
         // the children of the associated name, price, and calories element nodes.
@@ -82,7 +82,7 @@ alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"))
           alert("Name:" + node.nodeName);
           if (node.nodeName == "company") 
           {
-            var price = node.item(0).attributes.item(0).nodeValue;
+            var price = node.item(0).getAttribute("data");
             alert("Company1:" + price);
           }
           // If the user chose to display descriptions and
