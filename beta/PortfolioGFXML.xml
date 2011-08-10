@@ -46,7 +46,8 @@
         // obj.data contains a Document DOM element corresponding to the
         // page that was requested
         var domdata = obj.data;
-alert(domdata);
+alert(domdata.getElementsByTagName("finance"));
+alert(domdata.getElementsByTagName("finance").item(0).getAttribute("mobile_zipped"););
         // Display menu title. Use getElementsByTagName() to retrieve the <menu> element.
         // Since there is only one menu element in the file,
         // you can get to it by accessing the item at index "0". 
