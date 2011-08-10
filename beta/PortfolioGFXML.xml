@@ -80,9 +80,9 @@ alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"))
         for (var j = 0; j < nodeList.length ; j++) {
           var node = nodeList.item(j);
           alert("Name:" + node.nodeName);
-          if (node.nodeName == "company1") 
+          if (node.nodeName == "company") 
           {
-            var price = node.firstChild.item(0).getAttribute("data");
+            var price = node.item(0).getAttribute("data");
             alert("Company1:" + price);
           }
           if (node.nodeName == "company data") 
