@@ -63,8 +63,9 @@ alert(domdata.getElementsByTagName("finance").item(0).getAttribute("module_id"))
         // 
         // var title = domdata.getElementsByTagName("menu").item(0).attributes.item(0).nodeValue; 
 
-        html += title + "</div><br>"; 
+        //html += title + "</div><br>"; 
         // Get a list of the <food> element nodes in the file
+        alert("Yihaa");
         var itemList = domdata.getElementsByTagName("finance");
         alert("itemList Length:" + itemList.length);
 
