@@ -738,14 +738,15 @@
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
     if (debug){
-      var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
-      divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">You are using the Beta version with debug enabled, please use the releaed version instead.</a> &raquo;</span>';
-      miniMsg.createTimerMessage(divMess, 15);	
-    }
-
       var miniMsg1=new gadgets.MiniMessage(__MODULE_ID__);
-      miniMsg1.createTimerMessage('<a target="new" href="http://ggforum.cnybroe.dk/default.aspx?g=posts&m=787&#post787">Stockdata is currently unstable.</a>', 15);
+      var divMess1 = document.createElement("divMess");
+      divMess1.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">You are using the Beta version with debug enabled, please use the released version instead.</a> &raquo;</span>';
+      miniMsg1.createTimerMessage(divMess1, 15);
+    }
+    var miniMsg2=new gadgets.MiniMessage(__MODULE_ID__);
+    var divMess2 = document.createElement("divMess");
+    divMess2.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://ggforum.cnybroe.dk/default.aspx?g=posts&m=787&#post787" class="prostyle">2011-08-11: Stockdata is currently unstable.</a></span>';
+    miniMsg2.createTimerMessage(divMess2, 15);
     
     gadgets.window.adjustHeight();
   }
