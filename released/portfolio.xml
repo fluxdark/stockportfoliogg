@@ -101,6 +101,7 @@
   var iSDRetry=0;
   var iTmrRetry;
   var debug=0;
+  //Increase columnsNo from 5 to 6
   
   //gadgets.window.adjustHeight is called too many times at load. Must be fixed  
 
@@ -403,6 +404,10 @@
       fnToggleAdd(1);
     }
     gadgets.window.setTitle(pref.getString("CustomTitle"));
+	if(debug){
+	    gadgets.window.setTitle(pref.getString("CustomTitle")+" - BETA");
+	}
+	
     bTablesReady=true; //All needed tables has been made
     fnUpdateValues();
   }
@@ -522,7 +527,8 @@
     var html="";
     var feed = feedIn.data;
     for(var i in feed.Entry){
-      html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+IMAGES_BASE+'Square.gif"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
+      alert(feed.Entry[i].Date);
+	  html+='<tr><td width="5" valign="top"><img width="16" height="16" src="'+IMAGES_BASE+'Square.gif"></td><td><span><a href="'+feed.Entry[i].Link+'" target="_blank">';
       html+=feed.Entry[i].Title+'</a></span></td></tr>';
     }
     document.getElementById("StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:'+fsize+'">'+html+'</table>';
@@ -718,7 +724,7 @@
     if (arrStockSymbols.length>iMaxStockNo){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="background-Color:red;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit">More than '+iMaxStockNo+' stocks has been configured. Please read more here.</a> &raquo;</span>';
+      divMess.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/igoogle-preferences-limit">More than '+iMaxStockNo+' stocks has been configured. Please read more here.</a> &raquo;</span>';
       var statusMsg = miniMsg.createStaticMessage(divMess);
     }
   }
@@ -729,6 +735,16 @@
       divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Added buy price as column choice. Read more here.</a> &raquo;</span>';
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
+    if (debug){
+      var miniMsg1=new gadgets.MiniMessage(__MODULE_ID__);
+      var divMess1 = document.createElement("divMess");
+      divMess1.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">You are using the Beta version with debug enabled, please use the released version instead.</a> &raquo;</span>';
+      miniMsg1.createTimerMessage(divMess1, 15);
+    }
+    var miniMsg2=new gadgets.MiniMessage(__MODULE_ID__);
+    var divMess2 = document.createElement("divMess");
+    divMess2.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://ggforum.cnybroe.dk/default.aspx?g=posts&m=787&#post787" class="prostyle">2011-08-11: Stockdata is currently unstable. Read more here.</a></span>';
+    miniMsg2.createTimerMessage(divMess2, 15);
     gadgets.window.adjustHeight();
   }
   function fnHideMess(GadgetVersion){
