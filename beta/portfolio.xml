@@ -100,7 +100,7 @@
   var iConfCols=0;
   var iSDRetry=0;
   var iTmrRetry;
-  var debug=1;
+  var debug=0;
   //Increase columnsNo from 5 to 6
   
   
@@ -144,16 +144,9 @@
     var arrLineValues=new Array();
     var sSymb="";
     
-	print(stockData.data);
-
     arrLines=stockData.data.split('\r\n');
     
-	if (arrLines[6])
-	{
-	  print(arrLines[6]);
-    }
-	
-	for(i=0;i<arrLines.length-1;i++){
+    for(i=0;i<arrLines.length-1;i++){
       arrLineValues=splitLine(arrLines[i]);
       sSymb+=trim(arrLineValues[24])+pref.getString("Currency")+'=X+';      
     }
@@ -744,13 +737,16 @@
       divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Added buy price as column choice. Read more here.</a> &raquo;</span>';
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
     }
-	if (debug){
+    if (debug){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       divMess = document.createElement("divMess");
       divMess.innerHTML = '<span style="background-Color:red;font-size:11px;"><a target="new" href="http://www.google.dk/ig/directory?dpos=top&root=/ig&url=stockportfoliogg.googlecode.com/svn/released/portfolio.xml" class="prostyle">You are using the Beta version with debug enabled, please use the releaed version instead.</a> &raquo;</span>';
       miniMsg.createTimerMessage(divMess, 15);	
-	}
-	
+    }
+
+      var miniMsg1=new gadgets.MiniMessage(__MODULE_ID__);
+      miniMsg1.createTimerMessage('<a target="new" href="http://ggforum.cnybroe.dk/default.aspx?g=posts&m=787&#post787">Stockdata is currently unstable.</a>', 15);
+    
     gadgets.window.adjustHeight();
   }
   function fnHideMess(GadgetVersion){
