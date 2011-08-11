@@ -745,7 +745,7 @@
     }
     var miniMsg2=new gadgets.MiniMessage(__MODULE_ID__);
     var divMess2 = document.createElement("divMess");
-    divMess2.innerHTML = '<span style="Color:#E00000;font-size:11px;"><a target="new" href="http://ggforum.cnybroe.dk/default.aspx?g=posts&m=787&#post787" class="prostyle">2011-08-11: Stockdata is currently unstable. Read more here.</a></span>';
+    divMess2.innerHTML = '<span style="background-Color:#E80000;font-size:11px;"><a target="new" href="http://ggforum.cnybroe.dk/default.aspx?g=posts&m=787&#post787" class="prostyle">2011-08-11: Stockdata is currently unstable. Read more here.</a></span>';
     miniMsg2.createTimerMessage(divMess2, 15);
     gadgets.window.adjustHeight();
   }
