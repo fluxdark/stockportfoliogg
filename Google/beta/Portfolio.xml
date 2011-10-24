@@ -39,6 +39,7 @@
    //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.price;};
     function Stock(index,symbol,qty,price,hi,lo) {
+      alert("1");
       this.index = index;
       this.symbol = symbol;
       this.name = "N/A";
@@ -115,7 +116,7 @@
         for(var i=0;i<prefLen;i++)
         {
             arrStocks[i]=arrStocks[i].split(",");
-            //Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4]);
+            Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4]);
             //alert(Stocks[i].symbol);
         }
 
