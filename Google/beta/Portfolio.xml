@@ -36,15 +36,7 @@
     //News: http://www.google.com/finance/company_news?q=NASDAQ:GOOG&output=rss
     //Image: http://www.google.com/finance/chart?cht=c&q=goog&p=1m&tlf=24h
 
-
-    function fnInit(){
-        //document.getElementById("gVersion").innerHTML='Version:'+iVersion;
-        fnReadPrefs();
-        //fnLoad();
-        //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
-    }
-
-    //This defines the Stock object:
+   //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.price;};
     function Stock(index,symbol,qty,price,hi,lo) {
       this.index = index;
@@ -71,7 +63,14 @@
     var Stocks = new Array();
     var index = 0;
 
+    function fnInit(){
+        //document.getElementById("gVersion").innerHTML='Version:'+iVersion;
+        fnReadPrefs();
+        //fnLoad();
+        //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
+    }
 
+ 
 
     var quote = new google.finance.Quote();
       quote.getQuotes(["GOOG","INTC"]);
@@ -116,7 +115,7 @@
         {
             arrStocks[i]=arrStocks[i].split(",");
             Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4])
-            alert(Stocks[0].symbol);
+            alert(Stocks[i].symbol);
         }
 
 //        //alert(arrStocks[0][1]);
