@@ -1,0 +1,32 @@
+﻿  
+  function CreateCollection(ClassName){
+    var obj=new Array();
+    eval("var t=new "+ClassName+"()");
+    for(_item in t){
+      eval("obj."+_item+"=t."+_item);
+    }
+    return obj;
+  }
+  
+  function StockCollection(){
+    this.Container="";
+    this.Add=function(obj){
+      this.push(obj);
+    }
+    this.TotalValue=0;
+    this.TotalGain=0;
+    this.TotalGainToday=0;    
+  }
+  
+  Stocks=new CreateCollection("StockCollection");     
+  function Stock(Name,BuyPrice,Qty){
+    this.Name=Name;
+    this.BuyPrice=BuyPrice;
+    this.Qty=Qty;
+    this.Price=0;
+    this.Content="";
+    this.Value=function(){return this.Price*this.Qty};
+    this.TotalGain=function(){return (this.Price*this.Qty)-(this.BuyPrice*this.Qty)};
+    this.GainToday=function(){return (Math.round(this.Content[4]*this.Qty*10)/10)};
+  }
+ 

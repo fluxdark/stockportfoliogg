@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <title></title>
+  </head> 
+  <body>
+
+
+    <div id="debug" nowrap style="font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div>
+
+
+
+  <script type="text/javascript"> 
+  //------------DEBUG CODE START-------------------
+    function fngetDate(secs){
+      var currentTime=new Date();
+      var month=fnZeroPad(currentTime.getMonth()+1,2);
+      var day=fnZeroPad(currentTime.getDate(),2);
+      var year=currentTime.getFullYear();
+      var hours=fnZeroPad(currentTime.getHours(),2);
+      var minutes=fnZeroPad(currentTime.getMinutes(),2);
+      if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2);}
+      return year+'-'+month+'-'+day+' '+hours+':'+minutes;
+    }
+    function fnZeroPad(num,length){
+      var snum = num + '';
+      while(snum.length < length) {
+        snum = '0' + snum; 
+      }
+      return snum;
+    }
+    function print(msg){
+        var debug_html=document.getElementById("debug").innerHTML;
+        var msg=fngetDate(1)+"; "+ msg.toString()+"<br>";
+        debug_html=msg+debug_html;
+        document.getElementById("debug").innerHTML=debug_html;
+    }
+  //------------DEBUG CODE END-------------------
+  function splitLine(inp){
+  	var out=new Array();
+    out=inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
+    for(var i=0;i<out.length;i++){
+      out[i]=out[i].replace(/"/g,"");
+		}
+		if(out.length!=26){
+			out='N/A,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');	
+		}
+		if(out[0]!="N/A"){
+      out[24]="???";
+      out[25]=out[0].substr(0,out[0].indexOf("<"));
+    }
+    return out;
+  }
+  
+    //This defines Stock:
+    Stock.prototype.value=function(){return this.qty*this.price;};
+    function Stock(index,s,price,qty,exrate,hi,lo) {
+      this.index = index;
+      var a=new Array();
+      a=splitLine(s);
+      this.symbol = a[1];
+      this.name = a[2];
+      this.qty = qty;
+      this.price = price;
+      this.exrate = exrate;
+      this.hi = hi;
+      this.lo = lo;
+      this.last = a[6];
+      if (this.last>this.hi){OnHi(this.index);}
+      if (this.last<this.lo){OnLo(this.index);}
+    }
+
+    function OnHi(i){
+      print('Hi limit passed on index: '+i);
+    }
+    function OnLo(i){
+      print('Lo limit passed on index: '+i);
+    }
+    
+    Array.prototype.Add=function(s,price,qty,exrate,hi,lo){this[index++] = new Stock(index,s,price,qty,exrate,hi,lo);};
+    var Stocks = new Array();
+    var index = 0;
+
+    var s='"N/A","ABB.ST","ABB N","0.00%",0.00,"0.00 - 0.00%",120.00,"4/3/2009","11:24am",120.00,119.25,123.50,5900283,120.00,"76.50 - 195.5374",120.00,119.75," ====== ",+8.28%,+10.61%,"119.25 - 123.50","N/A","N/A","N/A","SEK","Stockholm"';
+    Stocks.Add(s,100,10,5.43,110,50);
+    s='"N/A","XAU=X","GOLD 1UZ","N/A",N/A,"N/A - N/A",0.0011,"4/3/2009","5:15pm",N/A,N/A,N/A,N/A,N/A,"N/A - N/A",0.0011,0.0011,"N/A",N/A,N/A,"N/A - N/A","N/A","N/A","N/A","USD","N/A"'
+    Stocks.Add(s,100,10,5.43,150,50);
+    s='"N/A","^GSPC","S&P 500 INDEX,RTH","+0.97%",+8.12,"+8.12 - +0.97%",842.50,"4/3/2009","4:59pm",835.13,826.70,842.50,4283639552,834.38,"666.79 - 1440.24",N/A,N/A,"N/A",N/A,N/A,"826.70 - 842.50","N/A","N/A","N/A","USD","SNP"';
+    Stocks.Add(s,100,10,5.43,150,50);
+    s='"N/A","EURUSD=X","EUR to USD","N/A",N/A,"N/A - N/A",1.3482,"4/3/2009","5:52pm",N/A,N/A,N/A,N/A,N/A,"N/A - N/A",1.3485,1.348,"N/A",N/A,N/A,"N/A - N/A","N/A","N/A","N/A","EUR","N/A"';
+    Stocks.Add(s,100,10,5.43,150,50);
+
+    for (var i=0;i<Stocks.length;i++){
+      print(Stocks[i].name + ":" + Stocks[0].value());
+    }
+  
+  
+  
+  
+  
+  
+
+  </script>
+  </body>
+</html>

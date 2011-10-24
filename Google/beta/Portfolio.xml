@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <Module>
+  <ModulePrefs title="__MSG_gadgettitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://sites.google.com/site/cnybroe/iGoogleStockGadget" category="finance">
+    <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
+    <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/da_ALL.xml"/>
+    <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/beta/locale/es_ALL.xml"/>
+    <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/fr_ALL.xml"/>
+    <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/it_ALL.xml"/>
+    <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/sv_ALL.xml"/>
+    <Locale lang="pt-PT" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_PT.xml"/>
+    <Locale lang="pt-BR" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_BR.xml"/>
+    <Locale lang="de" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/de_ALL.xml"/>
+    <Locale lang="nl" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/nl_ALL.xml"/>
+    <Locale lang="zh-TW" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/zh_TW.xml"/>
+    <Require feature="finance"/>
+    <Require feature="setprefs"/>
+    <Require feature="minimessage"/>
+    <Require feature="analytics"/>
+    <Require feature="dynamic-height"/>
+    <Require feature="settitle"/>
+  </ModulePrefs>
+  <UserPref name="StockSymbols" datatype="hidden" default_value=""/>
+  <UserPref name="StockQtys" datatype="hidden" default_value=""/>
+  <UserPref name="StockPrices" datatype="hidden" default_value=""/>
+  <UserPref name="StockTC" datatype="hidden" default_value=""/>
+  <UserPref name="StockHi" datatype="hidden" default_value=""/>
+  <UserPref name="StockLo" datatype="hidden" default_value=""/>
+  
+  <Content type="html" view="home,canvas,preview">
+    <![CDATA[
+   
+  <script language="javascript" type="text/javascript" defer="defer">
+    var pref=new gadgets.Prefs(__MODULE_ID__);
+
+    //Search: http://www.google.com/finance/match?matchtype=matchall&q=abb
+    //News: http://www.google.com/finance/company_news?q=NASDAQ:GOOG&output=rss
+    //Image: http://www.google.com/finance/chart?cht=c&q=goog&p=1m&tlf=24h
+
+
+    function fnInit(){
+        //document.getElementById("gVersion").innerHTML='Version:'+iVersion;
+        fnReadPrefs();
+        //fnLoad();
+        //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
+    }
+
+    //This defines the Stock object:
+    Stock.prototype.value=function(){return this.qty*this.price;};
+    function Stock(index,qty,price,hi,lo) {
+      this.index = index;
+      var a=new Array();
+      a=splitLine(s);
+      this.symbol = a[1];
+      this.name = a[2];
+      this.qty = qty;
+      this.price = price;
+      this.hi = hi;
+      this.lo = lo;
+      this.last = a[6];
+      if (this.last>this.hi){OnHi(this.index);}
+      if (this.last<this.lo){OnLo(this.index);}
+    }
+
+    function OnHi(i){
+      print('Hi limit passed on index: '+i);
+    }
+    function OnLo(i){
+      print('Lo limit passed on index: '+i);
+    }
+    
+    //Create stocks collection
+    Array.prototype.Add=function(qty,price,hi,lo){this[index++] = new Stock(index,qty,price,hi,lo);};
+    var Stocks = new Array();
+    var index = 0;
+
+
+
+    var quote = new google.finance.Quote();
+      quote.getQuotes(["GOOG","INTC"]);
+      quote.addListener(function(data) {
+        //alert(google.finance.LAST);
+        //alert(google.finance.SYMBOL);
+        //alert("Last: " + data[google.finance.LAST]);
+    
+        //Stocks.Add(1,);
+
+        //alert("Symbol: " + data[google.finance.SYMBOL]);
+        //alert("Change: " + data[google.finance.CHANGE]);
+        //alert("Change Pct: " + data[google.finance.CHANGE_PCT]);
+        //alert("Open: " + data[google.finance.OPEN]);
+        //alert("High: " + data[google.finance.HIGH]);
+        //alert("Low: " + data[google.finance.LOW]);
+        //alert("Exchange: " + data[google.finance.EXCHANGE]);
+        //alert("Time: " + data[google.finance.LAST_TRADE_TIME]);
+      });	  
+
+
+
+
+    function fnSavePrefs()
+    {
+//        var arrStock = ['0,100,20,80','1,101,21,81','2,102,22,82'];
+//        var arrStocks= [arrStock[0],arrStock[1],arrStock[2]];
+
+//        for(i=0;iprefLen;i++)
+
+//        pref.set("Stocks",);
+    }
+
+    function fnReadPrefs(){
+        //var prefStr = pref.getString("Stocks");
+        var prefStr  = "0,100,20,80;1,101,21,81;2,102,22,82";
+        
+        var arrStocks = prefStr.join(";");
+        var prefLen = prefStr.length;
+        for(i=0;iprefLen;i++)
+        {
+            arrStocks[i]=arrStocks[i].join(",");
+        }
+
+        alert(arrStocks[0][1]);
+        //for(i=0;iprefLen;i++)
+        //{        
+        //    var arrStock = 
+        //    Stocks.Add(prefStr.split(";")
+        //}
+   
+    //iPrefVersion=pref.getString("GadgetVersion");
+  }
+
+
+    //1-2-3 start
+    fnInit();  
+
+    </script>
+    ]]>
+    </Content>
+  </Module>
