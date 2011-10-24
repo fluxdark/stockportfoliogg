@@ -114,10 +114,9 @@
         var prefLen = arrStocks.length;
         for(var i=0;i<prefLen;i++)
         {
-            var arrStock = arrStocks[i].split(",");
-            //arrStocks[i]=arrStocks[i].split(",");
-            Stocks.Add(arrStock[0],arrStock[1],arrStock[2],arrStock[3],arrStock[4])
-            alert(Stocks[i].symbol);
+            arrStocks[i]=arrStocks[i].split(",");
+            Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4])
+            alert(Stocks[0].symbol);
         }
 
 //        //alert(arrStocks[0][1]);
