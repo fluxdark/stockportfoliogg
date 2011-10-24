@@ -66,7 +66,7 @@
     function fnInit()
     {
         //document.getElementById("gVersion").innerHTML='Version:'+iVersion;
-    //    fnReadPrefs();
+        fnReadPrefs();
         //fnLoad();
         //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
     }
@@ -115,7 +115,7 @@
         for(var i=0;i<prefLen;i++)
         {
             arrStocks[i]=arrStocks[i].split(",");
-            Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4]);
+            //Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4]);
             //alert(Stocks[i].symbol);
         }
 
