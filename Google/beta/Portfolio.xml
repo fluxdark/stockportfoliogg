@@ -114,10 +114,11 @@
         
         var arrStocks = prefStr.split(";");
         var prefLen = prefStr.length;
-        //for(i=0;prefLen;i++)
-        //{
+        for(i=0;prefLen;i++)
+        {
+            alert(i);
             //arrStocks[i]=arrStocks[i].split(",");
-        //}
+        }
 
         alert(arrStocks[0][1]);
         //for(i=0;prefLen;i++)
