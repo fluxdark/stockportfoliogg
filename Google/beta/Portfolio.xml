@@ -46,17 +46,15 @@
 
     //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.price;};
-    function Stock(index,qty,price,hi,lo) {
+    function Stock(index,symbol,qty,price,hi,lo) {
       this.index = index;
-      var a=new Array();
-      a=splitLine(s);
-      this.symbol = a[1];
-      this.name = a[2];
+      this.symbol = symbol;
+      this.name = "N/A";
       this.qty = qty;
       this.price = price;
       this.hi = hi;
       this.lo = lo;
-      this.last = a[6];
+      this.last = 0;
       if (this.last>this.hi){OnHi(this.index);}
       if (this.last<this.lo){OnLo(this.index);}
     }
@@ -69,7 +67,7 @@
     }
     
     //Create stocks collection
-    Array.prototype.Add=function(qty,price,hi,lo){this[index++] = new Stock(index,qty,price,hi,lo);};
+    Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
     var Stocks = new Array();
     var index = 0;
 
@@ -110,22 +108,24 @@
     function fnReadPrefs(){
         var arrStocks=new Array();
         //var prefStr = pref.getString("Stocks");
-        var prefStr = "0,100,20,80;1,101,21,81;2,102,22,82";
+        var prefStr = "GOOG,0,100,20,80;MFST,1,101,21,81;FCX,2,102,22,82";
         
         var arrStocks = prefStr.split(";");
         var prefLen = arrStocks.length;
         for(var i=0;i<prefLen;i++)
         {
-            alert(i);
-            arrStocks[i]=arrStocks[i].split(",");
+            var arrStock = arrStocks[i].split(",");
+            //arrStocks[i]=arrStocks[i].split(",");
+            Stocks.Add(arrStock[0],arrStock[1],arrStock[2],arrStock[3],arrStock[4])
+            alert(Stocks[0].symbol);
         }
 
-        alert(arrStocks[0][1]);
-        //for(i=0;prefLen;i++)
-        //{        
-        //    var arrStock = 
-        //    Stocks.Add(prefStr.split(";")
-        //}
+//        //alert(arrStocks[0][1]);
+//        for(i=0;prefLen;i++)
+//        {        
+//            var arrStock = 
+//            Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4])
+//        }
    
     //iPrefVersion=pref.getString("GadgetVersion");
   }
