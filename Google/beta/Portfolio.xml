@@ -117,7 +117,7 @@
             var arrStock = arrStocks[i].split(",");
             //arrStocks[i]=arrStocks[i].split(",");
             Stocks.Add(arrStock[0],arrStock[1],arrStock[2],arrStock[3],arrStock[4])
-            alert(Stocks[0].symbol);
+            alert(Stocks[i].symbol);
         }
 
 //        //alert(arrStocks[0][1]);
