@@ -108,14 +108,15 @@
     }
 
     function fnReadPrefs(){
+        var arrStocks=new Array();
         //var prefStr = pref.getString("Stocks");
-        var prefStr  = "0,100,20,80;1,101,21,81;2,102,22,82";
+        var prefStr = "0,100,20,80;1,101,21,81;2,102,22,82";
         
-        var arrStocks = prefStr.join(";");
+        var arrStocks = prefStr.split(";");
         var prefLen = prefStr.length;
         for(i=0;iprefLen;i++)
         {
-            arrStocks[i]=arrStocks[i].join(",");
+            arrStocks[i]=arrStocks[i].split(",");
         }
 
         alert(arrStocks[0][1]);
