@@ -39,7 +39,6 @@
    //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.price;};
     function Stock(index,symbol,qty,price,hi,lo) {
-      alert("1");
       this.index = index;
       this.symbol = symbol;
       this.name = "N/A";
@@ -53,10 +52,10 @@
     }
 
     function OnHi(i){
-      print('Hi limit passed on index: '+i);
+      //msg('Hi limit passed on index: '+i);
     }
     function OnLo(i){
-      print('Lo limit passed on index: '+i);
+      //msg('Lo limit passed on index: '+i);
     }
     
     //Create stocks collection
