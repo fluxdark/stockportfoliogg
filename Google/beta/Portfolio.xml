@@ -115,15 +115,9 @@
         {
             arrStocks[i]=arrStocks[i].split(",");
             Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4])
-            alert(Stocks[i].symbol);
+            //alert(Stocks[i].symbol);
         }
 
-//        //alert(arrStocks[0][1]);
-//        for(i=0;prefLen;i++)
-//        {        
-//            var arrStock = 
-//            Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4])
-//        }
    
     //iPrefVersion=pref.getString("GadgetVersion");
   }
