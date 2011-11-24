@@ -19,7 +19,7 @@
     <Require feature="dynamic-height"/>
     <Require feature="settitle"/>
   </ModulePrefs>
-  <UserPref name="StockSymbols" datatype="hidden" default_value=""/>
+  <UserPref name="StockTickers" datatype="hidden" default_value=""/>
   <UserPref name="StockQtys" datatype="hidden" default_value=""/>
   <UserPref name="StockPrices" datatype="hidden" default_value=""/>
   <UserPref name="StockTC" datatype="hidden" default_value=""/>
@@ -38,10 +38,10 @@
 
    //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.price;};
-    function Stock(index,symbol,qty,price,hiLim,loLim) 
+    function Stock(index,ticker,qty,price,hiLim,loLim) 
     {
       this.index = index;
-      this.symbol = symbol;
+      this.ticker = ticker;
       //this.name = "N/A";
       this.qty = qty;
       this.price = price;
@@ -54,7 +54,7 @@
       this.chg = 0;
       this.chgPct = 0;
       this.exchange = "";
-      this.tradeTime = "";
+      this.tradeDateTime = "";
       if (this.last>this.hi){OnHi(this.index);}
       if (this.last<this.lo){OnLo(this.index);}
     }
@@ -70,8 +70,9 @@
     }
     
     //Create stocks collection
-    Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
-    Array.prototype.GetSymbols=function(){var n = [];for(var i=0;i<this.length;i++){n[i]=Stocks[i].symbol;}return n;};
+    Array.prototype.Add=function(ticker,qty,price,hi,lo){this[index++] = new Stock(index,ticker,qty,price,hi,lo);};
+    Array.prototype.GetTickers=function(){var n = [];for(var i=0;i<this.length;i++){n[i]=Stocks[i].ticker;}return n;};
+    Array.prototype.GetStockByTickerName=function(name){for(var i=0;i<this.length;i++){if(Stocks[i].ticker==name){return=Stocks[i]};}};
     var Stocks = [];
     var index = 0;
 
@@ -86,20 +87,21 @@
     function fnReqStockData()
     {
         var quote = new google.finance.Quote();
-        alert(Stocks.GetSymbols().join());
-        quote.getQuotes(Stocks.GetSymbols());
+        alert(Stocks.GetTickers().join());
+        quote.getQuotes(Stocks.GetTickers());
         quote.addListener(fnRecvStockData);	  
     }
 
     function fnRecvStockData(data)
     {
         //alert(google.finance.LAST);
-        //alert(google.finance.SYMBOL);
+        //alert(google.finance.TICKER);
         alert("TICKER: " + data[google.finance.TICKER]);
-    
+   alert(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
+
         //Stocks.Add(1,);
 
-        //alert("Symbol: " + data[google.finance.SYMBOL]);
+        //alert("Ticker: " + data[google.finance.TICKER]);
         //alert("Change: " + data[google.finance.CHANGE]);
         //alert("Change Pct: " + data[google.finance.CHANGE_PCT]);
         //alert("Open: " + data[google.finance.OPEN]);
@@ -123,7 +125,7 @@
     function fnReadPrefs(){
         var arrStocks = [];
         //var prefStr = pref.getString("Stocks");
-        var prefStr = "GOOG,0,100,20,80;MSFT,1,101,21,81;FCX,2,102,22,82";
+        var prefStr = "GOOG,0,100,20,80;MFST,1,101,21,81;FCX,2,102,22,82";
         
         var arrStocks = prefStr.split(";");
         var prefLen = arrStocks.length;
