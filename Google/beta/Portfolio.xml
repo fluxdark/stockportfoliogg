@@ -64,12 +64,12 @@
     
     //Create stocks collection
     Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
-    Array.prototype.GetSymbols=function(){return GetSymbols(this.length};
+    Array.prototype.GetSymbols=function(){return GetSymbols1(this.length};
     var Stocks = new Array();
     var index = 0;
 
 
-    function GetSymbols(j)
+    function GetSymbols1(j)
     {
         var names = "";
         for(var i=0;i<j;i++)
