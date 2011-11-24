@@ -97,6 +97,7 @@
 
     function fnRecvStockData(data)
     {
+        alert("TICKER: " + data[google.finance.TICKER]);
         print("TICKER: " + data[google.finance.TICKER]);
         //Check that tickers always are retured in same order as reuested
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
