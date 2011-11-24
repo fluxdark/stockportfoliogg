@@ -64,10 +64,9 @@
     
     //Create stocks collection
     Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
-    Array.prototype.GetSymbols=function(){var n="";for(var i=0;i<this.length;i++){n+=Stocks[i].symbol + '","';}return '"'+n.slice(0,n.length-2);};
+    Array.prototype.GetSymbols=function(){var n[]="";for(var i=0;i<this.length;i++){n[i]=Stocks[i].symbol;}return n;};
     var Stocks = new Array();
     var index = 0;
-
 
     function fnInit()
     {
@@ -83,12 +82,8 @@
         //alert(Stocks.GetSymbols());
 
         var quote = new google.finance.Quote();
-        var q[];
-        q[0]="GOOG";
-        q[1]="FCX";
 
-
-        quote.getQuotes(q);
+        quote.getQuotes(Stocks.GetSymbols());
         quote.addListener(fnRecvStockData);	  
     }
 
