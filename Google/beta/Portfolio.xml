@@ -53,6 +53,7 @@
       this.open = 0;
       this.chg = 0;
       this.chgPct = 0;
+      this.volume = 0;
       this.exchange = "";
       this.tradeDateTime = "";
       if (this.last>this.hi){OnHi(this.index);}
@@ -84,35 +85,30 @@
         //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
     }
 
-    function fnReqStockData()
+    function fnReqStockData(t)
     {
-        var quote = new google.finance.Quote();
         //alert(Stocks.GetTickers().join()); 
-        quote.getQuotes(Stocks.GetTickers());
+        var quote = new google.finance.Quote();
+        quote.getQuotes(t);
         quote.addListener(fnRecvStockData);	  
     }
 
     function fnRecvStockData(data)
     {
-        alert("TICKER: " + data[google.finance.TICKER]);
+        //alert("TICKER: " + data[google.finance.TICKER]);
         //Check that tickers always are retured in same order as reuested
         //alert(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
-        alert("Last1: " + Stocks.GetStockByTickerName(data[google.finance.TICKER]).last);
 
         var a = Stocks.GetStockByTickerName(data[google.finance.TICKER]);
         a.last = data[google.finance.LAST];
-        alert("Last2: " + Stocks.GetStockByTickerName(data[google.finance.TICKER]).last);
-
-
-        //alert("Ticker: " + data[google.finance.TICKER]);
-        //alert("Last: " + data[google.finance.LAST]);
-        //alert("Change: " + data[google.finance.CHANGE]);
-        //alert("Change Pct: " + data[google.finance.CHANGE_PCT]);
-        //alert("Open: " + data[google.finance.OPEN]);
-        //alert("High: " + data[google.finance.HIGH]);
-        //alert("Low: " + data[google.finance.LOW]);
-        //alert("Exchange: " + data[google.finance.EXCHANGE]);
-        //alert("Time: " + data[google.finance.LAST_TRADE_TIME]);
+        a.high = data[google.finance.HIGH];
+        a.low = data[google.finance.LOW];
+        a.open = data[google.finance.OPEN];
+        a.chg = data[google.finance.CHANGE];
+        a.chgPct = data[google.finance.CHANGE_PCT];
+        a.exchange = data[google.finance.EXCHANGE];
+        a.volume = data[google.finance.VOLUME];
+        a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];        a.
     }
 
 
@@ -145,7 +141,7 @@
 
   function fnLoad(){
     //fnPrefsValidation(arrStockSymbols);
-    fnReqStockData();
+    fnReqStockData(Stocks.GetTickers());
     fnInsertTables();
   }
 
