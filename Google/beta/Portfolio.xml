@@ -72,7 +72,16 @@
     //Create stocks collection
     Array.prototype.Add=function(ticker,qty,price,hi,lo){this[index++] = new Stock(index,ticker,qty,price,hi,lo);};
     Array.prototype.GetTickers=function(){var n = [];for(var i=0;i<this.length;i++){n[i]=Stocks[i].ticker;}return n;};
-    Array.prototype.GetStockByTickerName=function(name){for(var i=0;i<this.length;i++){if(Stocks[i].ticker==name){return=Stocks[i]};}};
+    Array.prototype.GetStockByTickerName=function(name)
+    {
+      for(var i=0;i<this.length;i++)
+      {
+        if(Stocks[i].ticker==name)
+        {
+          return=Stocks[i];
+        }
+      }
+    };
     var Stocks = [];
     var index = 0;
 
