@@ -95,7 +95,7 @@
     {
         //alert(google.finance.LAST);
         //alert(google.finance.SYMBOL);
-        alert("Symbol: " + data[google.finance.SYMBOL]);
+        alert("TICKER: " + data[google.finance.TICKER]);
     
         //Stocks.Add(1,);
 
