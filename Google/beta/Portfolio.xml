@@ -103,7 +103,6 @@
         a.last = data[google.finance.LAST];
         alert(Stocks.GetStockByTickerName(data[google.finance.TICKER]).last);
 
-        //Stocks.Add(1,);
 
         //alert("Ticker: " + data[google.finance.TICKER]);
         //alert("Last: " + data[google.finance.LAST]);
