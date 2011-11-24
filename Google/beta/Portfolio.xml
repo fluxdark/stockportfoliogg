@@ -71,19 +71,23 @@
     {
         //document.getElementById("gVersion").innerHTML='Version:'+iVersion;
         fnReadPrefs();
-        //fnLoad();
+        fnLoad();
         //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
     }
 
  
-
+    function fnLoadData()
+    {
     var quote = new google.finance.Quote();
     quote.getQuotes(["GOOG","INTC"]);
-    quote.addListener(function(data) 
+    quote.addListener(GetData);	  
+    }
+
+    function GetData(data)
     {
-        //alert(google.finance.LAST);
+       //alert(google.finance.LAST);
         //alert(google.finance.SYMBOL);
-        alert("Last: " + data[google.finance.SYMBOL]);
+        alert("Last: " + data[google.finance.LAST]);
     
         //Stocks.Add(1,);
 
@@ -95,7 +99,7 @@
         //alert("Low: " + data[google.finance.LOW]);
         //alert("Exchange: " + data[google.finance.EXCHANGE]);
         //alert("Time: " + data[google.finance.LAST_TRADE_TIME]);
-    });	  
+    }
 
 
     function fnSavePrefs()
