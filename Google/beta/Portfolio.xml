@@ -38,7 +38,8 @@
 
    //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.price;};
-    function Stock(index,symbol,qty,price,hi,lo) {
+    function Stock(index,symbol,qty,price,hi,lo) 
+    {
       this.index = index;
       this.symbol = symbol;
       this.name = "N/A";
@@ -51,10 +52,13 @@
       if (this.last<this.lo){OnLo(this.index);}
     }
 
-    function OnHi(i){
+    function OnHi(i)
+    {
       //msg('Hi limit passed on index: '+i);
     }
-    function OnLo(i){
+    
+    function OnLo(i)
+    {
       //msg('Lo limit passed on index: '+i);
     }
     
@@ -74,10 +78,11 @@
  
 
     var quote = new google.finance.Quote();
-      quote.getQuotes(["GOOG","INTC"]);
-      quote.addListener(function(data) {
+    quote.getQuotes(["GOOG","INTC"]);
+    quote.addListener(function(data) 
+    {
         //alert(google.finance.LAST);
-        //alert(google.finance.SYMBOL);
+        alert(google.finance.SYMBOL);
         //alert("Last: " + data[google.finance.LAST]);
     
         //Stocks.Add(1,);
@@ -90,9 +95,7 @@
         //alert("Low: " + data[google.finance.LOW]);
         //alert("Exchange: " + data[google.finance.EXCHANGE]);
         //alert("Time: " + data[google.finance.LAST_TRADE_TIME]);
-      });	  
-
-
+    });	  
 
 
     function fnSavePrefs()
@@ -123,6 +126,11 @@
     //iPrefVersion=pref.getString("GadgetVersion");
   }
 
+  function fnLoad(){
+    //fnPrefsValidation(arrStockSymbols);
+    fnLoadData();
+    fnInsertTables();
+  }
 
     //1-2-3 start
     fnInit();  
