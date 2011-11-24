@@ -83,7 +83,7 @@
     {
         //alert(google.finance.LAST);
         //alert(google.finance.SYMBOL);
-        alert("Last: " + data[google.finance.LAST]);
+        alert("Last: " + data[google.finance.SYMBOL]);
     
         //Stocks.Add(1,);
 
