@@ -18,7 +18,7 @@
     <Require feature="analytics"/>
     <Require feature="dynamic-height"/>
     <Require feature="settitle"/>
-  </ModulePrefs>
+  </ModulePrefs> 
   <UserPref name="StockTickers" datatype="hidden" default_value=""/>
   <UserPref name="StockQtys" datatype="hidden" default_value=""/>
   <UserPref name="StockPrices" datatype="hidden" default_value=""/>
