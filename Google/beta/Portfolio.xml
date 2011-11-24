@@ -83,7 +83,8 @@
         //alert(Stocks.GetSymbols());
 
         var quote = new google.finance.Quote();
-        quote.getQuotes([Stocks.GetSymbols()]);
+        var q="["+Stocks.GetSymbols()+"]";
+        quote.getQuotes(q);
         quote.addListener(fnRecvStockData);	  
     }
 
