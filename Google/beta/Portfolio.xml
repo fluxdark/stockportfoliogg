@@ -97,7 +97,7 @@
 
     function fnRecvStockData(data)
     {
-        alert("TICKER: " + data[google.finance.TICKER]);
+        print("TICKER: " + data[google.finance.TICKER]);
         //Check that tickers always are retured in same order as reuested
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
@@ -110,7 +110,7 @@
         a.chgPct = data[google.finance.CHANGE_PCT];
         a.exchange = data[google.finance.EXCHANGE];
         a.volume = data[google.finance.VOLUME];
-        a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];        a.
+        a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];       
     }
 
 
@@ -139,15 +139,29 @@
 
    
     //iPrefVersion=pref.getString("GadgetVersion");
-    }
+  }
 
-    function fnLoad(){
+  function fnLoad(){
     //fnPrefsValidation(arrStockSymbols);
     fnReqStockData(Stocks.GetTickers());
     fnInsertTables();
+  }
+
+
+  function print(msg){
+    if (debug)
+    {
+      var debug_html = document.getElementById("debug").innerHTML;
+      if (document.getElementById("debug").style.display=='none')
+      {
+        document.getElementById("debug").style.display='block';
+        gadgets.window.adjustHeight();   
+      }
+      msg=fngetDate(1)+"; "+msg.toString()+"<br>";
+      debug_html=msg+debug_html;
+      document.getElementById("debug").innerHTML=debug_html;
     }
-
-
+  }
 
 
 
