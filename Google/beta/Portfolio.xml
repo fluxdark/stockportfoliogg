@@ -78,7 +78,7 @@
       {
         if(Stocks[i].ticker==name)
         {
-          return=Stocks[i];
+          return Stocks[i];
         }
       }
     };
