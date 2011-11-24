@@ -123,7 +123,7 @@
     function fnReadPrefs(){
         var arrStocks = [];
         //var prefStr = pref.getString("Stocks");
-        var prefStr = "GOOG,0,100,20,80;MFST,1,101,21,81;FCX,2,102,22,82";
+        var prefStr = "GOOG,0,100,20,80;MSFT,1,101,21,81;FCX,2,102,22,82";
         
         var arrStocks = prefStr.split(";");
         var prefLen = arrStocks.length;
