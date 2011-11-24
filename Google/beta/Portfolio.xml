@@ -42,7 +42,7 @@
     {
       this.index = index;
       this.symbol = symbol;
-      this.name = "N/A";
+      //this.name = "N/A";
       this.qty = qty;
       this.price = price;
       this.hi = hi;
@@ -64,7 +64,7 @@
     
     //Create stocks collection
     Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
-    Array.prototype.GetSymbols=function(){var n;for(var i=0;i<this.length-1;i++){n+=Stocks[i].name + ",";}return n;};
+    Array.prototype.GetSymbols=function(){var n;for(var i=0;i<this.length;i++){n+=Stocks[i].symbol + ",";}return n;};
     var Stocks = new Array();
     var index = 0;
 
