@@ -65,7 +65,7 @@
     //Create stocks collection
     Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
     Array.prototype.GetSymbols=function(){var n = [];for(var i=0;i<this.length;i++){n[i]=Stocks[i].symbol;}return n;};
-    var Stocks = new Array();
+    var Stocks = [];
     var index = 0;
 
     function fnInit()
@@ -91,7 +91,7 @@
     {
         //alert(google.finance.LAST);
         //alert(google.finance.SYMBOL);
-        alert("Last111: " + data[google.finance.LAST]);
+        alert("Last: " + data[google.finance.LAST]);
     
         //Stocks.Add(1,);
 
@@ -117,7 +117,7 @@
     }
 
     function fnReadPrefs(){
-        var arrStocks=new Array();
+        var arrStocks = [];
         //var prefStr = pref.getString("Stocks");
         var prefStr = "GOOG,0,100,20,80;MFST,1,101,21,81;FCX,2,102,22,82";
         
