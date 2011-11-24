@@ -64,15 +64,9 @@
     
     //Create stocks collection
     Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
-    Array.prototype.GetSymbols=function(){return GetSymbols1(this.length)};
+    Array.prototype.GetSymbols=function(){var n;for(var i=0;i<this.length-1;i++){n+=Stocks[i].name + ",";}return n;};
     var Stocks = new Array();
     var index = 0;
-
-
-    function GetSymbols1(j)
-    {
-        var n="";for(var i=0;i<j;i++){n+=Stocks[i].name + ",";}return n;
-    }
 
 
     function fnInit()
@@ -87,6 +81,7 @@
     function fnReqStockData()
     {
         alert(Stocks.GetSymbols());
+
         var quote = new google.finance.Quote();
         quote.getQuotes(["GOOG","INTC"]);
         quote.addListener(fnRecvStockData);	  
