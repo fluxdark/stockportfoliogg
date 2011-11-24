@@ -38,16 +38,23 @@
 
    //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.price;};
-    function Stock(index,symbol,qty,price,hi,lo) 
+    function Stock(index,symbol,qty,price,hiLim,loLim) 
     {
       this.index = index;
       this.symbol = symbol;
       //this.name = "N/A";
       this.qty = qty;
       this.price = price;
-      this.hi = hi;
-      this.lo = lo;
+      this.hiLim = hiLim;
+      this.loLim = loLim;
       this.last = 0;
+      this.high = 0;
+      this.low = 0;
+      this.open = 0;
+      this.chg = 0;
+      this.chgPct = 0;
+      this.exchange = "";
+      this.tradeTime = "";
       if (this.last>this.hi){OnHi(this.index);}
       if (this.last<this.lo){OnLo(this.index);}
     }
@@ -76,13 +83,10 @@
         //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
     }
 
- 
     function fnReqStockData()
     {
-        //alert(Stocks.GetSymbols());
-
         var quote = new google.finance.Quote();
-
+        alert(Stocks.GetSymbols().join());
         quote.getQuotes(Stocks.GetSymbols());
         quote.addListener(fnRecvStockData);	  
     }
@@ -127,7 +131,6 @@
         {
             arrStocks[i]=arrStocks[i].split(",");
             Stocks.Add(arrStocks[i][0],arrStocks[i][1],arrStocks[i][2],arrStocks[i][3],arrStocks[i][4]);
-            //alert(Stocks[i].symbol);
         }
 
    
