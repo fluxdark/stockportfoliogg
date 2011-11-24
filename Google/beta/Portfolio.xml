@@ -97,11 +97,11 @@
         alert("TICKER: " + data[google.finance.TICKER]);
         //Check that tickers always are retured in same order as reuested
         //alert(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
-        alert(Stocks.GetStockByTickerName(data[google.finance.TICKER]).last);
+        alert("Last1: " + Stocks.GetStockByTickerName(data[google.finance.TICKER]).last);
 
         var a = Stocks.GetStockByTickerName(data[google.finance.TICKER]);
         a.last = data[google.finance.LAST];
-        alert(Stocks.GetStockByTickerName(data[google.finance.TICKER]).last);
+        alert("Last2: " + Stocks.GetStockByTickerName(data[google.finance.TICKER]).last);
 
 
         //alert("Ticker: " + data[google.finance.TICKER]);
