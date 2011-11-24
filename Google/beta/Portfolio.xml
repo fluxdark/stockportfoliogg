@@ -80,10 +80,10 @@
  
     function fnReqStockData()
     {
-        alert(Stocks.GetSymbols());
+        //alert(Stocks.GetSymbols());
 
         var quote = new google.finance.Quote();
-        quote.getQuotes(["GOOG","INTC"]);
+        quote.getQuotes([Stocks.GetSymbols()]);
         quote.addListener(fnRecvStockData);	  
     }
 
