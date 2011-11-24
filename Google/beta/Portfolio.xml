@@ -83,7 +83,11 @@
         //alert(Stocks.GetSymbols());
 
         var quote = new google.finance.Quote();
-        var q="["+Stocks.GetSymbols()+"]";
+        var q[];
+        q[0]="GOOG";
+        q[1]="FCX";
+
+
         quote.getQuotes(q);
         quote.addListener(fnRecvStockData);	  
     }
