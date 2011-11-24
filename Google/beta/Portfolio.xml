@@ -71,12 +71,7 @@
 
     function GetSymbols1(j)
     {
-        var names = "";
-        for(var i=0;i<j;i++)
-        {
-            names += Stocks[i].Name + ",";
-        }
-        return names;
+        for(var i=0;i<j;i++){n+=Stocks[i].name + ",";}return n;
     }
 
 
