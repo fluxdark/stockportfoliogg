@@ -178,8 +178,43 @@
   }
 
 
-  function print(msg){
-    if (debug)
+  function fnZeroPad(num,length)
+  {
+    var snum = num + '';
+    while(snum.length < length)
+    {
+      snum = '0' + snum; 
+    }
+    return snum;
+  }
+
+  function trim(s)
+  {
+    if (s)
+    {
+      return s.replace(/^\s*/,"").replace(/\s*$/,"");
+    }
+    else
+    {
+      return "";
+    }
+  }
+
+  function fngetDate(secs)
+  {
+    var currentTime=new Date();
+    var month=fnZeroPad(currentTime.getMonth()+1,2);
+    var day=fnZeroPad(currentTime.getDate(),2);
+    var year=currentTime.getFullYear();
+    var hours=fnZeroPad(currentTime.getHours(),2);
+    var minutes=fnZeroPad(currentTime.getMinutes(),2);
+    if(secs){minutes+=':'+fnZeroPad(currentTime.getSeconds(),2);}
+    return year+'-'+month+'-'+day+' '+hours+':'+minutes;
+  }
+
+  function print(msg)
+  {
+    if (debug==1)
     {
       var debug_html = document.getElementById("debug").innerHTML;
       if (document.getElementById("debug").style.display=='none')
