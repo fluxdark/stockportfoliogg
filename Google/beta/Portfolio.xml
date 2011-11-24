@@ -64,7 +64,7 @@
     
     //Create stocks collection
     Array.prototype.Add=function(symbol,qty,price,hi,lo){this[index++] = new Stock(index,symbol,qty,price,hi,lo);};
-    Array.prototype.GetSymbols=function(){var n="";for(var i=0;i<this.length;i++){n+=Stocks[i].symbol + '","';}return '"'+n.slice(0,2);};
+    Array.prototype.GetSymbols=function(){var n="";for(var i=0;i<this.length;i++){n+=Stocks[i].symbol + '","';}return '"'+n.slice(0,n.length-2);};
     var Stocks = new Array();
     var index = 0;
 
