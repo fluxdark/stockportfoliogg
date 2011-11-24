@@ -71,7 +71,7 @@
 
     function GetSymbols1(j)
     {
-        for(var i=0;i<j;i++){n+=Stocks[i].name + ",";}return n;
+        var n="";for(var i=0;i<j;i++){n+=Stocks[i].name + ",";}return n;
     }
 
 
