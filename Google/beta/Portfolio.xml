@@ -87,7 +87,7 @@
     function fnReqStockData()
     {
         var quote = new google.finance.Quote();
-        //alert(Stocks.GetTickers().join());
+        //alert(Stocks.GetTickers().join()); 
         quote.getQuotes(Stocks.GetTickers());
         quote.addListener(fnRecvStockData);	  
     }
