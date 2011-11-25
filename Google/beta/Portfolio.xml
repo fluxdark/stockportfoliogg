@@ -114,9 +114,9 @@
         //Check that tickers always are retured in same order as reuested
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
-        var a = Stocks.GetStockByTickerName("jlkjlkjl");
-        if (a != "undefined")
-        {
+        var a = Stocks.GetStockByTickerName(data[google.finance.TICKER]);
+        //if (a != "undefined")
+        //{
             a.last = data[google.finance.LAST];
             a.high = data[google.finance.HIGH];
             a.low = data[google.finance.LOW];
@@ -126,14 +126,14 @@
             a.exchange = data[google.finance.EXCHANGE];
             a.volume = data[google.finance.VOLUME];
             a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];    
-            a.updated=1;   
+            a.updated = 1;   
             print(a.ticker + ": " + a.last);
-        } 
-        else
-        {
-            alert("dfdsfsd");
-            print(data[google.finance.TICKER] + " not found in stocks object !!!");
-        }
+        //} 
+        //else
+        //{
+        //    alert("dfdsfsd");
+        //    print(data[google.finance.TICKER] + " not found in stocks object !!!");
+        //}
     }
 
 
