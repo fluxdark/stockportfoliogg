@@ -186,7 +186,7 @@
 
     function fnInsertStockTable(){
         var sBGColor;
-        var sStockTable='<table border=0 cellspacing=0 width="100%" style="font-size:'+fsize+';" class="def">';
+        var sStockTable='<table border=2 cellspacing=0 width="100%" style="font-size:'+fsize+';" class="def">';
 
         var arrHeaderNames='__MSG_symbol__,__MSG_numberofstocks__,__MSG_buyprice__,__MSG_hialert__,__MSG_loalert__,__MSG_lasttrade__,__MSG_change__,__MSG_changepercent__,__MSG_dayopen__,__MSG_dayhigh__,__MSG_daylow__,__MSG_dayrange__,__MSG_exchange__,__MSG_dayvolume__,__MSG_lasttradetime__'.split(",");
         var sHead="";
