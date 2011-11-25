@@ -114,7 +114,7 @@
         //Check that tickers always are retured in same order as reuested
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
-        var a = Stocks.GetStockByTickerName(data[google.finance.TICKER]);
+        var a = Stocks.GetStockByTickerName("jlkjlkjl");
         print(a);
         a.last = data[google.finance.LAST];
         a.high = data[google.finance.HIGH];
