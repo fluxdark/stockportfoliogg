@@ -212,7 +212,7 @@
         }
         sStockTable+='</table>';
 
-        alert(sStockTable);
+        //alert(sStockTable);
 
         document.getElementById("StockData").innerHTML=sStockTable;
     }
