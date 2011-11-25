@@ -214,7 +214,7 @@
         }
         sStockTable+='</table>';
 
-        print(sStockTable);
+        print(""" + sStockTable + """);
 
         document.getElementById("StockData").innerHTML=sStockTable;
     }
