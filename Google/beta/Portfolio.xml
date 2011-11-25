@@ -131,6 +131,7 @@
         } 
         else
         {
+            alert("dfdsfsd");
             print(data[google.finance.TICKER] + " not found in stocks object !!!");
         }
     }
