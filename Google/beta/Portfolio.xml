@@ -35,7 +35,7 @@
 
   <Content type="html" view="home,canvas,preview">
     <![CDATA[
-  
+
   <style type="text/css">
     .Loading{font-family:sans-serif;foreground:#666666;font-style:italic;font-size:11px;}
     .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
