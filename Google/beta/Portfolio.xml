@@ -115,7 +115,7 @@
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
         var a = Stocks.GetStockByTickerName("jlkjlkjl");
-        if (a !="undefined")
+        if (a != "undefined")
         {
             a.last = data[google.finance.LAST];
             a.high = data[google.finance.HIGH];
