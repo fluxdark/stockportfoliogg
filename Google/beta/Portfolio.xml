@@ -115,19 +115,24 @@
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
         var a = Stocks.GetStockByTickerName("jlkjlkjl");
-        alert(a);
-        a.last = data[google.finance.LAST];
-        a.high = data[google.finance.HIGH];
-        a.low = data[google.finance.LOW];
-        a.open = data[google.finance.OPEN];
-        a.chg = data[google.finance.CHANGE];
-        a.chgPct = data[google.finance.CHANGE_PCT];
-        a.exchange = data[google.finance.EXCHANGE];
-        a.volume = data[google.finance.VOLUME];
-        a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];    
-        a.updated=1;   
-        print(a.ticker + ": " + a.last);
-
+        if (a !="undefined")
+        {
+            a.last = data[google.finance.LAST];
+            a.high = data[google.finance.HIGH];
+            a.low = data[google.finance.LOW];
+            a.open = data[google.finance.OPEN];
+            a.chg = data[google.finance.CHANGE];
+            a.chgPct = data[google.finance.CHANGE_PCT];
+            a.exchange = data[google.finance.EXCHANGE];
+            a.volume = data[google.finance.VOLUME];
+            a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];    
+            a.updated=1;   
+            print(a.ticker + ": " + a.last);
+        } 
+        else
+        {
+            print(data[google.finance.TICKER] + " not found in stocks object !!!");
+        }
     }
 
 
