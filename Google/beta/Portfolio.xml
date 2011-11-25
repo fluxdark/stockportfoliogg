@@ -109,7 +109,7 @@
 
     function fnRecvStockData(data)
     {
-        print("TICKER: " + data[google.finance.TICKER]);
+        //print("TICKER: " + data[google.finance.TICKER]);
         //Check that tickers always are retured in same order as reuested
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
@@ -123,6 +123,8 @@
         a.exchange = data[google.finance.EXCHANGE];
         a.volume = data[google.finance.VOLUME];
         a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];       
+        print(a.ticker + ": " + a.last);
+
     }
 
 
