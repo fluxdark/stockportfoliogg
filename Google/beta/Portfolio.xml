@@ -70,6 +70,7 @@
       this.volume = 0;
       this.exchange = "";
       this.tradeDateTime = "";
+      this.updated = 0;
       if (this.last>this.hi){OnHi(this.index);}
       if (this.last<this.lo){OnLo(this.index);}
     }
@@ -87,7 +88,8 @@
     //Create stocks collection
     Array.prototype.Add=function(ticker,qty,price,hi,lo){this[index++] = new Stock(index,ticker,qty,price,hi,lo);};
     Array.prototype.GetTickers=function(){var n = [];for(var i=0;i<this.length;i++){n[i]=Stocks[i].ticker;}return n;};
-    Array.prototype.GetStockByTickerName=function(name){for(var i=0;i<this.length;i++){if(Stocks[i].ticker==name){return Stocks[i];}}};
+    Array.prototype.GetStockByTickerName=function(name){for(var i=0;i<this.length;i++){if(Stocks[i].ticker==name && Stocks[i].updated==0){return Stocks[i];}}};
+    Array.prototype.UpdateStocks=function(){for(var i=0;i<this.length;i++){Stocks[i].updated=0;}fnReqStockData();};
     var Stocks = [];
     var index = 0;
 
@@ -99,11 +101,10 @@
         //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
     }
 
-    function fnReqStockData(t)
+    function fnReqStockData()
     {
-        //alert(Stocks.GetTickers().join()); 
         var quote = new google.finance.Quote();
-        quote.getQuotes(t);
+        quote.getQuotes(Stocks.GetTickers());
         quote.addListener(fnRecvStockData);	  
     }
 
@@ -122,7 +123,8 @@
         a.chgPct = data[google.finance.CHANGE_PCT];
         a.exchange = data[google.finance.EXCHANGE];
         a.volume = data[google.finance.VOLUME];
-        a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];       
+        a.tradeDateTime = data[google.finance.LAST_TRADE_DATETIME];    
+        a.updated=1;   
         print(a.ticker + ": " + a.last);
 
     }
@@ -157,7 +159,7 @@
 
   function fnLoad(){
     //fnPrefsValidation(arrStockSymbols);
-    fnReqStockData(Stocks.GetTickers());
+    Stocks.UpdateStocks();
     //fnInsertTables();
   }
 
