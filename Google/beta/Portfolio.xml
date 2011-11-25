@@ -115,6 +115,7 @@
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
         var a = Stocks.GetStockByTickerName(data[google.finance.TICKER]);
+        print(a);
         a.last = data[google.finance.LAST];
         a.high = data[google.finance.HIGH];
         a.low = data[google.finance.LOW];
