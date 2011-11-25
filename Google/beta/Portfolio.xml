@@ -199,7 +199,7 @@
                 sHead+='<td class="cellR">'+arrHeaderNames[pref.getString("Column"+i)]+'</td>';
             }
         }
-        sStockTable+='<COLGROUP width="8px"><COLGROUP span="2" width="10%"><COLGROUP span="'+iConfCols+'" width="'+80/iConfCols+'%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"><div class="Chart" id="StockChart"></div></td><td class="cellL">__MSG_name__</td>';
+        sStockTable+='<COLGROUP width="8px"><COLGROUP width="10%"><COLGROUP span="'+iConfCols+'" width="'+90/iConfCols+'%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"><div class="Chart" id="StockChart"></div></td><td class="cellL">__MSG_name__</td>';
             
         sStockTable+=sHead;
         sStockTable+='</tr><tr style="height:1px;background-Color:BCBCBC"><td colspan='+Number(iConfCols+2)+'></td></tr>';
