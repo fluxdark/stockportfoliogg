@@ -114,7 +114,7 @@
         //Check that tickers always are retured in same order as reuested
         //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
 
-        var a = Stocks.GetStockByTickerName("K" + data[google.finance.TICKER]);
+        var a = Stocks.GetStockByTickerName(data[google.finance.TICKER]);
         if (a)
         {
             a.last = data[google.finance.LAST];
@@ -131,7 +131,6 @@
         } 
         else
         {
-            alert("dfdsfsd");
             print(data[google.finance.TICKER] + " not found in stocks object !!!");
         }
     }
