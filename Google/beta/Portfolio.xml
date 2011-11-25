@@ -53,6 +53,7 @@
   <script language="javascript" type="text/javascript" defer="defer">
     var pref=new gadgets.Prefs(__MODULE_ID__);
     var iStockCols=6;
+    var IMAGES_BASE="http://stockportfoliogg.googlecode.com/svn/released/images/";
     var debug=1;
 
     //Search: http://www.google.com/finance/match?matchtype=matchall&q=abb
