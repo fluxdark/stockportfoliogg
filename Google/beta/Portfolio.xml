@@ -173,12 +173,12 @@
   }
 
     function fnLoad(){
-        //fnPrefsValidation(arrStockSymbols);
-        Stocks.UpdateStocks();
-        
         //Maketables
         fnInsertFooterTB();
         fnInsertStockTable();
+        
+        //fnPrefsValidation(arrStockSymbols);
+        Stocks.UpdateStocks();
     }
 
     function fnInsertStockTable(){
