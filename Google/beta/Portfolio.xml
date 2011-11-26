@@ -19,6 +19,7 @@
     <Require feature="dynamic-height"/>
     <Require feature="settitle"/>
   </ModulePrefs>
+  <UserPref name="GadgetVersion" datatype="hidden" default_value="0"/>
   <UserPref name="StockTickers" datatype="hidden" default_value=""/>
   <UserPref name="StockQtys" datatype="hidden" default_value=""/>
   <UserPref name="StockPrices" datatype="hidden" default_value=""/>
@@ -33,6 +34,10 @@
   <UserPref name="Column5" display_name="__MSG_column__ 5" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
   <UserPref name="Column6" display_name="__MSG_column__ 6" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
   <UserPref name="FontSize" display_name="__MSG_fontsize__" datatype="enum" default_value="11px"><EnumValue value="9px" display_value="9px"/><EnumValue value="10px" display_value="10px"/><EnumValue value="11px" display_value="11px"/><EnumValue value="12px" display_value="12px"/><EnumValue value="14px" display_value="14px"/></UserPref>
+
+
+  //http://docs.opensocial.org/display/OSD/App+Data
+  //http://24ways.org/2005/dont-be-eval
 
   <Content type="html" view="home,canvas,preview">
     <![CDATA[
@@ -55,6 +60,8 @@
     var iStockCols=6;
     var IMAGES_BASE="http://stockportfoliogg.googlecode.com/svn/released/images/";
     var fsize=pref.getString("FontSize");
+    var iVersion=1.0Alpha;
+    var iPrefVersion=0;
     var debug=1;
 
     //Search: http://www.google.com/finance/match?matchtype=matchall&q=abb
@@ -106,7 +113,7 @@
 
     function fnInit()
     {
-        //document.getElementById("gVersion").innerHTML='Version:'+iVersion;
+        document.getElementById("gVersion").innerHTML='Version:'+iVersion;
         fnReadPrefs();
         fnLoad();
         //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
@@ -170,7 +177,7 @@
         }
 
    
-    //iPrefVersion=pref.getString("GadgetVersion");
+    iPrefVersion=pref.getString("GadgetVersion");
   }
 
     function fnLoad(){
