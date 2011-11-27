@@ -26,15 +26,14 @@
   <UserPref name="StockTC" datatype="hidden" default_value=""/>
   <UserPref name="StockHi" datatype="hidden" default_value=""/>
   <UserPref name="StockLo" datatype="hidden" default_value=""/>
-  <UserPref name="Column0" display_name="__MSG_column__ 0" datatype="hidden" default_value="1"/>
-  <UserPref name="Column1" display_name="__MSG_column__ 1" datatype="enum" default_value="6"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
-  <UserPref name="Column2" display_name="__MSG_column__ 2" datatype="enum" default_value="8"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
-  <UserPref name="Column3" display_name="__MSG_column__ 3" datatype="enum" default_value="12"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
-  <UserPref name="Column4" display_name="__MSG_column__ 4" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
-  <UserPref name="Column5" display_name="__MSG_column__ 5" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
-  <UserPref name="Column6" display_name="__MSG_column__ 6" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/><EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/><EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/><EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/><EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/><EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
+  <UserPref name="Column0" display_name="__MSG_column__ 0" datatype="hidden" default_value="ticker"/>
+  <UserPref name="Column1" display_name="__MSG_column__ 1" datatype="enum" default_value="last"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="ticker" display_value="__MSG_symbol__"/><EnumValue value="qty" display_value="__MSG_numberofstocks__"/><EnumValue value="buyPrice" display_value="__MSG_buyprice__"/><EnumValue value="hiLim" display_value="__MSG_hialert__"/><EnumValue value="loLim" display_value="__MSG_loalert__"/><EnumValue value="last" display_value="__MSG_lasttrade__"/><EnumValue value="chg" display_value="__MSG_change__"/><EnumValue value="chgPct" display_value="__MSG_changepercent__"/><EnumValue value="dayOpen" display_value="__MSG_dayopen__"/><EnumValue value="dayHigh" display_value="__MSG_dayhigh__"/><EnumValue value="dayLow" display_value="__MSG_daylow__"/><EnumValue value="dayRange" display_value="__MSG_dayrange__"/><EnumValue value="exchange" display_value="__MSG_exchange__"/><EnumValue value="volume" display_value="__MSG_dayvolume__"/><EnumValue value="tradeDateTime" display_value="__MSG_lasttradetime__"/></UserPref>
+  <UserPref name="Column2" display_name="__MSG_column__ 2" datatype="enum" default_value="chgpct"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="ticker" display_value="__MSG_symbol__"/><EnumValue value="qty" display_value="__MSG_numberofstocks__"/><EnumValue value="buyPrice" display_value="__MSG_buyprice__"/><EnumValue value="hiLim" display_value="__MSG_hialert__"/><EnumValue value="loLim" display_value="__MSG_loalert__"/><EnumValue value="last" display_value="__MSG_lasttrade__"/><EnumValue value="chg" display_value="__MSG_change__"/><EnumValue value="chgPct" display_value="__MSG_changepercent__"/><EnumValue value="dayOpen" display_value="__MSG_dayopen__"/><EnumValue value="dayHigh" display_value="__MSG_dayhigh__"/><EnumValue value="dayLow" display_value="__MSG_daylow__"/><EnumValue value="dayRange" display_value="__MSG_dayrange__"/><EnumValue value="exchange" display_value="__MSG_exchange__"/><EnumValue value="volume" display_value="__MSG_dayvolume__"/><EnumValue value="tradeDateTime" display_value="__MSG_lasttradetime__"/></UserPref>
+  <UserPref name="Column3" display_name="__MSG_column__ 3" datatype="enum" default_value="dayrange"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="ticker" display_value="__MSG_symbol__"/><EnumValue value="qty" display_value="__MSG_numberofstocks__"/><EnumValue value="buyPrice" display_value="__MSG_buyprice__"/><EnumValue value="hiLim" display_value="__MSG_hialert__"/><EnumValue value="loLim" display_value="__MSG_loalert__"/><EnumValue value="last" display_value="__MSG_lasttrade__"/><EnumValue value="chg" display_value="__MSG_change__"/><EnumValue value="chgPct" display_value="__MSG_changepercent__"/><EnumValue value="dayOpen" display_value="__MSG_dayopen__"/><EnumValue value="dayHigh" display_value="__MSG_dayhigh__"/><EnumValue value="dayLow" display_value="__MSG_daylow__"/><EnumValue value="dayRange" display_value="__MSG_dayrange__"/><EnumValue value="exchange" display_value="__MSG_exchange__"/><EnumValue value="volume" display_value="__MSG_dayvolume__"/><EnumValue value="tradeDateTime" display_value="__MSG_lasttradetime__"/></UserPref>
+  <UserPref name="Column4" display_name="__MSG_column__ 4" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="ticker" display_value="__MSG_symbol__"/><EnumValue value="qty" display_value="__MSG_numberofstocks__"/><EnumValue value="buyPrice" display_value="__MSG_buyprice__"/><EnumValue value="hiLim" display_value="__MSG_hialert__"/><EnumValue value="loLim" display_value="__MSG_loalert__"/><EnumValue value="last" display_value="__MSG_lasttrade__"/><EnumValue value="chg" display_value="__MSG_change__"/><EnumValue value="chgPct" display_value="__MSG_changepercent__"/><EnumValue value="dayOpen" display_value="__MSG_dayopen__"/><EnumValue value="dayHigh" display_value="__MSG_dayhigh__"/><EnumValue value="dayLow" display_value="__MSG_daylow__"/><EnumValue value="dayRange" display_value="__MSG_dayrange__"/><EnumValue value="exchange" display_value="__MSG_exchange__"/><EnumValue value="volume" display_value="__MSG_dayvolume__"/><EnumValue value="tradeDateTime" display_value="__MSG_lasttradetime__"/></UserPref>
+  <UserPref name="Column5" display_name="__MSG_column__ 5" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="ticker" display_value="__MSG_symbol__"/><EnumValue value="qty" display_value="__MSG_numberofstocks__"/><EnumValue value="buyPrice" display_value="__MSG_buyprice__"/><EnumValue value="hiLim" display_value="__MSG_hialert__"/><EnumValue value="loLim" display_value="__MSG_loalert__"/><EnumValue value="last" display_value="__MSG_lasttrade__"/><EnumValue value="chg" display_value="__MSG_change__"/><EnumValue value="chgPct" display_value="__MSG_changepercent__"/><EnumValue value="dayOpen" display_value="__MSG_dayopen__"/><EnumValue value="dayHigh" display_value="__MSG_dayhigh__"/><EnumValue value="dayLow" display_value="__MSG_daylow__"/><EnumValue value="dayRange" display_value="__MSG_dayrange__"/><EnumValue value="exchange" display_value="__MSG_exchange__"/><EnumValue value="volume" display_value="__MSG_dayvolume__"/><EnumValue value="tradeDateTime" display_value="__MSG_lasttradetime__"/></UserPref>
+  <UserPref name="Column6" display_name="__MSG_column__ 6" datatype="enum" default_value="0"><EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="ticker" display_value="__MSG_symbol__"/><EnumValue value="qty" display_value="__MSG_numberofstocks__"/><EnumValue value="buyPrice" display_value="__MSG_buyprice__"/><EnumValue value="hiLim" display_value="__MSG_hialert__"/><EnumValue value="loLim" display_value="__MSG_loalert__"/><EnumValue value="last" display_value="__MSG_lasttrade__"/><EnumValue value="chg" display_value="__MSG_change__"/><EnumValue value="chgPct" display_value="__MSG_changepercent__"/><EnumValue value="dayOpen" display_value="__MSG_dayopen__"/><EnumValue value="dayHigh" display_value="__MSG_dayhigh__"/><EnumValue value="dayLow" display_value="__MSG_daylow__"/><EnumValue value="dayRange" display_value="__MSG_dayrange__"/><EnumValue value="exchange" display_value="__MSG_exchange__"/><EnumValue value="volume" display_value="__MSG_dayvolume__"/><EnumValue value="tradeDateTime" display_value="__MSG_lasttradetime__"/></UserPref>
   <UserPref name="FontSize" display_name="__MSG_fontsize__" datatype="enum" default_value="11px"><EnumValue value="9px" display_value="9px"/><EnumValue value="10px" display_value="10px"/><EnumValue value="11px" display_value="11px"/><EnumValue value="12px" display_value="12px"/><EnumValue value="14px" display_value="14px"/></UserPref>
-
 
   //http://docs.opensocial.org/display/OSD/App+Data
   //http://24ways.org/2005/dont-be-eval
@@ -60,7 +59,7 @@
     var iStockCols=6;
     var IMAGES_BASE="http://stockportfoliogg.googlecode.com/svn/Google/released/images/";
     var fsize=pref.getString("FontSize");
-    var iVersion="1.0&alpha;";
+    var iVersion="1.01&alpha;";
     var iPrefVersion=0;
     var debug=1;
 
@@ -69,19 +68,19 @@
     //Image: http://www.google.com/finance/chart?cht=c&q=goog&p=1m&tlf=24h
 
    //This defines the Stock object:
-    Stock.prototype.value=function(){return this.qty*this.price;};
-    function Stock(index,ticker,qty,price,hiLim,loLim) 
+    Stock.prototype.value=function(){return this.qty*this.buyPrice;};
+    function Stock(index,ticker,qty,buyPrice,hiLim,loLim) 
     {
       this.index = index;
       this.ticker = ticker;
       this.qty = qty;
-      this.price = price;
+      this.buyPrice = buyPrice;
       this.hiLim = hiLim;
       this.loLim = loLim;
       this.last = 0;
-      this.dayhigh = 0;
-      this.daylow = 0;
-      this.dayrange = this.low + " - " + this.dayhigh;
+      this.dayHigh = 0;
+      this.dayLow = 0;
+      this.dayRange = this.dayLow + " - " + this.dayHigh;
       this.open = 0;
       this.chg = 0;
       this.chgPct = 0;
@@ -110,6 +109,25 @@
     Array.prototype.UpdateStocks=function(){for(var i=0;i<this.length;i++){Stocks[i].updated=0;}fnReqStockData();};
     var Stocks = [];
     var index = 0;
+
+    fnGetHeadNameByProp(propName)
+    {
+        if (propName=="ticker"){return "__MSG_symbol__";}
+        if (propName=="qty"){return "__MSG_numberofstocks__";}
+        if (propName=="buyPrice"){return "__MSG_buyprice__";}
+        if (propName=="hiLim"){return "__MSG_hialert__";}
+        if (propName=="loLim"){return "__MSG_loalert__";}
+        if (propName=="last"){return "__MSG_lasttrade__";}
+        if (propName=="chg"){return "__MSG_change__";}
+        if (propName=="chgPct"){return "__MSG_changepercent__";}
+        if (propName=="open"){return "__MSG_loalert__";}
+        if (propName=="dayHigh"){return "__MSG_dayhigh__";}
+        if (propName=="dayLow"){return "__MSG_daylow__";}
+        if (propName=="dayRange"){return "__MSG_dayrange__";}
+        if (propName=="exchange"){return "__MSG_exchange__";}
+        if (propName=="volume"){return "__MSG_dayvolume__";}
+        if (propName=="tradeDateTime"){return "__MSG_lasttradetime__";}
+    }
 
     function fnInit()
     {
@@ -150,8 +168,6 @@
         {
             print(data[google.finance.TICKER] + " not found in stocks object !!!");
         }
-        var b = "last";
-        print(Stocks[0].Items[0]);
     }
 
 
@@ -194,7 +210,17 @@
         var sBGColor;
         var sStockTable='<table border=2 cellspacing=0 width="100%" style="font-size:'+fsize+';" class="def">';
 
-        var arrHeaderNames=',__MSG_symbol__,__MSG_numberofstocks__,__MSG_buyprice__,__MSG_hialert__,__MSG_loalert__,__MSG_lasttrade__,__MSG_change__,__MSG_changepercent__,__MSG_dayopen__,__MSG_dayhigh__,__MSG_daylow__,__MSG_dayrange__,__MSG_exchange__,__MSG_dayvolume__,__MSG_lasttradetime__'.split(",");
+        //var arrHeaderNames=',__MSG_symbol__,__MSG_numberofstocks__,__MSG_buyprice__,__MSG_hialert__,__MSG_loalert__,__MSG_lasttrade__,__MSG_change__,__MSG_changepercent__,__MSG_dayopen__,__MSG_dayhigh__,__MSG_daylow__,__MSG_dayrange__,__MSG_exchange__,__MSG_dayvolume__,__MSG_lasttradetime__'.split(","); 
+//        <EnumValue value="0" display_value="__MSG_notused__"/><EnumValue value="1" display_value="__MSG_symbol__"/><EnumValue value="2" display_value="__MSG_numberofstocks__"/>
+//        <EnumValue value="3" display_value="__MSG_buyprice__"/><EnumValue value="4" display_value="__MSG_hialert__"/><EnumValue value="5" display_value="__MSG_loalert__"/>
+//        <EnumValue value="6" display_value="__MSG_lasttrade__"/><EnumValue value="7" display_value="__MSG_change__"/><EnumValue value="8" display_value="__MSG_changepercent__"/>
+//        <EnumValue value="9" display_value="__MSG_dayopen__"/><EnumValue value="10" display_value="__MSG_dayhigh__"/><EnumValue value="11" display_value="__MSG_daylow__"/>
+//        <EnumValue value="12" display_value="__MSG_dayrange__"/><EnumValue value="13" display_value="__MSG_exchange__"/><EnumValue value="14" display_value="__MSG_dayvolume__"/>
+//        <EnumValue value="15" display_value="__MSG_lasttradetime__"/></UserPref>
+
+
+
+        
         var sHead="";
         iConfCols=0;
         for(i=1;i<iStockCols;i++)
@@ -202,7 +228,7 @@
             if(pref.getString("Column"+i)!='0')
             {
                 iConfCols++;
-                sHead+='<td class="cellR">'+arrHeaderNames[pref.getString("Column"+i)]+'</td>';
+                sHead+='<td class="cellR">'+fnGetHeadNameByProp(pref.getString("Column"+i))+'</td>';
             }
         }
         sStockTable+='<COLGROUP width="8px"><COLGROUP width="10%"><COLGROUP span="'+iConfCols+'" width="'+90/iConfCols+'%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"><div class="Chart" id="StockChart"></div></td><td class="cellL">__MSG_symbol__</td>';
@@ -224,6 +250,7 @@
 
         document.getElementById("StockData").innerHTML=sStockTable;
     }
+
 
     function fnInsertFooterTB()
     {
