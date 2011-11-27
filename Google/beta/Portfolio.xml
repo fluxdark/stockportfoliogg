@@ -150,6 +150,7 @@
         {
             print(data[google.finance.TICKER] + " not found in stocks object !!!");
         }
+        print(a[1]);
     }
 
 
