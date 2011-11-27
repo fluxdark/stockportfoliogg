@@ -60,6 +60,7 @@
     <Content Include="images\AddStock.gif" />
     <Content Include="images\delete.gif" />
     <Content Include="images\ggroups.gif" />
+    <Content Include="images\google.png" />
     <Content Include="images\help.gif" />
     <Content Include="images\HiAlert9.gif" />
     <Content Include="images\LoAlert9.gif" />
@@ -71,7 +72,6 @@
     <Content Include="images\StockPortfolio.png" />
     <Content Include="images\StockPortfolioThumb.png" />
     <Content Include="images\Summary.gif" />
-    <Content Include="images\Yahoo.gif" />
     <Content Include="locale\ALL_ALL.xml" />
     <Content Include="locale\da_ALL.xml" />
     <Content Include="locale\de_ALL.xml" />
