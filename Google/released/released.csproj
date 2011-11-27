@@ -53,6 +53,35 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\AddEdit.gif" />
+    <Content Include="images\AddStock.gif" />
+    <Content Include="images\delete.gif" />
+    <Content Include="images\ggroups.gif" />
+    <Content Include="images\google.png" />
+    <Content Include="images\help.gif" />
+    <Content Include="images\HiAlert9.gif" />
+    <Content Include="images\LoAlert9.gif" />
+    <Content Include="images\money.gif" />
+    <Content Include="images\MoveDown.gif" />
+    <Content Include="images\MoveUp.gif" />
+    <Content Include="images\News.gif" />
+    <Content Include="images\Square.gif" />
+    <Content Include="images\StockPortfolio.png" />
+    <Content Include="images\StockPortfolioThumb.png" />
+    <Content Include="images\Summary.gif" />
+    <Content Include="locale\ALL_ALL.xml" />
+    <Content Include="locale\da_ALL.xml" />
+    <Content Include="locale\de_ALL.xml" />
+    <Content Include="locale\es_ALL.xml" />
+    <Content Include="locale\fr_ALL.xml" />
+    <Content Include="locale\it_ALL.xml" />
+    <Content Include="locale\nl_ALL.xml" />
+    <Content Include="locale\pt_BR.xml" />
+    <Content Include="locale\pt_PT.xml" />
+    <Content Include="locale\sv_ALL.xml" />
+    <Content Include="locale\zh_TW.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
