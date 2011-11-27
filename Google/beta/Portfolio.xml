@@ -110,7 +110,7 @@
     var Stocks = [];
     var index = 0;
 
-    fnGetHeadNameByProp(propName)
+    function fnGetHeadNameByProp(propName)
     {
         if (propName=="ticker"){return "__MSG_symbol__";}
         if (propName=="qty"){return "__MSG_numberofstocks__";}
