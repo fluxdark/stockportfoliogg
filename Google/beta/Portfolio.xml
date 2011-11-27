@@ -151,7 +151,7 @@
             print(data[google.finance.TICKER] + " not found in stocks object !!!");
         }
         var b = "last";
-        print(Stocks[0].Items[0].Name);
+        print(Stocks[0].Items[0]);
     }
 
 
