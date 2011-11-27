@@ -60,7 +60,7 @@
     var iStockCols=6;
     var IMAGES_BASE="http://stockportfoliogg.googlecode.com/svn/Google/released/images/";
     var fsize=pref.getString("FontSize");
-    var iVersion="1.01&alpha;";
+    var iVersion="1.0&alpha;";
     var iPrefVersion=0;
     var debug=1;
 
