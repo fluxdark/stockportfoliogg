@@ -69,7 +69,7 @@
 
    //This defines the Stock object:
     Stock.prototype.value=function(){return this.qty*this.buyPrice;};
-    function Stock(index,ticker,qty,buyPrice,hiLim,loLim) 
+    function Stock(index,ticker,qty,buyPrice,loLim,hiLim) 
     {
       this.Index = index;
       this.Ticker = ticker;
@@ -109,7 +109,7 @@
     }
     
     //Create stocks collection
-    Array.prototype.Add=function(ticker,qty,price,hi,lo){this[index++] = new Stock(index,ticker,qty,price,hi,lo);};
+    Array.prototype.Add=function(ticker,qty,price,lo,hi){this[index++] = new Stock(index,ticker,qty,price,lo,hi);};
     Array.prototype.GetTickers=function(){var n = [];for(var i=0;i<this.length;i++){n[i]=Stocks[i].Ticker;}return n;};
     Array.prototype.GetStockByTickerName=function(tickerName){for(var i=0;i<this.length;i++){if(Stocks[i].Ticker==tickerName && Stocks[i].Updated==0){return Stocks[i];}}};
     Array.prototype.UpdateStocks=function(){for(var i=0;i<this.length;i++){Stocks[i].Updated=0;}fnReqStockData();};
@@ -148,7 +148,6 @@
             a.Exchange = data[google.finance.EXCHANGE];
             a.DayVolume = data[google.finance.VOLUME];
             a.TradeDateTime = data[google.finance.LAST_TRADE_DATETIME];    
-            print("Updated1: " + a.Updated);
             a.Updated = 1;   
             print("Updated2: " + a.Updated);
             print(a.Ticker + ": " + a.Last);
@@ -172,7 +171,7 @@
     function fnReadPrefs(){
         var arrStocks = [];
         //var prefStr = pref.getString("Stocks");
-        var prefStr = "GOOG,0,100,20,80;MFST,1,101,21,81;FCX,2,102,22,82;GOOG,1,101,21,81";
+        var prefStr = "GOOG,0,100,20,200;MFST,1,101,21,81;FCX,2,102,22,82;GOOG,1,101,21,81";
         
         var arrStocks = prefStr.split(";");
         var prefLen = arrStocks.length;
