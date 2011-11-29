@@ -103,7 +103,7 @@
     }
     
     //Create stocks collection
-    Array.prototype.Add=function(ticker,qty,price,hi,lo){this[Index++] = new Stock(index,ticker,qty,price,hi,lo);};
+    Array.prototype.Add=function(ticker,qty,price,hi,lo){this[index++] = new Stock(index,ticker,qty,price,hi,lo);};
     Array.prototype.GetTickers=function(){var n = [];for(var i=0;i<this.length;i++){n[i]=Stocks[i].Ticker;}return n;};
     Array.prototype.GetStockByTickerName=function(tickerName){for(var i=0;i<this.length;i++){if(Stocks[i].Ticker==tickerName && Stocks[i].Updated==0){return Stocks[i];}}};
     Array.prototype.UpdateStocks=function(){for(var i=0;i<this.length;i++){Stocks[i].Updated=0;}fnReqStockData();};
