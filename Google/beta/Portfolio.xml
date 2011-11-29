@@ -148,7 +148,9 @@
             a.Exchange = data[google.finance.EXCHANGE];
             a.DayVolume = data[google.finance.VOLUME];
             a.TradeDateTime = data[google.finance.LAST_TRADE_DATETIME];    
+            print("Updated1: " + a.Updated);
             a.Updated = 1;   
+            print("Updated2: " + a.Updated);
             print(a.Ticker + ": " + a.Last);
         } 
         else
