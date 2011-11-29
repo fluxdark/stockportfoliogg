@@ -215,7 +215,7 @@
             if(pref.getString("Column"+i)!='0')
             {
                 iConfCols++;
-                sHead+='<td class="cellR">__MSG_'+pref.getString("Column"+i)+'__</td>';
+                sHead+='<td class="cellR">'+pref.getMsg(pref.getString("Column"+i))+'</td>';
             }
         }
         sStockTable+='<COLGROUP width="8px"><COLGROUP width="10%"><COLGROUP span="'+iConfCols+'" width="'+90/iConfCols+'%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"><div class="Chart" id="StockChart"></div></td><td class="cellL">__MSG_Ticker__</td>';
