@@ -90,8 +90,14 @@
       this.Updated = 0;
       if (this.Last>this.HiLim){OnHi(this.Index);}
       if (this.Last<this.LoLim){OnLo(this.Index);}
+      if (this.Updated==1){UpdateStock(this.Index);}
     }
 
+    function UpdateStock(i)
+    {
+      msg('Stock "' + Stocks[i].Ticker + '" was updated');
+    }
+    
     function OnHi(i)
     {
       //msg('Hi limit passed on index: '+i);
@@ -128,7 +134,7 @@
     function fnRecvStockData(data)
     {
         //Check that tickers always are retured in same order as reuested
-        //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).ticker);
+        //print(Stocks.GetStockByTickerName(data[google.finance.TICKER]).Ticker);
 
         var a = Stocks.GetStockByTickerName(data[google.finance.TICKER]);
         if (a)
