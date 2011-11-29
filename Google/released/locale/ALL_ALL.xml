@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <messagebundle>
-  <msg name="Gadgettitle">Stock portfolio</msg>
-  <msg name="Gadgetdesc">Highly configurable list with stocks, options, ETFs. See chart and details for each stock. Calculate total value and earning in your local currency, and much more.</msg>
+  <msg name="GadgetTitle">Stock portfolio</msg>
+  <msg name="GadgetDesc">Highly configurable list with stocks, options, ETFs. See chart and details for each stock. Calculate total value and earning in your local currency, and much more.</msg>
   <msg name="Customtitle">Title</msg>
   <msg name="Column">Column</msg>
   <msg name="Updateinterval">Update</msg>
