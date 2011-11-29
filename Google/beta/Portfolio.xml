@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
   <Module>
   <ModulePrefs title="__MSG_GadgetTitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." directory_title="iGoogle Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/Google/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/Google/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://sites.google.com/site/cnybroe/iGoogleStockGadget" category="finance">
-    <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
-    <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/da_ALL.xml"/>
+    <Locale messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/ALL_ALL.xml"/>
+    <Locale lang="da" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/da_ALL.xml"/>
     <Locale lang="es" messages="http://stockportfoliogg.googlecode.com/svn/beta/locale/es_ALL.xml"/>
-    <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/fr_ALL.xml"/>
-    <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/it_ALL.xml"/>
-    <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/sv_ALL.xml"/>
-    <Locale lang="pt-PT" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_PT.xml"/>
-    <Locale lang="pt-BR" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/pt_BR.xml"/>
-    <Locale lang="de" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/de_ALL.xml"/>
-    <Locale lang="nl" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/nl_ALL.xml"/>
-    <Locale lang="zh-TW" messages="http://stockportfoliogg.googlecode.com/svn/released/locale/zh_TW.xml"/>
+    <Locale lang="fr" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/fr_ALL.xml"/>
+    <Locale lang="it" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/it_ALL.xml"/>
+    <Locale lang="sv" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/sv_ALL.xml"/>
+    <Locale lang="pt-PT" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/pt_PT.xml"/>
+    <Locale lang="pt-BR" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/pt_BR.xml"/>
+    <Locale lang="de" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/de_ALL.xml"/>
+    <Locale lang="nl" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/nl_ALL.xml"/>
+    <Locale lang="zh-TW" messages="http://stockportfoliogg.googlecode.com/svn/Google/released/locale/zh_TW.xml"/>
     <Require feature="finance"/>
     <Require feature="setprefs"/>
     <Require feature="minimessage"/>
