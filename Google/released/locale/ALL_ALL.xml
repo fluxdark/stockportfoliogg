@@ -34,8 +34,8 @@
   <msg name="InitialLoading">Loading configured columns...</msg>
   <msg name="HiLim">High</msg>
   <msg name="LoLim">Low</msg>
+  <msg name="StockLoading">Awaiting stock data...</msg>
   <msg name="prefsloading">Loading preferences...</msg>
-  <msg name="stockloading">Awaiting stock data...</msg>
   <msg name="retrystockloading">Retrying stockdata request...</msg>
   <msg name="lastupdated">Updated</msg>
   <msg name="tickertrend">Trend</msg>
