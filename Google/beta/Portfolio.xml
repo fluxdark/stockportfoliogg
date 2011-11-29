@@ -110,25 +110,6 @@
     var Stocks = [];
     var index = 0;
 
-    function fnGetHeadNameByProp(propName)
-    {
-        if (propName=="ticker"){return "__MSG_symbol__";}
-        if (propName=="qty"){return "__MSG_numberofstocks__";}
-        if (propName=="buyPrice"){return "__MSG_buyprice__";}
-        if (propName=="hiLim"){return "__MSG_hialert__";}
-        if (propName=="loLim"){return "__MSG_loalert__";}
-        if (propName=="last"){return "__MSG_lasttrade__";}
-        if (propName=="chg"){return "__MSG_change__";}
-        if (propName=="chgPct"){return "__MSG_changepercent__";}
-        if (propName=="open"){return "__MSG_loalert__";}
-        if (propName=="dayHigh"){return "__MSG_dayhigh__";}
-        if (propName=="dayLow"){return "__MSG_daylow__";}
-        if (propName=="dayRange"){return "__MSG_dayrange__";}
-        if (propName=="exchange"){return "__MSG_exchange__";}
-        if (propName=="volume"){return "__MSG_dayvolume__";}
-        if (propName=="tradeDateTime"){return "__MSG_lasttradetime__";}
-    }
-
     function fnInit()
     {
         document.getElementById("gVersion").innerHTML='Version:'+iVersion;
