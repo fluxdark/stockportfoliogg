@@ -130,7 +130,9 @@
       sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
+    print('Symbols:'+sSymb);
     sSymb=sSymb.replace('^DJI','^DJX');
+    print('Symbols:'+sSymb);
 
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var params = {};
