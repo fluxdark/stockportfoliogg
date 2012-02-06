@@ -130,7 +130,7 @@
       sSymb+=arrStockSymbols[i]+',';
     }
     sSymb=sSymb.substr(0,sSymb.length-1);
-    sSymb=sSymb.replace('^DJI','INDU');
+    sSymb=sSymb.replace('^DJI','^DJX'); //^DJI hack
 
     var url='http://download.finance.yahoo.com/d?s='+sSymb+'&f='+sTags+'&CW='+Math.random()*1000;
     var params = {};
@@ -175,7 +175,7 @@
     if (arrLinesSD.length>1){
       for(i=0;i<arrLinesSD.length-1;i++){
         arrLineValues=splitLine(arrLinesSD[i]);
-        arrLineValues[26]=arrLinesCD[i];//Currency rate
+		arrLineValues[26]=arrLinesCD[i];//Currency rate
         arrLineValues[30]=(isNaN(arrLineValues[4]))?0:myRound(arrLineValues[4]*arrStockQtys[i]*arrLineValues[26]);//Earned today in local currency
         if (isNaN(arrStockCurrRates[i])||trim(arrStockCurrRates[i])==""||pref.getString("Currency")=="-"){
           arrStockCurrRates[i]=arrLineValues[26];

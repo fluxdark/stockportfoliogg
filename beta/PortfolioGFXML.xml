@@ -22,10 +22,10 @@
         var domdata = obj.data;
         var itemList = domdata.getElementsByTagName("finance");
 
-        // Loop through all <food> nodes
+        // Loop through all <finance> nodes
         for (var i = 0; i < itemList.length ; i++) 
         { 
-          // For each <food> node, get child nodes.
+          // For each <finance> node, get child nodes.
           var nodeList = itemList.item(i).childNodes;
           // Loop through child nodes. Extract data from the text nodes 
           for (var j = 0; j < nodeList.length ; j++) {

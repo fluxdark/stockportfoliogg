@@ -34,8 +34,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="images\AddEdit.gif" />
+    <Content Include="images\AddStock.gif" />
+    <Content Include="images\delete.gif" />
+    <Content Include="images\ggroups.gif" />
+    <Content Include="images\help.gif" />
+    <Content Include="images\HiAlert9.gif" />
+    <Content Include="images\LoAlert9.gif" />
+    <Content Include="images\money.gif" />
+    <Content Include="images\MoveDown.gif" />
+    <Content Include="images\MoveUp.gif" />
+    <Content Include="images\News.gif" />
+    <Content Include="images\Square.gif" />
+    <Content Include="images\StockPortfolio.png" />
+    <Content Include="images\StockPortfolioThumb.png" />
+    <Content Include="images\Summary.gif" />
+    <Content Include="images\Yahoo.gif" />
+    <Content Include="locale\ALL_ALL.xml" />
+    <Content Include="locale\da_ALL.xml" />
+    <Content Include="locale\de_ALL.xml" />
+    <Content Include="locale\es_ALL.xml" />
+    <Content Include="locale\fr_ALL.xml" />
+    <Content Include="locale\it_ALL.xml" />
+    <Content Include="locale\nl_ALL.xml" />
+    <Content Include="locale\pt_BR.xml" />
+    <Content Include="locale\pt_PT.xml" />
+    <Content Include="locale\sv_ALL.xml" />
+    <Content Include="locale\zh_TW.xml" />
+    <Content Include="portfolio.xml" />
     <Content Include="portfolioDJI.xml" />
+    <Content Include="PortfolioGF.xml" />
+    <Content Include="PortfolioGFXML.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    
-<Module>
-  <ModulePrefs title="hellofinance">
-    <Require feature="finance"/>
-  </ModulePrefs>
-  <Content type="html">
-  <![CDATA[
+  <Module>
+    <ModulePrefs title="hellofinance">
+      <Require feature="finance"/>
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[
+   
+    <script type="text/javascript">
+//Search: http://www.google.com/finance/match?matchtype=matchall&q=abb
+//News: http://www.google.com/finance/company_news?q=NASDAQ:GOOG&output=rss
+//Image: http://www.google.com/finance/chart?cht=c&q=goog&p=1m&tlf=24h
 
-Hello world1 !
-Here is your portfolio:<br/>
-  GOOG: <span id=_IG_SYM1_l></span> (<span id=_IG_SYM1_c></span>)<br/>
-  AAPL: <span id=_IG_SYM2_l></span> (<span id=_IG_SYM2_c></span>)<br/>
-  INTC: <span id=_IG_SYM3_l></span> (<span id=_IG_SYM3_c></span>)<br/>
-
-  
-<script type="text/javascript">
-  var quote = new google.finance.Quote();
-  quote.enableDomUpdates( { 'GOOG' : '_IG_SYM1', 'AAPL' : '_IG_SYM2', 'INTC' : '_IG_SYM3' } );
-
-  quote.getQuotes(["GOOG", "AAPL", "INTC"]);
-</script>
-
-
-  ]]>
-
-  </Content>
-</Module>
+	var quote = new google.finance.Quote();
+      quote.getQuotes(["GOOG","INTC"]);
+      quote.addListener(function(data) {
+//alert(google.finance.LAST);
+//alert(google.finance.SYMBOL);
+//alert("Last: " + data[google.finance.LAST]);
+		
+		
+        //alert("Symbol: " + data[google.finance.SYMBOL]);
+        alert("Change: " + data[google.finance.CHANGE]);
+        //alert("Change Pct: " + data[google.finance.CHANGE_PCT]);
+        //alert("Open: " + data[google.finance.OPEN]);
+        //alert("High: " + data[google.finance.HIGH]);
+        //alert("Low: " + data[google.finance.LOW]);
+        //alert("Exchange: " + data[google.finance.EXCHANGE]);
+        //alert("Time: " + data[google.finance.LAST_TRADE_TIME]);
+      });	  
+    </script>
+    ]]>
+    </Content>
+  </Module>
