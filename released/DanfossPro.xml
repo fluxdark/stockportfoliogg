@@ -65,6 +65,7 @@
     //  iframe.style.height = '250px';
     //}
     gadgets.window.adjustHeight();
+    setTimeout('fnLoad();',600000);
   }
 
 
