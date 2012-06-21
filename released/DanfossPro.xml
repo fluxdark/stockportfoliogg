@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Module>
   <ModulePrefs title="__MSG_gadgettitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://sites.google.com/site/cnybroe/iGoogleStockGadget" category="finance">
     <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
@@ -7,6 +7,18 @@
   <UserPref name="UpdateInterval" display_name="__MSG_updateinterval__" datatype="enum" default_value="300000"><EnumValue value="60000" display_value="1 __MSG_minute__"/><EnumValue value="300000" display_value="5 __MSG_minute__"/><EnumValue value="600000" display_value="10 __MSG_minute__"/></UserPref>
 <Content type="html" view="home,canvas,preview">
   <![CDATA[
+  <style type="text/css">
+    .loading{font-family:sans-serif;foreground:#666666;font-style:italic;font-size:11px;}
+    .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
+    .Chart{display:none;filter:alpha(opacity=85);opacity:0.85;background-color:#FFFFFF;width:192;height:96;position:absolute;color:white;border:2px solid black;z-index:9999;}
+    .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
+    /* campaign minimessage styling */
+    .mmlib_table__MODULE_ID__ {border-bottom: 1px solid #ddd;}
+    a.prostyle:link {color: #0000FF; font-size:10px;font-family:sans-serif; text-decoration: underline}
+    a.prostyle:active {color: #ff6909; font-size:10px;font-family:sans-serif; text-decoration: none}
+    a.prostyle:visited {color: #254970; font-size:10px;font-family:sans-serif; text-decoration: none}
+    a.prostyle:hover {color: #000080; font-size:10px;font-family:sans-serif; text-decoration: underline;}
+  </style>
   <div id="StockData">
    <iframe id="preview_ifr" frameborder="0" marginwidth="0" marginheight="0" border="0" style="border:0;margin:0;" scrolling="no" allowtransparency="true">
       <div class="loading">
@@ -46,8 +58,8 @@
     //}
     iframe.src = url;
     //if (size == '728x90') {
-    //  iframe.style.width = '728px';
-    //  iframe.style.height = '90px'
+      iframe.style.width = '740px';
+      iframe.style.height = '410px'
     //} else {
     //  iframe.style.width = '300px';
     //  iframe.style.height = '250px';
