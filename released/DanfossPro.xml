@@ -35,7 +35,7 @@
   var pref=new gadgets.Prefs(__MODULE_ID__);
   var fsize="11px";
   var Uinterval="30";
-  var iVersion=0.9;
+  var iVersion=0.91;
   //var iSDRetry=0;
   //var iTmrRetry;
   var debug=0;
