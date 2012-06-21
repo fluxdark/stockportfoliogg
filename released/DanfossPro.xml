@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="__MSG_gadgettitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://sites.google.com/site/cnybroe/iGoogleStockGadget" category="finance">
+    <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
+    <Require feature="dynamic-height"/>
+  </ModulePrefs>
+  <UserPref name="UpdateInterval" display_name="__MSG_updateinterval__" datatype="enum" default_value="300000"><EnumValue value="60000" display_value="1 __MSG_minute__"/><EnumValue value="300000" display_value="5 __MSG_minute__"/><EnumValue value="600000" display_value="10 __MSG_minute__"/></UserPref>
+<Content type="html" view="home,canvas,preview">
+  <![CDATA[
+  <div id="StockData">
+   <iframe id="preview_ifr" frameborder="0" marginwidth="0" marginheight="0" border="0" style="border:0;margin:0;" scrolling="no" allowtransparency="true">
+      <div class="loading">
+	    __MSG_initialloading__
+	  </div>
+    </iframe>
+  </div>
+ 
+  
+  <div id="Footer" class="Footer"></div>
+  <div id="debug" nowrap style="display:none;font-size:9pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll"></div> 
+  <div id="disclaimer" nowrap><hr class="HrDef"><table border=0 cellspacing=0 cellpadding=0 width="100%"><tr><td valign="middle" class="Footer" nowrap width="10%"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer" target="_blank">Data charts provided by </a></td><td><img width="16" height="16" border=0 alt="Yahoo" title="Yahoo" src="http://stockportfoliogg.googlecode.com/svn/released/images/Yahoo.gif"></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer">Version</td></tr></table></div>
+  <script language="javascript" type="text/javascript" defer="defer">
+  var pref=new gadgets.Prefs(__MODULE_ID__);
+  var fsize="11px";
+  var Uinterval="30";
+  var iVersion=0.9;
+  //var iSDRetry=0;
+  //var iTmrRetry;
+  var debug=0;
+  
+ 
+  function fnInit()
+  {
+    document.getElementById("gVersion").innerHTML='Version:'+iVersion;
+    fnReadPrefs();
+    fnLoad();
+    //setTimeout('fnMessage();_IG_Analytics("UA-2031644-1", "/Portfolio")',2000);
+  }
+
+  function fnLoad()
+  {
+    var url = 'http://188.182.55.158/cgi-bin/view_graph.tcl?graph=10&sid=3862774629082469145';
+    var iframe = document.getElementById('preview_ifr');
+    //if (query.length > 0) {
+    //  url += '&q=' + encodeURIComponent(query);
+    //}
+    iframe.src = url;
+    //if (size == '728x90') {
+    //  iframe.style.width = '728px';
+    //  iframe.style.height = '90px'
+    //} else {
+    //  iframe.style.width = '300px';
+    //  iframe.style.height = '250px';
+    //}
+    gadgets.window.adjustHeight();
+  }
+
+
+  function fnReadPrefs()
+  {
+    fsize = pref.getString("FontSize");
+    Uinterval = pref.getInt("UpdateInterval");
+    //iPrefVersion=pref.getString("GadgetVersion");
+  }
+
+
+  function print(msg)
+  {
+    if (debug)
+	{
+      var debug_html = document.getElementById("debug").innerHTML;
+      if (document.getElementById("debug").style.display=='none')
+	  {
+        document.getElementById("debug").style.display='block';
+        gadgets.window.adjustHeight();   
+      }
+      msg=fngetDate(1)+"; "+msg.toString()+"<br>";
+      debug_html=msg+debug_html;
+      document.getElementById("debug").innerHTML=debug_html;
+    }
+  }
+  
+ //1-2-3 start
+  fnInit();  
+   </script>
+  ]]>
+  </Content>
+</Module>
