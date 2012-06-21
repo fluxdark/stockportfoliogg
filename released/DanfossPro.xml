@@ -51,7 +51,7 @@
 
   function fnLoad()
   {
-    var url = 'http://188.182.55.158/cgi-bin/view_graph.tcl?graph=10&sid=3862774629082469145';
+    var url = '';//'http://188.182.55.158/cgi-bin/view_graph.tcl?graph=10&sid=3862774629082469145';
     var iframe = document.getElementById('preview_ifr');
     //if (query.length > 0) {
     //  url += '&q=' + encodeURIComponent(query);
