@@ -65,8 +65,8 @@
     //  iframe.style.height = '250px';
     //}
     gadgets.window.adjustHeight();
-    document.getElementById("graphimg").style.width='370px';
-   document.getElementById("graphimg").style.height='205px';
+    //document.getElementById("graphimg").style.width='370px';
+   //document.getElementById("graphimg").style.height='205px';
     setTimeout('fnLoad();',600000);
   }
 
