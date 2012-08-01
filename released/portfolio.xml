@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Module>
   <ModulePrefs title="__MSG_gadgettitle__" description="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more in your local currency." directory_title="Stock portfolio" scrolling="false" singleton="false" scaling="true" height="250" thumbnail="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolioThumb.png" screenshot="http://stockportfoliogg.googlecode.com/svn/released/images/StockPortfolio.png" author="Christian Nybroe" author_email="cnybroe.feedback+Stockgadget@gmail.com" author_affiliation="Personal" author_location="Taasinge, Denmark" author_link="http://sites.google.com/site/cnybroe/iGoogleStockGadget" category="finance">
     <Locale messages="http://stockportfoliogg.googlecode.com/svn/released/locale/ALL_ALL.xml"/>
@@ -89,7 +89,7 @@
   var arrStocks=new Array();
   var arrStockCurrRates=new Array();
   var IMAGES_BASE = "http://stockportfoliogg.googlecode.com/svn/released/images/";
-  var iVersion=1.28;
+  var iVersion=1.29;
   var iPrefVersion=0;
   var bDataReady;
   var bTablesReady;
@@ -733,9 +733,11 @@
     if((iPrefVersion*1)<(iVersion*1)){
       var miniMsg=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess = document.createElement("divMess");
-      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Added buy price as column choice. Read more here.</a> &raquo;</span>';
+      //divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/release-notes" class="prostyle">Added buy price as column choice. Read more here.</a> &raquo;</span>';
+      divMess.innerHTML = '<span style="font-size:11px;"><a target="new" href="http://ggforum.cnybroe.dk/default.aspx?g=posts&t=301" class="prostyle">iGoogle being phased out. Read the future plan here.</a> &raquo;</span>';
       miniMsg.createDismissibleMessage(divMess, fnHideMess(iVersion));
-    }
+
+	  }
     if (debug){
       var miniMsg1=new gadgets.MiniMessage(__MODULE_ID__);
       var divMess1 = document.createElement("divMess");
