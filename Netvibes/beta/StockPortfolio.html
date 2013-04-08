@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
     <head>
-        <!-- Application Metas -->
+        <!-- Application Metas test -->
         <title>Stock Portfolio</title>
         <meta name="author" content="Christian Nybroe" />
         <meta name="email" content="netvibes_stock+cnybroe@gmail.com" />
@@ -10,7 +10,7 @@
         <meta name="screenshot" content="http://Netvibes.cnybroe.dk/images/StockPortfolio.png" />
         <meta name="thumbnail" content="http://Netvibes.cnybroe.dk/images/StockPortfolioThumb.png" />
         <meta name="description" content="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more" />
-        <meta name="version" content="0.1" />
+        <meta name="version" content="0.2" />
         <meta name="keywords" content="stocks, quotes, quote, portfolio, finance" />
         <meta name="debugMode" content="true" />
         <meta name="apiVersion" content="2.0" />
@@ -209,7 +209,6 @@
 //Start of Portfolio Object:
             function Portfolio() {
                 this.stocks = []; // New Array
-                this.version = '0.1';
                 //this.l10n = {"Title" : "Stock Portfolio","Loading" : "Loading...","baz" : "345678","bat" : "901234"};
                 this.addStockSymbol = function (symbol) {
                     this.addStock(symbol,0,0,0,0,99999,1);
@@ -467,8 +466,9 @@
                 GUI.insertStockTable();
                 
                 Quote.refreshData();
-                
-                GUI.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
+
+//                GUI.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
+
                 //GUI.setAnalytics();
                       
                 widget.setTitle(myPrefs.title);            
@@ -508,7 +508,7 @@
             };
             GUI.insertFooter = function () {
                 var footer = GUI.getTagById("div","Footer");
-                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(1,false)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer" onclick="fnToggleSummary(1)" src="' + GUI.imgBase + 'Summary.gif" title="' + 'Show stock summary' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleProfit(false)" src="' + GUI.imgBase + 'Money.gif" title=' + 'Show profit details' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleNews(1);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
+                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockAddEdit\',false)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer" onclick="fnToggleSummary(1)" src="' + GUI.imgBase + 'Summary.gif" title="' + 'Show stock summary' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleProfit(false)" src="' + GUI.imgBase + 'Money.gif" title=' + 'Show profit details' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockNews\',false);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
                 print(footer.innerHTML);
             };
             GUI.insertStockTable = function () {
@@ -540,7 +540,7 @@
             };
             GUI.insertDisclaimer = function () {
                 var disc = GUI.getTagById("div","Disclaimer");
-                disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + GUI.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer">Version</td></tr></table>';
+                disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + GUI.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer"></td></tr></table>';
             };
             GUI.insertAddEdit = function () {
                 var sCol='<Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%">';
@@ -622,17 +622,49 @@
                     }
                 }
             };
-            GUI.toggleWindow = function (elem,expand) {
-                print("ToggleWindow:" + elem.id);
-                //var elem = GUI.getTagById("div",id);
+            GUI.toggleWindow = function (id,expand) {
+                //print("ToggleWindow:" + elem.id);
+                var elem = GUI.getTagById("div",id);
                 if(elem.style.display == "none" || expand==true){
                     elem.style.display="block";
-                    GUI.insertAddEdit();
+                    switch (id) {
+                        case 'StockAddEdit':
+                            GUI.insertAddEdit();
+                        break;
+                        case 'StockNews':
+                            News.getNews();
+                        break;
+                    }
                 } else {
                     elem.style.display="none";
                 }
             };
-            
+
+            //Start of Quote Object
+            var News = {};
+            News.getNews = function () {
+                GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef"><div class="loading">Loading...</div>';
+                var url='http://finance.yahoo.com/rss/headline?s=' + encodeURIComponent(widget.getValue('StockSymbols'));
+
+                print('Symbol search url:' + url);
+
+                UWA.Data.getFeed(url, News.NewsDataProxy);
+
+            };
+
+            News.NewsDataProxy = function (feed) {
+                var html = "";
+                print(feed);
+                //var feed = feedIn.data;
+                for(var i in feed.items){
+                    html += '<tr><td width="5" valign="top"><img width="16" height="16" src="' + GUI.imgBase + 'Square.gif"></td><td><span><a href="' + feed.items[i].link + '" target="_blank">';
+                    html += feed.items[i].title + '</a></span></td></tr>';
+                }
+                print(html);
+                GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:' + myPrefs.fontSize + '">' + html + '</table>';
+            };
+
+
 //End of GUI Object
 //Start of Quote Object
             var Quote = {};
@@ -671,7 +703,7 @@
                     GUI.getTagById("div","StockAddList").innerHTML = 'Loading...';
                     var url = 'http://d.yimg.com/autoc.finance.yahoo.com/autoc?query=' + encodeURIComponent(symbol) + '&callback=YAHOO.Finance.SymbolSuggest.ssCallback';
 
-                    print('Symbol search url:' + url);
+                    //print('Symbol search url:' + url);
 
                     UWA.Data.getText(url, sSearch.symbolDataProxy);
                 } else {
@@ -780,7 +812,7 @@
         <div id="StockData"><div class="Loading"></div></div>
         <div id="Footer" class="Footer"></div>
         <div id="StockProfitDetails" style="display:none;width:100%;overflow:scroll;overflow-y:hidden;"></div>
-        <div id="StockAddEdit" class="def" style="display:none;">Hej</div>
+        <div id="StockAddEdit" class="def" style="display:none;"></div>
         <div id="StockProfitSummary" class="def" style="display:none"></div>
         <div id="StockSummary" class="def" style="display:none;"><div class="loading">__MSG_loading__</div></div>
         <div id="StockNews" class="def" style="display:none;"></div>
