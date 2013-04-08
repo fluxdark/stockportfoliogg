@@ -508,7 +508,7 @@
             };
             GUI.insertFooter = function () {
                 var footer = GUI.getTagById("div","Footer");
-                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockAddEdit\',false)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer" onclick="fnToggleSummary(1)" src="' + GUI.imgBase + 'Summary.gif" title="' + 'Show stock summary' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleProfit(false)" src="' + GUI.imgBase + 'Money.gif" title=' + 'Show profit details' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockNews\',false);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
+                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockAddEdit\',false)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer" onclick="" src="' + GUI.imgBase + 'Summary.gif" title="' + 'Show stock summary' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="" src="' + GUI.imgBase + 'Money.gif" title=' + 'Show profit details' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockNews\',false);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
                 print(footer.innerHTML);
             };
             GUI.insertStockTable = function () {
@@ -658,10 +658,13 @@
                 //var feed = feedIn.data;
                 for(var i in feed.items){
                     html += '<tr><td width="5" valign="top"><img width="16" height="16" src="' + GUI.imgBase + 'Square.gif"></td><td><span><a href="' + feed.items[i].link + '" target="_blank">';
+                    //html += feed.items[i].date + ': ';
                     html += feed.items[i].title + '</a></span></td></tr>';
+                    if(feed.items[i].id > 5){break;}
                 }
+                html = '<table border="3px" cellspacing="0" cellpadding="0" width="100%" style="font-size:' + myPrefs.fontSize + '">' + html + '</table>'
                 print(html);
-                GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="font-size:' + myPrefs.fontSize + '">' + html + '</table>';
+                GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef">' + html;
             };
 
 
