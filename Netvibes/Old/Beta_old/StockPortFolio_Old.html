@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/" >
+  <head>
+    <title>Stock Portfolio</title>
+    <meta name="author" content="Christian Nybroe" />
+    <meta name="email" content="netvibes_stock+cnybroe@gmail.com" />
+    <meta name="website" content="http://Netvibes.cnybroe.dk" />
+    <meta name="screenshot" content="http://Netvibes.cnybroe.dk/images/StockPortfolio.png" />
+    <meta name="thumbnail" content="http://Netvibes.cnybroe.dk/images/StockPortfolioThumb.png" />
+    <meta name="description" content="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more" />
+    <meta name="version" content="0.1" />
+    <meta name="keywords" content="stocks, quotes, quote, portfolio, finance" />
+    <meta name="debugMode" content="true" />
+ 
+    <link rel="icon" type="image/png" href="http://www.netvibes.com/favicon.ico" />
+    <!-- Application Standalone emulation files -->
+    <link rel="stylesheet" type="text/css" href="http://cdn.uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="http://cdn.uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js">    
+    
+    <!-- Application Preferences -->
+    <widget:preferences>
+        <widget:preference name="CustomTitle" type="text" label="Custom title" defaultValue="Stock portfolio" onchange="refresh"/>
+        <widget:preference name="Flashing" type="boolean" label="Flash when value change" defaultValue="true" />
+        <!-- Hidden preferences -->
+        <widget:preference name="GadgetVersion" type="hidden" defaultValue="0"/>
+        <widget:preference name="StockSymbols" type="text" defaultValue="GOOG,MSFT"/>
+        <widget:preference name="StockQtys" type="text" defaultValue="1,1"/>
+        <widget:preference name="StockPrices" type="text" defaultValue="0,0"/>
+        <widget:preference name="StockTC" type="text" defaultValue="0,0"/>
+        <widget:preference name="StockHi" type="text" defaultValue="1000,1000"/>
+        <widget:preference name="StockLo" type="text" defaultValue="0,0"/>
+        <widget:preference name="StockExRate" type="text" defaultValue="1,1"/>
+    </widget:preferences>
+
+
+    <!-- Widget Styles -->
+    <style type="text/css">
+        .Loading{font-family:sans-serif;font-style:italic;font-size:11px;}
+        .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
+        .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
+        .def{font-family:sans-serif;}
+    </style>
+
+    <!-- Widget Code -->
+    <script type="text/javascript">
+    //https://github.com/eligrey/l10n.js/#readme
+    //http://uwa.netvibes.com/docs/Uwa/html/files/Introduction-txt.html
+    //http://dev.netvibes.com/doc/uwa/howto/localize_widget(It's not quite ready yet, but we plan to release a way for widget developers to make their widget strings available to translator worldwide, which will free you from having to rely on a server-side script.)
+
+    //Start of Portfolio Object:
+    function Portfolio() {
+        this.toString = function () {
+          return this.stocks.length + 1;
+        };
+        this.stocks = []; // New Array
+        //this.l10n = {"Title" : "Stock Portfolio","Loading" : "Loading...","baz" : "345678","bat" : "901234"};
+        this.addStock = function (symbol, price, qty, tc, lo, hi, exRate, stockdata) {
+          var id = this.stocks.length + 1;
+          this.stocks.push(new Stock(id, symbol, price, qty, tc, lo, hi, exRate, stockdata));
+          return id;
+        };
+        this.totalValue = function () {
+          var v = 0;
+          for (var i = 0; i < this.stocks.length; i++) {
+            v += this.stocks[i].value();
+          }
+          return v;
+        };
+        this.readPreferences = readPreferences;
+    }
+
+    function readPreferences() {
+        //needs to check for empty preferences(standalone mode)
+        var ss = widget.getValue('StockSymbols').split(',');
+        var sp = widget.getValue('StockPrices').split(',');
+        var sq = widget.getValue('StockQtys').split(',');
+        var st = widget.getValue('StockTC').split(',');
+        var sl = widget.getValue('StockLo').split(',');
+        var sh = widget.getValue('StockHi').split(',');
+        var se = widget.getValue('StockExRate').split(',');
+        for (var i = 0; i < ss.length; i++) {
+            this.addStock(ss[i], sp[i], sq[i], st[i], sl[i], sh[i], se[i]);
+        }
+    }
+    //End of Portfolio object
+
+    //Start of Stock Object:
+    function Stock(id, symbol, price, qty, tc, lo, hi, exRate) {
+        this.id = id;
+        this.symbol = symbol;
+        this.price = parseFloat(price);
+        this.qty = parseInt(qty,10);
+        this.tradeCost = parseFloat(tc);
+        this.lo = parseFloat(lo);
+        this.hi = parseFloat(hi);
+        this.exRate = parseFloat(exRate);
+        //Stockdata Properties
+        this.updateStockData = function (stockdata) {
+            var s = parseStockData(stockdata);
+            this.description = s[2];
+            this.changePct = s[3];
+            this.change = parseFloat(s[4]);
+            this.changeRange = s[5];
+            this.lastTrade = parseFloat(s[6]);
+            this.lastTradeDate = s[7];
+            this.lastTradeTime = s[8];
+            this.dayopen = parseFloat(s[9]);
+            this.dayLow = parseFloat(s[10]);
+            this.dayHigh = parseFloat(s[11]);
+            this.dayVolume = parseFloat(s[12]);
+            this.previousClose = parseFloat(s[13]);
+            this.fiftyTwoWeekRange = s[14];
+            this.ask = parseFloat(s[15]);
+            this.bid = parseFloat(s[16]);
+            this.tickerTrend = s[17];
+            this.fiftyDaysMovingAvg = s[18];
+            this.twoHundredDaysMovingAvg = s[19];
+            this.dayRange = s[20];
+            this.optionStrike = s[21];
+            this.OptionCallPut = s[22];
+            this.OptionExpire = s[23];
+            this.currency = s[24];
+            this.exchange = s[25];
+            //Stock object Event triggers
+            if (s[0] == 'N/A') {
+                if (this.lastTrade > this.hi) {
+                    onStockHi(this.id);
+                }
+                if (this.lastTrade < this.lo) {
+                    onStockLo(this.id);
+                }
+            }
+        };
+        this.updateStockData(','); //Initialize stockdata properties with dummy values
+
+        this.value = function () {
+            return this.qty * this.lastTrade * this.exRate;
+        };
+        this.totalBuyCosts = function () {
+            return myRoundD(parseFloat(this.price * this.exRate * this.qty) + parseFloat(this.tradeCost), 0);
+        }; //Total costs in local currency
+        this.profit = function () {
+            return myRoundD((this.lastTrade.replace("%", "") * this.exRate * this.qty) - this.totalBuyCosts(), 0);
+        };
+        this.profitPct = function () {
+            return myRoundD(((this.value() / this.totalBuyCosts()) - 1) * 100, 0);
+        };
+        this.profitToday = function () {
+            return (isNaN(this.change)) ? 0 : myRoundD(this.change * this.qty * this.exRate, 0);
+        };
+        this.profitTodayPct = function () {
+            return (isNaN(this.changePct.replace(/\%/g, "").replace(/\+/g, "").replace(/\-/g, ""))) ? 0 : myRoundD(this.changePct.replace(/\%/g, ""), 0);
+        };
+    }
+
+    //Stock object Events
+    function onStockHi(id) {
+        print('Hi limit passed on index: ' + id);
+    }
+
+    function onStockLo(id) {
+        print('Lo limit passed on index: ' + id);
+    }
+
+    function parseStockData(inp) {
+        var out = [];
+        out = inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
+        for (var i = 0; i < out.length; i++) {
+            out[i] = out[i].replace(/"/g, "");
+        }
+        if (out.length != 26) {
+            out = 'Initializing,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');
+        }
+        if (out[0] != "N/A") {
+            out[24] = "???";
+            out[25] = out[0].substr(0, out[0].indexOf("<"));
+        }
+        return out;
+    }
+    //End of Stock object
+
+    var GUI = {};
+    var Quote = {};
+    var myPortfolio = new Portfolio();
+
+    //GUI object
+    GUI.getTagById = function (aTag, aId) {
+        var tagElement = widget.body.getElementsByTagName(aTag);
+        for (i = 0; i < tagElement.length; i++) {
+            if (tagElement[i].id == aId){
+                return tagElement[i];
+            }
+        }
+    }
+    GUI.imgBase = "http://Netvibes.cnybroe.dk/images/";
+    GUI.debug = 0;
+    GUI.insertFooter = function () {
+        var footer = GUI.getTagById("div","Footer");
+        footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + _('Loading stocks...') + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleAdd(0)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + _('Show add/edit dialog') + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer" onclick="fnToggleSummary(1)" src="' + GUI.imgBase + 'Summary.gif" title="' + _('Show stock summary') + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleProfit(false)" src="' + GUI.imgBase + 'money.gif" title=' + _('Show profit details') + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleNews(1);" src="' + GUI.imgBase + 'News.gif" title="' + _('Show news') + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'help.gif" title="' + _('Help') + '"></a></td><td style="width:20px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'ggroups.gif" title="' + _('Discuss this gadget with the developer and other users') + '"></a></td></tr></table>';
+    };
+    GUI.insertDisclaimer = function () {
+        var disc = GUI.getTagById("div","Disclaimer");
+        disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Stock data, news and historical charts provided by </a></td><td><img alt="Yahoo Finance" src="' + GUI.imgBase + 'Y!FinanceLogo10.png"/></td></tr></table>';
+    }
+    GUI.setAnalytics = function () {
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-2031644-3']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    };
+    GUI.myRoundD = function (inp, digits) {
+        var x = Math.pow(10, digits);
+        return Math.round(inp * x) / x;
+    };
+    GUI.refreshGUI = function () {
+        widget.setTitle(widget.getValue('CustomTitle'));
+    };
+
+    //Quote object
+    Quote.refreshData = function () {
+        var tags = 'e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
+        var symbols = ''; // = widget.getValue('Symbols');
+
+        for (var i = 0; i < myPortfolio.stocks.length; i++) {
+            symbols += myPortfolio.stocks[i].symbol + ',';
+        }
+        symbols = symbols.substr(0, symbols.length - 1);
+        print('Data symbols:' + symbols);
+
+        var url = 'http://download.finance.yahoo.com/d?s=' + symbols + '&f=' + tags + '&CW=' + Math.random() * 1000;
+        UWA.Data.getText(url, Quote.stockDataProxy);
+    };
+    Quote.stockDataProxy = function (stockData) {
+        var sLines = [];
+        sLines = stockData.split('\r\n');
+        for (var i = 0; i < myPortfolio.stocks.length; i++) {
+            myPortfolio.stocks[i].updateStockData(sLines[i]);
+        }
+
+        for (var j = 0; j < myPortfolio.stocks.length; j++) {
+            print(myPortfolio.stocks[j].symbol + ', Qty:' + myPortfolio.stocks[j].qty + ', Price:' + myPortfolio.stocks[j].price + ', TC:' + myPortfolio.stocks[j].tradeCost + ', lo:' + myPortfolio.stocks[j].lo + ', hi:' + myPortfolio.stocks[j].hi + ', Last:' + myPortfolio.stocks[j].lastTrade);
+        }
+        print('Total portfolio value:' + myPortfolio.totalValue());
+
+    };
+
+    
+//------------DEBUG CODE START-------------------
+    function fngetDate(secs) {
+        var currentTime = new Date();
+        var month = fnZeroPad(currentTime.getMonth() + 1, 2);
+        var day = fnZeroPad(currentTime.getDate(), 2);
+        var year = currentTime.getFullYear();
+        var hours = fnZeroPad(currentTime.getHours(), 2);
+        var minutes = fnZeroPad(currentTime.getMinutes(), 2);
+        if (secs) {
+            minutes += ':' + fnZeroPad(currentTime.getSeconds(), 2);
+        }
+        return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+    }
+
+    function fnZeroPad(num, length) {
+        var snum = num + '';
+        while (snum.length < length) {
+            snum = '0' + snum;
+        }
+        return snum;
+    }
+
+    function print(msg) {
+        var d = GUI.getTagById('div','Debug');
+        var d_html = d.innerHTML;
+        msg = fngetDate(1) + "; " + msg.toString() + "<br>";
+        d_html = msg + d_html;
+        d.innerHTML = d_html;
+    }
+//------------DEBUG CODE END-------------------
+    
+    //<!-- Widget Events -->
+    // widget.onLoad() is fired when the widget is fully loaded or when the preferences are validated 
+    widget.onLoad = function() {
+      GUI.insertFooter();
+      GUI.insertDisclaimer();
+      myPortfolio.readPreferences();
+      Quote.refreshData();
+      //print(myPortfolio.I10n["Loading"]);
+
+      GUI.refreshGUI();
+      //GUI.setAnalytics();
+    }
+    
+    widget.onRefresh = function () {
+        Quote.refreshData();
+    }
+
+    </script>
+  </head>
+  <body>
+    <div id="StockData"><div class="Loading">...</div></div>
+    <div id="Footer" class="Footer"></div>
+    <div id="Disclaimer" class="Footer"></div>
+    <div id="Debug" style="display:block;font-size:8pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll;white-space:nowrap;"></div> 
+  </body>
+</html>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Debug</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAYuknFDJa/UieQR1BohrligAAAAACAAAAAAADZgAAwAAAABAAAACd6vUoBxtGs6sEEvG4hYJ8AAAAAASAAACgAAAAEAAAAMuuGTfVuAzsojw0ti+WOBEgAAAAh08FVee9u+Ggv9orOMFT6coDlkgaMR21GjBHRAsTo7AUAAAAV8XjcEktEUAwfM5JNFF2IEMwILQ=</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Beta.dll">
+      <publishTime>03/26/2013 22:22:24</publishTime>
+    </File>
+    <File Include="bin/Beta.pdb">
+      <publishTime>03/26/2013 22:22:24</publishTime>
+    </File>
+    <File Include="images/AddEdit.gif">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/ggroups.gif">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/help.gif">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/money.gif">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/News.gif">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/StockPortfolio.png">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/StockPortfolioThumb.png">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/Summary.gif">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/Y!FinanceLogo.png">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/Y!FinanceLogo10.png">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="images/Y!FinanceLogo12.png">
+      <publishTime>03/26/2013 00:52:06</publishTime>
+    </File>
+    <File Include="StockPortfolio.html">
+      <publishTime>03/26/2013 22:32:01</publishTime>
+    </File>
+    <File Include="StockPortFolio_Old.html">
+      <publishTime>03/26/2013 00:52:11</publishTime>
+    </File>
+    <File Include="Translations.txt">
+      <publishTime>03/24/2013 08:12:46</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>03/26/2013 00:39:58</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

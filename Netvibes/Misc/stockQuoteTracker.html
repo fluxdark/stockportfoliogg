@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+
+<meta name="author" content="StockWidgets" />
+<meta name="author_email" content="stockwidgets@gmail.com" />
+<meta name="website" content="http://www.stockwidgets.net/" />
+<meta name="description" content="The Stock Quote Tracker widget combines a stock quotes and news follow-up module with Web2 technical analysis tools." />
+<meta name="keywords" content="stock, stock quote, stock widget, stock news, web2 technical analysis tools" />
+<meta name="screenshot" content="http://www.stockwidgets.net/images/data-grabber-screenshot.png" />
+<meta name="thumbnail" content="http://www.stockwidgets.net/images/data-grabber-thumbnail.png" />
+<meta name="apiVersion" content="1.0" />
+<meta name="debugMode" content="false" />
+<meta name="inline" content="false" />
+<meta name="autoRefresh" content="3" />
+<link rel="stylesheet" type="text/css"
+	href="http://www.netvibes.com/themes/uwa/style.css" />
+<script type="text/javascript"
+	src="http://www.netvibes.com/js/UWA/load.js.php?env=Standalone"></script>
+
+<widget:preferences>	
+	<preference name="defaultSymbol" type="text" label="Enter a default symbol (optional)" defaultValue="goog"/>
+	<preference name="displaySymbolField" type="hidden" defaultValue="flase"/>
+	<preference name="displayQuote" type="boolean" label="Hide quote"/>
+	<preference name="displayChart" type="boolean" label="Hide chart"/>
+    <preference name="chartSize" type="range"
+		label="Chart Size; 0 smallest, 10 bigger" defaultValue="2" step="1" min="0"	max="9" />	
+	<preference name="chartType" type="range"
+		label="Chart type; 1 Candlesticks, 2 OHLC bars, 3 Line" defaultValue="1" step="1" min="1" max="3" />
+	<preference name="displaySme" type="boolean" label="Hide moving average"/>	
+	<preference name="displayRSI" type="boolean" label="Hide RSI"/>	
+	<preference name="displayMacd" type="boolean" label="Hide MACD"/>	
+	<preference name="displayYahoo" type="boolean" label="Hide Yahoo news"/>
+	<preference name="displayGoogle" type="boolean" label="Hide Google news"/>
+	<preference name="limit" type="range"
+		label="Number of items to display for each stock feed" defaultValue="5" step="1" min="1"
+		max="20" />
+</widget:preferences>
+
+<style type="text/css">
+.moduleContent {
+	background:#FFFFFF none repeat scroll 0%;
+	clear:both;
+	padding:1px;
+}
+a:link, a:visited {
+	border-bottom:0px solid #DDDDDD;
+	color:#333333;
+	text-decoration:none;
+}
+a:hover {
+	border-bottom:0px solid #FF6600;
+	color:#FF6600;
+	text-decoration:none;
+}
+.submitButton {
+	margin: 2px;
+	font-size: 8pt;
+	height: 22px;
+}
+.symbolInput {
+	margin: 3px;
+	font-size: 8pt;
+	height: 16px;
+}
+.formP {
+	text-align: right;
+}
+.formDiv {
+	text-align: center;
+	width: 500px;
+}
+body {
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+.switchOpen {
+	background-image: url(http://www.stockwidgets.net/images/open_triangle.gif);
+	background-repeat: no-repeat;
+	height: 11px;
+	width: 11px;
+	display: inline;
+	padding-left:11px;
+	cursor: pointer;
+}
+.switchClose {
+	background-image: url(http://www.stockwidgets.net/images/triangle.gif);
+	background-repeat: no-repeat;
+	height: 11px;
+	width: 11px;
+	display: inline;
+	padding-left:11px;
+	cursor: pointer;
+}
+.switcherRow {
+	padding-top:5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-top: 1px solid #c0c0c0;
+	width: 100%;
+}
+.tableClose {
+	height: 11px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-top: 1px solid #c0c0c0;
+	width: 100%;
+}
+.symbolSwitch {
+	font-weight: bold;
+	color:#FF6600;
+	cursor: pointer;
+	font-size: 12px;
+}
+.symbolSwitch a:hover {
+	padding-left: 10px;
+	font-weight: bold;
+	color:#FF0000;
+	cursor: pointer;
+	font-size: 12px;
+}
+.symbolContent {
+	padding-left: 13px;
+}
+.listDivLight{
+	background-color: #ffffff;
+	border-top: 1px solid #c0c0c0;
+	width: 100%;
+}
+.listDivDark{
+	background-color: #FFFFD9;
+	border-top: 1px solid #c0c0c0;
+	width: 100%;
+}
+.dateDiv{
+	color:#808080;
+}
+.sysmbolRow{
+	background-color: #EFF5FF;
+	border-top: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+	border-left: 1px solid #c0c0c0;	
+	border-right: 1px solid #c0c0c0;	
+	font-size: 14px;
+	color: #FF6600;
+	font-weight: bold;
+	padding-left: 2px;	
+}
+.colTitle{
+	background-color: #FFFFD9;
+	border-bottom: 1px solid #c0c0c0;
+	border-right: 1px solid #c0c0c0;
+	padding-left: 2px;	
+}
+.colValue{
+	background-color: #ffffff;
+	border-bottom: 1px solid #c0c0c0;	
+	border-right: 1px solid #c0c0c0;	
+	padding-left: 2px;
+}
+.colBorderLeft{
+	border-left: 1px solid #c0c0c0;	
+}
+.lastTrade{
+	padding-top: 4px;
+	background-color: #ffffff;
+	font-size: 26px;
+	text-align:center;
+	font-weight: bold;
+	border-right: 1px solid #c0c0c0;	
+}
+.changeNeutral{
+	background-color: #ffffff;
+	font-size: 16px;
+	text-align:center;
+	border-bottom: 1px solid #c0c0c0;	
+	border-right: 1px solid #c0c0c0;	
+}
+.change{
+	background-color: #ffffff;
+	font-size: 16px;
+	text-align:center;
+	color: rgb(34,139,34);
+	border-bottom: 1px solid #c0c0c0;	
+	border-right: 1px solid #c0c0c0;	
+}
+.changeNeg{
+	background-color: #ffffff;
+	font-size: 16px;
+	text-align:center;
+	color: rgb(139,0,0);
+	border-bottom: 1px solid #c0c0c0;	
+	border-right: 1px solid #c0c0c0;	
+}
+.tradeTime{
+	background-color: #ffffff;
+	font-size: 12px;
+	text-align:center;
+}
+.lookUpLink:hover{
+	background-color: #eeeeee;
+}
+.symbolSuggestDiv{
+	position:absolute;
+	right: 0;
+	z-index: 100;
+	text-align:left;
+	width:300px;
+	border: 1px solid #c0c0c0;
+	cursor: pointer;
+}
+.symbolLookupBox{
+	position:relative;
+}
+.submitButton {
+	margin: 2px;
+	font-size: 8pt;
+	height: 22px;
+}
+.lookupRowDiv {
+	background-color: #ffffff;
+}
+.lookupRowDivHilight {
+	background-color: #eeeeee;
+	color: #FF6600;
+}
+.graphP{
+	text-align:center;
+}
+.graphL{
+	text-align:center;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 1px;
+	margin-right: 1px;
+	border: 1px solid #c0c0c0;
+	cursor: pointer;
+}
+.graphL:hover{
+	border: 1px solid #c0c0c0;
+	color:#FF6600;
+	text-decoration:none;
+	background-color: #eeeeee;
+	cursor: pointer;
+}
+.graphLSelected {
+	background-color: #eeeeee;
+	color:#FF6600;
+	text-align:center;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 1px;
+	margin-right: 1px;
+	border: 1px solid #c0c0c0;
+	cursor: pointer;	
+}
+.graphLSelected:hover{
+	border: 1px solid #c0c0c0;
+	color:#FF6600;
+	text-decoration:none;
+	background-color: #eeeeee;
+	cursor: pointer;
+}
+.periodLink{
+	text-align:center;
+}
+.yahooMsg{
+	color:#808080;
+	text-align:center;
+}
+.errorMsgField{
+	color:#FF0000;
+	text-align:right;
+	font-size: 12px;
+}
+</style>
+<title>StockWidgets - Stock Quote Tracker</title>
+<link rel="icon" type="image/png"
+	href="http://www.stockwidgets.net/images/favicon.ico" />
+	<link rel="rich-icon" type="image/png"
+  href="http://www.stockwidgets.net/images/richicon.png"/>
+	
+
+<script type="text/javascript">	 
+	var defaultStock = "goog"
+	var googleStk = "http://finance.google.com/finance?morenews=" + widget.getValue('limit') + "&rating=1&output=rss&q=";		
+	var yahooStk = "http://finance.yahoo.com/rss/headline?s=";
+	
+	var Stockwidgets = {};
+	var StockQuote = {};
+ 	var Params = {};
+ 	
+    /* *************************************** */
+	/*              Utility method             */
+	/* *************************************** */
+	Stockwidgets.server='localhost:8080';
+	Stockwidgets.getTagById = function (aTag, aId) {
+		var tagElement = widget.body.getElementsByTagName(aTag);
+		for (i = 0; i < tagElement.length; i++) {	
+			if (tagElement[i].id == aId){
+				return tagElement[i];
+			}
+		}
+	} 		
+	Stockwidgets.formatNumer = function(num) {  
+		var formatedNumber=parseFloat(num);		
+		if(isNaN(formatedNumber)){
+			formatedNumber = "0";
+		}
+		sign = (formatedNumber == (formatedNumber = Math.abs(formatedNumber)));
+		formatedNumber = Math.floor(formatedNumber*100+0.50000000001);
+		cents = formatedNumber%100;
+		formatedNumber = Math.floor(formatedNumber/100).toString();
+		if(cents<10)
+		cents = "0" + cents;
+		for (var i = 0; i < Math.floor((formatedNumber.length-(1+i))/3); i++)
+		formatedNumber = formatedNumber.substring(0,formatedNumber.length-(4*i+3))+','+
+		formatedNumber.substring(formatedNumber.length-(4*i+3));
+		return (((sign)?'':'-')  + formatedNumber + '.' + cents);
+	}	
+	Stockwidgets.CommaFormatted = function(num) {
+		var delimiter = ","; 
+		var n = num;
+		var valueToReturn = '';	
+		while( n.length > 3)
+		{  
+			 valueToReturn = delimiter.concat(n.substr(n.length-3)).concat(valueToReturn);
+			 n = n.substr(0,n.length-3);
+		}
+		valueToReturn = n.concat(valueToReturn);
+		return valueToReturn;
+	}
+	
+		
+	Stockwidgets.trim = function(pString) 
+	{ 
+		return pString.replace(/^\s+/g,'').replace(/\s+$/g,'') 
+	} 		 
+	/* *************************************** */
+	/*             Switcher method             */
+	/* *************************************** */
+	
+	var Switcher = {};
+	var switchState = new Array();
+	Switcher.switchTab = function(event, arg) {
+       	var arg = args = $A(arguments);
+       	var divId = arg[1];
+       	var switchId = arg[2];
+       	var el = Stockwidgets.getTagById("div", divId);
+       	var switchDiv = Stockwidgets.getTagById("a", switchId);
+       	if ( el.style.display != "none" ) {
+			el.style.display = 'none';
+			switchDiv.className='switchClose';
+			//Switcher.setState(switchId, false);
+		}
+		else {
+			el.style.display = '';
+			switchDiv.className='switchOpen';
+			//Switcher.setState(switchId, true);
+		}		
+		widget.callback("onUpdateBody"); 
+    }
+	Switcher.isOpen = function(divId) {
+		var div = Stockwidgets.getTagById("div", divId);
+		var arrayDiv;
+		if(switchState != null && switchState.length > 0){
+			for (x=0; x <switchState.length; x++) {
+				var divRow = switchState[x-1];
+				var divField = divRow[0];
+				if(divField == divId){
+					return divRow[1];					
+				}
+			}
+		}
+		return false;	
+	}		
+	Switcher.setState = function(divId, value) {		
+		var div = Stockwidgets.getTagById("div", divId);
+		var arrayDiv;
+		if(switchState != null && switchState.length > 0){
+			for (x=0; x <switchState.length; x++) {
+				var divRow = switchState[x-1];
+				divRow[1] = value;
+			}
+		} else {
+			var divRow = new Array();
+			divRow[0] = divId;
+			divRow[1] = value;
+			switchState[switchState.length]=divRow;
+		}
+		return false;	
+	}
+	/* *************************************** */
+	/*              Class variable             */
+	/* *************************************** */
+    var inputValue = null;
+ 		
+	/* *************************************** */
+	/*          BasicRSSReader method          */
+	/* *************************************** */
+	
+ 	var BasicRSSReader = {};
+ 	BasicRSSReader.feed = false;
+ 			
+	BasicRSSReader.displayYahooRss = function(xml) {
+		var feedList = BasicRSSReader.displayRss(xml);
+			
+		var feedDiv = Stockwidgets.getTagById("div", "symbolContent01");
+	   	feedDiv.setHTML(feedList.innerHTML);		 
+	   	widget.callback("onUpdateBody");  	   	
+	}	
+	BasicRSSReader.displayGoogRss = function(xml) {
+		var feedList = BasicRSSReader.displayRss(xml);
+			
+		var feedDiv = Stockwidgets.getTagById("div", "symbolContent02");
+	   	feedDiv.setHTML(feedList.innerHTML);	 
+	   	widget.callback("onUpdateBody");  	
+	}
+	
+	BasicRSSReader.displayRss = function(xml) {	  	
+	  		var rootNode = xml.documentElement;
+			var item  = rootNode.getElementsByTagName('item')
+		
+		  	// create the 'ul' element, applying it the CSS class 'nv-feedList'  
+		  	var feedList = widget.createElement('div');
+			feedList.className = 'feedList';
+			
+			// number of parsed items
+			var j = 0;
+							
+			// loop through the downloaded items
+			for(var i=0; i < item.length; i++) {
+			  	// if the limit is reached, stop looping
+			  	if (j >= widget.getValue('limit')) break;
+			
+				if(item[i].getElementsByTagName("title")[0].childNodes[0]!=null){
+					var title = item[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+				}
+				if(item[i].getElementsByTagName("link")[0].childNodes[0]!=null){
+					var link = item[i].getElementsByTagName("link")[0].childNodes[0].nodeValue;
+				}
+				if(item[i].getElementsByTagName("pubDate")[0].childNodes[0]!=null){
+					var pubDate = item[i].getElementsByTagName("pubDate")[0].childNodes[0].nodeValue;
+				}
+				var regForReplace=new RegExp('Etc/', 'g');				
+				pubDate = pubDate.replace(regForReplace,'');
+				if(item[i].getElementsByTagName("description")[0].childNodes[0]!=null){
+					var description = item[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
+				} else {
+					var description = title;
+				}
+						
+			  	// create and fill the 'div' element				  
+			  	var listDiv = widget.createElement('div'); 
+			  	listDiv.id='listDiv';
+			  	var modulo = i%2;
+			  	if(modulo == 0){
+			  		listDiv.className='listDivDark';
+			  	} else {				  	
+			  		listDiv.className='listDivLight';
+			  	}
+			  				  
+			  	// create and fill the 'a' element of the item with the item's link
+			  	var a = widget.createElement('a');
+			  	a.className='newsLink';
+			  	a.href = link;
+				a.target='_blank';
+			 
+			  	// var displayTitle = item.content;
+			  	a.innerHTML = title;
+			
+			  	// build the title from the 255 first characters of the content
+			  	// remove the content's HTML tags along the way
+			  	var title = description.stripTags().truncate(255);
+			  	a.title = title;
+			
+			  	// set a tooltip on the 'a' element, with the item's content
+			  	a.onmouseover = function() {UWA.Utils.setTooltip(this, this.content, 250);
+			  				
+			}
+			
+			
+			  	listDiv.appendChild(a);	
+				var dateDiv = widget.createElement('div'); 
+				dateDiv.id='dateDiv';
+				dateDiv.className='dateDiv';
+				dateDiv.setText(pubDate);
+			  	
+				listDiv.appendChild(dateDiv);
+				
+			// ...and append the 'li' element to the main 'ul' element        
+			feedList.appendChild(listDiv); 
+			// feedList.appendChild(displayDate); 
+			j++;
+		}
+		return feedList;
+	}
+	/* *************************************** */
+	/*             Stock Quote                 */
+	/* *************************************** */
+	
+ 	Params.symbol={idx:0, qryPram:'s'};
+		Params.name={idx:1, qryPram:'n'};
+		Params.market={idx:2, qryPram:'x'};
+		Params.lastTrade={idx:3, qryPram:'l1'};
+		Params.tradeTime={idx:4, qryPram:'t1'};
+		Params.vol={idx:5, qryPram:'v'};
+		Params.avgVol={idx:6, qryPram:'a2'};
+		Params.open={idx:7, qryPram:'o'};
+		Params.prevClose={idx:8, qryPram:'p'};
+		Params.change={idx:9, qryPram:'c1'};
+		Params.changePC={idx:10, qryPram:'p2'};
+		Params.daysRange={idx:11, qryPram:'m'};
+		Params.bid={idx:12, qryPram:'b'};
+		Params.bidSize={idx:13, qryPram:'b6'};
+		Params.ask={idx:14, qryPram:'a'};
+		Params.askSize={idx:15, qryPram:'a5'};
+		Params.yearWeekRange={idx:16, qryPram:'w'};
+		Params.mktCap={idx:17, qryPram:'j1'};
+		
+	var yahooQry = 
+		Params.symbol.qryPram + 
+		Params.name.qryPram + 
+		Params.market.qryPram + 
+		Params.lastTrade.qryPram + 
+		Params.tradeTime.qryPram + 
+		Params.vol.qryPram + 
+		Params.avgVol.qryPram + 
+		Params.open.qryPram + 
+		Params.prevClose.qryPram + 
+		Params.change.qryPram + 
+		Params.changePC.qryPram + 
+		Params.daysRange.qryPram + 
+		Params.bid.qryPram + 
+		Params.bidSize.qryPram + 
+		Params.ask.qryPram + 
+		Params.askSize.qryPram + 
+		Params.yearWeekRange.qryPram + 
+		Params.mktCap.qryPram;
+		
+		
+				
+	StockQuote.showStockQuote = function() {	
+		if(widget.getValue('displayQuote') != 'true'){
+		 		
+			var quoteTable = widget.createElement('div');
+		    quoteTable.className = 'quoteDiv';
+		    quoteTable.id = 'quoteDiv';
+		    
+			widget.body.appendChild(quoteTable);
+			
+			UWA.Data.getText(
+	    	'http://download.finance.yahoo.com/d/quotes.txt?f=' + yahooQry + '&e=.cvs&s=' + defaultStock,
+	    	StockQuote.dataProcessor);
+    	}
+	}		
+	StockQuote.quoteUpdate = function() {	
+		if(widget.getValue('displayQuote') != 'true'){ 	
+			UWA.Data.getText(
+	    	'http://download.finance.yahoo.com/d/quotes.txt?f=' + yahooQry + '&e=.cvs&s=' + inputValue,
+	    	StockQuote.dataProcessor);
+    	} else {
+	    	var quoteDiv = Stockwidgets.getTagById("div", "quoteDiv");
+			quoteDiv.hide();
+    	}
+	}	 
+	StockQuote.displayErrorMsg = function(msf){
+		if(widget.getValue('displaySymbolField') != 'true'){
+			var errorMsgField = Stockwidgets.getTagById("span", "errorMsgField");
+			errorMsgField.setText(msf);
+			errorMsgField.show();
+		}
+	}
+	StockQuote.hideErrorMsg = function(){
+		if(widget.getValue('displaySymbolField') != 'true'){
+			var errorMsgField = Stockwidgets.getTagById("span", "errorMsgField");
+			errorMsgField.hide();
+		}
+	}
+	StockQuote.dataProcessor = function(qryResult) {
+		var chaine=qryResult;
+		
+		var regForReplace=new RegExp('"', 'g');
+		chaine = chaine.replace(regForReplace,'');
+		
+		var reg=new RegExp("[,]+", "g");
+		var quoteObject=chaine.split(reg);
+		if(quoteObject[Params.lastTrade.idx] == 'N/A'){
+			StockQuote.displayErrorMsg('Symbol not found');
+			return null;
+		} else {
+			StockQuote.hideErrorMsg();
+		}
+		
+		var changeColorClass='change';	
+			
+		if(quoteObject[Params.change.idx] < 0){
+			changeColorClass='changeNeg';	
+		}		
+		if (quoteObject[Params.change.idx] == 0){
+			changeColorClass='changeNeutral';	
+		}
+		var tableHtml = ' ';
+		tableHtml += '<table width="100%" style="border-collapse:collapse;font-size:11px;">';
+		tableHtml += '<tr><td colspan="4" class="sysmbolRow">' + quoteObject[Params.name.idx] +
+			' (' + quoteObject[Params.market.idx] +':' + quoteObject[Params.symbol.idx] +') </td></tr>';
+
+		tableHtml += '<tr><td class="lastTrade colBorderLeft" colspan="2" rowspan="2">';
+		tableHtml +=  Stockwidgets.formatNumer(quoteObject[Params.lastTrade.idx]) + '</td>';
+		tableHtml += '<td class="colTitle">Open:</td>';
+		tableHtml += '<td class="colValue">' + Stockwidgets.formatNumer(quoteObject[Params.open.idx]) + '</td></tr>';		
+
+		tableHtml += '<tr><td class="colTitle">Prev Cl.:</td>';
+		tableHtml += '<td class="colValue">' + Stockwidgets.formatNumer(quoteObject[Params.prevClose.idx]) + '</td></tr>';
+		
+		tableHtml += '<tr><td class="'+changeColorClass+' colBorderLeft" colspan="2"  rowspan="2">';
+		tableHtml += Stockwidgets.formatNumer(quoteObject[Params.change.idx]) + ' (' + quoteObject[Params.changePC.idx] + ') </td>';
+		tableHtml += '<td class="colTitle">Bid:</td>';
+		tableHtml += '<td class="colValue">' + quoteObject[Params.bid.idx] + '</td></tr>';		
+		
+		tableHtml += '<tr><td class="colTitle">Ask:</td>';
+		tableHtml += '<td class="colValue">' + quoteObject[Params.ask.idx] + '</td></tr>';
+		
+		tableHtml += '<tr><td class="colTitle colBorderLeft">Vol:</td>';
+		tableHtml += '<td class="colValue colBorderRight">' + Stockwidgets.CommaFormatted(quoteObject[Params.vol.idx]) + '</td>';
+		tableHtml += '<td class="colTitle">Avg Vol 3m:</td>';
+		tableHtml += '<td class="colValue">' + Stockwidgets.CommaFormatted(quoteObject[Params.avgVol.idx]) + '</td></tr>';
+		
+		tableHtml += '<tr><td class="colTitle colBorderLeft">Day Rng:</td></td>';
+		tableHtml += '<td class="colValue colBorderRight">' + quoteObject[Params.daysRange.idx] + '</td>';
+		tableHtml += '<td class="colTitle">Year Rng:</td>';
+		tableHtml += '<td class="colValue">' + quoteObject[Params.yearWeekRange.idx] + '</td></tr>';
+				
+		
+		tableHtml += '<tr><td class="colTitle colBorderLeft">Delayed:</td>';
+		tableHtml += '<td class="colValue colBorderRight">' + quoteObject[Params.tradeTime.idx] + '</td>';
+		tableHtml += '<td class="colTitle">Mkt Cap:</td>';
+		tableHtml += '<td class="colValue">' + quoteObject[Params.mktCap.idx] + '</td></tr>';
+	
+		tableHtml += '</table>';
+		
+		var quoteDiv = Stockwidgets.getTagById("div", "quoteDiv");
+		quoteDiv.setHTML(tableHtml);	  
+		quoteDiv.show(); 	
+	}
+	
+	/* *************************************** */
+	/*          Display a rss block            */
+	/* *************************************** */	
+	var NewFeds = {};
+	NewFeds.period = "3";
+	
+	NewFeds.rssBlock = function(tabContent, switcherID, newContentId, title, prefID, rssUrl, rssReader) {
+			  
+	    if (widget.getValue(prefID) != 'true') {	
+			var switcherRow = widget.createElement('div');
+	       	switcherRow.className = 'switcherRow';
+	       	switcherRow.id = 'switcherRow'+switcherID;
+	       	
+			var switcher = widget.createElement('a');
+			switcher.className = 'switchOpen';
+		    
+	       	switcher.id=switcherID;
+	       	switcher.setHTML('&nbsp;');
+	       	switcher.onclick = Switcher.switchTab.bindAsEventListener(this, [newContentId, switcherID]);
+			switcherRow.appendChild(switcher);
+			
+	        var symbolToggleDiv = widget.createElement('a');
+	        symbolToggleDiv.className = 'symbolSwitch'; 
+	        symbolToggleDiv.id = 'symbolSwitch'; 
+	        symbolToggleDiv.setText(title);    
+	        symbolToggleDiv.onclick = Switcher.switchTab.bindAsEventListener(this, [newContentId, switcherID]);
+	    	switcherRow.appendChild(symbolToggleDiv);
+	    	
+	        tabContent.appendChild(switcherRow);
+	                	
+	       	var symbolContent = widget.createElement('div');
+	       	symbolContent.className = 'symbolContent';
+	       	symbolContent.id = newContentId;
+	       	symbolContent.style.display = '';   
+							
+		    tabContent.appendChild(symbolContent);	    
+			
+		    UWA.Data.request(rssUrl, 
+		  	{ method: 'get', proxy: 'ajax', type: 'xml',  cache: 3600, onComplete: rssReader});
+	    }
+	}
+	/* *************************************** */
+	/*          Stock Graph method             */
+	/* *************************************** */
+	NewFeds.stockGraph = function() {	
+		if(widget.getValue('displayChart') != 'true'){ 
+		 	var graphP = widget.createElement('div');
+	        graphP.className = 'graphP';
+	        graphP.id = 'graphP';
+	       	graphP.innerHTML = NewFeds.getStockGraph();
+			NewFeds.setGraphHeight(graphP);
+	        widget.body.appendChild(graphP);
+			NewFeds.chartPeriodLink();		
+		}
+	}	
+	NewFeds.chartPeriodLink= function() {	
+		if(widget.getValue('displayChart') != 'true'){
+			var periodLink = widget.createElement('div');
+	        periodLink.className = 'periodLink';
+	        periodLink.id = 'periodLink';
+	       		
+			var graphL1 = widget.createElement('a');
+	        graphL1.id = 'graphL1';        
+	        if(NewFeds.period == '1'){
+	        	graphL1.className = 'graphLSelected';
+	        } else {
+	        	graphL1.className = 'graphL';
+	        }
+	       	graphL1.setText('1m');
+			graphL1.onclick  = function () { 
+				NewFeds.changeChartPeriod(this, '1');
+			}
+			
+			var graphL2 = widget.createElement('a');       
+	        graphL2.id = 'graphL2';        
+	        if(NewFeds.period == '3'){
+	        	graphL2.className = 'graphLSelected';
+	        } else {
+	        	graphL2.className = 'graphL';
+	        }
+	       	graphL2.setText('3m');
+			graphL2.onclick  = function () { 
+				NewFeds.changeChartPeriod(this, '3');
+			}
+			
+			var graphL3 = widget.createElement('a');
+			graphL3.id = 'graphL3';
+	        if(NewFeds.period == '12'){
+	        	graphL3.className = 'graphLSelected';
+	        } else {
+	        	graphL3.className = 'graphL';
+	        }
+	       	graphL3.setText('1y');
+			graphL3.onclick  = function () { 
+				NewFeds.changeChartPeriod(this, '12');
+			}
+			
+			var graphL4 = widget.createElement('a');
+	        graphL4.id = 'graphL4';      
+	        if(NewFeds.period == '36'){
+	        	graphL4.className = 'graphLSelected';
+	        } else {
+	        	graphL4.className = 'graphL';
+	        }
+	       	graphL4.setText('3y');
+			graphL4.onclick  = function () { 
+				NewFeds.changeChartPeriod(this, '36');
+			}
+			periodLink.appendChild(graphL1);
+			periodLink.appendChild(graphL2);
+			periodLink.appendChild(graphL3);
+			periodLink.appendChild(graphL4);
+			periodLink.show();
+	        widget.body.appendChild(periodLink);
+        } else{
+        	var periodLink = Stockwidgets.getTagById("div", "periodLink");
+        	periodLink.hide();
+        }
+	}	
+	NewFeds.changeChartPeriod = function(obj, pPeriod) {	 
+		NewFeds.period = pPeriod;
+		NewFeds.updateStockGraph();
+		var graphL1 = Stockwidgets.getTagById("a", "graphL1");
+		var graphL2 = Stockwidgets.getTagById("a", "graphL2");
+		var graphL3 = Stockwidgets.getTagById("a", "graphL3");
+		var graphL4 = Stockwidgets.getTagById("a", "graphL4");
+		graphL1.className='graphL';
+		graphL2.className='graphL';
+		graphL3.className='graphL';
+		graphL4.className='graphL';
+		
+		obj.className='graphLSelected';
+	}
+	NewFeds.updateStockGraph = function() {	 
+		if(widget.getValue('displayChart') != 'true'){
+	        var graphP = Stockwidgets.getTagById("div", "graphP");
+	        graphP.setHTML(NewFeds.getStockGraph());	
+	        NewFeds.setGraphHeight(graphP);	
+	        graphP.show();
+	        var periodLink = Stockwidgets.getTagById("div", "periodLink");
+	       	periodLink.show();	       	
+        	widget.callback("onUpdateBody");
+        } else {
+        	var graphP = Stockwidgets.getTagById("div", "graphP");
+        	graphP.hide();
+        	var periodLink = Stockwidgets.getTagById("div", "periodLink");
+        	periodLink.hide();
+        }
+	}
+	NewFeds.setGraphHeight = function(graphP) {	 
+        var chartSize = widget.getValue('chartSize');
+		var chartHeight=140;
+		
+		switch (chartSize) {
+			case '2':
+				chartHeight=180;
+				break;
+			case '3':
+				chartHeight=200;
+				break;
+			case '4':
+				chartHeight=220;
+				break;
+			case '5':
+				chartHeight=300;
+				break;
+			case '6':
+				chartHeight=600;
+				break;
+			case '7':
+				chartHeight=800;
+				break;
+			case '8':
+				chartHeight=1000;
+				break;
+			case '9':
+				chartHeight=1200;
+				break;
+			default: 
+				chartHeight=140;
+				break;
+		}
+		graphP.setStyle('height',chartHeight);
+	}	
+	NewFeds.getStockGraph = function() {	 
+		if (inputValue == null){
+			inputValue = defaultStock;
+		}
+		
+        var chartSize = widget.getValue('chartSize');
+        var chartType = widget.getValue('chartType');
+        var displaySme = widget.getValue('displaySme');        
+        var displayRSI = widget.getValue('displayRSI');
+        var displayMacd = widget.getValue('displayMacd');
+	
+        var contentHtml = '';
+		contentHtml += '<center><a href="http://www.stockwidgets.net/charting/chartPage.jsf?s=' + inputValue + '" target="_blank" title="StockWidgets charting">';
+		contentHtml += '<img src="http://' + Stockwidgets.server + '/charting' ;
+		contentHtml += '/chartFx.jsf?';
+		contentHtml += 'symbol=' + inputValue + '&'; 
+		contentHtml += 'chartSize=' + chartSize + '&';
+		contentHtml += 'period=' + NewFeds.period + '&';
+		contentHtml += 'chartType=' + chartType + '&';
+		contentHtml += 'displaySme=' + displaySme + '&';
+		contentHtml += 'displayRSI=' + displayRSI + '&';
+		contentHtml += 'displayMacd=' + displayMacd;
+		contentHtml += '" />';
+		contentHtml += '</a></center>';
+		
+		return contentHtml;
+	}
+   	/* *************************************** */
+	/*         Symbol Feed form method         */
+	/* *************************************** */
+	NewFeds.stockFocus = function (obj){
+	 	if(obj.value == 'Enter Symbol'){
+		 	obj.value='';
+		 	obj.style.color='rgb(0, 0, 0)';
+		 }
+	}		 
+	NewFeds.stockBlur = function (obj){
+		 if(obj.value.length == 0){
+		 	obj.value='Enter Symbol';
+		 	obj.style.color='rgb(170, 170, 170)';
+		 }
+	}		
+
+	 
+	NewFeds.addSymbol = function() {
+		var tagElement = Stockwidgets.getTagById("input", "symbolInput");
+		var trimValue = Stockwidgets.trim(tagElement.value);
+		if(tagElement.value != "Enter Symbol"){
+			if(trimValue.length > 0){
+				inputValue =  trimValue;	
+			}
+		}
+		NewFeds.reload();
+	}
+	NewFeds.reload = function() {
+		StockQuote.quoteUpdate();
+		NewFeds.updateStockGraph();
+		if(widget.getValue('displayYahoo') != 'true'){
+			var tmpYahooFeedUrl = yahooStk + inputValue;
+			UWA.Data.request(tmpYahooFeedUrl, 
+		  	{ method: 'get', proxy: 'ajax', type: 'xml',  cache: 3600, onComplete: BasicRSSReader.displayYahooRss});
+	   		var feedDiv = Stockwidgets.getTagById("div", "symbolContent01");
+	   		feedDiv.show();
+	   		var switchDiv = Stockwidgets.getTagById("div", "switcherRowswitcher01");
+	   		switchDiv.show();	
+	  	} else {
+	   		var feedDiv = Stockwidgets.getTagById("div", "symbolContent01");
+	   		feedDiv.hide();
+	   		var switchDiv = Stockwidgets.getTagById("div", "switcherRowswitcher01");
+	   		switchDiv.hide();	
+	   	}
+	  	if(widget.getValue('displayGoogle') != 'true'){
+			var tmpGoogleFeedUrl = googleStk + inputValue;
+			UWA.Data.request(tmpGoogleFeedUrl, 
+		  	{ method: 'get', proxy: 'ajax', type: 'xml',  cache: 3600, onComplete: BasicRSSReader.displayGoogRss});
+		  	var feedDiv = Stockwidgets.getTagById("div", "symbolContent02");
+	   		feedDiv.show();
+	   		var switchDiv = Stockwidgets.getTagById("div", "switcherRowswitcher02");
+	   		switchDiv.show();	   		
+	   	} else {
+	   		var feedDiv = Stockwidgets.getTagById("div", "symbolContent02");
+	   		feedDiv.hide();
+	   		var switchDiv = Stockwidgets.getTagById("div", "switcherRowswitcher02");
+	   		switchDiv.hide();	 
+	   	}
+		widget.callback("onUpdateBody");
+	}
+	NewFeds.displaySymbolForm = function() {
+	
+		if(widget.getValue('displaySymbolField') != 'true'){
+		
+			var errorMsgField = widget.createElement('span');
+			errorMsgField.id = 'errorMsgField';
+			errorMsgField.className = 'errorMsgField';
+			errorMsgField.hide();
+	        var symbolInput = widget.createElement('input');		        		
+			symbolInput.type = 'text';
+			symbolInput.id	= 'symbolInput';
+			symbolInput.className = 'symbolInput';
+			symbolInput.style.color="rgb(170, 170, 170)";
+			symbolInput.size = 11;	
+			symbolInput.value = 'Enter Symbol';
+			symbolInput.onkeyup = SymbolLookup.onSymbolKeyUp.bindAsEventListener(this);	
+	        symbolInput.onfocus = function () { NewFeds.stockFocus(this);}
+			symbolInput.onblur= function () { NewFeds.stockBlur(this);}
+											
+	       	var submitButton = widget.createElement('button');		
+			submitButton.id	= 'submitButton';
+			submitButton.value = 'Go';
+			submitButton.innerHTML = 'Go';
+			submitButton.className = 'submitButton';
+			submitButton.onclick  = function () { 
+				var tagElement = Stockwidgets.getTagById("div", "symbolLookupBox");
+				tagElement.hide();
+				NewFeds.addSymbol(); 
+			}        
+	        var formP = widget.createElement('p');
+	        formP.className = 'formP';
+	       	       	 
+			var formDiv = widget.createElement('formDiv');
+	        formDiv.className = 'formDiv';
+	        formDiv.appendChild(errorMsgField);
+	        formDiv.appendChild(symbolInput);
+	        formDiv.appendChild(submitButton);
+	        formP.appendChild(formDiv);
+	        widget.body.appendChild(formP);	
+		}
+	}
+	
+   	/* *************************************** */
+	/*          SymbolLookup method            */
+	/* *************************************** */
+	var SymbolLookup = {};
+	SymbolLookup.rowNumber =-1;
+	
+	SymbolLookup.addSymbolLookup = function() {
+		if(widget.getValue('displaySymbolField') != 'true'){        
+			var symbolSuggest = widget.createElement('div');
+	        symbolSuggest.id = 'symbolSuggestDiv';
+	        symbolSuggest.className = 'symbolSuggestDiv';
+	    	        
+	    	var symbolLookupBox = widget.createElement('div');
+	        symbolLookupBox.id = 'symbolLookupBox';
+	        symbolLookupBox.className = 'symbolLookupBox';
+	       	symbolLookupBox.hide();
+	    	       	
+	       	symbolLookupBox.appendChild(symbolSuggest);
+	      	widget.body.appendChild(symbolLookupBox);
+      	}
+    }	       	
+	SymbolLookup.setSymbol = function(value) {
+		var tagElement = Stockwidgets.getTagById("input", "symbolInput");
+		tagElement.value = value;		
+	}		
+	SymbolLookup.getData = function() {
+		var inputValue = Stockwidgets.getTagById("input", "symbolInput");	
+		if (inputValue.value.length < 1) {
+			SymbolLookup.display('');
+			var symbolLookupBox = Stockwidgets.getTagById("div", "symbolLookupBox");	
+			symbolLookupBox.hide();
+		}else{
+			UWA.Data.getText("http://d.yimg.com/autoc.finance.yahoo.com/autoc?query=" + inputValue.value + "&callback=YAHOO.Finance.SymbolSuggest.ssCallback",
+				SymbolLookup.display);			
+		}					
+	}		
+	SymbolLookup.display = function(feed) {	
+		var feedResult = feed;
+       	feedResult = feedResult.replace('YAHOO.Finance.SymbolSuggest.ssCallback','');	
+		var feedObject = eval(feedResult);
+       	
+		var symbolSuggest = Stockwidgets.getTagById("div", "symbolSuggestDiv");	
+					
+		var symbolLookupBox = Stockwidgets.getTagById("div", "symbolLookupBox");
+		
+		if(feed.length > 0 && feedObject.ResultSet.Result.length > 0){
+			symbolLookupBox.show();
+		} else {
+			symbolLookupBox.hide();
+		}
+       	symbolSuggest.empty();	
+       
+		for(var i=0; i < feedObject.ResultSet.Result.length; i++) {
+		
+			var tableHtml = "<table><tr><td width='50px'>" + feedObject.ResultSet.Result[i].symbol + "</td>";
+			tableHtml += "<td width='200px'>" + feedObject.ResultSet.Result[i].name + "</td>";
+			tableHtml += "<td width='50px'>" + feedObject.ResultSet.Result[i].exchDisp + "</td></tr></table>";	
+			
+			// create and fill the 'a' element of the item with the item's link
+		  	var a = widget.createElement('a');
+		  	a.className='lookUpLink';
+		  	a.id='lookUpLink';
+		  	a.innerHTML = tableHtml;
+		  	a.symb=feedObject.ResultSet.Result[i].symbol;
+		  	a.onclick= function () {SymbolLookup.setSymbol(this.symb); symbolLookupBox.hide(); NewFeds.addSymbol();}
+		  	
+			var lookupRowDiv = widget.createElement('div');
+        	lookupRowDiv.id = 'lookupRowDiv';
+        	lookupRowDiv.className = 'lookupRowDiv';
+        	lookupRowDiv.symb=feedObject.ResultSet.Result[i].symbol;
+        	lookupRowDiv.appendChild(a);
+        	lookupRowDiv.onmouseover=function () {SymbolLookup.resetRowStyle();}
+       		symbolSuggest.appendChild(lookupRowDiv);
+		}				  
+	}		
+	/* *************************************** */
+	/* Look-up symbol row navigation method    */
+	/* *************************************** */
+	SymbolLookup.resetRowStyle = function() {
+		var tagElement = Stockwidgets.getTagById("div", "symbolSuggestDiv");
+		var childNodes = tagElement.childNodes;
+		if(SymbolLookup.rowNumber < childNodes.length -1){
+			childNodes[SymbolLookup.rowNumber].className="lookupRowDiv";
+		}
+	}
+	SymbolLookup.onSymbolKeyUp = function(keyEvent) {
+		//var key  = keyEvent.which ? keyEvent.which : event.keyCode;
+		
+		var key = (window.event) ? event.keyCode : keyEvent.keyCode;
+		
+		if (key == 40) { //touche fleche bas
+			SymbolLookup.moveLooUpCursor();
+		} else if (key == 38) { //touche fleche haut
+			SymbolLookup.moveLooDownCursor();
+		} else if (key == 13) { //touche return
+			if(SymbolLookup.rowNumber < 0) {
+				var tagElement = Stockwidgets.getTagById("div", "symbolLookupBox");
+				tagElement.hide();
+			} else {
+				SymbolLookup.selectRow();
+			}
+			NewFeds.addSymbol(); 			
+		} else {		
+			SymbolLookup.getData();
+		}			
+	}			
+	SymbolLookup.moveLooUpCursor = function() {			
+		var tagElement = Stockwidgets.getTagById("div", "symbolSuggestDiv");
+		var childNodes = tagElement.childNodes;
+		if(SymbolLookup.rowNumber < childNodes.length -1){
+			if(SymbolLookup.rowNumber > -1){
+				childNodes[SymbolLookup.rowNumber].className="lookupRowDiv";
+			}
+			SymbolLookup.rowNumber = SymbolLookup.rowNumber + 1;
+			childNodes[SymbolLookup.rowNumber].className="lookupRowDivHilight";
+		}
+	}		
+	SymbolLookup.moveLooDownCursor = function() {			
+		var tagElement = Stockwidgets.getTagById("div", "symbolSuggestDiv");
+		var childNodes = tagElement.childNodes;
+		if(SymbolLookup.rowNumber > 0){
+			if(SymbolLookup.rowNumber > 0){
+				childNodes[SymbolLookup.rowNumber].className="lookupRowDiv";
+			}
+			SymbolLookup.rowNumber = SymbolLookup.rowNumber - 1;
+			childNodes[SymbolLookup.rowNumber].className="lookupRowDivHilight";
+		}
+	}		
+	SymbolLookup.selectRow = function() {	
+		var symbolLookupBox = Stockwidgets.getTagById("div", "symbolLookupBox");
+		var tagElement = Stockwidgets.getTagById("div", "symbolSuggestDiv");
+		var childNodes = tagElement.childNodes;
+		var symbolSelected = childNodes[SymbolLookup.rowNumber].symb;
+		SymbolLookup.setSymbol(symbolSelected);
+		symbolLookupBox.hide();
+		SymbolLookup.rowNumber = -1;
+	}		
+	/* *************************************** */
+	/*            Stocks news page             */
+	/* *************************************** */
+	NewFeds.stockNews = function() {	
+       	var tabContent = widget.createElement('div');
+       	tabContent.className = 'tabContent';        	
+       	
+       	/* Display the symbol form */        	
+		NewFeds.displaySymbolForm(tabContent);
+		
+		SymbolLookup.addSymbolLookup(tabContent);
+		/* Display the stock quote */
+		StockQuote.showStockQuote(tabContent);		
+		/* Display the symbol graph */
+		NewFeds.stockGraph();
+		/* Display the yahoo rss */
+       	NewFeds.rssBlock(tabContent, 'switcher01', 'symbolContent01', 'Yahoo Finance', 'displayYahoo',
+       							yahooStk + defaultStock, BasicRSSReader.displayYahooRss);
+	    /* Display the google rss */
+       	NewFeds.rssBlock(tabContent, 'switcher02', 'symbolContent02', 'Google Finance', 'displayGoogle',
+       							googleStk + defaultStock, BasicRSSReader.displayGoogRss);
+       							
+		/* Close de table */
+		var tableClose = widget.createElement('div');
+       	tableClose.className = 'tableClose';
+       	tableClose.id = 'tableClose';
+       	tableClose.setHTML('&nbsp;');  		
+	    tabContent.appendChild(tableClose);
+	   
+	   /* yahoo message */
+		var yahooMsg = widget.createElement('div');
+       	yahooMsg.className = 'yahooMsg';
+       	yahooMsg.id = 'yahooMsg';
+       	yahooMsg.setText('Data provided by Yahoo! Finance');  		
+	    tabContent.appendChild(yahooMsg);
+	   
+	    		    
+        widget.body.appendChild(tabContent);
+        widget.callback("onUpdateBody");
+	}     
+
+	/* *************************************** */
+	/*                    Adds                 */
+	/* *************************************** */
+	var AdsFrame = {};
+	AdsFrame.show = function() {	
+       	var adsContent = widget.createElement('div');
+       	adsContent.className = 'adsContent';
+       	var iframe = widget.createElement( 'iframe' );
+		iframe.src = 'http://www.stockwidgets.net/widgets/stockQuoteTracker/adsFrame.html';
+		iframe.frameBorder='0';
+		iframe.scrolling='no';
+		iframe.width='100%';
+		iframe.height='25px';
+      	widget.body.appendChild(iframe);
+	}   
+	/* *************************************** */
+	/*              Main method                */
+	/* *************************************** */
+	widget.onLoad = function() {
+		widget.setBody('');
+		if (document.location && (document.location.hostname == 'localhost'
+		 || document.location.hostname =='www.stockwidgets.net')) {
+			UWA.proxies.ajax = '/widget-services/widgetsproxie';
+		}  
+		if (document.location && document.location.hostname !='localhost') {
+			Stockwidgets.server = 'www.stockwidgets.net'
+		}
+
+		if(widget.getValue('defaultSymbol') != null
+			&& widget.getValue('defaultSymbol').length > 0){
+			defaultStock = widget.getValue('defaultSymbol');
+		}
+		NewFeds.stockNews(); 
+		AdsFrame.show();
+	}
+	widget.onRefresh =function() { 
+		NewFeds.reload();
+	}
+</script>
+</head>
+<body>
+</body>
+</html>

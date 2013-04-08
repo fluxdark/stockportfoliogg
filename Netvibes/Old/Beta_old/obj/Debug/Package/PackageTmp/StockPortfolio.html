@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+
+    <!-- Application Metas -->
+    <title>Title of the App</title>
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="A descriptive description" />
+
+    <!-- Application Standalone emulation files -->
+    <link rel="stylesheet" type="text/css" href="http://cdn.uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="http://cdn.uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+<!-- Application Preferences -->
+<widget:preferences>
+  <widget:preference name="hellowho" type="text" label="Hello who ?"
+defaultValue="World" />
+</widget:preferences>
+
+<!-- Application JavaScript Source -->
+<script type="text/javascript">
+//<![CDATA[
+
+  function Portfolio() {
+      this.toString = function () {
+          return this.stocks.length + 1;
+      };
+      this.stocks = []; // New Array
+      this.l10n = {"loading" : "Loading...",
+          "showAddEdit" : "ShowSummary","" : "Show stock summary",
+          "showProfit" : "Show profit details",
+          "showNews" : "Show news","ShowForum" : "Discuss this gadget with the developer and other users",
+          "showHelp" : "Help",
+          "disclaimer" : "Stock data, news and historical charts provided by",
+          "change" : "Change",
+          "lastTrade" : "Last",
+          "lastTradeDate" : "Trade date",
+          "lastTradeTime" : "Trade time",
+          "dayOpen" : "Day open", 
+          "dayLow" : "Day low",
+          "dayHigh" : "Day high",
+          "dayVolume" : "Volume",
+          "previousClose" : "Prev close",
+          "fiftyTwoWeekRange" : "52 week range",
+          "ask" : "Ask",
+          "bid" : "Bid",
+          "tickerTrend" : "Trend",
+          "fiftyDaysMovingAvg" : "50 day avg.",
+          "twoHundredDayMovingAvg" : "200 day avg.",
+          "dayRange" : "Day range",
+          "optionStrike" : "strike",
+          "optionCallPut" : "call/put",
+          "optionExpire" : "strike",
+          "currency" : "Currency",
+          "currencyRate" : "Exch.rate",
+          "earnedToday" : "Gain today",
+          "earnedTotal" : "Gain",
+          "price" : "Buy price",
+      };
+                           
+                           
+                           
+
+      this.addStock = function (symbol, price, qty, tc, lo, hi, exRate, stockdata) {
+          var id = this.stocks.length + 1;
+          this.stocks.push(new Stock(id, symbol, price, qty, tc, lo, hi, exRate, stockdata));
+          return id;
+      };
+      this.totalValue = function () {
+          var v = 0;
+          for (var i = 0; i < this.stocks.length; i++) {
+              v += this.stocks[i].value();
+          }
+          return v;
+      };
+      this.readPreferences = readPreferences;
+  }
+
+function readPreferences() {
+    //needs to check for empty preferences(standalone mode)
+    var ss = widget.getValue('StockSymbols').split(',');
+    var sp = widget.getValue('StockPrices').split(',');
+    var sq = widget.getValue('StockQtys').split(',');
+    var st = widget.getValue('StockTC').split(',');
+    var sl = widget.getValue('StockLo').split(',');
+    var sh = widget.getValue('StockHi').split(',');
+    var se = widget.getValue('StockExRate').split(',');
+    for (var i = 0; i < ss.length; i++) {
+        this.addStock(ss[i], sp[i], sq[i], st[i], sl[i], sh[i], se[i]);
+    }
+}
+//End of Portfolio object
+
+          
+var GUI = {};
+var Quote = {};
+var myPortfolio = new Portfolio();
+// myPortfolio Events 
+myPortfolio.onLoad = function () {
+    alert('OnLoad');
+    GUI.insertFooter();
+}
+          
+myPortfolio.onRefresh = function () {
+    alert('onRefresh');
+
+          
+}
+
+//GUI object
+GUI.getTagById = function (aTag, aId) {
+    alert('getTagById');
+    var tagElements = widget.body.getElements(aTag);
+    for (i = 0; i < tagElements.length; i++) {
+        alert(tagElements[i].id);
+        if (tagElements[i].id == aId){
+            return tagElements[i];
+        }
+    }
+}
+GUI.insertFooter = function () {
+    var footer = GUI.getTagById("div","Footer");
+    footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + myPortfolio.l10n["loading"] + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleAdd(0)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + myPortfolio.l10n["showAddEdit"] + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer" onclick="fnToggleSummary(1)" src="' + GUI.imgBase + 'Summary.gif" title="' + myPortfolio.l10n["showSummary"] + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleProfit(false)" src="' + GUI.imgBase + 'money.gif" title=' + myPortfolio.l10n["showProfit"] + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleNews(1);" src="' + GUI.imgBase + 'News.gif" title="' + myPortfolio.l10n["showNews"] + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'help.gif" title="' +  myPortfolio.l10n["showHelp"] + '"></a></td><td style="width:20px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'ggroups.gif" title="' + myPortfolio.l10n["showForum"] + '"></a></td></tr></table>';
+};
+
+          
+
+// Events listeners
+widget.addEvents({
+    onLoad: myPortfolio.onLoad,
+    onRefresh: myPortfolio.onRefresh
+});
+
+//]]>
+</script>
+</head>
+<body>
+<div id="StockData"><div class="Loading"></div></div>
+<div id="Footer" class="Footer"></div>
+<div id="Disclaimer" class="Footer"></div>
+<div id="Debug" style="display:block;font-size:8pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll;white-space:nowrap;"></div> 
+</body>
+</html>
