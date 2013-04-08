@@ -1,0 +1,791 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+    <head> test
+        <!-- Application Metas -->
+        <title>Stock Portfolio</title>
+        <meta name="author" content="Christian Nybroe" />
+        <meta name="email" content="netvibes_stock+cnybroe@gmail.com" />
+        <meta name="website" content="http://Netvibes.cnybroe.dk" />
+        <meta name="screenshot" content="http://Netvibes.cnybroe.dk/images/StockPortfolio.png" />
+        <meta name="thumbnail" content="http://Netvibes.cnybroe.dk/images/StockPortfolioThumb.png" />
+        <meta name="description" content="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more" />
+        <meta name="version" content="0.1" />
+        <meta name="keywords" content="stocks, quotes, quote, portfolio, finance" />
+        <meta name="debugMode" content="true" />
+        <meta name="apiVersion" content="2.0" />
+     
+        <link rel="icon" type="image/png" href="http://www.netvibes.com/favicon.ico" />
+        <!-- Application Standalone emulation files -->
+        <link rel="stylesheet" type="text/css" href="http://cdn.uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="http://cdn.uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+        <!-- Application Preferences -->
+        <widget:preferences>
+            <widget:preference name="CustomTitle" type="text" label="Custom title" defaultValue="Stock portfolio" onchange="refresh"/>
+            <widget:preference name="UpdateInterval" type="list" label="Update" defaultValue="60000" onchange="refresh">
+                <option value="60000" label="1 minute"/>
+                <option value="300000" label="5 minutes"/>
+                <option value="600000" label="10 minutes"/>
+                <option value="1800000" label="30 minutes"/>
+            </widget:preference>
+            <widget:preference name="Flashing" type="boolean" label="Flash when value change" defaultValue="true" />
+
+            <widget:preference name="Column1" type="list" label="Name column" defaultValue="name" onchange="refresh">
+                <option value="symbol" label="Symbol" />
+                <option value="name" label="Name" />
+                <option value="nameAndSymbol" label="Name(Symbol)" />
+            </widget:preference>
+            <widget:preference name="Column2" type="list" label="Chg. column" defaultValue="changePct" onchange="refresh">
+                <option value="changePct" label="Change percent" />
+                <option value="change" label="Change" />
+                <option value="changeAndChangePct" label="Change(%)" />
+            </widget:preference>
+            <widget:preference name="Column3" type="list" label="Column 1" defaultValue="lastTrade" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column4" type="list" label="Column 2" defaultValue="earned" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column5" type="list" label="Column 3" defaultValue="tickerTrend" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column6" type="list" label="Column 4" defaultValue="notused" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column7" type="list" label="Column 5" defaultValue="notused" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+  
+            <widget:preference name="FontSize" type="range" label="Font size" defaultValue="10" step="1" min="8" max="14" />
+
+            <!-- Hidden preferences -->
+            <widget:preference name="GadgetVersion" type="hidden" defaultValue="0.0"/>
+            <widget:preference name="StockSymbols" type="hidden" defaultValue="GOOG,MSFT"/>
+            <widget:preference name="StockQtys" type="hidden" defaultValue="1,1"/>
+            <widget:preference name="StockPrices" type="hidden" defaultValue="0,0"/>
+            <widget:preference name="StockTC" type="hidden" defaultValue="0,0"/>
+            <widget:preference name="StockHi" type="hidden" defaultValue="1000,1000"/>
+            <widget:preference name="StockLo" type="hidden" defaultValue="0,0"/>
+            <widget:preference name="StockExRate" type="hidden" defaultValue="1,1"/>
+            <widget:preference name="ShowNews" type="hidden" defaultValue="0"/>
+        </widget:preferences>
+
+        <!-- Widget Styles -->
+        <style type="text/css">
+            .Loading{font-family:sans-serif;font-style:italic;font-size:11px;}
+            .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
+            .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
+            td.HiAlert{width:9px;background:url("./images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
+            td.LoAlert{width:9px;background:url("./images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
+            .def{font-family:sans-serif;}
+            .cellL{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:left;}
+            .cellC{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:center;}
+            .cellR{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:right;}
+            .SearchList{display:none;position:relative;border:1px solid black;z-index:9998;background-color:white;top:-1;}
+        </style>
+    
+        <!-- Application JavaScript Source -->
+        <script type="text/javascript">
+            //https://github.com/eligrey/l10n.js/#readme
+            //http://uwa.netvibes.com/docs/Uwa/html/files/Introduction-txt.html
+            //http://dev.netvibes.com/doc/uwa/howto/localize_widget(It's not quite ready yet, but we plan to release a way for widget developers to make their widget strings available to translator worldwide, which will free you from having to rely on a server-side script.)
+            //Add trim function to string object if missing
+            if(!String.prototype.trim) {  
+              String.prototype.trim = function () {  
+                return this.replace(/^\s+|\s+$/g,'');  
+              };  
+            }
+//Start of Portfolio Object:
+            function Portfolio() {
+                this.stocks = []; // New Array
+                this.version = '0.1';
+                //this.l10n = {"Title" : "Stock Portfolio","Loading" : "Loading...","baz" : "345678","bat" : "901234"};
+                this.addStockSymbol = function (symbol) {
+                    this.addStock(symbol,0,0,0,0,99999,1);
+                };
+                this.addStock = function (symbol, price, qty, tc, lo, hi, exRate) {
+                    var id = this.stocks.length + 1;
+                    this.stocks.push(new Stock(id, symbol, price, qty, tc, lo, hi, exRate));
+                    return id;
+                };
+                this.deleteStock = function (id) {
+                    this.stocks.splice(id,1);
+                    return id;
+                };
+                this.moveStock = function (id,up) {
+                    var iAC;
+                    var iB;
+                    if(up == 1) {
+                        if(id > this.stocks.length - 2) {return;}
+                        iAC = id;
+                        iB = id + 1;
+                    } else {
+                        if(id == 0) {return;}
+                        iAC = id - 1;
+                        iB = id;
+                    }
+                    this.stocks.splice(iAC,2,this.stocks[iB],this.stocks[iAC]);
+                };
+                this.deleteAllStocks = function () {
+                   this.stocks = [];
+                };
+                this.totalValue = function () {
+                    var v = 0;
+                    for (var i = 0; i < this.stocks.length; i++) {
+                      v += this.stocks[i].value();
+                    }
+                    return GUI.myRoundD(v,0);
+                };
+            }
+//End of Portfolio object
+//Start of Stock Object:
+            function Stock(id, symbol, price, qty, tc, lo, hi, exRate) {
+                this.id = id;
+                this.symbol = symbol;
+                this.price = parseFloat(price);
+                this.qty = parseInt(qty,10);
+                this.tradeCost = parseFloat(tc);
+                this.lo = parseFloat(lo);
+                this.hi = parseFloat(hi);
+                this.exRate = parseFloat(exRate);
+
+                //Stockdata Properties
+                this.updateStockData = function (stockdata) {
+                    var s = parseStockData(stockdata);
+                    this.name = s[2];
+                    this.nameAndSymbol = s[2] + '(' + this.symbol + ')';
+                    this.changePct = s[3];
+                    this.change = parseFloat(s[4]);
+                    this.changeAndChangePct = parseFloat(s[4]) + '(' + s[3] + ')';
+                    this.changeRange = s[5];
+                    this.prevLastTrade = this.lastTrade;
+                    this.lastTrade = GUI.myRoundD(parseFloat(s[6]),2);
+                    this.lastTradeDate = s[7];
+                    this.lastTradeTime = s[8];
+                    this.dayOpen = parseFloat(s[9]);
+                    this.dayLow = parseFloat(s[10]);
+                    this.dayHigh = parseFloat(s[11]);
+                    this.dayVolume = parseFloat(s[12]);
+                    this.previousClose = parseFloat(s[13]);
+                    this.fiftyTwoWeekRange = s[14];
+                    this.ask = parseFloat(s[15]);
+                    this.bid = parseFloat(s[16]);
+                    this.tickerTrend = s[17];
+                    this.fiftyDaysMovingAvg = s[18];
+                    this.twoHundredDaysMovingAvg = s[19];
+                    this.dayRange = s[20];
+                    this.optionStrike = s[21];
+                    this.optionCallPut = s[22];
+                    this.optionExpire = s[23];
+                    this.currency = s[24];
+                    this.exchange = s[25];
+                    
+                    if (this.id <= myPortfolio.stocks.length) {
+                        GUI.refreshStock(this.id);
+                    }
+
+                    //Stock object Event triggers
+                    if (s[0] == 'N/A') {
+                        if (this.lastTrade > this.hi) {
+                            onStockHi(this.id);
+                        }
+                        if (this.lastTrade < this.lo) {
+                            onStockLo(this.id);
+                        }
+                        
+                        //Has lasttrade changed
+                        if(!isNaN(this.lastTrade-this.prevLastTrade)) {
+                            if (this.lastTrade != this.prevLastTrade && this.prevLastTrade != 0) {
+                                onStockChange(this.id,this.lastTrade-this.prevLastTrade);
+                            }
+                        }
+                    }
+                };
+                this.updateStockData(','); //Initialize stockdata properties with dummy values
+
+                this.value = function () {
+                    return this.qty * this.lastTrade * this.exRate;
+                };
+                this.totalBuyCosts = function () {
+                    return GUI.myRoundD(parseFloat(this.price * this.exRate * this.qty) + parseFloat(this.tradeCost), 0);
+                }; //Total costs in local currency
+                this.earned = function () {
+                    return GUI.myRoundD((this.lastTrade.toString().replace("%", "") * this.exRate * this.qty) - this.totalBuyCosts(), 0);
+                };
+                this.earnedPct = function () {
+                    return GUI.myRoundD(((this.value() / this.totalBuyCosts()) - 1) * 100, 0);
+                };
+                this.earnedToday = function () {
+                    return (isNaN(this.change)) ? 0 : GUI.myRoundD(this.change * this.qty * this.exRate, 0);
+                };
+                this.earnedTodayPct = function () {
+                    return (isNaN(this.changePct.replace(/\%/g, "").replace(/\+/g, "").replace(/\-/g, ""))) ? 0 : GUI.myRoundD(this.changePct.replace(/\%/g, ""), 0);
+                };
+            }
+ 
+            //Stock object Events
+            function onStockHi(id) {
+                print('Hi limit passed on index: ' + id);
+                GUI.getTagById('td','stc' + (id-1).toString() + '0').className = 'HiAlert';
+            }
+
+            function onStockLo(id) {
+                print('Lo limit passed on index: ' + id);
+                GUI.getTagById('td','stc' + (id-1).toString() + '0').className = 'LoAlert';
+            }
+
+            function onStockChange(id,number) {
+                print('Value changed on index: ' + id);
+                if (myPrefs.flashing == true)
+                {
+                    var sbgColor = GUI.getTagById('td','stc' + (id-1).toString() + '1').style.background;
+                    GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = GUI.changeToColor(number,sbgColor);
+                    setTimeout('onStockChangeFlashOff(' + id + ',"' + sbgColor + '")',700);
+                }
+            }
+            function onStockChangeFlashOff(id, color) {
+                print('Flash off on index: ' + id);
+                GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = color;
+            }
+
+            function parseStockData(inp) {
+                var out = [];
+                out = inp.split(/,(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))/);
+                for (var i = 0; i < out.length; i++) {
+                    out[i] = out[i].replace(/"/g, "");
+                }
+                if (out.length != 26) {
+                    out = 'Initializing,Bad data,Bad data,0.00%,0.00,0.00 - 0.00%,0.00,01/01/1899,12:00am,0.00,0.00,0.00,100000,0.00,"0.00 - 0.00",0.00,0.00," ====== ",+0.00%,0.00%,"0.00 - 0.00","N/A","N/A","N/A","EUR","No exchange"'.split(',');
+                }
+                if (out[0] != "N/A") {
+                    out[24] = "???";
+                    out[25] = out[0].substr(0, out[0].indexOf("<"));
+                }
+                return out;
+            }
+//End of Stock object
+//Start of Preferences Object:
+            function Preferences() {
+                this.stockDataColumns = 7;
+                this.dataColumns = []; // New Array
+                this.title;
+                this.flashing; 
+                this.fontSize;
+                this.updateInterval;
+                this.savePreferences = function () {
+                    //Save stock data
+                    var ss = [], sp = [], sq = [], st = [], sl = [], sh = [], se = [];
+                    //Add all stocks
+                    for (var i = 0; i < myPortfolio.stocks.length; i++) {
+                        ss[i] = myPortfolio.stocks[i].symbol;
+                        sp[i] = myPortfolio.stocks[i].price;
+                        sq[i] = myPortfolio.stocks[i].qty;
+                        st[i] = myPortfolio.stocks[i].tradeCost;
+                        sl[i] = myPortfolio.stocks[i].lo;
+                        sh[i] = myPortfolio.stocks[i].hi;
+                        se[i] = myPortfolio.stocks[i].exRate;
+                    }    
+                    widget.setValues({
+                        'StockSymbols': ss.join(','), 
+                        'StockPrices': sp.join(','), 
+                        'StockQtys': sq.join(','), 
+                        'StockTC': st.join(','), 
+                        'StockLo': sl.join(','), 
+                        'StockHi': sh.join(','), 
+                        'StockExRate': se.join(',') 
+                    });
+                };
+                this.readPreferences = function () {
+                    //needs to check for empty preferences(standalone mode)
+
+                    //Add all configured columns
+                    for (var i = 1; i < this.stockDataColumns; i++) {
+                        var col = widget.getValue('Column'+(i));
+                        //if(col == '') {widget.deleteValue('Column' + i);} //Fix bad preferences
+                        if(col != 'notused' && col != '') {
+                            this.dataColumns[this.dataColumns.length] = col;
+                        }
+                    }
+                    //Read other preferences
+                    this.title = widget.getValue('CustomTitle');
+                    this.flashing = widget.getBool('Flashing');
+                    this.fontSize = widget.getValue('FontSize');
+                    this.updateInterval = widget.getValue('UpdateInterval');
+                    
+                    //Read stock data
+                    var ss = widget.getValue('StockSymbols').split(',');
+                    var sp = widget.getValue('StockPrices').split(',');
+                    var sq = widget.getValue('StockQtys').split(',');
+                    var st = widget.getValue('StockTC').split(',');
+                    var sl = widget.getValue('StockLo').split(',');
+                    var sh = widget.getValue('StockHi').split(',');
+                    var se = widget.getValue('StockExRate').split(',');
+                    //Add all stocks
+                    myPortfolio.deleteAllStocks();
+                    for (var i = 0; i < ss.length; i++) {
+                        myPortfolio.addStock(ss[i], sp[i], sq[i], st[i], sl[i], sh[i], se[i]);
+                    }
+                };
+            }
+//End of Prefs object
+            
+            var myPortfolio = new Portfolio();
+            var myPrefs = new Preferences();
+            var iTmrRetry;
+            
+            
+//Start of GUI Object
+            var GUI = {};
+            GUI.imgBase = "./images/";
+            GUI.debug = 1;
+            GUI.getTagById = function (aTag, aId) {
+                var tagElement = widget.body.getElementsByTagName(aTag);
+                for (var i = 0; i < tagElement.length; i++) {
+                    if (tagElement[i].id == aId){
+                        return tagElement[i];
+                    }
+                }
+            }
+            GUI.onLoad = function () {
+                print('onLoad');
+                myPrefs.readPreferences();
+                
+                GUI.insertFooter();
+                GUI.insertDisclaimer();
+                
+                GUI.insertStockTable();
+                
+                Quote.refreshData();
+                
+                GUI.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
+                //GUI.setAnalytics();
+                      
+                widget.setTitle(myPrefs.title);            
+            };
+            GUI.onRefresh = function () {
+                print('onRefresh');
+                Quote.refreshData();
+            };
+            GUI.myRoundD = function (inp, digits) {
+                var x = Math.pow(10, digits);
+                return Math.round(inp * x) / x;
+            };
+            GUI.changeToColor = function (number,zeroColor) {
+                var sColor=zeroColor;
+                if(!isNaN(parseFloat(number))){
+                    if(parseFloat(number)>0){sColor="#008200";}
+                    if(parseFloat(number)<0){sColor="#FF2200";}
+                }
+                return sColor;
+            };
+            GUI.refreshStock = function (id) {
+                print('Refresh GUI on Stock:'+id)
+                id = id - 1;
+                var stc = "stc" + (id).toString();
+                for (var i = 0; i < myPrefs.dataColumns.length; i++) {
+                    var col = myPrefs.dataColumns[i];
+                    if(col != 'notused' && col != '') {
+                        var evalStr = 'myPortfolio.stocks[' + (id).toString() + '].' + myPrefs.dataColumns[i];      
+                        if (typeof(eval(evalStr)) == 'function') {
+                            evalStr += '()';
+                        }
+                        GUI.getTagById("td",stc + (i+1).toString()).innerHTML = eval(evalStr);
+                        //print(evalStr);
+                    }
+                }
+                GUI.getTagById("td",stc + '0').title="Hi = " + myPortfolio.stocks[id].hi + "\nLo=" + myPortfolio.stocks[id].lo;
+            };
+            GUI.insertFooter = function () {
+                var footer = GUI.getTagById("div","Footer");
+                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(1,false)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer" onclick="fnToggleSummary(1)" src="' + GUI.imgBase + 'Summary.gif" title="' + 'Show stock summary' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleProfit(false)" src="' + GUI.imgBase + 'Money.gif" title=' + 'Show profit details' + '"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="fnToggleNews(1);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://ggforum.cnybroe.dk/default.aspx?g=forum&c=2" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
+                print(footer.innerHTML);
+            };
+            GUI.insertStockTable = function () {
+                var st = GUI.getTagById("div","StockData");
+                var sBGColor;
+                var sStockTable='<table border=1 cellspacing=0 width="100%" style="font-size:' + myPrefs.fontSize + ';" class="def">';
+                //var arrHeaderNames=',,,%,__MSG_change__,__MSG_change__(%),__MSG_lasttrade__,__MSG_lasttradedate__,__MSG_lasttradetime__,__MSG_dayopen__,__MSG_daylow__,__MSG_dayhigh__,__MSG_dayvolume__,__MSG_previousclose__,__MSG_52weekrange__,__MSG_ask__,__MSG_bid__,__MSG_tickertrend__,__MSG_50daymovingavg__,__MSG_200daymovingavg__,__MSG_dayrange__,__MSG_optionstrike__,__MSG_optioncallput__,__MSG_optionexpire__,__MSG_currency__,,__MSG_currencyrate__,,,,__MSG_dayearned__,__MSG_earned__,,,,__MSG_buyprice__'.split(",");
+                var sHead = "";
+                var iConfCols = myPrefs.dataColumns.length-2;
+
+                //Header
+                for(var i = 0; i < iConfCols; i++) {
+                    sHead += '<td class="cellR">' + myPrefs.dataColumns[i+2] + '</td>';
+                }
+                sStockTable+='<COLGROUP width="8px"><COLGROUP span="2" width="10%"><COLGROUP span="' + iConfCols + '" width="' + 80/iConfCols + '%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"></td><td class="cellL">Name</td><td class="cellR"><div class="Chart" id="StockChart"></div>Change</td>';
+                sStockTable+=sHead;
+                sStockTable+='</tr><tr style="height:2px;background-Color:BCBCBC"><td colspan=' + Number(iConfCols+3) + '></td></tr>';
+
+                for(var i = 0; i < myPortfolio.stocks.length; i++) {
+                    if(i % 2 == 0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+                    sStockTable += '<tr id="str' + i + '" style="background-Color:' + sBGColor + ';"><td class="cellL" id="stc' + i + '0"></td><td class="cellL" id="stc' + i + '1">' + myPortfolio.stocks[i].symbol + '</td>';
+                    for(var j = 2; j < iConfCols + 3; j++){
+                        sStockTable += '<td class="cellR" id="stc' + i + j + '"></td>';
+                    }
+                    sStockTable += '</tr>';
+                }
+                sStockTable+='</table>';
+                st.innerHTML = sStockTable;
+            };
+            GUI.insertDisclaimer = function () {
+                var disc = GUI.getTagById("div","Disclaimer");
+                disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + GUI.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer">Version</td></tr></table>';
+            };
+            GUI.insertAddEdit = function () {
+                var sCol='<Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%">';
+                var iCols=9;
+                var fSize = myPrefs.fontSize;
+                var sTDH='';
+                var sBGColor;
+                var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:' + fSize + '"><tr><td width="62px" align="left"><input type="text" style="font-size:' + fSize + ';width:180px;color:#AAAAAA;" class="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="Enter symbol or company name" value="Enter symbol or company name" onFocus=GUI.txtFocus(this,1) onBlur=GUI.txtFocus(this,0) onKeyUp=sSearch.search(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=GUI.getTagById(\'input\',\'txtStockSymbol\').value;GUI.addSymbol(Temp);" title="Add" src="' + GUI.imgBase + 'AddStock.gif"></td></tr></table><div id="StockAddList" style="font-size:' + fSize + '" class="SearchList"></div>';
+                var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=' + iCols + '></td></tr>';
+                var sConfigTable='<table style="width:100%;font-size:' + fSize + '" border=0 cellspacing=0 cellpadding=0>' + sCol + '<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan=' + iCols + '></td></tr>' + sLine + '<tr style="font-weight: bold;"><td class="cellL">Symbol</td><td class="cellR" >Qty</td><td class="cellR">Price</td><td class="cellR">TC</td>' + sTDH + '<td class="cellR">Lo</td><td class="cellR">Hi</td><td colspan=3></td></tr>' + sLine;
+                for(i=0;i < myPortfolio.stocks.length;i++){
+                    if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+                    sConfigTable+='<tr style="background-Color:' + sBGColor + ';"><td id="ctc0' + i + '" class="cellL" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '">' + myPortfolio.stocks[i].symbol + '</td><td id="ctc1' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '" class="cellR">' + myPortfolio.stocks[i].qty + '</td><td id="ctc2' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].price + '</td><td id="ctc3' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].tradeCost + '</td><td id="ctc5' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].lo + '</td><td id="ctc6' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].hi + '</td><td class="cellR" width="25px"><img class="cellR" id="ctc7' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.deleteSymbol(' + i + ')" src="' + GUI.imgBase + 'Delete.gif" title="Remove"></td><td class="cellR" width="15px"><img id="ctc8' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.moveSymbol(' + i + ',0)" src="' + GUI.imgBase + 'MoveUp.gif" title="Move up"></td><td class="cellR" width="15px"><img id="ctc9' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.moveSymbol(' + i + ',1)" src="' + GUI.imgBase + 'MoveDown.gif" title="Move down"></td></tr>';
+                }
+                sConfigTable +='</table>';
+                GUI.getTagById("div","StockAddEdit").innerHTML = sTemp + sConfigTable;
+                //Hide move arrows with no function
+                if (i > 0){
+                    GUI.getTagById("img","ctc80").style.display = "none";
+                    GUI.getTagById("img","ctc9" + (i-1)).style.display = "none";
+                }
+            };
+            GUI.editStock = function(sender) {
+                if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
+                var sTemp = sender.innerHTML;
+                var a = "uha" + sender.id.replace("ctc","");
+                var b = (sender.id.substr(3,1) == 0)?'64px':'49px';
+                var c = (sender.id.substr(3,1) == 0)?'left':'right';
+                var d = '<input type="text" id="' + a + '" onkeypress="GUI.editOnKey(event,this);" onBlur="GUI.editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
+                sender.innerHTML = d;
+                GUI.getTagById('input',a).focus();
+            }; 
+            GUI.editOnBlur = function(s) {
+                var index = s.id.substr(4);
+                var col = s.id.substr(3,1);
+                if((col == 0 && s.value.trim() != "") || (col > 0 && !isNaN(s.value))){
+                    if(col == 0){myPortfolio.stocks[index].symbol = s.value;}
+                    if(col == 1){myPortfolio.stocks[index].qty = s.value;}
+                    if(col == 2){myPortfolio.stocks[index].price = s.value;}
+                    if(col == 3){myPortfolio.stocks[index].tradeCost = s.value;}
+                    if(col == 5){myPortfolio.stocks[index].lo = s.value;}
+                    if(col == 6){myPortfolio.stocks[index].hi = s.value;}
+                    myPrefs.savePreferences();
+                }
+                GUI.insertAddEdit();
+                Quote.refreshData();
+            };
+            GUI.editOnKey = function(e,s) {
+                if(e.keyCode == 13) {
+                  GUI.editOnBlur(s);
+                }
+            };
+            GUI.addSymbol = function(symbol) {
+                myPortfolio.addStockSymbol(symbol);
+                GUI.refreshAfterEdit();
+            };
+            GUI.deleteSymbol = function(id) {
+                myPortfolio.deleteStock(id);
+                GUI.refreshAfterEdit();
+            };
+            GUI.moveSymbol = function(id,up) {
+                myPortfolio.moveStock(id,up);
+                GUI.refreshAfterEdit();
+            };
+            GUI.refreshAfterEdit = function() {
+                myPrefs.savePreferences();
+                myPrefs.readPreferences();
+                GUI.insertStockTable();
+                GUI.insertAddEdit();                
+                Quote.refreshData();
+            };
+            GUI.txtFocus = function (sender,focus) {
+                if (sender.value.trim() == "" || sender.value.trim() == sender.title) {
+                    if (focus == 1) {
+                      sender.value = "";
+                      sender.style.color = '#000000';
+                    } else {
+                      sender.style.color = '#AAAAAA';
+                      sender.value = sender.title;
+                    }
+                }
+            }
+            GUI.toggleWindow = function (elem,expand) {
+                print("ToggleWindow:" + elem.id);
+                //var elem = GUI.getTagById("div",id);
+                if(elem.style.display == "none" || expand==true){
+                    elem.style.display="block";
+                    GUI.insertAddEdit();
+                } else {
+                    elem.style.display="none";
+                }
+            };
+            
+//End of GUI Object
+//Start of Quote Object
+            var Quote = {};
+            Quote.refreshData = function () {
+                clearTimeout(iTmrRetry);
+                iTmrRetry=setTimeout(Quote.refreshData,myPrefs.updateInterval);
+                var tags = 'e1snp2c1cl1d1t1oghvpwabt7m8m6ms3p3e3c4x';
+                var symbols = ''; // = widget.getValue('Symbols');
+
+                for (var i = 0; i < myPortfolio.stocks.length; i++) {
+                    symbols += myPortfolio.stocks[i].symbol + ',';
+                }
+                symbols = symbols.substr(0, symbols.length - 1);
+                print('Data symbols:' + symbols);
+
+                var url = 'http://download.finance.yahoo.com/d?s=' + symbols + '&f=' + tags + '&CW=' + Math.random() * 1000;
+                UWA.Data.getText(url, Quote.stockDataProxy);
+            };
+            Quote.stockDataProxy = function (stockData) {
+                var sLines = [];
+                //Read received data
+                sLines = stockData.split('\r\n');
+                //read stockdata and update stock objects
+                for (var i = 0; i < myPortfolio.stocks.length; i++) {
+                    myPortfolio.stocks[i].updateStockData(sLines[i]);
+                }
+                print('Total portfolio value:' + myPortfolio.totalValue());
+                GUI.getTagById("td","FooterMsg").innerHTML = 'Updated:' + fngetDate(false);
+
+            };
+//End of Quote Object
+//Start of Symbol Search Object
+            var sSearch = {};
+            sSearch.search = function (symbol) {
+                if(symbol.trim() != '') {
+                    GUI.getTagById("div","StockAddList").innerHTML = 'Loading...';
+                    var url = 'http://d.yimg.com/autoc.finance.yahoo.com/autoc?query=' + encodeURIComponent(symbol) + '&callback=YAHOO.Finance.SymbolSuggest.ssCallback';
+
+                    print('Symbol search url:' + url);
+
+                    UWA.Data.getText(url, sSearch.symbolDataProxy);
+                } else {
+                    GUI.getTagById("div","StockAddList").style.display = "none";
+                }
+            };
+            sSearch.symbolDataProxy = function (symbolData) {
+                var iStart = 0;
+                var iEnd = 0;
+                var arrSearch = "";
+                var i = 0;
+                var sTemp = "";
+                var sLine = '<tr style="height:1px;background-Color:BCBCBC"><td colspan=4></td></tr>';
+                var sTable = '<table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:' + myPrefs.fontSize + '" class="def">' + sLine + '<tr style="font-weight:bold;"><td>Symbol</td><td>Name</td><td>Type</td><td>Exchange</td></tr>' + sLine;
+                if (symbolData.indexOf('"Result":[]',1) < 1) {
+                    iStart = symbolData.indexOf('[{',1) + 2;
+                    iEnd = symbolData.indexOf('}]', iStart);
+                    arrSearch = symbolData.substring(iStart,iEnd).split("},{");
+                    for(i = 0;i < arrSearch.length; i++) {
+                        iStart = arrSearch[i].indexOf('"symbol":"',0) + 10;
+                        iEnd = arrSearch[i].indexOf('","',iStart);
+                        sSymbol = arrSearch[i].substring(iStart,iEnd);
+                        sTable += '<tr style="cursor: pointer;" onmouseover=\'this.style.backgroundColor="#DCDCDC";\' onmouseout=\'this.style.backgroundColor="#FFFFFF";\' onclick=\'document.getElementById("txtStockSymbol").value="' + sSymbol + '"\'><td nowrap>' + sSymbol + '</td>';
+                        iStart = arrSearch[i].indexOf('"name": "',1) + 9;
+                        iEnd = arrSearch[i].indexOf('","',iStart);
+                        sTable += '<td nowrap>' + arrSearch[i].substring(iStart,iEnd) + '</td>';
+                        iStart = arrSearch[i].indexOf('"typeDisp":"',1) + 12;
+                        if (iStart > 12) {
+                            iEnd = arrSearch[i].indexOf('"',iStart);
+                            sTemp = arrSearch[i].substring(iStart,iEnd);
+                        } else {
+                            sTemp = 'Stock';
+                        }
+                        sTable += '<td nowrap>' + sTemp + '</td>';
+                        iStart = arrSearch[i].indexOf('"exchDisp":"',1) + 12;
+                        if (iStart > 12) {
+                            iEnd = arrSearch[i].indexOf('"', iStart);
+                        } else {
+                            iStart = arrSearch[i].indexOf('"exch": "', 1) + 8;
+                            iEnd = arrSearch[i].indexOf('"', iStart);
+                        }
+                        sTable += '<td nowrap>' + arrSearch[i].substring(iStart,iEnd) + '</td></tr>';
+                    }
+                    sTable += '<tr><td colspan=4 class="Footer"><i>__MSG_searchlimit__</i></td></tr></table>';
+                } else {
+                    sTable += '<tr><td colspan=4>Not found</td></tr></table>';
+                }
+                GUI.getTagById("div","StockAddList").innerHTML=sTable;
+                GUI.getTagById("div","StockAddList").style.display="block";
+            };            
+//End of Symbol Search Object
+
+
+
+
+
+
+
+
+//------------DEBUG CODE START-------------------
+            function fngetDate(secs) {
+                var currentTime = new Date();
+                var month = fnZeroPad(currentTime.getMonth() + 1, 2);
+                var day = fnZeroPad(currentTime.getDate(), 2);
+                var year = currentTime.getFullYear();
+                var hours = fnZeroPad(currentTime.getHours(), 2);
+                var minutes = fnZeroPad(currentTime.getMinutes(), 2);
+                if (secs) {
+                    minutes += ':' + fnZeroPad(currentTime.getSeconds(), 2);
+                }
+                return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+            }
+
+            function fnZeroPad(num, length) {
+                var snum = num + '';
+                while (snum.length < length) {
+                    snum = '0' + snum;
+                }
+                return snum;
+            }
+
+            //function print(msg) {
+            //    if (GUI.debug==1)
+            //    {
+            //        var d = GUI.getTagById('div','Debug');
+            //        d.style.display = 'block';
+            //        var d_html = d.innerHTML;
+            //        msg = fngetDate(1) + "; " + msg.toString() + "<br>";
+            //        d_html = msg + d_html;
+            //        d.innerHTML = d_html;
+            //    }
+            //}
+            function print(msg) {
+                msg = fngetDate(1) + "; " + msg.toString();
+                widget.log(msg);
+            }
+//------------DEBUG CODE END-------------------
+            
+            
+//------------Widget events-------------------
+            widget.addEvent('onLoad', GUI.onLoad);
+            widget.addEvent('onRefresh', GUI.onRefresh);
+        </script>
+    </head>
+    <body>
+        <div id="StockData"><div class="Loading"></div></div>
+        <div id="Footer" class="Footer"></div>
+        <div id="StockProfitDetails" style="display:none;width:100%;overflow:scroll;overflow-y:hidden;"></div>
+        <div id="StockAddEdit" class="def" style="display:none;">Hej</div>
+        <div id="StockProfitSummary" class="def" style="display:none"></div>
+        <div id="StockSummary" class="def" style="display:none;"><div class="loading">__MSG_loading__</div></div>
+        <div id="StockNews" class="def" style="display:none;"></div>
+        <div id="Disclaimer" class="Footer"></div>
+        <div id="Debug" style="display:none;font-size:8pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll;white-space:nowrap;"></div> 
+    </body>
+</html>
