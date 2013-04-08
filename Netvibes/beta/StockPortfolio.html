@@ -185,7 +185,7 @@
         <style type="text/css">
             .Loading{font-family:sans-serif;font-style:italic;font-size:11px;}
             .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
-            .HrDef{height:1px;margin-top:1px;margin-bottom:1px;margin-right:0px;margin-left:0px;}
+            .HrDef{height:1px;margin:1px 0px;}
             td.HiAlert{width:9px;background:url("./images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
             td.LoAlert{width:9px;background:url("./images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
             .def{font-family:sans-serif;}
@@ -433,8 +433,8 @@
                     var se = widget.getValue('StockExRate').split(',');
                     //Add all stocks
                     myPortfolio.deleteAllStocks();
-                    for (var i = 0; i < ss.length; i++) {
-                        myPortfolio.addStock(ss[i], sp[i], sq[i], st[i], sl[i], sh[i], se[i]);
+                    for (var j = 0; j < ss.length; j++) {
+                        myPortfolio.addStock(ss[j], sp[j], sq[j], st[j], sl[j], sh[j], se[j]);
                     }
                 };
             }
@@ -456,7 +456,7 @@
                         return tagElement[i];
                     }
                 }
-            }
+            };
             GUI.onLoad = function () {
                 print('onLoad');
                 myPrefs.readPreferences();
@@ -490,7 +490,7 @@
                 return sColor;
             };
             GUI.refreshStock = function (id) {
-                print('Refresh GUI on Stock:'+id)
+                print('Refresh GUI on Stock:' + id);
                 id = id - 1;
                 var stc = "stc" + (id).toString();
                 for (var i = 0; i < myPrefs.dataColumns.length; i++) {
@@ -525,7 +525,7 @@
                 }
                 sStockTable+='<COLGROUP width="8px"><COLGROUP span="2" width="10%"><COLGROUP span="' + iConfCols + '" width="' + 80/iConfCols + '%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"></td><td class="cellL">Name</td><td class="cellR"><div class="Chart" id="StockChart"></div>Change</td>';
                 sStockTable+=sHead;
-                sStockTable+='</tr><tr style="height:2px;background-Color:BCBCBC"><td colspan=' + Number(iConfCols+3) + '></td></tr>';
+                sStockTable+='</tr><tr style="height:2px;background-Color:*#BCBCBC"><td colspan=' + Number(iConfCols+3) + '></td></tr>';
 
                 for(var i = 0; i < myPortfolio.stocks.length; i++) {
                     if(i % 2 == 0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
@@ -549,7 +549,7 @@
                 var sTDH='';
                 var sBGColor;
                 var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:' + fSize + '"><tr><td width="62px" align="left"><input type="text" style="font-size:' + fSize + ';width:180px;color:#AAAAAA;" class="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="Enter symbol or company name" value="Enter symbol or company name" onFocus=GUI.txtFocus(this,1) onBlur=GUI.txtFocus(this,0) onKeyUp=sSearch.search(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=GUI.getTagById(\'input\',\'txtStockSymbol\').value;GUI.addSymbol(Temp);" title="Add" src="' + GUI.imgBase + 'AddStock.gif"></td></tr></table><div id="StockAddList" style="font-size:' + fSize + '" class="SearchList"></div>';
-                var sLine='<tr style="height:1px;background-Color:BCBCBC"><td colspan=' + iCols + '></td></tr>';
+                var sLine='<tr style="height:1px;background-Color:#BCBCBC"><td colspan=' + iCols + '></td></tr>';
                 var sConfigTable='<table style="width:100%;font-size:' + fSize + '" border=0 cellspacing=0 cellpadding=0>' + sCol + '<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan=' + iCols + '></td></tr>' + sLine + '<tr style="font-weight: bold;"><td class="cellL">Symbol</td><td class="cellR" >Qty</td><td class="cellR">Price</td><td class="cellR">TC</td>' + sTDH + '<td class="cellR">Lo</td><td class="cellR">Hi</td><td colspan=3></td></tr>' + sLine;
                 for(i=0;i < myPortfolio.stocks.length;i++){
                     if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
@@ -569,8 +569,7 @@
                 var a = "uha" + sender.id.replace("ctc","");
                 var b = (sender.id.substr(3,1) == 0)?'64px':'49px';
                 var c = (sender.id.substr(3,1) == 0)?'left':'right';
-                var d = '<input type="text" id="' + a + '" onkeypress="GUI.editOnKey(event,this);" onBlur="GUI.editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
-                sender.innerHTML = d;
+                sender.innerHTML = '<input type="text" id="' + a + '" onkeypress="GUI.editOnKey(event,this);" onBlur="GUI.editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
                 GUI.getTagById('input',a).focus();
             }; 
             GUI.editOnBlur = function(s) {
@@ -622,7 +621,7 @@
                       sender.value = sender.title;
                     }
                 }
-            }
+            };
             GUI.toggleWindow = function (elem,expand) {
                 print("ToggleWindow:" + elem.id);
                 //var elem = GUI.getTagById("div",id);
@@ -685,7 +684,7 @@
                 var arrSearch = "";
                 var i = 0;
                 var sTemp = "";
-                var sLine = '<tr style="height:1px;background-Color:BCBCBC"><td colspan=4></td></tr>';
+                var sLine = '<tr style="height:1px;background-Color:#BCBCBC"><td colspan=4></td></tr>';
                 var sTable = '<table width="100%" border=0 cellspacing=0 cellpadding=0 style="font-size:' + myPrefs.fontSize + '" class="def">' + sLine + '<tr style="font-weight:bold;"><td>Symbol</td><td>Name</td><td>Type</td><td>Exchange</td></tr>' + sLine;
                 if (symbolData.indexOf('"Result":[]',1) < 1) {
                     iStart = symbolData.indexOf('[{',1) + 2;
