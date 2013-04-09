@@ -186,8 +186,8 @@
             .Loading{font-family:sans-serif;font-style:italic;font-size:11px;}
             .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
             .HrDef{height:1px;margin:1px 0px;}
-            td.HiAlert{width:9px;background:url("./images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
-            td.LoAlert{width:9px;background:url("./images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
+            td.HiAlert{width:9px;background:url("../images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
+            td.LoAlert{width:9px;background:url("../images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
             .def{font-family:sans-serif;}
             .cellL{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:left;}
             .cellC{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:center;}
@@ -446,8 +446,8 @@
             
 //Start of GUI Object
             var GUI = {};
-            GUI.imgBase = "./images/";
-            GUI.debug = 1;
+            GUI.imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
+            //GUI.debug = 1;
             GUI.getTagById = function (aTag, aId) {
                 var tagElement = widget.body.getElementsByTagName(aTag);
                 for (var i = 0; i < tagElement.length; i++) {
