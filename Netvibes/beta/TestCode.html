@@ -206,6 +206,7 @@
 					// Here we update the content of the widget body.
 					//widget.setBody('Hello World!');
 					widget.log('onLoad1');
+					DEBUG.log('onLoad2');
 					//Prefs.readPreferences();
 					
 					//GUI.insertFooter();
@@ -220,7 +221,12 @@
 					alert('Refresh');
 				}
 			};
-
+			var DEBUG = {
+				log: function(msg) {
+					msg = "TEST: " + fngetDate(1) + "; " + msg.toString();
+					widget.log(msg);
+				}
+			};
 
 
 			
