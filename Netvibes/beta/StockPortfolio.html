@@ -351,7 +351,7 @@
                     var sbgColor = GUI.getTagById('td','stc' + (id-1).toString() + '1').style.background;
                     GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = GUI.changeToColor(number,sbgColor);
 //                    setTimeout('onStockChangeFlashOff(' + id + ',"' + sbgColor + '")',700);
-                    onStockChangeFlashOff(id, color);
+                    onStockChangeFlashOff(id, sbgColor);
                 }
             }
             function onStockChangeFlashOff(id, color) {
