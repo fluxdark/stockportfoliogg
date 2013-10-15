@@ -351,11 +351,14 @@
                     var sbgColor = GUI.getTagById('td','stc' + (id-1).toString() + '1').style.background;
                     GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = GUI.changeToColor(number,sbgColor);
 //                    setTimeout('onStockChangeFlashOff(' + id + ',"' + sbgColor + '")',700);
+                    onStockChangeFlashOff(id, color);
                 }
             }
             function onStockChangeFlashOff(id, color) {
                 print('Flash off on index: ' + id);
-                GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = color;
+				alert('GUI.getTagById(\'td\',\'stc\' + (id-1).toString() + \'2\').style.background = ' + color);
+                //setTimeout('GUI.getTagById(\'td\',\'stc\' + (id-1).toString() + \'2\').style.background = color',700);
+                //GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = color;
             }
 
             function parseStockData(inp) {
