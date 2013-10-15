@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <!-- Application Metas test -->
+        <title>Stock Portfolio</title> 
+        <meta name="author" content="Christian Nybroe" />
+        <meta name="email" content="netvibes_stock+cnybroe@gmail.com" />
+        <meta name="website" content="http://Netvibes.cnybroe.dk" />
+        <meta name="screenshot" content="http://Netvibes.cnybroe.dk/images/StockPortfolio.png" />
+        <meta name="thumbnail" content="http://Netvibes.cnybroe.dk/images/StockPortfolioThumb.png" />
+        <meta name="description" content="Highly configurable list with unlimited number of stocks, options, ETFs. See chart and details for each stock. Calculate total value, earning and much more" />
+        <meta name="version" content="0.2" />
+        <meta name="keywords" content="stocks, quotes, quote, portfolio, finance" />
+        <meta name="debugMode" content="true" />
+        <meta name="apiVersion" content="2.0" />
+     
+        <link rel="icon" type="image/png" href="http://stockportfoliogg.googlecode.com/svn/Netvibes/images/StockPortfolioIcon.png" />
+        <!-- Application Standalone emulation files -->
+        <link rel="stylesheet" type="text/css" href="http://cdn.uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="http://cdn.uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+        <!-- Application Preferences -->
+        <widget:preferences>
+            <widget:preference name="CustomTitle" type="text" label="Custom title" defaultValue="Stock portfolio" onchange="refresh"/>
+            <widget:preference name="UpdateInterval" type="list" label="Update" defaultValue="60000" onchange="refresh">
+                <option value="10000" label="10 sec"/>
+                <option value="300000" label="5 minutes"/>
+                <option value="600000" label="10 minutes"/>
+                <option value="1800000" label="30 minutes"/>
+            </widget:preference>
+            <widget:preference name="Flashing" type="boolean" label="Flash when value change" defaultValue="true" />
+
+            <widget:preference name="Column1" type="list" label="Name column" defaultValue="name" onchange="refresh">
+                <option value="symbol" label="Symbol" />
+                <option value="name" label="Names" />
+                <option value="nameAndSymbol" label="Name(Symbol)" />
+            </widget:preference>
+            <widget:preference name="Column2" type="list" label="Chg. column" defaultValue="changePct" onchange="refresh">
+                <option value="changePct" label="Change percent" />
+                <option value="change" label="Change" />
+                <option value="changeAndChangePct" label="Change(%)" />
+            </widget:preference>
+            <widget:preference name="Column3" type="list" label="Column 1" defaultValue="lastTrade" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column4" type="list" label="Column 2" defaultValue="earned" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column5" type="list" label="Column 3" defaultValue="tickerTrend" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column6" type="list" label="Column 4" defaultValue="notused" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+            <widget:preference name="Column7" type="list" label="Column 5" defaultValue="notused" onchange="refresh">
+                <option value="notused" label="Not used"/>
+                <option value="lastTrade" label="Last trade"/>
+                <option value="lastTradeDate" label="Last trade date"/>
+                <option value="lastTradeTime" label="Last trade time"/>
+                <option value="dayOpen" label="Day open"/>
+                <option value="dayLow" label="Day low"/>
+                <option value="dayHigh" label="Day high"/>
+                <option value="dayVolumn" label="Day volume"/>
+                <option value="previousClose" label="Previous close"/>
+                <option value="fiftyTwoWeekRange" label="52 weeks range"/>
+                <option value="ask" label="Ask"/>
+                <option value="bid" label="Bid"/>
+                <option value="tickerTrend" label="Ticker trend"/>
+                <option value="fiftyDaysMovingAvg" label="50 days moving avg."/>
+                <option value="twoHundredDaysMovingAvg" label="200 days moving avg."/>
+                <option value="dayRange" label="Day range"/>
+                <option value="currency" label="Currency"/>
+                <option value="optionStrike" label="Option strike"/>
+                <option value="optionCallPut" label="Option call/put"/>
+                <option value="optionExpire" label="Option expire"/>
+                <option value="earnedToday" label="Earned today"/>
+                <option value="earned" label="Earned"/>
+                <option value="price" label="Price"/>
+            </widget:preference>
+  
+            <widget:preference name="FontSize" type="range" label="Font size" defaultValue="10" step="1" min="8" max="14" />
+
+            <!-- Hidden preferences -->
+            <widget:preference name="GadgetVersion" type="hidden" defaultValue="0.0"/>
+            <widget:preference name="StockSymbols" type="hidden" defaultValue="GOOG,MSFT"/>
+            <widget:preference name="StockQtys" type="hidden" defaultValue="1,1"/>
+            <widget:preference name="StockPrices" type="hidden" defaultValue="0,0"/>
+            <widget:preference name="StockTC" type="hidden" defaultValue="0,0"/>
+            <widget:preference name="StockHi" type="hidden" defaultValue="1000,1000"/>
+            <widget:preference name="StockLo" type="hidden" defaultValue="0,0"/>
+            <widget:preference name="StockExRate" type="hidden" defaultValue="1,1"/>
+            <widget:preference name="ShowNews" type="hidden" defaultValue="0"/>
+        </widget:preferences>
+
+        <!-- Widget Styles -->
+        <style type="text/css">
+            .Loading{font-family:sans-serif;font-style:italic;font-size:11px;}
+            .Footer{font-size:9px;font-family:sans-serif;padding:0px;margin:0px;}
+            .HrDef{height:1px;margin:1px 0px;}
+            td.HiAlert{width:9px;background:url("../images/HiAlert9.gif");background-repeat:no-repeat;background-position:center;}
+            td.LoAlert{width:9px;background:url("../images/LoAlert9.gif");background-repeat:no-repeat;background-position:center;}
+            .def{font-family:sans-serif;}
+            .cellL{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:left;}
+            .cellC{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:center;}
+            .cellR{padding-right:2px;padding-left:2px;white-space:nowrap;text-align:right;}
+            .SearchList{display:none;position:relative;border:1px solid black;z-index:9998;background-color:white;top:-1;}
+        </style>
+    
+        <!-- Application JavaScript Source -->
+        <script type="text/javascript">
+        //<![CDATA[
+		/*   We create the global MyWidget object (it could be any other name). This object will be used to store variables and functions.            */
+		var MyWidget = {
+			//The onLoad() function is the first one, it will be triggered by widget "onLoad" event.
+			onLoad: function() {
+				// Here we update the content of the widget body.
+				widget.setBody('Hello World!');
+			}
+		};
+			
+			
+//------------Widget events-------------------
+            widget.addEvent('onLoad', MyWidget.onLoad);
+            widget.addEvent('onRefresh', MyWidget.onRefresh);
+        //]]>
+        </script>
+    </head>
+    <body>
+        <div id="StockData"><div class="Loading"></div></div>
+        <div id="Footer" class="Footer"></div>
+        <div id="StockProfitDetails" style="display:none;width:100%;overflow:scroll;overflow-y:hidden;"></div>
+        <div id="StockAddEdit" class="def" style="display:none;"></div>
+        <div id="StockProfitSummary" class="def" style="display:none"></div>
+        <div id="StockSummary" class="def" style="display:none;"><div class="loading">__MSG_loading__</div></div>
+        <div id="StockNews" class="def" style="display:none;"></div>
+        <div id="Disclaimer" class="Footer"></div>
+        <div id="Debug" style="display:none;font-size:8pt;padding:5px;color:red;width:100%;height:200px;overflow:scroll;white-space:nowrap;"></div> 
+    </body>
+</html>
