@@ -446,13 +446,12 @@
             var myPrefs = new Preferences();
             var iTmrRetry;
             
-			
+            
 //Start of GUI Object
-            function GUI() {
-//            var GUI = {};
-            this.imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
+            var GUI = {};
+            GUI.imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
             //GUI.debug = 1;
-            this.getTagById = function (aTag, aId) {
+            GUI.getTagById = function (aTag, aId) {
                 var tagElement = widget.body.getElementsByTagName(aTag);
                 for (var i = 0; i < tagElement.length; i++) {
                     if (tagElement[i].id == aId){
@@ -461,14 +460,14 @@
                 }
 			    return null;
             };
-            this.onLoad = function () {
+            GUI.onLoad = function () {
                 print('onLoad');
                 myPrefs.readPreferences();
                 
-                this.insertFooter();
-                this.insertDisclaimer();
+                GUI.insertFooter();
+                GUI.insertDisclaimer();
                 
-                this.insertStockTable();
+                GUI.insertStockTable();
                 
                 Quote.refreshData();
 
@@ -478,15 +477,15 @@
                       
                 widget.setTitle(myPrefs.title);            
             };
-            this.onRefresh = function () {
+            GUI.onRefresh = function () {
                 print('onRefresh');
                 Quote.refreshData();
             };
-            this.myRoundD = function (inp, digits) {
+            GUI.myRoundD = function (inp, digits) {
                 var x = Math.pow(10, digits);
                 return Math.round(inp * x) / x;
             };
-            this.changeToColor = function (number,zeroColor) {
+            GUI.changeToColor = function (number,zeroColor) {
                 var sColor=zeroColor;
                 if(!isNaN(parseFloat(number))){
                     if(parseFloat(number)>0){sColor="#008200";}
@@ -494,7 +493,7 @@
                 }
                 return sColor;
             };
-            this.refreshStock = function (id) {
+            GUI.refreshStock = function (id) {
                 print('Refresh GUI on Stock:' + id);
                 id = id - 1;
                 var stc = "stc" + (id).toString();
@@ -505,21 +504,21 @@
                         if (typeof(eval(evalStr)) == 'function') {
                             evalStr += '()';
                         }
-                        this.getTagById("td",stc + (i+1).toString()).innerHTML = eval(evalStr);
+                        GUI.getTagById("td",stc + (i+1).toString()).innerHTML = eval(evalStr);
                         //print(evalStr);
                     }
                 }
-                this.getTagById("td",stc + '0').title="Hi = " + myPortfolio.stocks[id].hi + "\nLo=" + myPortfolio.stocks[id].lo;
+                GUI.getTagById("td",stc + '0').title="Hi = " + myPortfolio.stocks[id].hi + "\nLo=" + myPortfolio.stocks[id].lo;
             };
-            this.insertFooter = function () {
+            GUI.insertFooter = function () {
 				print('Test1');
-                var footer = this.getTagById("div","Footer");
+                var footer = GUI.getTagById("div","Footer");
 				print('Test2');
-				this.toggleWindow('StockAddEdit',false);
-                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer" onclick="" src="' + GUI.imgBase + 'Blank.gif" title="' + 'Not yet implemented' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer;" onclick="" src="' + GUI.imgBase + 'Blank.gif" title="Not yet implemented"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockNews\',false);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'Help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://forum.cnybroe.dk/default.aspx?g=forum&c=4" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'Ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
+				GUI.toggleWindow('StockAddEdit',false);
+                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow("StockAddEdit",false)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer" onclick="" src="' + GUI.imgBase + 'Blank.gif" title="' + 'Not yet implemented' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer;" onclick="" src="' + GUI.imgBase + 'Blank.gif" title="Not yet implemented"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockNews\',false);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'Help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://forum.cnybroe.dk/default.aspx?g=forum&c=4" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'Ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
                 print(footer.innerHTML);
             };
-            this.insertStockTable = function () {
+            GUI.insertStockTable = function () {
                 var st = GUI.getTagById("div","StockData");
                 var sBGColor;
                 var sStockTable='<table border=1 cellspacing=0 width="100%" style="font-size:' + myPrefs.fontSize + ';" class="def">';
@@ -546,11 +545,11 @@
                 sStockTable+='</table>';
                 st.innerHTML = sStockTable;
             };
-            this.insertDisclaimer = function () {
-                var disc = this.getTagById("div","Disclaimer");
-                disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + this.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer"></td></tr></table>';
+            GUI.insertDisclaimer = function () {
+                var disc = GUI.getTagById("div","Disclaimer");
+                disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + GUI.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer"></td></tr></table>';
             };
-            this.insertAddEdit = function () {
+            GUI.insertAddEdit = function () {
                 var sCol='<Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%">';
                 var iCols=9;
                 var fSize = myPrefs.fontSize;
@@ -564,23 +563,23 @@
                     sConfigTable+='<tr style="background-Color:' + sBGColor + ';"><td id="ctc0' + i + '" class="cellL" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '">' + myPortfolio.stocks[i].symbol + '</td><td id="ctc1' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '" class="cellR">' + myPortfolio.stocks[i].qty + '</td><td id="ctc2' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].price + '</td><td id="ctc3' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].tradeCost + '</td><td id="ctc5' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].lo + '</td><td id="ctc6' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].hi + '</td><td class="cellR" width="25px"><img class="cellR" id="ctc7' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.deleteSymbol(' + i + ')" src="' + GUI.imgBase + 'DeleteStock.gif" title="Remove"></td><td class="cellR" width="15px"><img id="ctc8' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.moveSymbol(' + i + ',0)" src="' + GUI.imgBase + 'MoveUpStock.gif" title="Move up"></td><td class="cellR" width="15px"><img id="ctc9' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.moveSymbol(' + i + ',1)" src="' + GUI.imgBase + 'MoveDownStock.gif" title="Move down"></td></tr>';
                 }
                 sConfigTable +='</table>';
-                this.getTagById("div","StockAddEdit").innerHTML = sTemp + sConfigTable;
+                GUI.getTagById("div","StockAddEdit").innerHTML = sTemp + sConfigTable;
                 //Hide move arrows with no function
                 if (i > 0){
-                    this.getTagById("img","ctc80").style.display = "none";
-                    this.getTagById("img","ctc9" + (i-1)).style.display = "none";
+                    GUI.getTagById("img","ctc80").style.display = "none";
+                    GUI.getTagById("img","ctc9" + (i-1)).style.display = "none";
                 }
             };
-            this.editStock = function(sender) {
+            GUI.editStock = function(sender) {
                 if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
                 var sTemp = sender.innerHTML;
                 var a = "uha" + sender.id.replace("ctc","");
                 var b = (sender.id.substr(3,1) == 0)?'64px':'49px';
                 var c = (sender.id.substr(3,1) == 0)?'left':'right';
                 sender.innerHTML = '<input type="text" id="' + a + '" onkeypress="GUI.editOnKey(event,this);" onBlur="GUI.editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
-                this.getTagById('input',a).focus();
+                GUI.getTagById('input',a).focus();
             }; 
-            this.editOnBlur = function(s) {
+            GUI.editOnBlur = function(s) {
                 var index = s.id.substr(4);
                 var col = s.id.substr(3,1);
                 if((col == 0 && s.value.trim() != "") || (col > 0 && !isNaN(s.value))){
@@ -592,34 +591,34 @@
                     if(col == 6){myPortfolio.stocks[index].hi = s.value;}
                     myPrefs.savePreferences();
                 }
-                this.insertAddEdit();
+                GUI.insertAddEdit();
                 Quote.refreshData();
             };
-            this.editOnKey = function(e,s) {
+            GUI.editOnKey = function(e,s) {
                 if(e.keyCode == 13) {
-                  this.editOnBlur(s);
+                  GUI.editOnBlur(s);
                 }
             };
-            this.addSymbol = function(symbol) {
+            GUI.addSymbol = function(symbol) {
                 myPortfolio.addStockSymbol(symbol);
-                this.refreshAfterEdit();
+                GUI.refreshAfterEdit();
             };
-            this.deleteSymbol = function(id) {
+            GUI.deleteSymbol = function(id) {
                 myPortfolio.deleteStock(id);
-                this.refreshAfterEdit();
+                GUI.refreshAfterEdit();
             };
-            this.moveSymbol = function(id,up) {
+            GUI.moveSymbol = function(id,up) {
                 myPortfolio.moveStock(id,up);
-                this.refreshAfterEdit();
+                GUI.refreshAfterEdit();
             };
-            this.refreshAfterEdit = function() {
+            GUI.refreshAfterEdit = function() {
                 myPrefs.savePreferences();
                 myPrefs.readPreferences();
-                this.insertStockTable();
-                this.insertAddEdit();                
+                GUI.insertStockTable();
+                GUI.insertAddEdit();                
                 Quote.refreshData();
             };
-            this.txtFocus = function (sender,focus) {
+            GUI.txtFocus = function (sender,focus) {
                 if (sender.value.trim() == "" || sender.value.trim() == sender.title) {
                     if (focus == 1) {
                       sender.value = "";
@@ -630,14 +629,14 @@
                     }
                 }
             };
-            this.toggleWindow = function (obj,expand) {
+            GUI.toggleWindow = function (obj,expand) {
                 //print("ToggleWindow object:" + Object.prototype.toString.call(obj));
-                var elem = this.getTagById("div",obj);
+                var elem = GUI.getTagById("div",obj);
                 if(elem.style.display == "none" || expand==true){
                     elem.style.display="block";
                     switch (obj) {
                         case 'StockAddEdit':
-                            this.insertAddEdit();
+                            GUI.insertAddEdit();
                         break;
                         case 'StockNews':
                             News.getNews();
@@ -647,7 +646,6 @@
                     elem.style.display="none";
                 }
             };
-		    }
 
             //Start of Quote Object
             var News = {};
@@ -675,7 +673,7 @@
                 //print(html);
                 GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef">' + html;
             };
-            }
+
 
 //End of GUI Object
 //Start of Quote Object
