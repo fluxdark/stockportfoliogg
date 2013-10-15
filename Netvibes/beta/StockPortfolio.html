@@ -623,7 +623,7 @@
                 }
             };
             GUI.toggleWindow = function (id,expand) {
-                print("ToggleWindow:" + id);
+                print("ToggleWindow:" + id.id);
                 var elem = GUI.getTagById("div",id);
                 if(elem.style.display == "none" || expand==true){
                     elem.style.display="block";
