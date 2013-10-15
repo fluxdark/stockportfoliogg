@@ -214,6 +214,10 @@
                 //GUI.insertStockTable();
                 
                 //Quote.refreshData();
+				},
+				
+				onRefresh: function() {
+					alert('Refresh');
 				}
 			};
 
@@ -282,11 +286,15 @@
 			};
 //End of Prefs object
 
+            function print(msg) {
+                msg = fngetDate(1) + "; " + msg.toString();
+                widget.log(msg);
+            }
 			
 			
 //------------Widget events-------------------
             widget.addEvent('onLoad', GUI.onLoad);
-            //widget.addEvent('onRefresh', MyWidget.onRefresh);
+            widget.addEvent('onRefresh', GUI.onRefresh);
         //]]>
         </script>
     </head>
