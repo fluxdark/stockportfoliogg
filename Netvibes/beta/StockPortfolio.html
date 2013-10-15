@@ -455,6 +455,7 @@
                         return tagElement[i];
                     }
                 }
+			    return null;
             };
             GUI.onLoad = function () {
                 print('onLoad');
@@ -527,11 +528,11 @@
                 sStockTable+=sHead;
                 sStockTable+='</tr><tr style="height:2px;background-Color:*#BCBCBC"><td colspan=' + Number(iConfCols+3) + '></td></tr>';
 
-                for(var i = 0; i < myPortfolio.stocks.length; i++) {
-                    if(i % 2 != 0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
-                    sStockTable += '<tr id="str' + i + '" style="background-Color:' + sBGColor + ';"><td class="cellL" id="stc' + i + '0"></td><td class="cellL" id="stc' + i + '1">' + myPortfolio.stocks[i].symbol + '</td>';
+                for(var s = 0; s < myPortfolio.stocks.length; s++) {
+                    if(s % 2 != 0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+                    sStockTable += '<tr id="str' + s + '" style="background-Color:' + sBGColor + ';"><td class="cellL" id="stc' + s + '0"></td><td class="cellL" id="stc' + s + '1">' + myPortfolio.stocks[s].symbol + '</td>';
                     for(var j = 2; j < iConfCols + 3; j++){
-                        sStockTable += '<td class="cellR" id="stc' + i + j + '"></td>';
+                        sStockTable += '<td class="cellR" id="stc' + s + j + '"></td>';
                     }
                     sStockTable += '</tr>';
                 }
@@ -662,8 +663,8 @@
                     html += feed.items[i].title + '</a></span></td></tr>';
                     if(feed.items[i].id > 5){break;}
                 }
-                html = '<table border="3px" cellspacing="0" cellpadding="0" width="100%" style="font-size:' + myPrefs.fontSize + '">' + html + '</table>'
-                print(html);
+                html = '<table border="3px" cellspacing="0" cellpadding="0" width="100%" style="font-size:' + myPrefs.fontSize + '">' + html + '</table>';
+                //print(html);
                 GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef">' + html;
             };
 
