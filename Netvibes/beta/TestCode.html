@@ -207,7 +207,7 @@
 					//widget.setBody('Hello World!');
 					widget.log('onLoad1');
 					DEBUG.log('onLoad2');
-					//Prefs.readPreferences();
+					PREFS.readPreferences();
 					
 					//GUI.insertFooter();
 					//GUI.insertDisclaimer();
@@ -221,14 +221,84 @@
 					alert('Refresh');
 				}
 			};
+			
+			
+			
+//Start of PREFS Object:
+			var PREFS = {
+			    stockDataColumns : 7,
+                dataColumns : [], // New Array
+                title : null,
+                flashing : null, 
+                fontSize : null,
+                updateInterval : null,
+				savePreferences : function () {
+					DEBUG.log('Saving preferences');
+                    //Save stock data
+                    var ss = [], sp = [], sq = [], st = [], sl = [], sh = [], se = [];
+                    //Add all stocks
+                    for (var i = 0; i < myPortfolio.stocks.length; i++) {
+                        ss[i] = myPortfolio.stocks[i].symbol;
+                        sp[i] = myPortfolio.stocks[i].price;
+                        sq[i] = myPortfolio.stocks[i].qty;
+                        st[i] = myPortfolio.stocks[i].tradeCost;
+                        sl[i] = myPortfolio.stocks[i].lo;
+                        sh[i] = myPortfolio.stocks[i].hi;
+                        se[i] = myPortfolio.stocks[i].exRate;
+                    }    
+                    widget.setValues({
+                        'StockSymbols': ss.join(','), 
+                        'StockPrices': sp.join(','), 
+                        'StockQtys': sq.join(','), 
+                        'StockTC': st.join(','), 
+                        'StockLo': sl.join(','), 
+                        'StockHi': sh.join(','), 
+                        'StockExRate': se.join(',') 
+                    });
+                },
+				readPreferences : function () {
+					DEBUG.log('Reading preferences');
+    				//needs to check for empty preferences(standalone mode)
+
+                    //Add all configured columns
+                    for (var i = 1; i < this.stockDataColumns; i++) {
+                        var col = widget.getValue('Column'+(i));
+                        //if(col == '') {widget.deleteValue('Column' + i);} //Fix bad preferences
+                        if(col != 'notused' && col != '') {
+                            this.dataColumns[this.dataColumns.length] = col;
+                        }
+                    }
+                    //Read other preferences
+                    this.title = widget.getValue('CustomTitle');
+                    this.flashing = widget.getBool('Flashing');
+                    this.fontSize = widget.getValue('FontSize');
+                    this.updateInterval = widget.getValue('UpdateInterval');
+                    
+                    //Read stock data
+                    var ss = widget.getValue('StockSymbols').split(',');
+                    var sp = widget.getValue('StockPrices').split(',');
+                    var sq = widget.getValue('StockQtys').split(',');
+                    var st = widget.getValue('StockTC').split(',');
+                    var sl = widget.getValue('StockLo').split(',');
+                    var sh = widget.getValue('StockHi').split(',');
+                    var se = widget.getValue('StockExRate').split(',');
+                    //Add all stocks
+                    myPortfolio.deleteAllStocks();
+                    for (var j = 0; j < ss.length; j++) {
+                        myPortfolio.addStock(ss[j], sp[j], sq[j], st[j], sl[j], sh[j], se[j]);
+                    }
+                }
+			};
+//End of PREFS object
+			
+//Start of DEBUG Object:
 			var DEBUG = {
 				log: function(msg) {
 					msg = "TEST: " + fngetDate(1) + "; " + msg.toString();
 					widget.log(msg);
 				}
 			};
-
-
+//End of DEBUG object
 			
 			
 //------------Widget events-------------------
