@@ -560,7 +560,8 @@
 //Start of GUI code
 			var imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
 			function getTagById(aTag, aId) {
-				var tagElement = widget.body.getElementsByTagName(aTag);
+print("getTagById called");
+  			    var tagElement = widget.body.getElementsByTagName(aTag);
 				for (var i = 0; i < tagElement.length; i++) {
 					if (tagElement[i].id == aId){
 						return tagElement[i];
