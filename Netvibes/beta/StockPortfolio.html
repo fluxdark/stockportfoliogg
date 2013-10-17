@@ -244,7 +244,7 @@
                     for (var i = 0; i < this.stocks.length; i++) {
                       v += this.stocks[i].value();
                     }
-                    return GUI.myRoundD(v,0);
+                    return myGUI.myRoundD(v,0);
                 };
             }
 //End of Portfolio object
@@ -269,7 +269,7 @@
                     this.changeAndChangePct = parseFloat(s[4]) + '(' + s[3] + ')';
                     this.changeRange = s[5];
                     this.prevLastTrade = this.lastTrade;
-                    this.lastTrade = GUI.myRoundD(parseFloat(s[6]),2);
+                    this.lastTrade = myGUI.myRoundD(parseFloat(s[6]),2);
                     this.lastTradeDate = s[7];
                     this.lastTradeTime = s[8];
                     this.dayOpen = parseFloat(s[9]);
@@ -291,7 +291,7 @@
                     this.exchange = s[25];
                     
                     if (this.id <= myPortfolio.stocks.length) {
-                        GUI.refreshStock(this.id);
+                        myGUI.refreshStock(this.id);
                     }
 
                     //Stock object Event triggers
@@ -317,48 +317,48 @@
                     return this.qty * this.lastTrade * this.exRate;
                 };
                 this.totalBuyCosts = function () {
-                    return GUI.myRoundD(parseFloat(this.price * this.exRate * this.qty) + parseFloat(this.tradeCost), 0);
+                    return myGUI.myRoundD(parseFloat(this.price * this.exRate * this.qty) + parseFloat(this.tradeCost), 0);
                 }; //Total costs in local currency
                 this.earned = function () {
-                    return GUI.myRoundD((this.lastTrade.toString().replace("%", "") * this.exRate * this.qty) - this.totalBuyCosts(), 0);
+                    return myGUI.myRoundD((this.lastTrade.toString().replace("%", "") * this.exRate * this.qty) - this.totalBuyCosts(), 0);
                 };
                 this.earnedPct = function () {
-                    return GUI.myRoundD(((this.value() / this.totalBuyCosts()) - 1) * 100, 0);
+                    return myGUI.myRoundD(((this.value() / this.totalBuyCosts()) - 1) * 100, 0);
                 };
                 this.earnedToday = function () {
-                    return (isNaN(this.change)) ? 0 : GUI.myRoundD(this.change * this.qty * this.exRate, 0);
+                    return (isNaN(this.change)) ? 0 : myGUI.myRoundD(this.change * this.qty * this.exRate, 0);
                 };
                 this.earnedTodayPct = function () {
-                    return (isNaN(this.changePct.replace(/\%/g, "").replace(/\+/g, "").replace(/\-/g, ""))) ? 0 : GUI.myRoundD(this.changePct.replace(/\%/g, ""), 0);
+                    return (isNaN(this.changePct.replace(/\%/g, "").replace(/\+/g, "").replace(/\-/g, ""))) ? 0 : myGUI.myRoundD(this.changePct.replace(/\%/g, ""), 0);
                 };
             }
  
             //Stock object Events
             function onStockHi(id) {
                 print('Hi limit passed on index: ' + id);
-                GUI.getTagById('td','stc' + (id-1).toString() + '0').className = 'HiAlert';
+                myGUI.getTagById('td','stc' + (id-1).toString() + '0').className = 'HiAlert';
             }
 
             function onStockLo(id) {
                 print('Lo limit passed on index: ' + id);
-                GUI.getTagById('td','stc' + (id-1).toString() + '0').className = 'LoAlert';
+                myGUI.getTagById('td','stc' + (id-1).toString() + '0').className = 'LoAlert';
             }
 
             function onStockChange(id,number) {
                 print('Value changed on index: ' + id);
                 if (myPrefs.flashing == true)
                 {
-                    var sbgColor = GUI.getTagById('td','stc' + (id-1).toString() + '1').style.background;
-                    GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = GUI.changeToColor(number,sbgColor);
+                    var sbgColor = myGUI.getTagById('td','stc' + (id-1).toString() + '1').style.background;
+                    myGUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = myGUI.changeToColor(number,sbgColor);
 //                    setTimeout('onStockChangeFlashOff(' + id + ',"' + sbgColor + '")',700);
                     onStockChangeFlashOff(id, sbgColor);
                 }
             }
             function onStockChangeFlashOff(id, color) {
                 print('Flash off on index: ' + id);
-				alert('GUI.getTagById(\'td\',\'stc\' + (id-1).toString() + \'2\').style.background = ' + color);
-                //setTimeout('GUI.getTagById(\'td\',\'stc\' + (id-1).toString() + \'2\').style.background = color',700);
-                //GUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = color;
+				alert('myGUI.getTagById(\'td\',\'stc\' + (id-1).toString() + \'2\').style.background = ' + color);
+                //setTimeout('myGUI.getTagById(\'td\',\'stc\' + (id-1).toString() + \'2\').style.background = color',700);
+                //myGUI.getTagById('td','stc' + (id-1).toString() + '2').style.background = color;
             }
 
             function parseStockData(inp) {
@@ -441,216 +441,218 @@
                 };
             }
 //End of Prefs object
+            
+//Start of GUI Object
+            function GUI = {
+				this.imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
+				//GUI.debug = 1;
+				this.getTagById = function (aTag, aId) {
+					var tagElement = widget.body.getElementsByTagName(aTag);
+					for (var i = 0; i < tagElement.length; i++) {
+						if (tagElement[i].id == aId){
+							return tagElement[i];
+						}
+					}
+					return null;
+				};
+				this.onLoad = function () {
+					print('onLoad');
+					myPrefs.readPreferences();
+					
+					this.insertFooter();
+					this.insertDisclaimer();
+					
+					this.insertStockTable();
+					
+					Quote.refreshData();
 
+	//                this.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
+
+					//this.setAnalytics();
+						  
+					widget.setTitle(myPrefs.title);            
+				};
+				this.onRefresh = function () {
+					print('onRefresh');
+					Quote.refreshData();
+				};
+				this.myRoundD = function (inp, digits) {
+					var x = Math.pow(10, digits);
+					return Math.round(inp * x) / x;
+				};
+				this.changeToColor = function (number,zeroColor) {
+					var sColor=zeroColor;
+					if(!isNaN(parseFloat(number))){
+						if(parseFloat(number)>0){sColor="#008200";}
+						if(parseFloat(number)<0){sColor="#FF2200";}
+					}
+					return sColor;
+				};
+				this.refreshStock = function (id) {
+					print('Refresh GUI on Stock:' + id);
+					id = id - 1;
+					var stc = "stc" + (id).toString();
+					for (var i = 0; i < myPrefs.dataColumns.length; i++) {
+						var col = myPrefs.dataColumns[i];
+						if(col != 'notused' && col != '') {
+							var evalStr = 'myPortfolio.stocks[' + (id).toString() + '].' + myPrefs.dataColumns[i];      
+							if (typeof(eval(evalStr)) == 'function') {
+								evalStr += '()';
+							}
+							this.getTagById("td",stc + (i+1).toString()).innerHTML = eval(evalStr);
+							//print(evalStr);
+						}
+					}
+					this.getTagById("td",stc + '0').title="Hi = " + myPortfolio.stocks[id].hi + "\nLo=" + myPortfolio.stocks[id].lo;
+				};
+				this.insertFooter = function () {
+					print('Test1');
+					var footer = this.getTagById("div","Footer");
+					print('Test2');
+					this.toggleWindow('StockAddEdit',false);
+					footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="myGUI.toggleWindow("StockAddEdit",false)" src="' + this.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer" onclick="" src="' + this.imgBase + 'Blank.gif" title="' + 'Not yet implemented' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer;" onclick="" src="' + this.imgBase + 'Blank.gif" title="Not yet implemented"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="myGUI.toggleWindow(\'StockNews\',false);" src="' + this.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + this.imgBase + 'Help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://forum.cnybroe.dk/default.aspx?g=forum&c=4" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + this.imgBase + 'Ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
+					print(footer.innerHTML);
+				};
+				this.insertStockTable = function () {
+					var st = this.getTagById("div","StockData");
+					var sBGColor;
+					var sStockTable='<table border=1 cellspacing=0 width="100%" style="font-size:' + myPrefs.fontSize + ';" class="def">';
+					//var arrHeaderNames=',,,%,__MSG_change__,__MSG_change__(%),__MSG_lasttrade__,__MSG_lasttradedate__,__MSG_lasttradetime__,__MSG_dayopen__,__MSG_daylow__,__MSG_dayhigh__,__MSG_dayvolume__,__MSG_previousclose__,__MSG_52weekrange__,__MSG_ask__,__MSG_bid__,__MSG_tickertrend__,__MSG_50daymovingavg__,__MSG_200daymovingavg__,__MSG_dayrange__,__MSG_optionstrike__,__MSG_optioncallput__,__MSG_optionexpire__,__MSG_currency__,,__MSG_currencyrate__,,,,__MSG_dayearned__,__MSG_earned__,,,,__MSG_buyprice__'.split(",");
+					var sHead = "";
+					var iConfCols = myPrefs.dataColumns.length-2;
+
+					//Header
+					for(var i = 0; i < iConfCols; i++) {
+						sHead += '<td class="cellR">' + myPrefs.dataColumns[i+2] + '</td>';
+					}
+					sStockTable+='<COLGROUP width="8px"><COLGROUP span="2" width="10%"><COLGROUP span="' + iConfCols + '" width="' + 80/iConfCols + '%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"></td><td class="cellL">Name</td><td class="cellR"><div class="Chart" id="StockChart"></div>Change</td>';
+					sStockTable+=sHead;
+					sStockTable+='</tr><tr style="height:2px;background-Color:*#BCBCBC"><td colspan=' + Number(iConfCols+3) + '></td></tr>';
+
+					for(var s = 0; s < myPortfolio.stocks.length; s++) {
+						if(s % 2 != 0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+						sStockTable += '<tr id="str' + s + '" style="background-Color:' + sBGColor + ';"><td class="cellL" id="stc' + s + '0"></td><td class="cellL" id="stc' + s + '1">' + myPortfolio.stocks[s].symbol + '</td>';
+						for(var j = 2; j < iConfCols + 3; j++){
+							sStockTable += '<td class="cellR" id="stc' + s + j + '"></td>';
+						}
+						sStockTable += '</tr>';
+					}
+					sStockTable+='</table>';
+					st.innerHTML = sStockTable;
+				};
+				this.insertDisclaimer = function () {
+					var disc = this.getTagById("div","Disclaimer");
+					disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + this.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer"></td></tr></table>';
+				};
+				this.insertAddEdit = function () {
+					var sCol='<Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%">';
+					var iCols=9;
+					var fSize = myPrefs.fontSize;
+					var sTDH='';
+					var sBGColor;
+					var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:' + fSize + '"><tr><td width="62px" align="left"><input type="text" style="font-size:' + fSize + ';width:180px;color:#AAAAAA;" class="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="Enter symbol or company name" value="Enter symbol or company name" onFocus=myGUI.txtFocus(this,1) onBlur=myGUI.txtFocus(this,0) onKeyUp=sSearch.search(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=myGUI.getTagById(\'input\',\'txtStockSymbol\').value;myGUI.addSymbol(Temp);" title="Add" src="' + this.imgBase + 'AddStock.gif"></td></tr></table><div id="StockAddList" style="font-size:' + fSize + '" class="SearchList"></div>';
+					var sLine='<tr style="height:1px;background-Color:#BCBCBC"><td colspan=' + iCols + '></td></tr>';
+					var sConfigTable='<table style="width:100%;font-size:' + fSize + '" border=0 cellspacing=0 cellpadding=0>' + sCol + '<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan=' + iCols + '></td></tr>' + sLine + '<tr style="font-weight: bold;"><td class="cellL">Symbol</td><td class="cellR" >Qty</td><td class="cellR">Price</td><td class="cellR">TC</td>' + sTDH + '<td class="cellR">Lo</td><td class="cellR">Hi</td><td colspan=3></td></tr>' + sLine;
+					for(i=0;i < myPortfolio.stocks.length;i++){
+						if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
+						sConfigTable+='<tr style="background-Color:' + sBGColor + ';"><td id="ctc0' + i + '" class="cellL" title="Click to change this item" onclick="myGUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '">' + myPortfolio.stocks[i].symbol + '</td><td id="ctc1' + i + '" title="Click to change this item" onclick="myGUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '" class="cellR">' + myPortfolio.stocks[i].qty + '</td><td id="ctc2' + i + '" title="Click to change this item" onclick="myGUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].price + '</td><td id="ctc3' + i + '" title="Click to change this item" onclick="myGUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].tradeCost + '</td><td id="ctc5' + i + '" title="Click to change this item" onclick="myGUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].lo + '</td><td id="ctc6' + i + '" title="Click to change this item" onclick="myGUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].hi + '</td><td class="cellR" width="25px"><img class="cellR" id="ctc7' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="myGUI.deleteSymbol(' + i + ')" src="' + this.imgBase + 'DeleteStock.gif" title="Remove"></td><td class="cellR" width="15px"><img id="ctc8' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="myGUI.moveSymbol(' + i + ',0)" src="' + this.imgBase + 'MoveUpStock.gif" title="Move up"></td><td class="cellR" width="15px"><img id="ctc9' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="myGUI.moveSymbol(' + i + ',1)" src="' + this.imgBase + 'MoveDownStock.gif" title="Move down"></td></tr>';
+					}
+					sConfigTable +='</table>';
+					this.getTagById("div","StockAddEdit").innerHTML = sTemp + sConfigTable;
+					//Hide move arrows with no function
+					if (i > 0){
+						this.getTagById("img","ctc80").style.display = "none";
+						this.getTagById("img","ctc9" + (i-1)).style.display = "none";
+					}
+				};
+				this.editStock = function(sender) {
+					if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
+					var sTemp = sender.innerHTML;
+					var a = "uha" + sender.id.replace("ctc","");
+					var b = (sender.id.substr(3,1) == 0)?'64px':'49px';
+					var c = (sender.id.substr(3,1) == 0)?'left':'right';
+					sender.innerHTML = '<input type="text" id="' + a + '" onkeypress="myGUI.editOnKey(event,this);" onBlur="myGUI.editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
+					this.getTagById('input',a).focus();
+				}; 
+				this.editOnBlur = function(s) {
+					var index = s.id.substr(4);
+					var col = s.id.substr(3,1);
+					if((col == 0 && s.value.trim() != "") || (col > 0 && !isNaN(s.value))){
+						if(col == 0){myPortfolio.stocks[index].symbol = s.value;}
+						if(col == 1){myPortfolio.stocks[index].qty = s.value;}
+						if(col == 2){myPortfolio.stocks[index].price = s.value;}
+						if(col == 3){myPortfolio.stocks[index].tradeCost = s.value;}
+						if(col == 5){myPortfolio.stocks[index].lo = s.value;}
+						if(col == 6){myPortfolio.stocks[index].hi = s.value;}
+						myPrefs.savePreferences();
+					}
+					this.insertAddEdit();
+					Quote.refreshData();
+				};
+				this.editOnKey = function(e,s) {
+					if(e.keyCode == 13) {
+					  this.editOnBlur(s);
+					}
+				};
+				this.addSymbol = function(symbol) {
+					myPortfolio.addStockSymbol(symbol);
+					this.refreshAfterEdit();
+				};
+				this.deleteSymbol = function(id) {
+					myPortfolio.deleteStock(id);
+					this.refreshAfterEdit();
+				};
+				this.moveSymbol = function(id,up) {
+					myPortfolio.moveStock(id,up);
+					this.refreshAfterEdit();
+				};
+				this.refreshAfterEdit = function() {
+					myPrefs.savePreferences();
+					myPrefs.readPreferences();
+					this.insertStockTable();
+					this.insertAddEdit();                
+					Quote.refreshData();
+				};
+				this.txtFocus = function (sender,focus) {
+					if (sender.value.trim() == "" || sender.value.trim() == sender.title) {
+						if (focus == 1) {
+						  sender.value = "";
+						  sender.style.color = '#000000';
+						} else {
+						  sender.style.color = '#AAAAAA';
+						  sender.value = sender.title;
+						}
+					}
+				};
+				this.toggleWindow = function (obj,expand) {
+					//print("ToggleWindow object:" + Object.prototype.toString.call(obj));
+					var elem = this.getTagById("div",obj);
+					if(elem.style.display == "none" || expand==true){
+						elem.style.display="block";
+						switch (obj) {
+							case 'StockAddEdit':
+								this.insertAddEdit();
+							break;
+							case 'StockNews':
+								News.getNews();
+							break;
+						}
+					} else {
+						elem.style.display="none";
+					}
+				};
+			}
+
+            var myGUI = new GUI();
             var myPortfolio = new Portfolio();
             var myPrefs = new Preferences();
             var iTmrRetry;
             
-            
-//Start of GUI Object
-            var GUI = {};
-            GUI.imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
-            //GUI.debug = 1;
-            GUI.getTagById = function (aTag, aId) {
-                var tagElement = widget.body.getElementsByTagName(aTag);
-                for (var i = 0; i < tagElement.length; i++) {
-                    if (tagElement[i].id == aId){
-                        return tagElement[i];
-                    }
-                }
-			    return null;
-            };
-            GUI.onLoad = function () {
-                print('onLoad');
-                myPrefs.readPreferences();
-                
-                GUI.insertFooter();
-                GUI.insertDisclaimer();
-                
-                GUI.insertStockTable();
-                
-                Quote.refreshData();
 
-//                GUI.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
-
-                //GUI.setAnalytics();
-                      
-                widget.setTitle(myPrefs.title);            
-            };
-            GUI.onRefresh = function () {
-                print('onRefresh');
-                Quote.refreshData();
-            };
-            GUI.myRoundD = function (inp, digits) {
-                var x = Math.pow(10, digits);
-                return Math.round(inp * x) / x;
-            };
-            GUI.changeToColor = function (number,zeroColor) {
-                var sColor=zeroColor;
-                if(!isNaN(parseFloat(number))){
-                    if(parseFloat(number)>0){sColor="#008200";}
-                    if(parseFloat(number)<0){sColor="#FF2200";}
-                }
-                return sColor;
-            };
-            GUI.refreshStock = function (id) {
-                print('Refresh GUI on Stock:' + id);
-                id = id - 1;
-                var stc = "stc" + (id).toString();
-                for (var i = 0; i < myPrefs.dataColumns.length; i++) {
-                    var col = myPrefs.dataColumns[i];
-                    if(col != 'notused' && col != '') {
-                        var evalStr = 'myPortfolio.stocks[' + (id).toString() + '].' + myPrefs.dataColumns[i];      
-                        if (typeof(eval(evalStr)) == 'function') {
-                            evalStr += '()';
-                        }
-                        GUI.getTagById("td",stc + (i+1).toString()).innerHTML = eval(evalStr);
-                        //print(evalStr);
-                    }
-                }
-                GUI.getTagById("td",stc + '0').title="Hi = " + myPortfolio.stocks[id].hi + "\nLo=" + myPortfolio.stocks[id].lo;
-            };
-            GUI.insertFooter = function () {
-				print('Test1');
-                var footer = GUI.getTagById("div","Footer");
-				print('Test2');
-				GUI.toggleWindow('StockAddEdit',false);
-                footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow("StockAddEdit",false)" src="' + GUI.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer" onclick="" src="' + GUI.imgBase + 'Blank.gif" title="' + 'Not yet implemented' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer;" onclick="" src="' + GUI.imgBase + 'Blank.gif" title="Not yet implemented"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="GUI.toggleWindow(\'StockNews\',false);" src="' + GUI.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'Help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://forum.cnybroe.dk/default.aspx?g=forum&c=4" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + GUI.imgBase + 'Ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
-                print(footer.innerHTML);
-            };
-            GUI.insertStockTable = function () {
-                var st = GUI.getTagById("div","StockData");
-                var sBGColor;
-                var sStockTable='<table border=1 cellspacing=0 width="100%" style="font-size:' + myPrefs.fontSize + ';" class="def">';
-                //var arrHeaderNames=',,,%,__MSG_change__,__MSG_change__(%),__MSG_lasttrade__,__MSG_lasttradedate__,__MSG_lasttradetime__,__MSG_dayopen__,__MSG_daylow__,__MSG_dayhigh__,__MSG_dayvolume__,__MSG_previousclose__,__MSG_52weekrange__,__MSG_ask__,__MSG_bid__,__MSG_tickertrend__,__MSG_50daymovingavg__,__MSG_200daymovingavg__,__MSG_dayrange__,__MSG_optionstrike__,__MSG_optioncallput__,__MSG_optionexpire__,__MSG_currency__,,__MSG_currencyrate__,,,,__MSG_dayearned__,__MSG_earned__,,,,__MSG_buyprice__'.split(",");
-                var sHead = "";
-                var iConfCols = myPrefs.dataColumns.length-2;
-
-                //Header
-                for(var i = 0; i < iConfCols; i++) {
-                    sHead += '<td class="cellR">' + myPrefs.dataColumns[i+2] + '</td>';
-                }
-                sStockTable+='<COLGROUP width="8px"><COLGROUP span="2" width="10%"><COLGROUP span="' + iConfCols + '" width="' + 80/iConfCols + '%"><tr style="font-weight: bold;"><td style="padding-right:8px" title="Alerts"></td><td class="cellL">Name</td><td class="cellR"><div class="Chart" id="StockChart"></div>Change</td>';
-                sStockTable+=sHead;
-                sStockTable+='</tr><tr style="height:2px;background-Color:*#BCBCBC"><td colspan=' + Number(iConfCols+3) + '></td></tr>';
-
-                for(var s = 0; s < myPortfolio.stocks.length; s++) {
-                    if(s % 2 != 0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
-                    sStockTable += '<tr id="str' + s + '" style="background-Color:' + sBGColor + ';"><td class="cellL" id="stc' + s + '0"></td><td class="cellL" id="stc' + s + '1">' + myPortfolio.stocks[s].symbol + '</td>';
-                    for(var j = 2; j < iConfCols + 3; j++){
-                        sStockTable += '<td class="cellR" id="stc' + s + j + '"></td>';
-                    }
-                    sStockTable += '</tr>';
-                }
-                sStockTable+='</table>';
-                st.innerHTML = sStockTable;
-            };
-            GUI.insertDisclaimer = function () {
-                var disc = GUI.getTagById("div","Disclaimer");
-                disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + GUI.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer"></td></tr></table>';
-            };
-            GUI.insertAddEdit = function () {
-                var sCol='<Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%"><Col width="16%">';
-                var iCols=9;
-                var fSize = myPrefs.fontSize;
-                var sTDH='';
-                var sBGColor;
-                var sTemp='<hr class="HrDef"><table border=0 id="tblSearch" cellspacing=0 cellpadding=0 style="font-size:' + fSize + '"><tr><td width="62px" align="left"><input type="text" style="font-size:' + fSize + ';width:180px;color:#AAAAAA;" class="def" id="txtStockSymbol" name="txtStockSymbol" alt="Symbol" title="Enter symbol or company name" value="Enter symbol or company name" onFocus=txtFocus(this,1) onBlur=txtFocus(this,0) onKeyUp=sSearch.search(this.value,"S")></td><td width="20px" align="left"><img width="12" height="12" style="cursor:hand;cursor:pointer;" onclick="var Temp=GUI.getTagById(\'input\',\'txtStockSymbol\').value;GUI.addSymbol(Temp);" title="Add" src="' + GUI.imgBase + 'AddStock.gif"></td></tr></table><div id="StockAddList" style="font-size:' + fSize + '" class="SearchList"></div>';
-                var sLine='<tr style="height:1px;background-Color:#BCBCBC"><td colspan=' + iCols + '></td></tr>';
-                var sConfigTable='<table style="width:100%;font-size:' + fSize + '" border=0 cellspacing=0 cellpadding=0>' + sCol + '<Col width="10px"><Col width="10px"><Col width="10px"><tr style="height:3px"><td colspan=' + iCols + '></td></tr>' + sLine + '<tr style="font-weight: bold;"><td class="cellL">Symbol</td><td class="cellR" >Qty</td><td class="cellR">Price</td><td class="cellR">TC</td>' + sTDH + '<td class="cellR">Lo</td><td class="cellR">Hi</td><td colspan=3></td></tr>' + sLine;
-                for(i=0;i < myPortfolio.stocks.length;i++){
-                    if(i%2==0){sBGColor='#FFFFFF';}else{sBGColor='#EFEFEF';}
-                    sConfigTable+='<tr style="background-Color:' + sBGColor + ';"><td id="ctc0' + i + '" class="cellL" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '">' + myPortfolio.stocks[i].symbol + '</td><td id="ctc1' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '" class="cellR">' + myPortfolio.stocks[i].qty + '</td><td id="ctc2' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].price + '</td><td id="ctc3' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].tradeCost + '</td><td id="ctc5' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].lo + '</td><td id="ctc6' + i + '" title="Click to change this item" onclick="GUI.editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].hi + '</td><td class="cellR" width="25px"><img class="cellR" id="ctc7' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.deleteSymbol(' + i + ')" src="' + GUI.imgBase + 'DeleteStock.gif" title="Remove"></td><td class="cellR" width="15px"><img id="ctc8' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.moveSymbol(' + i + ',0)" src="' + GUI.imgBase + 'MoveUpStock.gif" title="Move up"></td><td class="cellR" width="15px"><img id="ctc9' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="GUI.moveSymbol(' + i + ',1)" src="' + GUI.imgBase + 'MoveDownStock.gif" title="Move down"></td></tr>';
-                }
-                sConfigTable +='</table>';
-                GUI.getTagById("div","StockAddEdit").innerHTML = sTemp + sConfigTable;
-                //Hide move arrows with no function
-                if (i > 0){
-                    GUI.getTagById("img","ctc80").style.display = "none";
-                    GUI.getTagById("img","ctc9" + (i-1)).style.display = "none";
-                }
-            };
-            GUI.editStock = function(sender) {
-                if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
-                var sTemp = sender.innerHTML;
-                var a = "uha" + sender.id.replace("ctc","");
-                var b = (sender.id.substr(3,1) == 0)?'64px':'49px';
-                var c = (sender.id.substr(3,1) == 0)?'left':'right';
-                sender.innerHTML = '<input type="text" id="' + a + '" onkeypress="GUI.editOnKey(event,this);" onBlur="GUI.editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
-                GUI.getTagById('input',a).focus();
-            }; 
-            GUI.editOnBlur = function(s) {
-                var index = s.id.substr(4);
-                var col = s.id.substr(3,1);
-                if((col == 0 && s.value.trim() != "") || (col > 0 && !isNaN(s.value))){
-                    if(col == 0){myPortfolio.stocks[index].symbol = s.value;}
-                    if(col == 1){myPortfolio.stocks[index].qty = s.value;}
-                    if(col == 2){myPortfolio.stocks[index].price = s.value;}
-                    if(col == 3){myPortfolio.stocks[index].tradeCost = s.value;}
-                    if(col == 5){myPortfolio.stocks[index].lo = s.value;}
-                    if(col == 6){myPortfolio.stocks[index].hi = s.value;}
-                    myPrefs.savePreferences();
-                }
-                GUI.insertAddEdit();
-                Quote.refreshData();
-            };
-            GUI.editOnKey = function(e,s) {
-                if(e.keyCode == 13) {
-                  GUI.editOnBlur(s);
-                }
-            };
-            GUI.addSymbol = function(symbol) {
-                myPortfolio.addStockSymbol(symbol);
-                GUI.refreshAfterEdit();
-            };
-            GUI.deleteSymbol = function(id) {
-                myPortfolio.deleteStock(id);
-                GUI.refreshAfterEdit();
-            };
-            GUI.moveSymbol = function(id,up) {
-                myPortfolio.moveStock(id,up);
-                GUI.refreshAfterEdit();
-            };
-            GUI.refreshAfterEdit = function() {
-                myPrefs.savePreferences();
-                myPrefs.readPreferences();
-                GUI.insertStockTable();
-                GUI.insertAddEdit();                
-                Quote.refreshData();
-            };
-            GUI.toggleWindow = function (obj,expand) {
-                //print("ToggleWindow object:" + Object.prototype.toString.call(obj));
-                var elem = GUI.getTagById("div",obj);
-                if(elem.style.display == "none" || expand==true){
-                    elem.style.display="block";
-                    switch (obj) {
-                        case 'StockAddEdit':
-                            GUI.insertAddEdit();
-                        break;
-                        case 'StockNews':
-                            News.getNews();
-                        break;
-                    }
-                } else {
-                    elem.style.display="none";
-                }
-            };
-
-            txtFocus = function (sender,focus) {
-                if (sender.value.trim() == "" || sender.value.trim() == sender.title) {
-                    if (focus == 1) {
-                      sender.value = "";
-                      sender.style.color = '#000000';
-                    } else {
-                      sender.style.color = '#AAAAAA';
-                      sender.value = sender.title;
-                    }
-                }
-            };
             //Start of Quote Object
             var News = {};
             News.getNews = function () {
-                GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef"><div class="loading">Loading...</div>';
+                myGUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef"><div class="loading">Loading...</div>';
                 var url='http://finance.yahoo.com/rss/headline?s=' + encodeURIComponent(widget.getValue('StockSymbols'));
 
                 print('Symbol search url:' + url);
@@ -664,14 +666,14 @@
                 print(feed);
                 //var feed = feedIn.data;
                 for(var i in feed.items){
-                    html += '<tr><td width="5" valign="top"><img width="16" height="16" src="' + GUI.imgBase + 'Square.gif"></td><td><span><a href="' + feed.items[i].link + '" target="_blank">';
+                    html += '<tr><td width="5" valign="top"><img width="16" height="16" src="' + myGUI.imgBase + 'Square.gif"></td><td><span><a href="' + feed.items[i].link + '" target="_blank">';
                     //html += feed.items[i].date + ': ';
                     html += feed.items[i].title + '</a></span></td></tr>';
                     if(feed.items[i].id > 5){break;}
                 }
                 html = '<table border="3px" cellspacing="0" cellpadding="0" width="100%" style="font-size:' + myPrefs.fontSize + '">' + html + '</table>';
                 //print(html);
-                GUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef">' + html;
+                myGUI.getTagById("div","StockNews").innerHTML='<hr class="HrDef">' + html;
             };
 
 
@@ -702,7 +704,7 @@
                     myPortfolio.stocks[i].updateStockData(sLines[i]);
                 }
                 print('Total portfolio value:' + myPortfolio.totalValue());
-                GUI.getTagById("td","FooterMsg").innerHTML = 'Updated:' + fngetDate(false);
+                myGUI.getTagById("td","FooterMsg").innerHTML = 'Updated:' + fngetDate(false);
 
             };
 //End of Quote Object
@@ -710,14 +712,14 @@
             var sSearch = {};
             sSearch.search = function (symbol) {
                 if(symbol.trim() != '') {
-                    GUI.getTagById("div","StockAddList").innerHTML = 'Loading...';
+                    myGUI.getTagById("div","StockAddList").innerHTML = 'Loading...';
                     var url = 'http://d.yimg.com/autoc.finance.yahoo.com/autoc?query=' + encodeURIComponent(symbol) + '&callback=YAHOO.Finance.SymbolSuggest.ssCallback';
 
                     //print('Symbol search url:' + url);
 
                     UWA.Data.getText(url, sSearch.symbolDataProxy);
                 } else {
-                    GUI.getTagById("div","StockAddList").style.display = "none";
+                    myGUI.getTagById("div","StockAddList").style.display = "none";
                 }
             };
             sSearch.symbolDataProxy = function (symbolData) {
@@ -761,8 +763,8 @@
                 } else {
                     sTable += '<tr><td colspan=4>Not found</td></tr></table>';
                 }
-                GUI.getTagById("div","StockAddList").innerHTML=sTable;
-                GUI.getTagById("div","StockAddList").style.display="block";
+                myGUI.getTagById("div","StockAddList").innerHTML=sTable;
+                myGUI.getTagById("div","StockAddList").style.display="block";
             };            
 //End of Symbol Search Object
 
@@ -796,9 +798,9 @@
             }
 
             //function print(msg) {
-            //    if (GUI.debug==1)
+            //    if (myGUI.debug==1)
             //    {
-            //        var d = GUI.getTagById('div','Debug');
+            //        var d = myGUI.getTagById('div','Debug');
             //        d.style.display = 'block';
             //        var d_html = d.innerHTML;
             //        msg = fngetDate(1) + "; " + msg.toString() + "<br>";
@@ -814,8 +816,8 @@
             
             
 //------------Widget events-------------------
-            widget.addEvent('onLoad', GUI.onLoad);
-            widget.addEvent('onRefresh', GUI.onRefresh);
+            widget.addEvent('onLoad', myGUI.onLoad);
+            widget.addEvent('onRefresh', myGUI.onRefresh);
         </script>
     </head>
     <body>
