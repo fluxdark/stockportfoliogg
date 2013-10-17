@@ -278,19 +278,23 @@
 			function toggleWindow(obj,expand) {
 				print("ToggleWindow called");
 				var elem = getTagById("div",obj);
+				print("getTagById called");
 				if(elem.style.display == "none" || expand==true){
 					elem.style.display="block";
 					switch (obj) {
 						case 'StockAddEdit':
+				print("StockAddEdit");
 							insertAddEdit();
 						break;
 						case 'StockNews':
+				print("StockNews");
 							News.getNews();
 						break;
 					}
 				} else {
 					elem.style.display="none";
 				}
+				return true;
 			};
 //End of basic functions code
 
