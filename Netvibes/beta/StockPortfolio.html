@@ -200,13 +200,16 @@
             //https://github.com/eligrey/l10n.js/#readme
             //http://uwa.netvibes.com/docs/Uwa/html/files/Introduction-txt.html
             //http://dev.netvibes.com/doc/uwa/howto/localize_widget(It's not quite ready yet, but we plan to release a way for widget developers to make their widget strings available to translator worldwide, which will free you from having to rely on a server-side script.)
-            //Add trim function to string object if missing
+            
+			//Add trim function to string object if missing
             if(!String.prototype.trim) {  
               String.prototype.trim = function () {  
                 return this.replace(/^\s+|\s+$/g,'');  
               };  
             }
-//Start of Portfolio Object:
+			var imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
+
+			//Start of Portfolio Object:
             function Portfolio() {
                 this.stocks = []; // New Array
                 //this.l10n = {"Title" : "Stock Portfolio","Loading" : "Loading...","baz" : "345678","bat" : "901234"};
@@ -458,7 +461,7 @@
                 print(feed);
                 //var feed = feedIn.data;
                 for(var i in feed.items){
-                    html += '<tr><td width="5" valign="top"><img width="16" height="16" src="' + myGUI.imgBase + 'Square.gif"></td><td><span><a href="' + feed.items[i].link + '" target="_blank">';
+                    html += '<tr><td width="5" valign="top"><img width="16" height="16" src="' + imgBase + 'Square.gif"></td><td><span><a href="' + feed.items[i].link + '" target="_blank">';
                     //html += feed.items[i].date + ': ';
                     html += feed.items[i].title + '</a></span></td></tr>';
                     if(feed.items[i].id > 5){break;}
@@ -558,17 +561,6 @@
             };            
 //End of Symbol Search Object
 //Start of GUI code
-			var imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
-			function getTagById(aTag, aId) {
-print("getTagById called");
-  			    var tagElement = widget.body.getElementsByTagName(aTag);
-				for (var i = 0; i < tagElement.length; i++) {
-					if (tagElement[i].id == aId){
-						return tagElement[i];
-					}
-				}
-				return null;
-			};
 			function changeToColor(number,zeroColor) {
 				var sColor=zeroColor;
 				if(!isNaN(parseFloat(number))){
@@ -666,6 +658,16 @@ print("getTagById called");
 //End of GUI code
             
 //Start of misc GUI code
+			function getTagById(aTag, aId) {
+print("getTagById called");
+  			    var tagElement = widget.body.getElementsByTagName(aTag);
+				for (var i = 0; i < tagElement.length; i++) {
+					if (tagElement[i].id == aId){
+						return tagElement[i];
+					}
+				}
+				return null;
+			};
 			function myRoundD(inp, digits) {
 				var x = Math.pow(10, digits);
 				return Math.round(inp * x) / x;
