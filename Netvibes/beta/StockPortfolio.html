@@ -209,7 +209,93 @@
             }
 			var imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
 
-			//Start of Portfolio Object:
+//Start of basic functions code
+			function getTagById(aTag, aId) {
+print("getTagById called");
+  			    var tagElement = widget.body.getElementsByTagName(aTag);
+				for (var i = 0; i < tagElement.length; i++) {
+					if (tagElement[i].id == aId){
+						return tagElement[i];
+					}
+				}
+				return null;
+			};
+			function myRoundD(inp, digits) {
+				var x = Math.pow(10, digits);
+				return Math.round(inp * x) / x;
+			};
+			function editStock(sender) {
+				if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
+				var sTemp = sender.innerHTML;
+				var a = "uha" + sender.id.replace("ctc","");
+				var b = (sender.id.substr(3,1) == 0)?'64px':'49px';
+				var c = (sender.id.substr(3,1) == 0)?'left':'right';
+				sender.innerHTML = '<input type="text" id="' + a + '" onkeypress="editOnKey(event,this);" onBlur="editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
+				getTagById('input',a).focus();
+			}; 
+			function editOnBlur(s) {
+				var index = s.id.substr(4);
+				var col = s.id.substr(3,1);
+				if((col == 0 && s.value.trim() != "") || (col > 0 && !isNaN(s.value))){
+					if(col == 0){myPortfolio.stocks[index].symbol = s.value;}
+					if(col == 1){myPortfolio.stocks[index].qty = s.value;}
+					if(col == 2){myPortfolio.stocks[index].price = s.value;}
+					if(col == 3){myPortfolio.stocks[index].tradeCost = s.value;}
+					if(col == 5){myPortfolio.stocks[index].lo = s.value;}
+					if(col == 6){myPortfolio.stocks[index].hi = s.value;}
+					myPrefs.savePreferences();
+				}
+				insertAddEdit();
+				Quote.refreshData();
+			};
+			function editOnKey(e,s) {
+				if(e.keyCode == 13) {
+				  this.editOnBlur(s);
+				}
+			};
+			function addSymbol(symbol) {
+				myPortfolio.addStockSymbol(symbol);
+				refreshAfterEdit();
+			};
+			function deleteSymbol(id) {
+				myPortfolio.deleteStock(id);
+				refreshAfterEdit();
+			};
+			function moveSymbol(id,up) {
+				myPortfolio.moveStock(id,up);
+				refreshAfterEdit();
+			};
+			function txtFocus(sender,focus) {
+				if (sender.value.trim() == "" || sender.value.trim() == sender.title) {
+					if (focus == 1) {
+					  sender.value = "";
+					  sender.style.color = '#000000';
+					} else {
+					  sender.style.color = '#AAAAAA';
+					  sender.value = sender.title;
+					}
+				}
+			};
+			function toggleWindow(obj,expand) {
+				//print("ToggleWindow object:" + Object.prototype.toString.call(obj));
+				var elem = getTagById("div",obj);
+				if(elem.style.display == "none" || expand==true){
+					elem.style.display="block";
+					switch (obj) {
+						case 'StockAddEdit':
+							insertAddEdit();
+						break;
+						case 'StockNews':
+							News.getNews();
+						break;
+					}
+				} else {
+					elem.style.display="none";
+				}
+			};
+//End of basic functions code
+
+//Start of Portfolio Object:
             function Portfolio() {
                 this.stocks = []; // New Array
                 //this.l10n = {"Title" : "Stock Portfolio","Loading" : "Loading...","baz" : "345678","bat" : "901234"};
@@ -336,7 +422,7 @@
                 };
             }
  
-            //Stock object Events
+     //Start of Stock object Events
             function onStockHi(id) {
                 print('Hi limit passed on index: ' + id);
                 getTagById('td','stc' + (id-1).toString() + '0').className = 'HiAlert';
@@ -363,6 +449,7 @@
                 //setTimeout('getTagById(\'td\',\'stc\' + (id-1).toString() + \'2\').style.background = color',700);
                 //getTagById('td','stc' + (id-1).toString() + '2').style.background = color;
             }
+     //End of Stock object Events
 
             function parseStockData(inp) {
                 var out = [];
@@ -657,92 +744,6 @@
 			};
 //End of GUI code
             
-//Start of misc GUI code
-			function getTagById(aTag, aId) {
-print("getTagById called");
-  			    var tagElement = widget.body.getElementsByTagName(aTag);
-				for (var i = 0; i < tagElement.length; i++) {
-					if (tagElement[i].id == aId){
-						return tagElement[i];
-					}
-				}
-				return null;
-			};
-			function myRoundD(inp, digits) {
-				var x = Math.pow(10, digits);
-				return Math.round(inp * x) / x;
-			};
-			function editStock(sender) {
-				if(sender.innerHTML.toLowerCase().indexOf("input",1)>0){return;}
-				var sTemp = sender.innerHTML;
-				var a = "uha" + sender.id.replace("ctc","");
-				var b = (sender.id.substr(3,1) == 0)?'64px':'49px';
-				var c = (sender.id.substr(3,1) == 0)?'left':'right';
-				sender.innerHTML = '<input type="text" id="' + a + '" onkeypress="editOnKey(event,this);" onBlur="editOnBlur(this);" value="' + sTemp + '" class="def" style="font-size:' + myPrefs.fontSize + ';width:' + b + ';height:14px;margin:0px;padding:0px;text-align:' + c + ';" />';
-				getTagById('input',a).focus();
-			}; 
-			function editOnBlur(s) {
-				var index = s.id.substr(4);
-				var col = s.id.substr(3,1);
-				if((col == 0 && s.value.trim() != "") || (col > 0 && !isNaN(s.value))){
-					if(col == 0){myPortfolio.stocks[index].symbol = s.value;}
-					if(col == 1){myPortfolio.stocks[index].qty = s.value;}
-					if(col == 2){myPortfolio.stocks[index].price = s.value;}
-					if(col == 3){myPortfolio.stocks[index].tradeCost = s.value;}
-					if(col == 5){myPortfolio.stocks[index].lo = s.value;}
-					if(col == 6){myPortfolio.stocks[index].hi = s.value;}
-					myPrefs.savePreferences();
-				}
-				insertAddEdit();
-				Quote.refreshData();
-			};
-			function editOnKey(e,s) {
-				if(e.keyCode == 13) {
-				  this.editOnBlur(s);
-				}
-			};
-			function addSymbol(symbol) {
-				myPortfolio.addStockSymbol(symbol);
-				refreshAfterEdit();
-			};
-			function deleteSymbol(id) {
-				myPortfolio.deleteStock(id);
-				refreshAfterEdit();
-			};
-			function moveSymbol(id,up) {
-				myPortfolio.moveStock(id,up);
-				refreshAfterEdit();
-			};
-			function txtFocus(sender,focus) {
-				if (sender.value.trim() == "" || sender.value.trim() == sender.title) {
-					if (focus == 1) {
-					  sender.value = "";
-					  sender.style.color = '#000000';
-					} else {
-					  sender.style.color = '#AAAAAA';
-					  sender.value = sender.title;
-					}
-				}
-			};
-			function toggleWindow(obj,expand) {
-				//print("ToggleWindow object:" + Object.prototype.toString.call(obj));
-				var elem = getTagById("div",obj);
-				if(elem.style.display == "none" || expand==true){
-					elem.style.display="block";
-					switch (obj) {
-						case 'StockAddEdit':
-							insertAddEdit();
-						break;
-						case 'StockNews':
-							News.getNews();
-						break;
-					}
-				} else {
-					elem.style.display="none";
-				}
-			};
-//End of misc GUI code
-
 
 
 
