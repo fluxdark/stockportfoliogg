@@ -276,7 +276,7 @@
 				}
 			};
 			function toggleWindow(obj,expand) {
-				//print("ToggleWindow object:" + Object.prototype.toString.call(obj));
+				print("ToggleWindow called");
 				var elem = getTagById("div",obj);
 				if(elem.style.display == "none" || expand==true){
 					elem.style.display="block";
