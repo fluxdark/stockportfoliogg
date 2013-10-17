@@ -587,15 +587,15 @@
 						if (typeof(eval(evalStr)) == 'function') {
 							evalStr += '()';
 						}
-						this.getTagById("td",stc + (i+1).toString()).innerHTML = eval(evalStr);
+						getTagById("td",stc + (i+1).toString()).innerHTML = eval(evalStr);
 						//print(evalStr);
 					}
 				}
-				this.getTagById("td",stc + '0').title="Hi = " + myPortfolio.stocks[id].hi + "\nLo=" + myPortfolio.stocks[id].lo;
+				getTagById("td",stc + '0').title="Hi = " + myPortfolio.stocks[id].hi + "\nLo=" + myPortfolio.stocks[id].lo;
 			};
 			function insertFooter() {
 				print('Test1');
-				var footer = this.getTagById("div","Footer");
+				var footer = getTagById("div","Footer");
 				print('Test2');
 				toggleWindow('StockAddEdit',false);
 				print('Test3');
@@ -604,7 +604,7 @@
 				print('Test4');
 			};
 			function insertStockTable() {
-				var st = this.getTagById("div","StockData");
+				var st = getTagById("div","StockData");
 				var sBGColor;
 				var sStockTable='<table border=1 cellspacing=0 width="100%" style="font-size:' + myPrefs.fontSize + ';" class="def">';
 				//var arrHeaderNames=',,,%,__MSG_change__,__MSG_change__(%),__MSG_lasttrade__,__MSG_lasttradedate__,__MSG_lasttradetime__,__MSG_dayopen__,__MSG_daylow__,__MSG_dayhigh__,__MSG_dayvolume__,__MSG_previousclose__,__MSG_52weekrange__,__MSG_ask__,__MSG_bid__,__MSG_tickertrend__,__MSG_50daymovingavg__,__MSG_200daymovingavg__,__MSG_dayrange__,__MSG_optionstrike__,__MSG_optioncallput__,__MSG_optionexpire__,__MSG_currency__,,__MSG_currencyrate__,,,,__MSG_dayearned__,__MSG_earned__,,,,__MSG_buyprice__'.split(",");
@@ -631,7 +631,7 @@
 				st.innerHTML = sStockTable;
 			};
 			function insertDisclaimer() {
-				var disc = this.getTagById("div","Disclaimer");
+				var disc = getTagById("div","Disclaimer");
 				disc.innerHTML = '<hr class="HrDef"/><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td valign="middle" style="width:10%;white-space:nowrap;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/disclaimer">Data, news and charts provided by </a></td><td><img alt="Yahoo Finance" src="' + this.imgBase + 'Y!FinanceLogo10.png"/></td><td id="gVersion" nowrap valign="middle" align="right" width="90%" class="Footer"></td></tr></table>';
 			};
 			function insertAddEdit() {
@@ -648,11 +648,11 @@
 					sConfigTable+='<tr style="background-Color:' + sBGColor + ';"><td id="ctc0' + i + '" class="cellL" title="Click to change this item" onclick="editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '">' + myPortfolio.stocks[i].symbol + '</td><td id="ctc1' + i + '" title="Click to change this item" onclick="editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="' + sBGColor + '" class="cellR">' + myPortfolio.stocks[i].qty + '</td><td id="ctc2' + i + '" title="Click to change this item" onclick="editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].price + '</td><td id="ctc3' + i + '" title="Click to change this item" onclick="editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].tradeCost + '</td><td id="ctc5' + i + '" title="Click to change this item" onclick="editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].lo + '</td><td id="ctc6' + i + '" title="Click to change this item" onclick="editStock(this)" onmouseover=this.style.backgroundColor="#dcdcdc" onmouseout=this.style.backgroundColor="'  +  sBGColor  +  '" class="cellR">' + myPortfolio.stocks[i].hi + '</td><td class="cellR" width="25px"><img class="cellR" id="ctc7' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="deleteSymbol(' + i + ')" src="' + this.imgBase + 'DeleteStock.gif" title="Remove"></td><td class="cellR" width="15px"><img id="ctc8' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="moveSymbol(' + i + ',0)" src="' + this.imgBase + 'MoveUpStock.gif" title="Move up"></td><td class="cellR" width="15px"><img id="ctc9' + i + '" width="10" height="10" style="cursor:hand;cursor:pointer;" onclick="moveSymbol(' + i + ',1)" src="' + this.imgBase + 'MoveDownStock.gif" title="Move down"></td></tr>';
 				}
 				sConfigTable +='</table>';
-				this.getTagById("div","StockAddEdit").innerHTML = sTemp + sConfigTable;
+				getTagById("div","StockAddEdit").innerHTML = sTemp + sConfigTable;
 				//Hide move arrows with no function
 				if (i > 0){
-					this.getTagById("img","ctc80").style.display = "none";
-					this.getTagById("img","ctc9" + (i-1)).style.display = "none";
+					getTagById("img","ctc80").style.display = "none";
+					getTagById("img","ctc9" + (i-1)).style.display = "none";
 				}
 			};
 			function refreshAfterEdit() {
@@ -760,7 +760,7 @@
 				
 				Quote.refreshData();
 
-//                this.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
+//                getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
 
 				//this.setAnalytics();
 					  
