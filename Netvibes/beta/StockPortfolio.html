@@ -443,7 +443,7 @@
 //End of Prefs object
             
 //Start of GUI Object
-            function GUI = {
+            function GUI() {
 				this.imgBase = "http://stockportfoliogg.googlecode.com/svn/Netvibes/images/";
 				//GUI.debug = 1;
 				this.getTagById = function (aTag, aId) {
@@ -454,27 +454,6 @@
 						}
 					}
 					return null;
-				};
-				this.onLoad = function () {
-					print('onLoad');
-					myPrefs.readPreferences();
-					
-					this.insertFooter();
-					this.insertDisclaimer();
-					
-					this.insertStockTable();
-					
-					Quote.refreshData();
-
-	//                this.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
-
-					//this.setAnalytics();
-						  
-					widget.setTitle(myPrefs.title);            
-				};
-				this.onRefresh = function () {
-					print('onRefresh');
-					Quote.refreshData();
 				};
 				this.myRoundD = function (inp, digits) {
 					var x = Math.pow(10, digits);
@@ -510,8 +489,10 @@
 					var footer = this.getTagById("div","Footer");
 					print('Test2');
 					this.toggleWindow('StockAddEdit',false);
-					footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="myGUI.toggleWindow("StockAddEdit",false)" src="' + this.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer" onclick="" src="' + this.imgBase + 'Blank.gif" title="' + 'Not yet implemented' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer;" onclick="" src="' + this.imgBase + 'Blank.gif" title="Not yet implemented"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="myGUI.toggleWindow(\'StockNews\',false);" src="' + this.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + this.imgBase + 'Help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://forum.cnybroe.dk/default.aspx?g=forum&c=4" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + this.imgBase + 'Ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
+					print('Test3');
+					footer.innerHTML = '<table border="0" cellspacing="0" cellpadding="1px" width="100%"><tr><td colspan="7" style="height:2px"></td></tr><tr class="Footer"><td id="FooterMsg" nowrap>' + 'Loading stocks...' + '</td><td width="20px"><img id="AddEditIcon" width="16" height="16" style="border:none;cursor:pointer;" onclick="myGUI.toggleWindow(\'StockAddEdit\',false)" src="' + this.imgBase + 'AddEdit.gif" title="' + 'Show add/edit dialog' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer" onclick="" src="' + this.imgBase + 'Blank.gif" title="' + 'Not yet implemented' + '"></td><td style="width:1px;"><img width="1" height="16" style="border:none;cursor:pointer;" onclick="" src="' + this.imgBase + 'Blank.gif" title="Not yet implemented"></td><td style="width:20px;"><img width="16" height="16" style="border:none;cursor:pointer;" onclick="myGUI.toggleWindow(\'StockNews\',false);" src="' + this.imgBase + 'News.gif" title="' + 'Show news' + '"/></td><td style="width:18px;"><a href="http://sites.google.com/site/cnybroe/iGoogleStockGadget/help-1" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + this.imgBase + 'Help.gif" title="' + 'Help' + '"></a></td><td style="width:20px;"><a href="http://forum.cnybroe.dk/default.aspx?g=forum&c=4" target="_blank"><img width="16" height="16" style="border:none;cursor:pointer;" src="' + this.imgBase + 'Ggroups.gif" title="' + 'Discuss this gadget with the developer and other users' + '"></a></td></tr></table>';
 					print(footer.innerHTML);
+					print('Test4');
 				};
 				this.insertStockTable = function () {
 					var st = this.getTagById("div","StockData");
@@ -770,6 +751,27 @@
 
 
 
+			function onLoad() {
+				print('onLoad');
+				myPrefs.readPreferences();
+				
+				myGUI.insertFooter();
+				myGUI.insertDisclaimer();
+				
+				myGUI.insertStockTable();
+				
+				Quote.refreshData();
+
+//                this.getTagById('td','gVersion').innerHTML = 'Version:' + myPortfolio.version;
+
+				//this.setAnalytics();
+					  
+				widget.setTitle(myPrefs.title);            
+			};
+		    function onRefresh() {
+				print('onRefresh');
+				Quote.refreshData();
+			};
 
 
 
@@ -797,17 +799,6 @@
                 return snum;
             }
 
-            //function print(msg) {
-            //    if (myGUI.debug==1)
-            //    {
-            //        var d = myGUI.getTagById('div','Debug');
-            //        d.style.display = 'block';
-            //        var d_html = d.innerHTML;
-            //        msg = fngetDate(1) + "; " + msg.toString() + "<br>";
-            //        d_html = msg + d_html;
-            //        d.innerHTML = d_html;
-            //    }
-            //}
             function print(msg) {
                 msg = fngetDate(1) + "; " + msg.toString();
                 widget.log(msg);
@@ -816,8 +807,8 @@
             
             
 //------------Widget events-------------------
-            widget.addEvent('onLoad', myGUI.onLoad);
-            widget.addEvent('onRefresh', myGUI.onRefresh);
+            widget.addEvent('onLoad', onLoad);
+            widget.addEvent('onRefresh', onRefresh);
         </script>
     </head>
     <body>
