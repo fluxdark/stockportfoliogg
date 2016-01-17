@@ -1,0 +1,1 @@
+Highly configurable list with almost unlimited number of stocks. See chart and details for each stock. Calculate total value and earnings and much more.
